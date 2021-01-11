@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.MultimediaView.MultimediaDetailPage"
+              xmlns:converter="clr-namespace:LookaukwatApp.Converter"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Multimedia"  
+             Title="{Binding Title}">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter"></converter:StringNullOrEmptyBoolConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout >
+            <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+            <CarouselView ItemsSource="{Binding Images}"
+                          IndicatorView="indicatorview"
+                          HeightRequest="380">
+
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame HasShadow="True"
+                       BorderColor="DarkGray"
+                       CornerRadius="5"
+                       Margin="20"
+                       HeightRequest="300"
+                       HorizontalOptions="Center"
+                       VerticalOptions="StartAndExpand">
+
+                                <Image Source="{Binding .}"
+                               Aspect="AspectFill"
+                               HeightRequest="300"
+                               WidthRequest="300"
+                               HorizontalOptions="Center" />
+
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView
+            x:Name="indicatorview"
+            AbsoluteLayout.LayoutBounds="0.5,0.95,100,100"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            IndicatorColor="LightGray"
+            IndicatorSize="10"
+            SelectedIndicatorColor="Black" />
+
+            <StackLayout Margin="10,15,10,15">
+
+                <Label Text="{Binding Title}"
+                   FontSize="20"
+                   FontAttributes="Bold"></Label>
+
+                <Label  TextColor="Red"
+                    VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Price}"></Span>
+                            <Span Text=" FCFA"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Text="{Binding Date}"
+                    TextColor="Green" Margin="0,0,0,20"></Label>
+
+
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Contacter " TextColor="Black" FontAttributes="Bold" FontSize="Subtitle"></Span>
+                            <Span Text="{Binding Name}"></Span>
+                            <Span Text=" par :"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Grid Margin="0,0,0,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton Source="icon_phone"
+                                 HeightRequest="40"
+                                 WidthRequest="40"
+                                 BackgroundColor="White"
+                                 Command="{Binding CallUserCommand}"></ImageButton>
+                    <Label Grid.Row="1"
+                           Text="Téléphone"
+                           FontAttributes="Italic"></Label>
+                </Grid>
+
+                <Label Text="Critères"
+                       TextColor="Black"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.15*" />
+                        <ColumnDefinition Width="0.85*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Source="icon_contractType"
+                           Grid.RowSpan="2"
+                               Aspect="AspectFill"
+                               HeightRequest="40"
+                               WidthRequest="40" />
+                    <Label Grid.Column="1"
+                               Text="Rubrique"
+                               FontAttributes="Italic" />
+                    <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding Type}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                </Grid>
+
+
+                <Grid IsVisible="{Binding Model, Converter={StaticResource StringNullOrEmptyBoolConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.15*" />
+                        <ColumnDefinition Width="0.85*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Source="icon_activitySector"
+                           Grid.RowSpan="2"
+                          
+                               Aspect="AspectFill"
+                               HeightRequest="40"
+                               WidthRequest="40" />
+                    <Label Grid.Column="1"
+                               Text="Modèle"
+                               FontAttributes="Italic" />
+                    <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding Model}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                </Grid>
+
+                <Grid IsVisible="{Binding Brand, Converter={StaticResource StringNullOrEmptyBoolConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.15*" />
+                        <ColumnDefinition Width="0.85*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Source="icon_activitySector"
+                           Grid.RowSpan="2"
+                          
+                               Aspect="AspectFill"
+                               HeightRequest="40"
+                               WidthRequest="40" />
+                    <Label Grid.Column="1"
+                               Text="Marque"
+                               FontAttributes="Italic" />
+                    <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding Brand}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                </Grid>
+
+                <Grid IsVisible="{Binding Capacity, Converter={StaticResource StringNullOrEmptyBoolConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.15*" />
+                        <ColumnDefinition Width="0.85*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Source="icon_activitySector"
+                           Grid.RowSpan="2"
+                          
+                               Aspect="AspectFill"
+                               HeightRequest="40"
+                               WidthRequest="40" />
+                    <Label Grid.Column="1"
+                               Text="Capacité"
+                               FontAttributes="Italic" />
+                    <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding Capacity}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                </Grid>
+
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.15*" />
+                        <ColumnDefinition Width="0.85*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Source="icon_searchOrAsk"
+                           Grid.RowSpan="2"
+                               Aspect="AspectFill"
+                               HeightRequest="40"
+                               WidthRequest="40" />
+                    <Label Grid.Column="1"
+                               Text="J'offre/Je recherche"
+                               FontAttributes="Italic" />
+                    <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding SearchOrAsk}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                </Grid>
+
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                <Label Text="Description"
+                       TextColor="Black"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+
+
+                <Label Text="{Binding Description}"
+                   
+                   LineBreakMode="WordWrap"
+                   Margin="0,0,0,20"></Label>
+
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+                <Grid Margin="10,0,10,20">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal">
+                        <ImageButton Source="share"
+                                 HeightRequest="30"
+                                 WidthRequest="30"
+                                 BackgroundColor="Transparent"
+                                 Command="{Binding ShareCommand}"
+                                ></ImageButton>
+                        <Label 
+                           Text="Partager"
+                           FontAttributes="Italic"
+                           ></Label>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal"
+                                 Grid.Column="2"
+                                 HorizontalOptions="End">
+                        <ImageButton 
+                                 Source="link"
+                                 HeightRequest="30"
+                                 WidthRequest="30"
+                                 BackgroundColor="Transparent"
+                                 Command="{Binding ClipBoardCommand}"
+                                 Clicked="CopyLink_Click"></ImageButton>
+                        <Label 
+                           
+                           Text="Copier le lien"
+                           FontAttributes="Italic"></Label>
+
+                    </StackLayout>
+                </Grid>
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                <Label Text="Ces annonces peuvent vous intéresser"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       FontSize="Subtitle"></Label>
+
+                <CarouselView ItemsSource="{Binding SimilarProduct}"
+                              PeekAreaInsets="70"
+                              HeightRequest="300">
+
+                    <CarouselView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" />
+                    </CarouselView.ItemsLayout>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Frame HasShadow="True"
+                       BorderColor="DarkGray"
+                       CornerRadius="5"
+                       Margin="5"
+                       HeightRequest="290"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start">
+                                    <StackLayout>
+
+                                        <Image Source="{Binding Image}"
+                               Aspect="AspectFill"
+                               HeightRequest="145"
+                               WidthRequest="250"
+                               HorizontalOptions="Center" />
+                                        <Label Text="{Binding Title}"
+                               HorizontalOptions="Start"
+                                               TextColor="Black"
+                                               FontAttributes="Bold"
+                                               MaxLines="1"/>
+                                        <Label  TextColor="Red"
+                    VerticalOptions="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Price}"></Span>
+                                                    <Span Text=" FCFA"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label Text="{Binding Date}"
+                                               TextColor="Green" ></Label>
+                                        <Label Text="{Binding Town}"
+                                                ></Label>
+
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:MultimediaDetailViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+
+</ContentPage>

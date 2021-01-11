@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.MultimediaView.MultimediaAddFirstPage"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Multimedia"
+             Title="Dites-nous en plus">
+    
+    <ContentPage.BindingContext>
+        <local:MultimediaViewModel></local:MultimediaViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+
+
+        <ScrollView>
+            <StackLayout Orientation="Vertical"
+                     Margin="15,35,20,25">
+                <Label Text="Mettez en valeur votre annonce! plus il ya de détails, plus votre client vous trouvera rapidement."
+               TextColor="Black"
+               FontSize="Small"></Label>
+
+                <Label Text="J'offre ou je recherche?"
+                       TextColor="Black"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+
+
+                <Picker 
+                     
+                    Title="Choisir entre J'offre ou je recherche"
+                    ItemsSource="{Binding SearchOrSaskList}"
+                    SelectedItem="{Binding SearchOrAskJob, Mode=TwoWay}">
+                </Picker>
+                <Label Text="Rubrique"
+                   TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Picker 
+                    
+                    Title="Choisir une rubrique"
+                    ItemsSource="{Binding RubriqueList}"
+                    SelectedItem="{Binding Rubrique, Mode=TwoWay}">
+                </Picker>
+
+                <Label Text="Marque"
+                   TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Picker 
+                    
+                    Title="choisir une marque"
+                    ItemsSource="{Binding Brands}"
+                    SelectedItem="{Binding Brand, Mode=TwoWay}">
+                </Picker>
+
+                <Label Text="Modèle"
+                       TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold">
+                </Label>
+                <Picker 
+                    
+                    Title="Choisir le model"
+                    ItemsSource="{Binding Models}"
+                    SelectedItem="{Binding Model, Mode=TwoWay}">
+                </Picker>
+
+                <Label Text="Capacité"
+                       TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold">
+                </Label>
+                <Picker 
+                    
+                    Title="choisir la capacité"
+                    ItemsSource="{Binding CapacityMultimediaList}"
+                    SelectedItem="{Binding Capacity, Mode=TwoWay}">
+                </Picker>
+
+                <Label Text="Prix (FCFA)"
+                       TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold">
+                </Label>
+                <Entry Placeholder="2"
+                   Text="{Binding Price}"
+                       Keyboard="Numeric"></Entry>
+
+
+                <Button Text="Suivant"
+                    Command="{Binding NextMultimediaCommad}"
+                    VerticalOptions="CenterAndExpand"
+                        Margin="0,0,0,20"></Button>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

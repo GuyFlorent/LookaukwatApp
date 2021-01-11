@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.UserView.UserUpdateInfoPage"
+             xmlns:vm="clr-namespace:LookaukwatApp.ViewModels.User"
+             Title="Modifier mes informations">
+    
+    <ContentPage.BindingContext>
+        <vm:UserProfileViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="valider" Command="{Binding UpdateUserCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Margin="15,15,20,25">
+            <Label Text="Modifier mes informations personnelles"
+                   TextColor="Black"
+                   FontSize="Title"
+                HorizontalOptions="CenterAndExpand" />
+            <Label Text="{Binding ErrorMessage1}"
+                   TextColor="Red"></Label>
+            <Label Text="{Binding ErrorMessage2}"
+                   TextColor="Red"></Label>
+
+
+            <StackLayout Orientation="Horizontal">
+                <Image Source="account_circle"
+                       HeightRequest="20"></Image>
+
+                <Label Text="Nom d'utilisateur"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold"></Label>
+            </StackLayout>
+            <Label >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Ancien Nom : "
+                              TextColor="Black"
+                              FontAttributes="Bold"></Span>
+                        <Span Text="{Binding OldFirstName}"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Entry Placeholder="Saisir le nouveau nom" Text="{Binding NewFirstName}"></Entry>
+
+            <StackLayout Orientation="Horizontal">
+                <Image Source="email"
+                       HeightRequest="20"></Image>
+
+                <Label Text="Email"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold"></Label>
+            </StackLayout>
+            <Label >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Ancien Email : "
+                              TextColor="Black"
+                              FontAttributes="Bold"></Span>
+                        <Span Text="{Binding OldEmail}"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Entry Placeholder="Saisir le nouveau Email" Text="{Binding NewEmail}"
+                   Keyboard="Email"></Entry>
+            <StackLayout Orientation="Horizontal">
+                <Image Source="icon_phone"
+                       HeightRequest="20"></Image>
+
+                <Label Text="Numéro de téléphone"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold"></Label>
+            </StackLayout>
+            <Label >
+
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Ancien Téléphone : "
+                              TextColor="Black"
+                              FontAttributes="Bold"></Span>
+                        <Span Text="{Binding OldPhone}"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Entry Placeholder="Saisir le nouveau Numéro de téléphone" 
+                   Text="{Binding NewPhone}"
+                   Keyboard="Telephone"></Entry>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

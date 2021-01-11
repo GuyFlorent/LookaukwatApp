@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.UserView.UserAnnoucePage"
+             Title="{Binding TitlePage}"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.User" >
+    
+    <ContentPage.BindingContext>
+        <local:UserAnounceViewModel />
+    </ContentPage.BindingContext>
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout AbsoluteLayout.LayoutFlags="SizeProportional" AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+            <ListView ItemsSource="{Binding Items}" 
+                      CachingStrategy="RecycleElement" 
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                      SeparatorColor="Blue"
+                      x:Name="UserAnounce">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell>
+
+                            <StackLayout Margin="0,0,0,20" Orientation="Vertical" BackgroundColor="AliceBlue" Padding="11"  >
+
+                                <Grid x:Name="Item">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.ColumnSpan="2" 
+                       Source="{Binding Image }"
+                       Aspect="AspectFill"
+                       HeightRequest="100"
+                       WidthRequest="100"></Image>
+
+                                    <Label Grid.Row="1"
+                       Text="{Binding Title}"
+                       FontAttributes="Bold"
+                                       MaxLines="1"></Label>
+
+                                    <Label 
+                           Grid.Row="2"
+                           TextColor="Red"
+                           
+                           VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Price}"></Span>
+                                                <Span Text=" FCFA"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label 
+                           Grid.Row="3"
+                       Text="{Binding Town}"
+                       VerticalOptions="End"></Label>
+
+
+                                    <Label 
+                           Grid.Row="4"
+                       Text="{Binding Date}"
+                       VerticalOptions="End"
+                                       TextColor="Green"></Label>
+
+
+                                    <ImageButton Grid.Row="5"
+                                             Grid.Column="1"
+                                             Source="trash"
+                                             BackgroundColor="DarkRed"
+                                             Command="{Binding DeleteCommand}"
+                                             BindingContext="{Binding Source={x:Reference UserAnounce}, Path=BindingContext}"
+                                             CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                             HorizontalOptions="End"
+                                             VerticalOptions="Start"
+                                             ></ImageButton>
+                                </Grid>
+
+                                <!--<StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>-->
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackLayout>
+
+        <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
+                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                 AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color ="#80000000"/>
+
+            <!--<Label Text="Loading..." HorizontalOptions="Center" TextColor="White"/>-->
+
+        </StackLayout>
+    </AbsoluteLayout>
+</ContentPage>

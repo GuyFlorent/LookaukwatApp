@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.UserView.UserPersonalInfoPage"
+             xmlns:vm="clr-namespace:LookaukwatApp.ViewModels.User"
+             Title="Mes informations">
+    <ContentPage.BindingContext>
+        <vm:UserProfileViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="account_edit" Command="{Binding UpdateUserPageCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Margin="15,35,20,25">
+            <Label Text="Mes informations personnelles"
+                   TextColor="Black"
+                   FontSize="Title"
+                HorizontalOptions="CenterAndExpand" />
+
+            <StackLayout Orientation="Horizontal">
+                <Image Source="account_circle"
+                       HeightRequest="20"></Image>
+
+                <Label Text="Nom d'utilisateur"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold"></Label>
+            </StackLayout>
+            <Label Text="{Binding OldFirstName}"></Label>
+
+            <StackLayout Orientation="Horizontal">
+                <Image Source="email"
+                       HeightRequest="20"></Image>
+
+                <Label Text="Email"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold"></Label>
+            </StackLayout>
+            <Label Text="{Binding OldEmail}"></Label>
+
+            <StackLayout Orientation="Horizontal">
+                <Image Source="icon_phone"
+                       HeightRequest="20"></Image>
+
+                <Label Text="Numéro de téléphone"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold"></Label>
+            </StackLayout>
+            <Label Text="{Binding OldPhone}"></Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

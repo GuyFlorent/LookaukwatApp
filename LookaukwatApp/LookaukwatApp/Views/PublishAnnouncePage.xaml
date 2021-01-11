@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.PublishAnnouncePage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Publish" >
+    
+    <ContentPage.BindingContext>
+        <local:PublishAnnounceViewModel></local:PublishAnnounceViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     Margin="15,35,20,25">
+            <Label Text="Choisir une catégorie"
+                   TextColor="Black"
+                   FontSize="Title"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand" />
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Emploi : "
+                              TextColor="Black"
+                              FontAttributes="Bold"></Span>
+                        <Span Text="Offres et recherche d'emploi"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Immobilier : "
+                              TextColor="Black"
+                              FontAttributes="Bold"></Span>
+                        <Span Text="Appartement, bureau, terrain à vendre et à louer..."></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Maison : "
+                              TextColor="Black"
+                              FontAttributes="Bold"></Span>
+                        <Span Text="Ammeublement, électroménager, décoration, cuisine..."></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Multimédia : "
+                              TextColor="Black"
+                              FontAttributes="Bold"></Span>
+                        <Span Text="Informatique, Téléphonie,Jeux vidéo..."></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Mode : "
+                              TextColor="Black"
+                              FontAttributes="Bold"></Span>
+                        <Span Text="Vêtements,  Chaussures, Montres, Bijoux, Sac..."></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Voiture : "
+                              TextColor="Black"
+                              FontAttributes="Bold"></Span>
+                        <Span Text="Voiture, location voiture, Moto, pièces auto et moto..."></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Picker 
+                    x:Name="picker" 
+                    Title="Choisir une catégorie"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand"
+                    ItemsSource="{Binding liste}"
+                    SelectedItem="{Binding Categori, Mode=TwoWay}">
+
+            </Picker>
+
+            <Button Text="Suivant"
+                    Command="{Binding GetCategoryCommand }"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

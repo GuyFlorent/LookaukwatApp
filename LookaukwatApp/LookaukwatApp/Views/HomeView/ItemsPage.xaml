@@ -14,7 +14,7 @@
                HorizontalOptions="Center"
                VerticalOptions="Center" />
     </Shell.TitleView>-->
-    <Shell.SearchHandler>
+    <!--<Shell.SearchHandler>
 
         <local1:ProductSearchHandler Placeholder="Que recherchez vous?"
                                       ShowsResults="true">
@@ -36,7 +36,7 @@
                 </DataTemplate>
             </local1:ProductSearchHandler.ItemTemplate>
         </local1:ProductSearchHandler>
-    </Shell.SearchHandler>
+    </Shell.SearchHandler>-->
 
 
     <ContentPage.BindingContext>
@@ -44,9 +44,9 @@
     </ContentPage.BindingContext>
 
     <StackLayout>
-        <Image Source="logo_lookaukwat_xam1.png"
+        <!--<Image Source="logo_lookaukwat_xam1.png"
                HorizontalOptions="Center"
-               HeightRequest="30"/>
+               HeightRequest="30"/>-->
 
         <StackLayout Margin="20,10,20,25">
 

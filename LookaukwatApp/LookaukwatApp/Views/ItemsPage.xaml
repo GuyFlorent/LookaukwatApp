@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LookaukwatApp.Views.ItemsPage"
              Title="{Binding TitlePage}"
-             xmlns:local="clr-namespace:LookaukwatApp.ViewModels"  
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Home"  
              xmlns:model="clr-namespace:LookaukwatApp.Models"  
              xmlns:local1="clr-namespace:LookaukwatApp.ViewModels.OtherServices" 
             

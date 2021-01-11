@@ -112,7 +112,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Home\" />
     <Folder Include="Views\HomeView\" />
   </ItemGroup>
 </Project>

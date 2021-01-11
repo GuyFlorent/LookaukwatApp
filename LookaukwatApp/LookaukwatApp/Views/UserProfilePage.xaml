@@ -1,12 +1,188 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LookaukwatApp.Views.UserProfilePage">
+             x:Class="LookaukwatApp.Views.UserProfilePage"
+             xmlns:vm="clr-namespace:LookaukwatApp.ViewModels.User"
+             Title="Mon compte">
+    
+    <ContentPage.BindingContext>
+        <vm:UserProfileViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Margin="20,35,20,25">
+
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Bienvenue "
+                                  FontSize="Title"
+                                  TextColor="Black"></Span>
+                            <Span 
+                                  FontSize="Title"
+                                  TextColor="Black"
+                                  x:Name="UserName"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Grid  Margin="0,0,0,20">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="account_circle.png"
+                       HeightRequest="40"
+                       WidthRequest="40"
+                       HorizontalOptions="Start"></Image>
+                    <Button Grid.Column="1"
+                    Text="Profil"
+                        TextColor="Black"
+                        FontSize="Subtitle"
+                       BackgroundColor="White"
+                        Command="{Binding ProfileUserCommand}"
+                        ></Button>
+                </Grid>
+
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                <Grid  Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="list.png"
+                       HeightRequest="40"
+                       WidthRequest="40"
+                       HorizontalOptions="Start"></Image>
+                    <Button Grid.Column="1"
+                    Text="Mes annonces"
+                        TextColor="Black"
+                        FontSize="Subtitle"
+                       BackgroundColor="White"
+                        Command="{Binding UserAnnounceCommand}"
+                        ></Button>
+                </Grid>
+
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                <Grid  Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Source="setting.png"
+                       HeightRequest="40"
+                       WidthRequest="40"
+                       HorizontalOptions="Start"
+                       Grid.Row="0"
+                       Grid.Column="0"></Image>
+                    <StackLayout Grid.Column="1"
+                             Orientation="Vertical">
+                        <Label 
+                    Text="Paramètres"
+                    FontAttributes="Bold"
+                        TextColor="Black"
+                    HorizontalOptions="Center"
+                        FontSize="20"
+                       BackgroundColor="White"
+                        ></Label>
+
+                        <BoxView  Margin="0,0,0,10" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                        <Button 
+                    Text="Informations personnelles"
+                        TextColor="Black"
+                        FontSize="Subtitle"
+                       BackgroundColor="White"
+                       Command="{Binding UserPersonalInfoCommand}"
+                            ></Button>
+                        <BoxView  Margin="0,0,0,10" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                        <Button 
+                    Text="Modifier mon mot de passe"
+                        TextColor="Black"
+                        FontSize="Subtitle"
+                       BackgroundColor="White"
+                        Command="{Binding UpdateUserPasswordCommand}"
+                         ></Button>
+                    </StackLayout>
+                </Grid>
+
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                <Grid  Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Source="help.png"
+                       HeightRequest="40"
+                       WidthRequest="40"
+                       HorizontalOptions="Start"
+                       Grid.Row="0"
+                       Grid.Column="0"></Image>
+                    <StackLayout Grid.Column="1"
+                             Orientation="Vertical">
+                        <Label 
+                    Text="Aide"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                         HorizontalOptions="Center"
+                        FontSize="20"
+                       BackgroundColor="White"
+                        ></Label>
+
+                        <BoxView  Margin="0,0,0,10" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                        <Button 
+                    Text="Nous contacter"
+                        TextColor="Black"
+                        FontSize="Subtitle"
+                       BackgroundColor="White"
+                       Command="{Binding ContactUsCommand}"
+                            ></Button>
+                        <BoxView  Margin="0,0,0,10" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                        <Button 
+                    Text="Qui sommes nous?"
+                        TextColor="Black"
+                        FontSize="Subtitle"
+                       BackgroundColor="White"
+                        Command="{Binding AboutUsCommand}"
+                         ></Button>
+                    </StackLayout>
+                </Grid>
+
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Me déconnecter"
+                            TextColor="Black"
+                            BackgroundColor="White"
+                    Padding="10,00,00,10"
+                    
+                    HorizontalOptions="Start"
+                    Clicked="LogOut_Click"></Button>
+
+                    <Label Text="Version 1.0.0.0"
+                           HorizontalOptions="EndAndExpand"
+                           ></Label>
+                </StackLayout>
+
+
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

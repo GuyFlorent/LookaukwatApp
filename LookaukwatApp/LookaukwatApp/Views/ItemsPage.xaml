@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LookaukwatApp.Views.ItemsPage"
-             Title="{Binding Title}"
+             Title="{Binding TitlePage}"
              xmlns:local="clr-namespace:LookaukwatApp.ViewModels"  
-             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              xmlns:model="clr-namespace:LookaukwatApp.Models"  
-             xmlns:local1="clr-namespace:LookaukwatApp.ViewModels.OtherServices"
+             xmlns:local1="clr-namespace:LookaukwatApp.ViewModels.OtherServices" 
+            
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              x:Name="BrowseItemsPage">
 
     <Shell.SearchHandler>
@@ -38,9 +39,9 @@
     </ContentPage.BindingContext>
 
     <StackLayout>
-        <!--<Image Source="logo_lookaukwat_xam1.png"
+        <Image Source="logo_lookaukwat_xam1.png"
                HorizontalOptions="Center"
-               HeightRequest="30"/>-->
+               HeightRequest="30"/>
 
         <StackLayout Margin="20,10,20,25">
 
@@ -55,19 +56,19 @@
                     BackgroundColor="LightSkyBlue"
                     TextColor="Black"
                     Command="{Binding FilterCommand}"></Button>
-            <StackLayout VerticalOptions="Center" IsVisible="{Binding IsRunning}"
+            <StackLayout x:Name="Stackrun" VerticalOptions="Center" IsVisible="{Binding IsRunning}"
                      AbsoluteLayout.LayoutFlags="PositionProportional"
                  AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
-                <ActivityIndicator IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+                <ActivityIndicator x:Name="run" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
             </StackLayout>
-            <RefreshView  Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsRefressing, Mode=TwoWay}">
+            <RefreshView x:Name="refresh"  Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsRefressing, Mode=TwoWay}">
                 <ListView ItemsSource="{Binding Items}" 
                       CachingStrategy="RecycleElement" 
                       HasUnevenRows="True"
                       SelectionMode="None"
                       SeparatorVisibility="None">
                     <ListView.Behaviors>
-                        <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
+                        <extended:InfiniteScrollBehavior  IsLoadingMore="{Binding IsBusy}" />
                     </ListView.Behaviors>
 
                     <ListView.ItemTemplate>
@@ -140,13 +141,13 @@
 
                     <ListView.Footer>
                         <Grid Padding="6" IsVisible="{Binding IsBusy}">
-                            <!-- set the footer to have a zero height when invisible -->
+                             <!--set the footer to have a zero height when invisible--> 
                             <Grid.Triggers>
                                 <Trigger TargetType="Grid" Property="IsVisible" Value="False">
                                     <Setter Property="HeightRequest" Value="0" />
                                 </Trigger>
                             </Grid.Triggers>
-                            <!-- the loading content -->
+                             <!--the loading content--> 
                             <Label Text="Chargement..." TextColor="DeepPink" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
                         </Grid>
                     </ListView.Footer>

@@ -1450,6 +1450,7 @@ namespace LookaukwatApp.ViewModels.Search
 
         private async void OnSearch()
         {
+            string JsonSearchModel = null;
             switch (SearchOrAskJob)
             {
                 case "J'offre":
@@ -1468,7 +1469,7 @@ namespace LookaukwatApp.ViewModels.Search
                                 ActivitySector = ActivitySector,
                                 PriceJob = PriceJob
                             };
-                            var JsonSearchModel = JsonConvert.SerializeObject(searchModel);
+                            JsonSearchModel = JsonConvert.SerializeObject(searchModel);
 
                             await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
 
@@ -1488,9 +1489,9 @@ namespace LookaukwatApp.ViewModels.Search
                                 ApartSurfaceAppart = ApartSurfaceAppart
 
                             };
-                            var JsonSearchModelImo = JsonConvert.SerializeObject(searchModelImo);
+                            JsonSearchModel = JsonConvert.SerializeObject(searchModelImo);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModelImo}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
 
 
                             break;
@@ -1509,9 +1510,9 @@ namespace LookaukwatApp.ViewModels.Search
                                 MultimediaCapacity = MultimediaCapacity
 
                             };
-                            var JsonSearchModelMulti = JsonConvert.SerializeObject(searchModelMulti);
+                            JsonSearchModel = JsonConvert.SerializeObject(searchModelMulti);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModelMulti}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
 
 
                             break;
@@ -1531,9 +1532,9 @@ namespace LookaukwatApp.ViewModels.Search
 
                             };
 
-                            var JsonSearchModelHouse = JsonConvert.SerializeObject(searchModelHouse);
+                            JsonSearchModel = JsonConvert.SerializeObject(searchModelHouse);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModelHouse}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
 
 
                             break;
@@ -1556,9 +1557,9 @@ namespace LookaukwatApp.ViewModels.Search
 
                             };
 
-                            var JsonSearchModelMode = JsonConvert.SerializeObject(searchModelMode);
+                            JsonSearchModel = JsonConvert.SerializeObject(searchModelMode);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModelMode}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
 
 
                             break;
@@ -1583,9 +1584,9 @@ namespace LookaukwatApp.ViewModels.Search
 
                             };
 
-                            var JsonSearchModelVehicule = JsonConvert.SerializeObject(searchModelVehicule);
+                            JsonSearchModel = JsonConvert.SerializeObject(searchModelVehicule);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModelVehicule}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
 
 
                             break;
@@ -1599,9 +1600,9 @@ namespace LookaukwatApp.ViewModels.Search
                                 SearchOrAskJob = SearchOrAskJob,
 
                             };
-                            var JsonSearchModelOffer = JsonConvert.SerializeObject(searchModelOffer);
+                            JsonSearchModel = JsonConvert.SerializeObject(searchModelOffer);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModelOffer}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
 
 
                             break;
@@ -1618,9 +1619,9 @@ namespace LookaukwatApp.ViewModels.Search
                         SearchOrAskJob = SearchOrAskJob,
 
                     };
-                    var JsonSearchModelAsk = JsonConvert.SerializeObject(searchModelSearch);
+                    JsonSearchModel = JsonConvert.SerializeObject(searchModelSearch);
 
-                    await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModelAsk}");
+                    await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
 
 
                     break;

@@ -40,8 +40,17 @@ namespace LookaukwatApp.ViewModels.Search
 
         public string JsonSearchModel
         {
-            get => jsonSearchModel;
-            set => SetProperty(ref jsonSearchModel, Uri.UnescapeDataString(value));
+            //get => jsonSearchModel;
+            //set => SetProperty(ref jsonSearchModel, Uri.UnescapeDataString(value));
+            get
+            {
+                return jsonSearchModel;
+            }
+            set
+            {
+                jsonSearchModel = value;
+                ShowResult();
+            }
         }
 
         private const int PageSize = 10;
@@ -78,7 +87,7 @@ namespace LookaukwatApp.ViewModels.Search
                 }
             };
 
-            ShowResult();
+           
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -175,38 +184,38 @@ namespace LookaukwatApp.ViewModels.Search
 
                         case "Emploi":
 
-                            List<ProductForMobileViewModel> resultJob = await _apiServices.GetResultOfferSeachJobAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultJob = await _apiServices.GetResultOfferSeachJobAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
                             Items.AddRange(resultJob);
 
                             break;
                         case "Immobilier":
 
-                            List<ProductForMobileViewModel> resultImo = await _apiServices.GetResultOfferSeachApartAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultImo = await _apiServices.GetResultOfferSeachApartAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
                             Items.AddRange(resultImo);
                             break;
                         case "Multimédia":
 
-                            List<ProductForMobileViewModel> resultMulti = await _apiServices.GetResultOfferSeachMultiAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultMulti = await _apiServices.GetResultOfferSeachMultiAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
                             Items.AddRange(resultMulti);
                             break;
                         case "Maison":
 
-                            List<ProductForMobileViewModel> resultHouse = await _apiServices.GetResultOfferSeachHouseAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultHouse = await _apiServices.GetResultOfferSeachHouseAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
                             Items.AddRange(resultHouse);
                             break;
                         case "Mode":
 
-                            List<ProductForMobileViewModel> resultMode = await _apiServices.GetResultOfferSeachModeAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultMode = await _apiServices.GetResultOfferSeachModeAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
                             Items.AddRange(resultMode);
                             break;
                         case "Véhicule":
 
-                            List<ProductForMobileViewModel> resultVehicule = await _apiServices.GetResultOfferSearchVehiculeAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultVehicule = await _apiServices.GetResultOfferSearchVehiculeAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
                             Items.AddRange(resultVehicule);
                             break;
 
                         default:
-                            List<ProductForMobileViewModel> resultOffer = await _apiServices.GetResultAskAndOfferSeachAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultOffer = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
                             Items.AddRange(resultOffer);
                             break;
                     }
@@ -215,7 +224,7 @@ namespace LookaukwatApp.ViewModels.Search
 
                 case "Je recherche":
 
-                    List<ProductForMobileViewModel> resultAsk = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                    var resultAsk = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
                     Items.AddRange(resultAsk);
                     break;
             }

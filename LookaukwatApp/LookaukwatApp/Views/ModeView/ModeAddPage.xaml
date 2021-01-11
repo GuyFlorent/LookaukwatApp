@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.ModeView.ModeAddPage"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Mode"
+             Title="{Binding TitlePage}">
+    
+    <ContentPage.BindingContext>
+        <local:ModeEndViewModel></local:ModeEndViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Orientation="Vertical"
+                     Margin="15,35,20,25">
+
+                    <Label Text="Mettez en valeur votre annonce! plus il ya de détails, plus votre annonce sera de qualité.N'oubliez pas de mettre aussi le quartier exact pour mieux être visible dans les recherches."
+               TextColor="Black"
+               FontSize="Small"></Label>
+
+                    <Label Text="Titre"
+                       TextColor="Black"></Label>
+                    <Entry Placeholder="Saisir le titre de l'annonce"
+                   Text="{Binding Title}"></Entry>
+                    <Label Text="Description"
+                       TextColor="Black"></Label>
+                    <Editor Placeholder="Donnez une description assez claire du bien immobilier et le lieu excacte"
+                    Text="{Binding Description}"
+                    
+                    AutoSize="TextChanges"></Editor>
+                    <Label Text="Ville"
+                       TextColor="Black"></Label>
+                    <Picker 
+                    x:Name="pickerTown" 
+                    Title="Choisir la ville"
+                    ItemsSource="{Binding TownList}"
+                    SelectedItem="{Binding Town, Mode=TwoWay}">
+                    </Picker>
+                    <Label Text="Quartier"
+                       TextColor="Black"></Label>
+                    <Entry Placeholder="Saisir le nom du quartier"
+                   Text="{Binding Street}"></Entry>
+
+                    <Button Text="Suivant"
+                    Command="{Binding PostModeCommad}"
+                    VerticalOptions="EndAndExpand"></Button>
+
+                    <StackLayout IsVisible="{Binding IsRunning}">
+
+                        <ActivityIndicator IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.AppartmentView.ApartAddFirstPage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Appartment" 
+             xmlns:converter="clr-namespace:LookaukwatApp.Converter"
+             Title="Dites-nous en plus">
+    
+    <ContentPage.BindingContext>
+        <local:ApartViewModel></local:ApartViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ApartCheckingForm x:Key="ApartCheckingForm"></converter:ApartCheckingForm>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Orientation="Vertical"
+                     Margin="15,35,20,25">
+            <Label Text="Mettez en valeur votre annonce! plus il ya de détails, plus votre client vous trouvera rapidement."
+               TextColor="Black"
+               FontSize="Small"></Label>
+            <Label Text="J'offre ou je recherche?"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+            <Picker 
+                     
+                    Title="Choisir entre J'offre ou je recherche"
+                    ItemsSource="{Binding SearchOrSaskList}"
+                    SelectedItem="{Binding SearchOrAskJob, Mode=TwoWay}">
+            </Picker>
+            <Label Text="Type de bien"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+            <Picker 
+                    
+                    Title="Choisir le type de bien immobilier"
+                    ItemsSource="{Binding TypeList}"
+                    SelectedItem="{Binding Type, Mode=TwoWay}">
+            </Picker>
+            <StackLayout IsVisible="{Binding Type, Converter={StaticResource ApartCheckingForm}}">
+                <Label Text="Meublé/Non meublé"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Picker 
+                    
+                    Title="Meublé ou non meublé?"
+                    ItemsSource="{Binding FurnitureOrNotList}"
+                    SelectedItem="{Binding FurnitureOrNot, Mode=TwoWay}">
+                </Picker>
+
+                <Label Text="Nombre de pièce"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                </Label>
+                <Entry Placeholder="2"
+                   Text="{Binding RoomNumber}"
+                       Keyboard="Numeric"></Entry>
+            </StackLayout>
+            <Label Text="Superficie (m2)"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+            </Label>
+
+            <Entry Placeholder="555"
+                   Text="{Binding ApartSurface}"
+                       Keyboard="Numeric"></Entry>
+
+
+            <Label Text="Prix/Loyer (FCFA)"
+                       TextColor="Black"
+                FontSize="Subtitle"
+                       FontAttributes="Bold">
+            </Label>
+            <Entry Placeholder="2"
+                   Text="{Binding Price}"
+                       Keyboard="Numeric"></Entry>
+
+
+            <Button Text="Suivant"
+                    Command="{Binding NextApartCommad}"
+                    VerticalOptions="EndAndExpand"
+                Margin="0,0,0,20"></Button>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

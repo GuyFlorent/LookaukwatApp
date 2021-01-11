@@ -18,14 +18,27 @@ namespace LookaukwatApp.ViewModels
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
+        private bool isRefressing = false;
+
+        public bool IsRefressing
+        {
+            get { return isRefressing; }
+            set { SetProperty(ref isRefressing, value); }
+        }
+
+        bool isRunning = false;
+        public bool IsRunning
+        {
+            get { return isRunning; }
+            set { SetProperty(ref isRunning, value); }
+        }
 
         string title = string.Empty;
-        public string Title
+        public string TitlePage
         {
             get { return title; }
             set { SetProperty(ref title, value); }
         }
-
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",
             Action onChanged = null)

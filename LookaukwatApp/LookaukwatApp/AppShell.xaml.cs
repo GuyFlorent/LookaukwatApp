@@ -10,6 +10,7 @@ using LookaukwatApp.Views.ModeView;
 using LookaukwatApp.Views.MultimediaView;
 using LookaukwatApp.Views.PublishView;
 using LookaukwatApp.Views.RegisterView;
+using LookaukwatApp.Views.SearchView;
 using LookaukwatApp.Views.UserView;
 using LookaukwatApp.Views.Vehicule;
 using System;
@@ -56,8 +57,8 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(UserAnnoucePage), typeof(UserAnnoucePage));
             Routing.RegisterRoute(nameof(UserPersonalInfoPage), typeof(UserPersonalInfoPage));
             Routing.RegisterRoute(nameof(UserUpdateInfoPage), typeof(UserUpdateInfoPage));
-            //Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
-            //Routing.RegisterRoute(nameof(ResultSearchPage), typeof(ResultSearchPage));
+            Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
+            Routing.RegisterRoute(nameof(ResultSearchPage), typeof(ResultSearchPage));
         }
 
     }

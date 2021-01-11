@@ -1,0 +1,684 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.SearchView.SearchPage"
+             xmlns:vm="clr-namespace:LookaukwatApp.ViewModels.Search" 
+             xmlns:converter="clr-namespace:LookaukwatApp.Converter"
+             Title="{Binding TitlePage}">
+
+
+
+
+
+
+
+
+
+    <ContentPage.BindingContext>
+        <vm:SearchViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:HouseCheckingForm x:Key="HouseCheckingForm"></converter:HouseCheckingForm>
+            <converter:ApartCheckingForm x:Key="ApartCheckingForm"></converter:ApartCheckingForm>
+            <converter:ModeCheckingForm x:Key="ModeCheckingForm"></converter:ModeCheckingForm>
+            <converter:VehiculeModelAutoCheckingForm x:Key="VehiculeModelAutoCheckingForm"></converter:VehiculeModelAutoCheckingForm>
+            <converter:VehiculeModelMotoAccessoryChecking x:Key="VehiculeModelMotoAccessoryChecking"></converter:VehiculeModelMotoAccessoryChecking>
+            <converter:VehiculeAutoMotoCheckingForm x:Key="VehiculeAutoMotoCheckingForm"></converter:VehiculeAutoMotoCheckingForm>
+            <converter:ApartCheckSearchCategory x:Key="ApartCheckSearchCategory"></converter:ApartCheckSearchCategory>
+            <converter:HouseCheckSearchCategory x:Key="HouseCheckSearchCategory"></converter:HouseCheckSearchCategory>
+            <converter:JobCheckSearchCategory x:Key="JobCheckSearchCategory"></converter:JobCheckSearchCategory>
+            <converter:ModeCheckSearchCategory x:Key="ModeCheckSearchCategory"></converter:ModeCheckSearchCategory>
+            <converter:MultimediaCheckSearchCategory x:Key="MultimediaCheckSearchCategory"></converter:MultimediaCheckSearchCategory>
+            <converter:VehiculeCheckSearchCategory x:Key="VehiculeCheckSearchCategory"></converter:VehiculeCheckSearchCategory>
+            <converter:SearchOrAskJCheckinForm x:Key="SearchOrAskJCheckinForm"></converter:SearchOrAskJCheckinForm>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Margin="20,35,20,25">
+
+                    <Label Text="Choisir une catégorie"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+                    <Picker Title="Choisir une catégorie"
+                    ItemsSource="{Binding Categoryliste}"
+                    SelectedItem="{Binding Categori, Mode=TwoWay}"></Picker>
+
+                    <Label Text="Choisir une ville"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+                    <Picker Title="Choisir une ville"
+                    ItemsSource="{Binding TownList}"
+                    SelectedItem="{Binding Town, Mode=TwoWay}"></Picker>
+
+
+
+                    <!--for differents categories-->
+                    <StackLayout IsVisible="{Binding SearchOrAskJob, Converter={StaticResource SearchOrAskJCheckinForm}}">
+                        <!--for appart categorie-->
+
+                        <StackLayout IsVisible="{Binding Categori, Converter={StaticResource ApartCheckSearchCategory}}">
+
+                            <Label Text="Type de bien"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                            <Picker 
+                    
+                    Title="Choisir le type de bien immobilier"
+                    ItemsSource="{Binding TypeList}"
+                    SelectedItem="{Binding TypeAppart, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="Prix/Loyer Maximal"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+
+                            <StackLayout Orientation="Vertical">
+                                <Slider Value="{Binding PriceApart}"
+                Maximum="5000000"
+                Minimum="0"
+                MaximumTrackColor="DarkGray"
+                MinimumTrackColor="Blue"
+                    x:Name="sliderPriceApart"/>
+
+                                <Label Text="{Binding Source={x:Reference sliderPriceApart},
+                              Path=Value,
+                              StringFormat='{0:F0} FCFA / 5 000 000 FCFA +'}"
+                   TextColor="Black"></Label>
+                            </StackLayout>
+
+
+                            <Label Text="Surface maximale"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+
+                            <StackLayout Orientation="Vertical">
+                                <Slider Value="{Binding ApartSurfaceAppart}"
+                Maximum="2000"
+                Minimum="0"
+               MaximumTrackColor="DarkGray"
+                MinimumTrackColor="Blue"
+                    x:Name="sliderSurface"/>
+
+                                <Label Text="{Binding Source={x:Reference sliderSurface},
+                              Path=Value,
+                              StringFormat='{0:F0} m2 / 2000 m2 +'}"
+                   TextColor="Black"></Label>
+                            </StackLayout>
+
+
+                            <StackLayout IsVisible="{Binding TypeAppart, Converter={StaticResource ApartCheckingForm}}">
+
+                                <Label Text="Nombre de pièces maximal"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+
+                                <StackLayout Orientation="Vertical">
+                                    <Slider Value="{Binding RoomNumberAppart}"
+                Maximum="10"
+                Minimum="0"
+                MaximumTrackColor="DarkGray"
+                MinimumTrackColor="Blue"
+                    x:Name="sliderNumberOfRoom"/>
+
+                                    <Label Text="{Binding Source={x:Reference sliderNumberOfRoom},
+                              Path=Value,
+                              StringFormat='{0:F0} Pièces / 10 pièces +'}"
+                   TextColor="Black"></Label>
+                                </StackLayout>
+
+                                <Label Text="Meublé/Non meublé"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                                <Picker 
+                    
+                    Title="Meublé ou non meublé?"
+                    ItemsSource="{Binding FurnitureOrNotList}"
+                    SelectedItem="{Binding FurnitureOrNotAppart, Mode=TwoWay}">
+                                </Picker>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!--for house category-->
+
+                        <StackLayout IsVisible="{Binding Categori, Converter={StaticResource HouseCheckSearchCategory}}">
+                            <Label Text="Rubrique"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                            <Picker 
+                    
+                    Title="Choisir une rubrique"
+                    ItemsSource="{Binding HouseRubriqueList}"
+                    SelectedItem="{Binding RubriqueHouse, Mode=TwoWay}">
+                            </Picker>
+                            <StackLayout IsVisible="{Binding RubriqueHouse, Converter={StaticResource HouseCheckingForm}}">
+                                <Label Text="type"
+                   TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                                <Picker 
+                    
+                    Title="choisir un type"
+                    ItemsSource="{Binding HouseTypes}"
+                    SelectedItem="{Binding TypeHouse, Mode=TwoWay}">
+                                </Picker>
+
+                                <Label Text="Prix maximal"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+
+                                <StackLayout Orientation="Vertical">
+                                    <Slider Value="{Binding PriceHouse}"
+                Maximum="100000"
+                Minimum="0"
+               MaximumTrackColor="DarkGray"
+                MinimumTrackColor="Blue"
+                    x:Name="sliderPriceHouse"/>
+
+                                    <Label Text="{Binding Source={x:Reference sliderPriceHouse},
+                              Path=Value,
+                              StringFormat='{0:F0} FCFA / 100 000 FCFA +'}"
+                   TextColor="Black"></Label>
+                                </StackLayout>
+
+                                <Label Text="Matériel de fabrication"
+                       TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold">
+                                </Label>
+                                <Picker 
+                    
+                    Title="choisir un matériel"
+                    ItemsSource="{Binding FabricMaterials}"
+                    SelectedItem="{Binding FabricMaterial, Mode=TwoWay}">
+                                </Picker>
+                            </StackLayout>
+
+
+                            <Label Text="Couleur"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="choisir la couleur"
+                    ItemsSource="{Binding HouseColorList}"
+                    SelectedItem="{Binding ColorHouse, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="L'état de l'article"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="choisir l'état de l'article"
+                    ItemsSource="{Binding HouseStateList}"
+                    SelectedItem="{Binding StateHouse, Mode=TwoWay}">
+                            </Picker>
+                        </StackLayout>
+
+                        <!--for job category-->
+
+                        <StackLayout IsVisible="{Binding Categori, Converter={StaticResource JobCheckSearchCategory}}">
+                            <Label Text="Secteur d'activité"
+                       TextColor="Black"
+                            FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                            <Picker 
+                    x:Name="pickerActivitySectork" 
+                    Title="Choisir le secteur d'activité"
+                    ItemsSource="{Binding ActivitysectorList}"
+                    SelectedItem="{Binding ActivitySector, Mode=TwoWay}">
+                            </Picker>
+                            <Label Text="Type de contrat"
+                       TextColor="Black"
+                            FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                            <Picker 
+                    x:Name="pickerTypeContract" 
+                    Title="Choisir le type de contrat"
+                    ItemsSource="{Binding ContractList}"
+                    SelectedItem="{Binding TypeContract, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="Salaire maximal"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+
+                            <StackLayout Orientation="Vertical">
+                                <Slider Value="{Binding PriceJob}"
+                Maximum="300000"
+                Minimum="0"
+                MaximumTrackColor="DarkGray"
+                MinimumTrackColor="Blue"
+                    x:Name="sliderPriceJob"/>
+
+                                <Label Text="{Binding Source={x:Reference sliderPriceJob},
+                              Path=Value,
+                              StringFormat='{0:F0} FCFA / 300 000 FCFA +'}"
+                   TextColor="Black"></Label>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <!--for Mode category-->
+
+                        <StackLayout IsVisible="{Binding Categori, Converter={StaticResource ModeCheckSearchCategory}}">
+                            <Label Text="Rubrique"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                            <Picker 
+                    
+                    Title="Choisir une rubrique"
+                    ItemsSource="{Binding RubriqueList}"
+                    SelectedItem="{Binding RubriqueMode, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="type"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                            <Picker 
+                    
+                    Title="choisir un type"
+                    ItemsSource="{Binding Types}"
+                    SelectedItem="{Binding TypeMode, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="Marque"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="choisir une marque"
+                    ItemsSource="{Binding Brands}"
+                    SelectedItem="{Binding BrandMode, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="Prix maximal"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+
+                            <StackLayout Orientation="Vertical">
+                                <Slider Value="{Binding PriceMode}"
+                Maximum="100000"
+                Minimum="0"
+                 MaximumTrackColor="DarkGray"
+                MinimumTrackColor="Blue"
+                    x:Name="sliderPriceMode"/>
+
+                                <Label Text="{Binding Source={x:Reference sliderPriceMode},
+                              Path=Value,
+                              StringFormat='{0:F0} FCFA / 100 000 FCFA +'}"
+                   TextColor="Black"></Label>
+                            </StackLayout>
+
+                            <Label Text="Sexe"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="choisir le sexe cible"
+                    ItemsSource="{Binding UniversList}"
+                    SelectedItem="{Binding Univers, Mode=TwoWay}">
+                            </Picker>
+
+                            <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource ModeCheckingForm}}">
+                                <Label Text="Taille"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                                </Label>
+                                <Picker 
+                    
+                    Title="choisir la taille"
+                    ItemsSource="{Binding Sizes}"
+                    SelectedItem="{Binding Size, Mode=TwoWay}">
+                                </Picker>
+                            </StackLayout>
+                            <Label Text="Couleur"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="choisir la couleur"
+                    ItemsSource="{Binding ColorList}"
+                    SelectedItem="{Binding Color, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="L'état de l'article"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="choisir la l'état de l'article"
+                    ItemsSource="{Binding StateList}"
+                    SelectedItem="{Binding State, Mode=TwoWay}">
+                            </Picker>
+
+                        </StackLayout>
+
+                        <!--for Multimedia category-->
+
+                        <StackLayout IsVisible="{Binding Categori, Converter={StaticResource MultimediaCheckSearchCategory}}">
+                            <Label Text="Rubrique"
+                   TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                            <Picker 
+                    
+                    Title="Choisir une rubrique"
+                    ItemsSource="{Binding MultimediaRubriqueList}"
+                    SelectedItem="{Binding MultimediaRubrique, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="Marque"
+                   TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                            <Picker 
+                    
+                    Title="choisir une marque"
+                    ItemsSource="{Binding MultimediaBrands}"
+                    SelectedItem="{Binding MultimediaBrand, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="Modèle"
+                       TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="Choisir le model"
+                    ItemsSource="{Binding MultimediaModels}"
+                    SelectedItem="{Binding MultimediaModel, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="Prix maximal"
+                   TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+
+                            <StackLayout Orientation="Vertical">
+                                <Slider Value="{Binding PriceMulti}"
+                Maximum="100000"
+                Minimum="0"
+                 MaximumTrackColor="DarkGray"
+                MinimumTrackColor="Blue"
+                    x:Name="sliderPriceMultimedia"/>
+
+                                <Label Text="{Binding Source={x:Reference sliderPriceMultimedia},
+                              Path=Value,
+                              StringFormat='{0:F0} FCFA / 100 000 FCFA +'}"
+                   TextColor="Black"></Label>
+                            </StackLayout>
+
+                            <Label Text="Capacité"
+                       TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="choisir la capacité"
+                    ItemsSource="{Binding CapacityMultimediaList}"
+                    SelectedItem="{Binding MultimediaCapacity, Mode=TwoWay}">
+                            </Picker>
+                        </StackLayout>
+
+                        <!--for Vehicule category-->
+
+                        <StackLayout IsVisible="{Binding Categori, Converter={StaticResource VehiculeCheckSearchCategory}}">
+                            <Label Text="Rubrique"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                            <Picker 
+                    
+                    Title="Choisir une rubrique"
+                    ItemsSource="{Binding RubriqueVehiculeList}"
+                    SelectedItem="{Binding VehiculeRubrique, Mode=TwoWay}">
+                            </Picker>
+
+                            <Label Text="Marque"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="choisir une marque"
+                    ItemsSource="{Binding VehiculeBrands}"
+                    SelectedItem="{Binding VehiculeBrand, Mode=TwoWay}">
+                            </Picker>
+
+                            <!--only for auto and rent auto-->
+
+                            <StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
+                                <Label Text="Modèle"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                                </Label>
+                                <Picker 
+                    
+                    Title="choisir un model"
+                    ItemsSource="{Binding VehiculeModels}"
+                    SelectedItem="{Binding VehiculeModel, Mode=TwoWay}">
+                                </Picker>
+                            </StackLayout>
+
+                            <Label Text="Prix maximal"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+
+                            <StackLayout Orientation="Vertical">
+                                <Slider Value="{Binding PriceVehicule}"
+                Maximum="10000000"
+                Minimum="0"
+                MaximumTrackColor="DarkGray"
+                MinimumTrackColor="Blue"
+                    x:Name="sliderPriceVehicule"/>
+
+                                <Label Text="{Binding Source={x:Reference sliderPriceVehicule},
+                              Path=Value,
+                              StringFormat='{0:F0} FCFA / 10 000 000 FCFA +'}"
+                   TextColor="Black"></Label>
+                            </StackLayout>
+
+                            <Label Text="L'état"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="choisir la l'état de votre bien"
+                    ItemsSource="{Binding StateVehiculeList}"
+                    SelectedItem="{Binding VehiculeState, Mode=TwoWay}">
+                            </Picker>
+                            <!--only for auto-->
+                            <StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
+                                <Label Text="type"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                                <Picker 
+                    
+                    Title="choisir le type de voiture"
+                    ItemsSource="{Binding TypeVehiculeAutoList}"
+                    SelectedItem="{Binding VehiculeType, Mode=TwoWay}">
+                                </Picker>
+                            </StackLayout>
+                            <!--only for auto and moto bike not accessory-->
+                            <StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeAutoMotoCheckingForm}}">
+                                <Label Text="Carburant"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                                </Label>
+                                <Picker 
+                    
+                    Title="choisir le type de carburant"
+                    ItemsSource="{Binding PetrolVehiculeList}"
+                    SelectedItem="{Binding Petrol, Mode=TwoWay}">
+                                </Picker>
+
+                                <Label Text="Année"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                                </Label>
+                                <StackLayout Orientation="Vertical">
+                                    <Slider Value="{Binding Year}"
+                Maximum="2021"
+                Minimum="1960"
+                MaximumTrackColor="DarkGray"
+                MinimumTrackColor="Blue"
+                    x:Name="sliderVehiculeYear"/>
+
+                                    <Label Text="{Binding Source={x:Reference sliderVehiculeYear},
+                              Path=Value,
+                              StringFormat='{0:F0}'}"
+                   TextColor="Black"></Label>
+                                </StackLayout>
+
+                                <Label Text="Kilométrage maximal"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                                </Label>
+
+                                <StackLayout Orientation="Vertical">
+                                    <Slider Value="{Binding Mileage}"
+                Maximum="300000"
+                Minimum="0"
+                 MaximumTrackColor="DarkGray"
+                MinimumTrackColor="Blue"
+                    x:Name="slider"/>
+
+                                    <Label Text="{Binding Source={x:Reference slider},
+                              Path=Value,
+                              StringFormat='{0:F0} km / 300 000 km +'}"
+                   TextColor="Black"></Label>
+                                </StackLayout>
+
+                            </StackLayout>
+
+                            <StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
+                                <Label Text="Nombre de portes"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                                </Label>
+                                <Picker 
+                    
+                    Title="choisir le nombre de portes de la voitures"
+                    ItemsSource="{Binding NumberOfDoorVehiculeList}"
+                    SelectedItem="{Binding NumberOfDoor, Mode=TwoWay}">
+                                </Picker>
+                            </StackLayout >
+                            <Label Text="Couleur"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                            </Label>
+                            <Picker 
+                    
+                    Title="choisir la couleur"
+                    ItemsSource="{Binding ColorVehiculeList}"
+                    SelectedItem="{Binding Color, Mode=TwoWay}">
+                            </Picker>
+
+                            <StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
+                                <Label Text="Transmission"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                                </Label>
+                                <Picker 
+                    
+                    Title="choisir le type de boîte de vitesse"
+                    ItemsSource="{Binding GearBoxVehiculeList}"
+                    SelectedItem="{Binding GearBox, Mode=TwoWay}">
+                                </Picker>
+                            </StackLayout>
+                        </StackLayout>
+
+
+                    </StackLayout>
+
+
+                    <!--end of different categorie-->
+
+
+
+                    <Label Text="Type d'annonce"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"/>
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal">
+                            <RadioButton 
+                             IsChecked="{Binding IsOffer}"></RadioButton>
+                            <Label Text="Offres"
+                           TextColor="Black"></Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <RadioButton IsChecked="{Binding IsSearch}" ></RadioButton>
+                            <Label Text="Demandes"
+                           TextColor="Black"></Label>
+                        </StackLayout>
+
+                    </StackLayout>
+
+
+                </StackLayout>
+            </ScrollView>
+            <StackLayout Margin="20,10,20,15" >
+                <Button Text="{Binding SearchAndResultText}"
+                        CornerRadius="10"
+                        Command="{Binding SearchCommand}"
+                        ></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+
+
+
+
+
+
+
+
+
+
+</ContentPage>

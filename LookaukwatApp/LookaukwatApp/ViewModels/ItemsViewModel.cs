@@ -11,6 +11,7 @@ using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.JobView;
 using LookaukwatApp.Views.ModeView;
 using LookaukwatApp.Views.MultimediaView;
+using LookaukwatApp.Views.SearchView;
 using LookaukwatApp.Views.Vehicule;
 using System;
 using System.Collections.Generic;
@@ -76,7 +77,7 @@ namespace LookaukwatApp.ViewModels
 
         private async void OnFilter()
         {
-            // await Shell.Current.GoToAsync(nameof(SearchPage));
+             await Shell.Current.GoToAsync(nameof(SearchPage));
         }
 
         async void OnItemSelected(ProductForMobileViewModel item)

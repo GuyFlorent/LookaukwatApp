@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.SearchView.ResultSearchPage"
+             Title="{Binding TitlePage}"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels"  
+             xmlns:model="clr-namespace:LookaukwatApp.Models" 
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             x:Name="ResultSearch">
+
+
+
+
+
+
+
+    <!--<StackLayout Margin="20,10,20,25">
+
+
+        -->
+    <!--<Label Text="Infinite Scroll" FontSize="52" TextColor="DeepPink" Margin="20,0" />
+        <Label Text="Xamarin.Forms" FontSize="46" TextColor="DodgerBlue" Margin="20,0" />-->
+    <!--
+
+
+        <Button Text="Filtre"
+                    Grid.Column="0"
+                    CornerRadius="5"
+                    BackgroundColor="LightSkyBlue"
+                    TextColor="Black"
+                    Command="{Binding FilterCommand}"></Button>
+        <StackLayout VerticalOptions="Center" IsVisible="{Binding IsRunning}"
+                     AbsoluteLayout.LayoutFlags="PositionProportional"
+                 AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+            <ActivityIndicator IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+        </StackLayout>
+        <RefreshView  Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsRefressing, Mode=TwoWay}">
+            <ListView ItemsSource="{Binding Items}" 
+                      CachingStrategy="RecycleElement" 
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                      SeparatorVisibility="None">
+                <ListView.Behaviors>
+                    <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
+                </ListView.Behaviors>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="0,10,0,10"  
+                                   HasShadow="True"
+                                   BorderColor="SkyBlue">
+                                <StackLayout >
+
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.RowSpan="4" 
+                       Source="{Binding Image }"
+                       Aspect="AspectFill"
+                       HeightRequest="100"
+                       WidthRequest="100"></Image>
+
+                                        <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       FontAttributes="Bold"></Label>
+
+                                        <Label Grid.Column="1"
+                           Grid.Row="1"
+                           TextColor="Orange"
+                           
+                           VerticalOptions="Center">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Price}"></Span>
+                                                    <Span Text=" FCFA"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label Grid.Column="1"
+                           Grid.Row="2"
+                       Text="{Binding Town}"
+                       VerticalOptions="End"></Label>
+
+
+                                        <Label Grid.Column="1"
+                           Grid.Row="3"
+                       Text="{Binding Date}"
+                       VerticalOptions="End"
+                                       TextColor="Green"></Label>
+                                    </Grid>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.Footer>
+                    <Grid Padding="6" IsVisible="{Binding IsBusy}">
+                        -->
+    <!-- set the footer to have a zero height when invisible -->
+    <!--
+                        <Grid.Triggers>
+                            <Trigger TargetType="Grid" Property="IsVisible" Value="False">
+                                <Setter Property="HeightRequest" Value="0" />
+                            </Trigger>
+                        </Grid.Triggers>
+                        -->
+    <!-- the loading content -->
+    <!--
+                        <Label Text="Chargement..." TextColor="DeepPink" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                    </Grid>
+                </ListView.Footer>
+
+            </ListView>
+        </RefreshView>
+    </StackLayout>-->
+</ContentPage>

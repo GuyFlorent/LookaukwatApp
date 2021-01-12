@@ -89,7 +89,8 @@
             </Picker>
 
             <Button Text="Suivant"
-                    Command="{Binding GetCategoryCommand }"></Button>
+                    Command="{Binding GetCategoryCommand }"
+                    CornerRadius="20"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -78,7 +78,7 @@
                                 <Frame Margin="0,0,0,10"  
                                    HasShadow="True"
                                    BorderColor="SkyBlue">
-                                    <StackLayout >
+                                    <StackLayout BackgroundColor="GhostWhite">
 
                                         <Grid >
                                             <Grid.RowDefinitions>

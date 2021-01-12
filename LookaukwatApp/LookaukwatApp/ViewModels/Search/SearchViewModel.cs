@@ -1430,7 +1430,7 @@ namespace LookaukwatApp.ViewModels.Search
                             break;
                         case "Véhicule":
                             TitlePage = "Plus de filtres dans Véhicule";
-                            Result = await _apiServices.GetResultOfferSeachNumberVehiculeAsync("Vehicule", Town, SearchOrAskJob, PriceVehicule, VehiculeBrand, VehiculeModel,
+                            Result = await _apiServices.GetResultOfferSeachNumberVehiculeAsync("Vehicule", Town, SearchOrAskJob, PriceVehicule, VehiculeRubrique, VehiculeBrand, VehiculeModel,
                                 VehiculeType, Petrol, Year, Mileage, NumberOfDoor, GearBox, Vehiculestate, Color);
 
                             SearchAndResultText = "Rechercher ( " + Result + " annonces )";

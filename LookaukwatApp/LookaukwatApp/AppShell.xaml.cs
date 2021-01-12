@@ -29,7 +29,7 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
             Routing.RegisterRoute(nameof(Views.LoginView.LoginPage), typeof(Views.LoginView.LoginPage));
            // Routing.RegisterRoute(nameof(PublishProductPage), typeof(PublishProductPage));
-           // Routing.RegisterRoute(nameof(PublishAnnouncePage), typeof(PublishAnnouncePage));
+            Routing.RegisterRoute(nameof(Views.PublishAnnouncePage), typeof(Views.PublishAnnouncePage));
             //Routing.RegisterRoute(nameof(UserProfilePage), typeof(UserProfilePage));
             Routing.RegisterRoute(nameof(UserPage), typeof(UserPage));
            // Routing.RegisterRoute(nameof(Views.HomeView.ItemsPage), typeof(Views.HomeView.ItemsPage));

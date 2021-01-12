@@ -1025,7 +1025,7 @@ namespace LookaukwatApp.Services
             return result;
         }
 
-        public async Task<int> GetResultOfferSeachNumberVehiculeAsync(string category, string town, string searchOrAskJob, int price, string vehiculeBrand, string vehiculeModel, string vehiculeType, string petrol, string year, string mileage, string numberOfDoor, string gearBox, string vehiculestate, string color)
+        public async Task<int> GetResultOfferSeachNumberVehiculeAsync(string category, string town, string searchOrAskJob, int price,string vehiculeRubrique, string vehiculeBrand, string vehiculeModel, string vehiculeType, string petrol, string year, string mileage, string numberOfDoor, string gearBox, string vehiculestate, string color)
         {
             HttpClient client;
 
@@ -1038,7 +1038,7 @@ namespace LookaukwatApp.Services
 
             // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
 
-            var json = await client.GetStringAsync(Uri + "api/Vehicule/GetOfferVehiculeSearchNumber/?categori=" + category + "&town=" + town + "&searchOrAskJob=" + searchOrAskJob + "&price=" + price + "&vehiculeBrand=" + vehiculeBrand + "&vehiculeModel=" + vehiculeModel + "&vehiculeType=" + vehiculeType + "&petrol=" + petrol + "&year=" + year + "&mileage=" + mileage + "&numberOfDoor=" + numberOfDoor + "&gearBox=" + gearBox + "&vehiculestate=" + vehiculestate + "&color=" + color);
+            var json = await client.GetStringAsync(Uri + "api/Vehicule/GetOfferVehiculeSearchNumber/?categori=" + category + "&town=" + town + "&searchOrAskJob=" + searchOrAskJob + "&price=" + price + "&vehiculeRubrique=" + vehiculeRubrique + "&vehiculeBrand=" + vehiculeBrand + "&vehiculeModel=" + vehiculeModel + "&vehiculeType=" + vehiculeType + "&petrol=" + petrol + "&year=" + year + "&mileage=" + mileage + "&numberOfDoor=" + numberOfDoor + "&gearBox=" + gearBox + "&vehiculestate=" + vehiculestate + "&color=" + color);
 
             int result = JsonConvert.DeserializeObject<int>(json);
 

@@ -13,7 +13,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView>
+    <StackLayout>
+        <ScrollView>
         <StackLayout >
             <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
             <CarouselView ItemsSource="{Binding Images}"
@@ -346,6 +347,30 @@
             </StackLayout>
         </StackLayout>
     </ScrollView>
+        <StackLayout HeightRequest="130" BackgroundColor="#2196F3">
 
+            <Grid Margin="10,0,0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <ImageButton Source="icon_phone"
+                                 HeightRequest="40"
+                                 WidthRequest="40"
+                                 BackgroundColor="Transparent"
+                                 Command="{Binding CallUserCommand}"></ImageButton>
+                <Label Grid.Row="1"
+                           Text="Contacter"
+                       TextColor="White"
+                           FontAttributes="Italic"></Label>
+            </Grid>
+
+        </StackLayout>
+    </StackLayout>
 
 </ContentPage>

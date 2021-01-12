@@ -197,7 +197,7 @@ namespace LookaukwatApp.ViewModels.Search
 
         private async Task<List<ProductForMobileViewModel>> ShowResult(int pageIndex)
         {
-           
+            IsRunning = true;
             SearchModel UserSearchCondition = JsonConvert.DeserializeObject<SearchModel>(JsonSearchModel);
             List<ProductForMobileViewModel> list = new List<ProductForMobileViewModel>();
             switch (UserSearchCondition.SearchOrAskJob)
@@ -260,7 +260,7 @@ namespace LookaukwatApp.ViewModels.Search
                     list = resultAsk;
                     break;
             }
-
+            IsRunning = false;
             return list;
         }
     }

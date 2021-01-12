@@ -1,6 +1,18 @@
 ﻿using LookaukwatApp.Helpers;
 using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
+using LookaukwatApp.ViewModels.Appartment;
+using LookaukwatApp.ViewModels.House;
+using LookaukwatApp.ViewModels.Job;
+using LookaukwatApp.ViewModels.Mode;
+using LookaukwatApp.ViewModels.Multimedia;
+using LookaukwatApp.ViewModels.Vehicule;
+using LookaukwatApp.Views.AppartmentView;
+using LookaukwatApp.Views.HouseView;
+using LookaukwatApp.Views.JobView;
+using LookaukwatApp.Views.ModeView;
+using LookaukwatApp.Views.MultimediaView;
+using LookaukwatApp.Views.Vehicule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,7 +34,7 @@ namespace LookaukwatApp.ViewModels.User
         {
             TitlePage = "Mes annonces";
             //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-            //ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);
+            ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);
             Items = new ObservableCollection<ProductForMobileViewModel>();
             DeleteCommand = new Command(async (e) =>
             {
@@ -39,6 +51,47 @@ namespace LookaukwatApp.ViewModels.User
                 }
             });
             DownloadDataAsync();
+        }
+
+        async void OnItemSelected(ProductForMobileViewModel item)
+        {
+
+            if (item == null)
+                return;
+            
+            switch (item.Category)
+            {
+                case "Emploi":
+
+                    // This will push the ItemDetailPage onto the navigation stack
+                    await Shell.Current.GoToAsync($"{nameof(JobDetailPage)}?{nameof(JobDetailsViewModel.ItemId)}={item.id}");
+
+                    break;
+
+                case "Immobilier":
+
+                    await Shell.Current.GoToAsync($"{nameof(ApartDetailPage)}?{nameof(ApartDetailViewModel.ItemId)}={item.id}");
+                    break;
+
+                case "Mode":
+
+                    await Shell.Current.GoToAsync($"{nameof(ModeDetailPage)}?{nameof(ModeDetailViewModel.ItemId)}={item.id}");
+
+                    break;
+
+                case "Multimedia":
+                    await Shell.Current.GoToAsync($"{nameof(MultimediaDetailPage)}?{nameof(MultimediaDetailViewModel.ItemId)}={item.id}");
+                    break;
+
+                case "Vehicule":
+                    await Shell.Current.GoToAsync($"{nameof(VehiculeDetailPage)}?{nameof(VehiculeDetailViewModel.ItemId)}={item.id}");
+                    break;
+
+                case "Maison":
+                    await Shell.Current.GoToAsync($"{nameof(HouseDetailPage)}?{nameof(HouseDetailViewModel.ItemId)}={item.id}");
+                    break;
+            }
+
         }
 
         private async Task DownloadDataAsync()

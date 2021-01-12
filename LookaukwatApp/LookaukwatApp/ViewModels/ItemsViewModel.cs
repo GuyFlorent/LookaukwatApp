@@ -131,7 +131,7 @@ namespace LookaukwatApp.ViewModels
         public ItemsViewModel()
         {
             TitlePage = "Lookaukwat";
-           // numberOfProduct = _apiServices.Get_AllNumber_ProductsAsync().Result;
+             GetTotalNumberOfProduct();
             FilterCommand = new Command(OnFilter);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);
@@ -154,7 +154,7 @@ namespace LookaukwatApp.ViewModels
                 OnCanLoadMore = () =>
                 {
 
-                    return Items.Count < 500;
+                    return Items.Count < numberOfProduct;
                 }
             };
 
@@ -169,6 +169,11 @@ namespace LookaukwatApp.ViewModels
             Items.AddRange(items);
 
             IsRunning = false;
+        }
+
+        private async void GetTotalNumberOfProduct()
+        {
+            numberOfProduct = await _apiServices.Get_AllNumber_ProductsAsync();
         }
 
     }

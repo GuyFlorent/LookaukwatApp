@@ -49,7 +49,8 @@ namespace LookaukwatApp.ViewModels.Search
             set
             {
                 jsonSearchModel = value;
-                ShowResult();
+                int pageIndex = 0;
+               var item =  ShowResult(pageIndex);
             }
         }
 
@@ -73,7 +74,8 @@ namespace LookaukwatApp.ViewModels.Search
                     // load the next page
                     var page = Items.Count / PageSize;
 
-                    var items = await _apiServices.GetProductsAsync(page, PageSize);
+                    var items = await ShowResult(page);
+                    // var items = await _apiServices.GetProductsAsync(page, PageSize);
                     //numberOfProduct = await _apiServices.Get_AllNumber_ProductsAsync();
                     IsBusy = false;
 
@@ -100,8 +102,8 @@ namespace LookaukwatApp.ViewModels.Search
 
                 //var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize);
                 //Items.AddRange(items);
-
-                ShowResult();
+                int pageIndex = 0;
+                var items = ShowResult(pageIndex);
 
             }
             catch (Exception ex)
@@ -171,10 +173,10 @@ namespace LookaukwatApp.ViewModels.Search
         }
 
 
-        private async void ShowResult()
+        private async Task<List<ProductForMobileViewModel>> ShowResult(int pageIndex)
         {
             SearchModel UserSearchCondition = JsonConvert.DeserializeObject<SearchModel>(JsonSearchModel);
-
+            List<ProductForMobileViewModel> list = new List<ProductForMobileViewModel>();
             switch (UserSearchCondition.SearchOrAskJob)
             {
                 case "J'offre":
@@ -184,39 +186,45 @@ namespace LookaukwatApp.ViewModels.Search
 
                         case "Emploi":
 
-                            var resultJob = await _apiServices.GetResultOfferSeachJobAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultJob = await _apiServices.GetResultOfferSeachJobAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
                             Items.AddRange(resultJob);
-
+                            list = resultJob;
                             break;
                         case "Immobilier":
 
-                            var resultImo = await _apiServices.GetResultOfferSeachApartAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultImo = await _apiServices.GetResultOfferSeachApartAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
                             Items.AddRange(resultImo);
+                            list = resultImo;
                             break;
                         case "Multimédia":
 
-                            var resultMulti = await _apiServices.GetResultOfferSeachMultiAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultMulti = await _apiServices.GetResultOfferSeachMultiAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
                             Items.AddRange(resultMulti);
+                            list = resultMulti;
                             break;
                         case "Maison":
 
-                            var resultHouse = await _apiServices.GetResultOfferSeachHouseAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultHouse = await _apiServices.GetResultOfferSeachHouseAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
                             Items.AddRange(resultHouse);
+                            list = resultHouse;
                             break;
                         case "Mode":
 
-                            var resultMode = await _apiServices.GetResultOfferSeachModeAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultMode = await _apiServices.GetResultOfferSeachModeAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
                             Items.AddRange(resultMode);
+                            list = resultMode;
                             break;
                         case "Véhicule":
 
-                            var resultVehicule = await _apiServices.GetResultOfferSearchVehiculeAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultVehicule = await _apiServices.GetResultOfferSearchVehiculeAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
                             Items.AddRange(resultVehicule);
+                            list = resultVehicule;
                             break;
 
                         default:
-                            var resultOffer = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                            var resultOffer = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
                             Items.AddRange(resultOffer);
+                            list = resultOffer;
                             break;
                     }
 
@@ -224,10 +232,13 @@ namespace LookaukwatApp.ViewModels.Search
 
                 case "Je recherche":
 
-                    var resultAsk = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: 0, pageSize: PageSize);
+                    var resultAsk = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
                     Items.AddRange(resultAsk);
+                    list = resultAsk;
                     break;
             }
+
+            return list;
         }
     }
 }

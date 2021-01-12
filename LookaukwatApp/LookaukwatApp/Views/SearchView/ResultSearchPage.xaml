@@ -5,22 +5,44 @@
              Title="{Binding TitlePage}"
              xmlns:local="clr-namespace:LookaukwatApp.ViewModels"  
              xmlns:model="clr-namespace:LookaukwatApp.Models" 
-             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+             xmlns:local1="clr-namespace:LookaukwatApp.ViewModels.OtherServices"
              x:Name="ResultSearch">
 
 
 
 
+    <Shell.SearchHandler>
+
+        <local1:ProductSearchHandler Placeholder="Que recherchez vous?"
+                                      ShowsResults="true">
+            <local1:ProductSearchHandler.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.15*" />
+                            <ColumnDefinition Width="0.85*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Source="{Binding Image}"
+                               Aspect="AspectFill"
+                               HeightRequest="40"
+                               WidthRequest="40" />
+                        <Label Grid.Column="1"
+                               Text="{Binding Title}"
+                               FontAttributes="Bold" />
+                    </Grid>
+                </DataTemplate>
+            </local1:ProductSearchHandler.ItemTemplate>
+        </local1:ProductSearchHandler>
+    </Shell.SearchHandler>
+
+    <!--<ContentPage.BindingContext>
+        <local:ItemsViewModel />
+    </ContentPage.BindingContext>-->
 
 
+    <StackLayout Margin="20,10,20,25">
 
-    <!--<StackLayout Margin="20,10,20,25">
-
-
-        -->
-    <!--<Label Text="Infinite Scroll" FontSize="52" TextColor="DeepPink" Margin="20,0" />
-        <Label Text="Xamarin.Forms" FontSize="46" TextColor="DodgerBlue" Margin="20,0" />-->
-    <!--
 
 
         <Button Text="Filtre"
@@ -99,13 +121,13 @@
                                        TextColor="Green"></Label>
                                     </Grid>
 
-                                    <StackLayout.GestureRecognizers>
+                                    <!--<StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
                                 CommandParameter="{Binding .}">
                                         </TapGestureRecognizer>
-                                    </StackLayout.GestureRecognizers>
+                                    </StackLayout.GestureRecognizers>-->
                                 </StackLayout>
                             </Frame>
                         </ViewCell>
@@ -114,22 +136,22 @@
 
                 <ListView.Footer>
                     <Grid Padding="6" IsVisible="{Binding IsBusy}">
-                        -->
-    <!-- set the footer to have a zero height when invisible -->
-    <!--
+                        
+     <!--set the footer to have a zero height when invisible--> 
+    
                         <Grid.Triggers>
                             <Trigger TargetType="Grid" Property="IsVisible" Value="False">
                                 <Setter Property="HeightRequest" Value="0" />
                             </Trigger>
                         </Grid.Triggers>
-                        -->
-    <!-- the loading content -->
-    <!--
+                        
+     <!--the loading content--> 
+    
                         <Label Text="Chargement..." TextColor="DeepPink" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
                     </Grid>
                 </ListView.Footer>
 
             </ListView>
         </RefreshView>
-    </StackLayout>-->
+    </StackLayout>
 </ContentPage>

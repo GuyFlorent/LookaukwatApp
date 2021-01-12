@@ -17,7 +17,7 @@ namespace LookaukwatApp.Views.ImageView
     public partial class UploadImagePage : ContentPage
     {
         private MediaFile _mediaFile;
-        string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
+        string Uri = "https://192.168.1.66:45455/";
         public UploadImagePage()
         {
             InitializeComponent();
@@ -166,8 +166,8 @@ namespace LookaukwatApp.Views.ImageView
                 );
             if (_mediaFile == null)
                 return;
-            StackFirstActivity.IsVisible = false;
-            FirstActivity.IsRunning = false;
+            StackFirstActivity.IsVisible = true;
+            FirstActivity.IsRunning = true;
             //LocalPathLabel.Text = _mediaFile.Path;
             FileImage.Source = ImageSource.FromStream(() =>
             {
@@ -177,8 +177,8 @@ namespace LookaukwatApp.Views.ImageView
             var isSuccess = await UploadPhoto_Click();
             if (isSuccess)
             {
-                StackFirstActivity.IsVisible = true;
-                FirstActivity.IsRunning = true;
+                StackFirstActivity.IsVisible = false;
+                FirstActivity.IsRunning = false;
                 FirstImage.IsVisible = false;
                 response.Text = "Ajoutée avec success";
             }

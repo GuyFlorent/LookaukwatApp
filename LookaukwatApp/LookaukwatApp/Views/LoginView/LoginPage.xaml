@@ -39,7 +39,7 @@
                 </StackLayout>
 
             </StackLayout>
-            <Label Text="Connectez-vous et déposer vos annonces"
+            <Label Text="Connectez-vous et déposez vos annonces"
                    FontSize="Title"
                    TextColor="Black"></Label>
 

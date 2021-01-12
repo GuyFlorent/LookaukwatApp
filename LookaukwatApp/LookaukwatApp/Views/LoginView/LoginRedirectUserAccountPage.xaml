@@ -32,7 +32,7 @@
             <Label Text="{Binding ErrorMessage}"
                    TextColor="Red"
                        IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNullOrEmptyBoolConverter}}"></Label>
-            <Label Text="Connectez-vous et accéder à votre espace"
+            <Label Text="Connectez-vous et accédez à votre espace"
                    FontSize="Title"
                    TextColor="Black"></Label>
 

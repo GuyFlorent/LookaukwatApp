@@ -35,6 +35,7 @@ namespace LookaukwatApp.ViewModels.Search
         private ProductForMobileViewModel _selectedItem;
         public Command LoadItemsCommand { get; }
         public Command FilterCommand { get; }
+        public Command BackCommand { get; }
         public Command<ProductForMobileViewModel> ItemTapped { get; }
 
         private string jsonSearchModel;
@@ -69,6 +70,7 @@ namespace LookaukwatApp.ViewModels.Search
         {
             //numberOfProduct = _apiServices.Get_AllNumber_ProductsAsync().Result;
             FilterCommand = new Command(OnFilter);
+            BackCommand = new Command(OnBack);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);
 
@@ -135,7 +137,14 @@ namespace LookaukwatApp.ViewModels.Search
 
         private async void OnFilter()
         {
-            await Shell.Current.GoToAsync($"{nameof(SearchPage)}?{nameof(SearchViewModel.JsonOldSearch)}={JsonSearchModel}");
+           // await Shell.Current.GoToAsync($"{nameof(SearchPage)}?{nameof(SearchViewModel.JsonOldSearch)}={JsonSearchModel}");
+            await Shell.Current.GoToAsync("..");
+        }
+
+        private async void OnBack()
+        {
+            
+            await Shell.Current.GoToAsync("///MainPage");
         }
 
         async void OnItemSelected(ProductForMobileViewModel item)

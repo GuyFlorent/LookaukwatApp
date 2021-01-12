@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:converter="clr-namespace:LookaukwatApp.Converter"
               xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Mode"
-             x:Class="LookaukwatApp.Views.ModeView.ModeDetailPage">
+             x:Class="LookaukwatApp.Views.ModeView.ModeDetailPage"
+             Title="{Binding Title}">
 
 
     <ContentPage.Resources>

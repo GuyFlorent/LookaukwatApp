@@ -39,10 +39,10 @@ namespace LookaukwatApp.Models
 
         //Multimedia
         public int PriceMulti { get; set; }
-        public string MultimediaRubrique;
-        public string MultimediaBrand;
-        public string MultimediaModel;
-        public string MultimediaCapacity;
+        public string MultimediaRubrique { get; set; }
+        public string MultimediaBrand { get; set; }
+        public string MultimediaModel { get; set; }
+        public string MultimediaCapacity { get; set; }
 
         //Apart
 

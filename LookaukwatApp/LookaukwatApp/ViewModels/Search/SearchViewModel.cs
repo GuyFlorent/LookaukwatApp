@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Search
 {
-    [QueryProperty(nameof(JsonOldSearch), nameof(JsonOldSearch))]
+    
     public class SearchViewModel : BaseViewModel
     {
         ApiServices _apiServices = new ApiServices();
@@ -26,20 +26,7 @@ namespace LookaukwatApp.ViewModels.Search
             set { SetProperty(ref result, value); }
         }
 
-        private string jsonOldSearch;
-        public string JsonOldSearch
-        {
-            get { return jsonOldSearch; }
-            set 
-            { 
 
-                SetProperty(ref jsonOldSearch, value);
-                if (!string.IsNullOrWhiteSpace(value))
-                {
-
-                }
-            }
-        }
         public IList<string> SearchOrSaskList { get; }
         public IList<string> Categoryliste { get; }
         public IList<string> TownList { get; }
@@ -1649,5 +1636,6 @@ namespace LookaukwatApp.ViewModels.Search
             }
 
         }
+
     }
 }

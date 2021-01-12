@@ -3,14 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LookaukwatApp.Views.SearchView.ResultSearchPage"
              Title="{Binding TitlePage}"
-             xmlns:local="clr-namespace:LookaukwatApp.ViewModels"  
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Search"  
              xmlns:model="clr-namespace:LookaukwatApp.Models" 
              xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
              xmlns:local1="clr-namespace:LookaukwatApp.ViewModels.OtherServices"
              x:Name="ResultSearch">
 
 
-
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"
+                             />
+    </Shell.BackButtonBehavior>
 
     <Shell.SearchHandler>
 
@@ -121,13 +124,13 @@
                                        TextColor="Green"></Label>
                                     </Grid>
 
-                                    <!--<StackLayout.GestureRecognizers>
+                                    <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ResultSearchViewModel}}, Path=ItemTapped}"		
                                 CommandParameter="{Binding .}">
                                         </TapGestureRecognizer>
-                                    </StackLayout.GestureRecognizers>-->
+                                    </StackLayout.GestureRecognizers>
                                 </StackLayout>
                             </Frame>
                         </ViewCell>

@@ -1,4 +1,5 @@
 ﻿using LookaukwatApp.ViewModels;
+using LookaukwatApp.ViewModels.Job;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace LookaukwatApp.Views.JobView
         public JobDetailPage()
         {
             InitializeComponent();
-            BindingContext = new ItemDetailViewModel();
+            BindingContext = new JobDetailsViewModel();
         }
 
         private async void CopyLink_Click(object sender, EventArgs e)

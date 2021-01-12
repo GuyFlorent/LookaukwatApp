@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LookaukwatApp.ViewModels.Appartment;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace LookaukwatApp.Views.AppartmentView
         public ApartDetailPage()
         {
             InitializeComponent();
+            BindingContext = new ApartDetailViewModel();
         }
 
         private async void CopyLink_Click(object sender, EventArgs e)

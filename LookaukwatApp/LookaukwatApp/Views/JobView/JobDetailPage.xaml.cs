@@ -18,6 +18,7 @@ namespace LookaukwatApp.Views.JobView
         {
             InitializeComponent();
             BindingContext = new JobDetailsViewModel();
+            Shell.SetTabBarIsVisible(this, false);
         }
 
         private async void CopyLink_Click(object sender, EventArgs e)

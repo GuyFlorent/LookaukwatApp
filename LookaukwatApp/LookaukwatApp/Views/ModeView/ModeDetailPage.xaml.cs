@@ -17,6 +17,7 @@ namespace LookaukwatApp.Views.ModeView
         {
             InitializeComponent();
             BindingContext = new ModeDetailViewModel();
+            Shell.SetTabBarIsVisible(this, false);
         }
 
         private async void CopyLink_Click(object sender, EventArgs e)

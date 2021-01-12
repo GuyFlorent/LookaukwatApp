@@ -17,6 +17,7 @@ namespace LookaukwatApp.Views.AppartmentView
         {
             InitializeComponent();
             BindingContext = new ApartDetailViewModel();
+            Shell.SetTabBarIsVisible(this, false);
         }
 
         private async void CopyLink_Click(object sender, EventArgs e)

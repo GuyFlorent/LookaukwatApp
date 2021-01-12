@@ -17,6 +17,7 @@ namespace LookaukwatApp.Views.MultimediaView
         {
             InitializeComponent();
             BindingContext = new MultimediaDetailViewModel();
+            Shell.SetTabBarIsVisible(this, false);
         }
 
         private async void CopyLink_Click(object sender, EventArgs e)

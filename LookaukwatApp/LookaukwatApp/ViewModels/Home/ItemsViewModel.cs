@@ -32,7 +32,7 @@ namespace LookaukwatApp.ViewModels.Home
 
         public Command LoadItemsCommand { get; }
         public Command FilterCommand { get; }
-        // public Command AddItemCommand { get; }
+        
         public Command<ProductForMobileViewModel> ItemTapped { get; }
 
 
@@ -59,9 +59,10 @@ namespace LookaukwatApp.ViewModels.Home
             }
         }
 
+      
         //public void OnAppearing()
         //{
-        //    IsRefressing = true;
+        //    IsImageView = true;
         //    SelectedItem = null;
         //}
 
@@ -132,6 +133,7 @@ namespace LookaukwatApp.ViewModels.Home
         {
             TitlePage = "Lookaukwat";
             GetTotalNumberOfProduct();
+           
             FilterCommand = new Command(OnFilter);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);

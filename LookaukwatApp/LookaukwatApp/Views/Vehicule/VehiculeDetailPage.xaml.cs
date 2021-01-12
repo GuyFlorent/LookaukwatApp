@@ -17,6 +17,7 @@ namespace LookaukwatApp.Views.Vehicule
         {
             InitializeComponent();
             BindingContext = new VehiculeDetailViewModel();
+            Shell.SetTabBarIsVisible(this, false);
         }
 
         private async void CopyLink_Click(object sender, EventArgs e)

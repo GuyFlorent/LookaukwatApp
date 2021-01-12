@@ -113,8 +113,8 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_activitySector"
-                           Grid.RowSpan="2"
-                               Aspect="AspectFill"
+                       
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -138,9 +138,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_activitySector"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -163,11 +163,11 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="car_info"
-                           Grid.RowSpan="2"
+                           
                           
-                               Aspect="AspectFill"
-                               HeightRequest="40"
-                               WidthRequest="40" />
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
                     <Label Grid.Column="1"
                                Text="Modèle"
                                FontAttributes="Italic" />
@@ -188,9 +188,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="car_multiple"
-                           Grid.RowSpan="2"
+                         
                           
-                               Aspect="AspectFill"
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -213,9 +213,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="color_palette"
-                           Grid.RowSpan="2"
+                           
                           
-                               Aspect="AspectFill"
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -238,9 +238,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="gas_station"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -263,9 +263,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="calendar_month"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -288,9 +288,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="car_cruise_control"
-                           Grid.RowSpan="2"
+                           
                           
-                               Aspect="AspectFill"
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -321,9 +321,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="car_door"
-                           Grid.RowSpan="2"
+                           
                           
-                               Aspect="AspectFill"
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -346,9 +346,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="car_shift_pattern"
-                           Grid.RowSpan="2"
+                           
                           
-                               Aspect="AspectFill"
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -373,9 +373,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="state"
-                           Grid.RowSpan="2"
+                           
                           
-                               Aspect="AspectFill"
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -398,8 +398,8 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_searchOrAsk"
-                           Grid.RowSpan="2"
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"

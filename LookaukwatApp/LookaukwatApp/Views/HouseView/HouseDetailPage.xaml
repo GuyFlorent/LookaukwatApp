@@ -113,10 +113,10 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_activitySector"
-                           Grid.RowSpan="2"
-                               Aspect="AspectFill"
-                               HeightRequest="40"
-                               WidthRequest="40" />
+                           
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
                     <Label Grid.Column="1"
                                Text="Rubrique"
                                FontAttributes="Italic" />
@@ -138,9 +138,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="lamps"
-                           Grid.RowSpan="2"
+                           
                           
-                               Aspect="AspectFill"
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -163,9 +163,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="material_design"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -188,9 +188,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="color_palette"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -213,9 +213,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="state"
-                           Grid.RowSpan="2"
+                         
                           
-                               Aspect="AspectFill"
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -238,8 +238,8 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_searchOrAsk"
-                           Grid.RowSpan="2"
-                               Aspect="AspectFill"
+                           
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"

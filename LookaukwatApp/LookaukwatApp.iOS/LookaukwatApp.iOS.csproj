@@ -148,4 +148,130 @@
       <Name>LookaukwatApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\car-shift-pattern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\color-palette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\account_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\account_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\add_image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\calendar-month.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\camera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\car-cruise-control.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\car-door.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\car-info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\car-multiple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\car-seat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\state.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\surface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tshirt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-Portrait.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\gas-station.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\home_city.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_activitySector.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_contractType.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_profil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_searchOrAsk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\lamps.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\material_design.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ruler.png" />
+  </ItemGroup>
 </Project>

@@ -4,7 +4,7 @@
              x:Class="LookaukwatApp.Views.AppartmentView.ApartDetailPage"
              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Appartment"
              xmlns:converter="clr-namespace:LookaukwatApp.Converter"
-             Title="{Binding TitlePage}">
+             Title="{Binding Title}">
     
     
     <ContentPage.Resources>
@@ -113,8 +113,8 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="home_city"
-                           Grid.RowSpan="2"
-                               Aspect="AspectFill"
+                           
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -138,9 +138,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_activitySector"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -163,9 +163,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="surface"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -188,9 +188,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_activitySector"
-                           Grid.RowSpan="2"
+                        
                           
-                               Aspect="AspectFill"
+                               Aspect="AspectFit"
                                HeightRequest="40"
                                WidthRequest="40" />
                     <Label Grid.Column="1"
@@ -213,8 +213,8 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_searchOrAsk"
-                           Grid.RowSpan="2"
-                               Aspect="AspectFill"
+                         
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"

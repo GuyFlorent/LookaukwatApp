@@ -106,10 +106,10 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_contractType"
-                           Grid.RowSpan="2"
-                               Aspect="AspectFill"
-                               HeightRequest="40"
-                               WidthRequest="40" />
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
                     <Label Grid.Column="1"
                                Text="Type de contrat"
                                FontAttributes="Italic" />
@@ -130,11 +130,11 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_activitySector"
-                           Grid.RowSpan="2"
+                           
                           
-                               Aspect="AspectFill"
-                               HeightRequest="40"
-                               WidthRequest="40" />
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
                     <Label Grid.Column="1"
                                Text="Secteur d'activité"
                                FontAttributes="Italic" />
@@ -155,10 +155,10 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_searchOrAsk"
-                           Grid.RowSpan="2"
-                               Aspect="AspectFill"
-                               HeightRequest="40"
-                               WidthRequest="40" />
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
                     <Label Grid.Column="1"
                                Text="J'offre/Je recherche"
                                FontAttributes="Italic" />

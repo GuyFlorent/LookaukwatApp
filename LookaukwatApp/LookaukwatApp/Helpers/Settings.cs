@@ -21,7 +21,17 @@ namespace LookaukwatApp.Helpers
             }
         }
 
-
+        public static string JsonSearchSave
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("JsonSearchSave", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("JsonSearchSave", value);
+            }
+        }
         public static string Username
         {
             get

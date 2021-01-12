@@ -113,8 +113,8 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_activitySector"
-                           Grid.RowSpan="2"
-                               Aspect="AspectFill"
+                           
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -136,9 +136,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="group"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -161,9 +161,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_activitySector"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -186,9 +186,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="tshirt"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -211,9 +211,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="ruler"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -236,9 +236,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="color_palette"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -261,9 +261,9 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="state"
-                           Grid.RowSpan="2"
                           
-                               Aspect="AspectFill"
+                          
+                               Aspect="AspectFit"
                                HeightRequest="5"
                                WidthRequest="5" />
                     <Label Grid.Column="1"
@@ -286,10 +286,10 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="icon_searchOrAsk"
-                           Grid.RowSpan="2"
-                               Aspect="AspectFill"
-                               HeightRequest="5"
-                               WidthRequest="5" />
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="10"
+                               WidthRequest="10" />
                     <Label Grid.Column="1"
                                Text="J'offre/Je recherche"
                                FontAttributes="Italic" />

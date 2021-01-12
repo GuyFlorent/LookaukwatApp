@@ -1508,7 +1508,7 @@ namespace LookaukwatApp.ViewModels.Search
 
                             SearchModel searchModelMulti = new SearchModel
                             {
-                                Category = Categori,
+                                Category = "Multimedia",
                                 Town = Town,
                                 SearchOrAskJob = SearchOrAskJob,
                                 PriceMulti = PriceMulti,
@@ -1575,7 +1575,7 @@ namespace LookaukwatApp.ViewModels.Search
 
                             SearchModel searchModelVehicule = new SearchModel
                             {
-                                Category = Categori,
+                                Category = "Vehicule",
                                 Town = Town,
                                 SearchOrAskJob = SearchOrAskJob,
                                 PriceVehicule = PriceVehicule,

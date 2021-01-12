@@ -1,4 +1,5 @@
-﻿using LookaukwatApp.Models;
+﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.Models;
 using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.Appartment;
@@ -51,6 +52,7 @@ namespace LookaukwatApp.ViewModels.Search
             set
             {
                 jsonSearchModel = value;
+               
                 int pageIndex = 0;
                var item =  ShowResult(pageIndex);
             }
@@ -111,6 +113,10 @@ namespace LookaukwatApp.ViewModels.Search
 
                 //var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize);
                 //Items.AddRange(items);
+                if (string.IsNullOrWhiteSpace(JsonSearchModel))
+                {
+                    JsonSearchModel = Settings.JsonSearchSave;
+                }
                 int pageIndex = 0;
                 var items = ShowResult(pageIndex);
 
@@ -152,7 +158,7 @@ namespace LookaukwatApp.ViewModels.Search
 
             if (item == null)
                 return;
-
+            Settings.JsonSearchSave = JsonSearchModel;
             switch (item.Category)
             {
                 case "Emploi":
@@ -191,6 +197,7 @@ namespace LookaukwatApp.ViewModels.Search
 
         private async Task<List<ProductForMobileViewModel>> ShowResult(int pageIndex)
         {
+           
             SearchModel UserSearchCondition = JsonConvert.DeserializeObject<SearchModel>(JsonSearchModel);
             List<ProductForMobileViewModel> list = new List<ProductForMobileViewModel>();
             switch (UserSearchCondition.SearchOrAskJob)

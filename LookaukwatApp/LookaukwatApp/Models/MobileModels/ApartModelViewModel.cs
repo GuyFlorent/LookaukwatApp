@@ -18,7 +18,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string Title { get; set; }
 
         public string Description { get; set; }
-
+        public int ViewNumber { get; set; }
         public string Street { get; set; }
 
         public int ApartSurface { get; set; }

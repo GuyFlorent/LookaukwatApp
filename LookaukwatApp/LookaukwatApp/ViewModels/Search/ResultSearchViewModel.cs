@@ -135,7 +135,7 @@ namespace LookaukwatApp.ViewModels.Search
 
         private async void OnFilter()
         {
-            await Shell.Current.GoToAsync($"{nameof(SearchPage)}?{nameof(SearchViewModel.Categori)}={JsonSearchModel}");
+            await Shell.Current.GoToAsync($"{nameof(SearchPage)}?{nameof(SearchViewModel.JsonOldSearch)}={JsonSearchModel}");
         }
 
         async void OnItemSelected(ProductForMobileViewModel item)

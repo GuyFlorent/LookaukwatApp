@@ -10,7 +10,7 @@ namespace LookaukwatApp.Models.MobileModels
 
         public string Title { get; set; }
 
-
+        public int ViewNumber { get; set; }
         public string Town { get; set; }
         public string Category { get; set; }
 

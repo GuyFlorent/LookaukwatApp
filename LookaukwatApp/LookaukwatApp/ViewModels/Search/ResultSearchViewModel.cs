@@ -26,6 +26,7 @@ using Xamarin.Forms.Extended;
 namespace LookaukwatApp.ViewModels.Search
 {
     [QueryProperty(nameof(JsonSearchModel), nameof(JsonSearchModel))]
+    [QueryProperty(nameof(NumberOfresult), nameof(NumberOfresult))]
     public class ResultSearchViewModel : BaseViewModel
     {
         ApiServices _apiServices = new ApiServices();
@@ -56,6 +57,12 @@ namespace LookaukwatApp.ViewModels.Search
 
         private const int PageSize = 10;
 
+        private string numberOfresult;
+        public string NumberOfresult
+        {
+            get { return numberOfresult; }
+            set { SetProperty(ref numberOfresult, value); }
+        }
         public InfiniteScrollCollection<ProductForMobileViewModel> Items { get; }
 
         public ResultSearchViewModel()
@@ -85,7 +92,7 @@ namespace LookaukwatApp.ViewModels.Search
                 OnCanLoadMore = () =>
                 {
 
-                    return Items.Count < 500;
+                    return Items.Count < Convert.ToInt32(NumberOfresult);
                 }
             };
 

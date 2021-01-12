@@ -19,6 +19,11 @@ namespace LookaukwatApp.ViewModels.Search
         //For every Product
         #region Same model for every categorie
         private int result = 0;
+        public int Result
+        {
+            get { return result; }
+            set { SetProperty(ref result, value); }
+        }
         public IList<string> SearchOrSaskList { get; }
         public IList<string> Categoryliste { get; }
         public IList<string> TownList { get; }
@@ -1384,54 +1389,54 @@ namespace LookaukwatApp.ViewModels.Search
 
                         case "Emploi":
                             TitlePage = "Plus de filtres dans Emploi";
-                            result = await _apiServices.GetResultOfferSeachNumberJobAsync(Categori, Town, SearchOrAskJob, TypeContract, ActivitySector, PriceJob);
+                            Result = await _apiServices.GetResultOfferSeachNumberJobAsync(Categori, Town, SearchOrAskJob, TypeContract, ActivitySector, PriceJob);
 
-                            SearchAndResultText = "Rechercher ( " + result + " annonces )";
+                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
                             break;
                         case "Immobilier":
                             TitlePage = "Plus de filtres dans Immobilier";
-                            result = await _apiServices.GetResultOfferSeachNumberApartAsync(Categori, Town, SearchOrAskJob, PriceApart, RoomNumberAppart,
+                            Result = await _apiServices.GetResultOfferSeachNumberApartAsync(Categori, Town, SearchOrAskJob, PriceApart, RoomNumberAppart,
                                 FurnitureOrNotAppart, TypeAppart, ApartSurfaceAppart);
 
-                            SearchAndResultText = "Rechercher ( " + result + " annonces )";
+                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
 
                             break;
                         case "Multimédia":
                             TitlePage = "Plus de filtres dans Multimédia";
-                            result = await _apiServices.GetResultOfferSeachNumberMultiAsync("Multimedia", Town, SearchOrAskJob, PriceMulti, MultimediaRubrique,
+                            Result = await _apiServices.GetResultOfferSeachNumberMultiAsync("Multimedia", Town, SearchOrAskJob, PriceMulti, MultimediaRubrique,
                                 MultimediaBrand, MultimediaModel, MultimediaCapacity);
 
-                            SearchAndResultText = "Rechercher ( " + result + " annonces )";
+                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
 
                             break;
                         case "Maison":
                             TitlePage = "Plus de filtres dans Maison";
-                            result = await _apiServices.GetResultOfferSeachNumberHouseAsync(Categori, Town, SearchOrAskJob, PriceHouse, RubriqueHouse, TypeHouse,
+                            Result = await _apiServices.GetResultOfferSeachNumberHouseAsync(Categori, Town, SearchOrAskJob, PriceHouse, RubriqueHouse, TypeHouse,
                                 FabricMaterialHouse, StateHouse, ColorHouse);
 
-                            SearchAndResultText = "Rechercher ( " + result + " annonces )";
+                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
 
                             break;
                         case "Mode":
                             TitlePage = "Plus de filtres dans Mode";
-                            result = await _apiServices.GetResultOfferSeachNumberModeAsync(Categori, Town, SearchOrAskJob, PriceMode, RubriqueMode, TypeMode,
+                            Result = await _apiServices.GetResultOfferSeachNumberModeAsync(Categori, Town, SearchOrAskJob, PriceMode, RubriqueMode, TypeMode,
                                 BrandMode, UniversMode, SizeMode, State, ColorMode);
 
-                            SearchAndResultText = "Rechercher ( " + result + " annonces )";
+                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
 
                             break;
                         case "Véhicule":
                             TitlePage = "Plus de filtres dans Véhicule";
-                            result = await _apiServices.GetResultOfferSeachNumberVehiculeAsync("Vehicule", Town, SearchOrAskJob, PriceVehicule, VehiculeBrand, VehiculeModel,
+                            Result = await _apiServices.GetResultOfferSeachNumberVehiculeAsync("Vehicule", Town, SearchOrAskJob, PriceVehicule, VehiculeBrand, VehiculeModel,
                                 VehiculeType, Petrol, Year, Mileage, NumberOfDoor, GearBox, Vehiculestate, Color);
 
-                            SearchAndResultText = "Rechercher ( " + result + " annonces )";
+                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
 
                             break;
 
                         default:
-                            result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob); ;
-                            SearchAndResultText = "Rechercher ( " + result + " annonces )";
+                            Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob); ;
+                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
                             break;
                     }
 
@@ -1439,9 +1444,9 @@ namespace LookaukwatApp.ViewModels.Search
 
                 case "Je recherche":
 
-                    result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob);
+                    Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob);
 
-                    SearchAndResultText = "Rechercher ( " + result + " annonces )";
+                    SearchAndResultText = "Rechercher ( " + Result + " annonces )";
                     break;
             }
 
@@ -1469,9 +1474,9 @@ namespace LookaukwatApp.ViewModels.Search
                                 ActivitySector = ActivitySector,
                                 PriceJob = PriceJob
                             };
-                            JsonSearchModel = JsonConvert.SerializeObject(searchModel);
+                            JsonSearchModel = JsonConvert.SerializeObject(searchModel); 
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
+                             await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
 
                             break;
                         case "Immobilier":
@@ -1491,7 +1496,7 @@ namespace LookaukwatApp.ViewModels.Search
                             };
                             JsonSearchModel = JsonConvert.SerializeObject(searchModelImo);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
 
 
                             break;
@@ -1512,7 +1517,7 @@ namespace LookaukwatApp.ViewModels.Search
                             };
                             JsonSearchModel = JsonConvert.SerializeObject(searchModelMulti);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
 
 
                             break;
@@ -1534,7 +1539,7 @@ namespace LookaukwatApp.ViewModels.Search
 
                             JsonSearchModel = JsonConvert.SerializeObject(searchModelHouse);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
 
 
                             break;
@@ -1559,7 +1564,7 @@ namespace LookaukwatApp.ViewModels.Search
 
                             JsonSearchModel = JsonConvert.SerializeObject(searchModelMode);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
 
 
                             break;
@@ -1586,7 +1591,7 @@ namespace LookaukwatApp.ViewModels.Search
 
                             JsonSearchModel = JsonConvert.SerializeObject(searchModelVehicule);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
 
 
                             break;
@@ -1602,7 +1607,7 @@ namespace LookaukwatApp.ViewModels.Search
                             };
                             JsonSearchModel = JsonConvert.SerializeObject(searchModelOffer);
 
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
 
 
                             break;
@@ -1621,7 +1626,7 @@ namespace LookaukwatApp.ViewModels.Search
                     };
                     JsonSearchModel = JsonConvert.SerializeObject(searchModelSearch);
 
-                    await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}");
+                    await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
 
 
                     break;

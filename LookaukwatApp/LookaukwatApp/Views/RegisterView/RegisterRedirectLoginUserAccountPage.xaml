@@ -41,7 +41,7 @@
                        IsVisible="{Binding ErrorMessage4, Converter={StaticResource StringNullOrEmptyBoolConverter}}"></Label>
 
                 <Label Text="Créer un compte et accéder à votre espace"
-                   FontSize="Title"
+                   FontSize="Subtitle"
                    TextColor="Black"></Label>
                 <Entry Placeholder="Prénom /Raison sociale"
                    Text="{Binding FirstName}"
@@ -64,7 +64,8 @@
                 <Switch IsToggled="False"></Switch>
             </StackLayout>-->
                 <Button Text="Créer"
-                    TextColor="Blue"
+                    TextColor="White"
+                        CornerRadius="20"
                     Command="{Binding RegisterReturnUserAccountCommand}"></Button>
 
                 <ActivityIndicator IsVisible="{Binding IsRunning}" 
@@ -72,7 +73,7 @@
                                    Color ="#80000000"/>
 
                 <StackLayout>
-                    <Label Text="Avez vous déja un compte? " TextColor="Blue"></Label>
+                    <Label Text="Avez vous déja un compte? " TextColor="Black"></Label>
                     <Button
                             
                     Clicked="OnLoginReturnForUserClicked"

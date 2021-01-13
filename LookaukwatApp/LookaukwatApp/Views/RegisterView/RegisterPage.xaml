@@ -41,7 +41,7 @@
 
 
             <Label Text="Créer un compte et déposer vos annonces"
-                   FontSize="Title"
+                   FontSize="Subtitle"
                    TextColor="Black"></Label>
             <Entry Placeholder="Prénom /Raison sociale"
                    Text="{Binding FirstName}"
@@ -64,14 +64,15 @@
                 <Switch IsToggled="False"></Switch>
             </StackLayout>-->
             <Button Text="Créer"
-                    TextColor="Blue"
+                    TextColor="White"
+                        CornerRadius="20"
                     Command="{Binding RegisterCommand}"></Button>
 
             <ActivityIndicator IsVisible="{Binding IsRunning}" 
                                    IsRunning="{Binding IsRunning}" 
                                    Color ="#80000000"/>
             <StackLayout>
-                <Label Text="Avez vous déja un compte? " TextColor="Blue"></Label>
+                <Label Text="Avez vous déja un compte? " TextColor="Black"></Label>
                 <Button
                             
                             Clicked="LoginPagePopup_Buton"

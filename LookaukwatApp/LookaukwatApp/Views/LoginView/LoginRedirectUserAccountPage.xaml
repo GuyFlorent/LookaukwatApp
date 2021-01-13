@@ -29,12 +29,11 @@
                      VerticalOptions="Center">
 
 
-            <Label Text="{Binding ErrorMessage}"
-                   TextColor="Red"
-                       IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNullOrEmptyBoolConverter}}"></Label>
+            
             <Label Text="Connectez-vous et accédez à votre espace"
-                   FontSize="Title"
+                   FontSize="Subtitle"
                    TextColor="Black"></Label>
+          
 
             <StackLayout Orientation="Horizontal">
                 <StackLayout Orientation="Horizontal">
@@ -51,6 +50,10 @@
 
             </StackLayout>
 
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                       IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNullOrEmptyBoolConverter}}"></Label>
+
             <StackLayout IsVisible="{Binding IsEmail}">
                 <Entry Placeholder="Adresse Email"
                    Text="{Binding Username}"
@@ -60,20 +63,26 @@
                    IsPassword="True"
                    Text="{Binding Password}"></Entry>
 
-                <StackLayout Orientation="Horizontal">
+                <!--<StackLayout Orientation="Horizontal">
                     <Label Text="Mémoriser le mot de passe ?"></Label>
                     <Switch IsToggled="False"></Switch>
-                </StackLayout>
+                </StackLayout>-->
                 <Button Text="Se connecter"
-                    TextColor="Blue"
-                    Command="{Binding LoginUserAccountCommand }"></Button>
+                        TextColor="White"
+                    Command="{Binding LoginUserAccountCommand }"
+                         CornerRadius="20"></Button>
 
                 <ActivityIndicator IsVisible="{Binding IsRunning}" 
                                    IsRunning="{Binding IsRunning}" 
                                    Color ="#80000000"/>
 
+                <Button Text="Vous avez oublié votre mot de passe ?"
+                    TextColor="Blue"
+                    BackgroundColor="Transparent"
+                    Clicked="ForgotPassword_Button"></Button>
+
                 <StackLayout>
-                    <Label Text="Vous n'avez pas de compte? " TextColor="Blue"></Label>
+                    <Label Text="Vous n'avez pas de compte? " TextColor="Black"></Label>
                     <Button
                              Clicked ="RegisterViewForUser"
                             CornerRadius="4"
@@ -81,6 +90,15 @@
                             BackgroundColor="Transparent"
                             Text="Créer en 2 minutes ici" />
                 </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Des problèmes ?" TextColor="Black"></Label>
+                    <Button Text="contactez nous ici"
+                    TextColor="Blue"
+                    BackgroundColor="Transparent"
+                    Clicked="ContactUs_Button"></Button>
+                </StackLayout>
+                
 
             </StackLayout>
 
@@ -94,26 +112,40 @@
                    IsPassword="True"
                    Text="{Binding Password}"></Entry>
 
-                <StackLayout Orientation="Horizontal">
+                <!--<StackLayout Orientation="Horizontal">
                     <Label Text="Mémoriser le mot de passe ?"></Label>
                     <Switch IsToggled="False"></Switch>
-                </StackLayout>
+                </StackLayout>-->
                 <Button Text="Se connecter"
-                    TextColor="Blue"
-                    Command="{Binding LoginUserAccountByPhoneCommand }"></Button>
+                    TextColor="White"
+                    Command="{Binding LoginUserAccountByPhoneCommand }"
+                         CornerRadius="20"></Button>
 
                 <ActivityIndicator IsVisible="{Binding IsRunning}" 
                                    IsRunning="{Binding IsRunning}" 
                                    Color ="#80000000"/>
 
+                <Button Text="Vous avez oublié votre mot de passe ?"
+                    TextColor="Blue"
+                    BackgroundColor="Transparent"
+                    Clicked="ForgotPassword_Button"></Button>
+
                 <StackLayout>
-                    <Label Text="Vous n'avez pas de compte? " TextColor="Blue"></Label>
+                    <Label Text="Vous n'avez pas de compte? " TextColor="Black"></Label>
                     <Button
                              Clicked ="RegisterViewForUser"
                             CornerRadius="4"
                             TextColor="Blue"
                             BackgroundColor="Transparent"
                             Text="Créer en 2 minutes ici" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Des problèmes ?" TextColor="Black"></Label>
+                    <Button Text="contactez nous ici"
+                    TextColor="Blue"
+                    BackgroundColor="Transparent"
+                    Clicked="ContactUs_Button"></Button>
                 </StackLayout>
 
             </StackLayout>

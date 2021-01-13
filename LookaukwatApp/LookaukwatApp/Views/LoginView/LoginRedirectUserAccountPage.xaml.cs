@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,6 +25,16 @@ namespace LookaukwatApp.Views.LoginView
         {
             await PopupNavigation.Instance.PopAllAsync();
             await PopupNavigation.Instance.PushAsync(new RegisterRedirectLoginUserAccountPage());
+        }
+
+        private async void ForgotPassword_Button(object o, EventArgs e)
+        {
+           await Browser.OpenAsync("https://lookaukwat.com/Account/ForgotPassword");
+        }
+
+        private async void ContactUs_Button(object o, EventArgs e)
+        {
+           await Browser.OpenAsync("https://lookaukwat.com/Home/Contact");
         }
     }
 }

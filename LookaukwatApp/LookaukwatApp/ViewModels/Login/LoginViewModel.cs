@@ -110,7 +110,7 @@ namespace LookaukwatApp.ViewModels.Login
         private async void OnLoginClicked()
         {
             IsRunning = true;
-            if (!string.IsNullOrEmpty(Username) || !string.IsNullOrEmpty(Password))
+            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
             {
                 var accesstonken = await _apiServices.LoginASync(Username, Password);
 
@@ -140,13 +140,13 @@ namespace LookaukwatApp.ViewModels.Login
         private async void OnLoginByPhoneClicked()
         {
             IsRunning = true;
-            if (!string.IsNullOrEmpty(Phone) || !string.IsNullOrEmpty(Password))
+            if (!string.IsNullOrEmpty(Phone) && !string.IsNullOrEmpty(Password))
             {
                 string userEmail = await _apiServices.GetUserNameWithPhoneAsync(Phone);
                 if (userEmail == null)
                 {
                     IsRunning = false;
-                    ErrorMessage = "Numero de téléphone et/ou mot de passe incorrecte !";
+                    ErrorMessage = "Téléphone et/ou mot de passe incorrecte !";
                 }
                 else
                 {
@@ -166,21 +166,21 @@ namespace LookaukwatApp.ViewModels.Login
                     else
                     {
                         IsRunning = false;
-                        ErrorMessage = "Email et/ou mot de passe incorrect !";
+                        ErrorMessage = "Téléphone et/ou mot de passe incorrect !";
                     }
                 }
             }
             else
             {
                 IsRunning = false;
-                ErrorMessage = "Numero de téléphone et le mot de passe sont obligatoires !";
+                ErrorMessage = "Téléphone et mot de passe sont obligatoires !";
             }
         }
 
         private async void OnLoginReturnUserClicked()
         {
             IsRunning = true;
-            if (!string.IsNullOrEmpty(Username) || !string.IsNullOrEmpty(Password))
+            if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
             {
                 var accesstonken = await _apiServices.LoginASync(Username, Password);
 
@@ -202,20 +202,20 @@ namespace LookaukwatApp.ViewModels.Login
             else
             {
                 IsRunning = false;
-                ErrorMessage = "Email et mot de passe incorrect sont obligatoires !";
+                ErrorMessage = "Email et mot de passe sont obligatoires !";
             }
         }
         //for login with phone
         private async void OnLoginByPhoneReturnUserClicked()
         {
             IsRunning = true;
-            if (!string.IsNullOrEmpty(Phone) || !string.IsNullOrEmpty(Password))
+            if (!string.IsNullOrEmpty(Phone) && !string.IsNullOrEmpty(Password))
             {
                 string userEmail = await _apiServices.GetUserNameWithPhoneAsync(Phone);
                 if (userEmail == null)
                 {
                     IsRunning = false;
-                    ErrorMessage = "Numero de téléphone et/ou mot de passe incorrecte !";
+                    ErrorMessage = "Téléphone et/ou mot de passe incorrecte !";
                 }
                 else
                 {
@@ -233,14 +233,14 @@ namespace LookaukwatApp.ViewModels.Login
                     else
                     {
                         IsRunning = false;
-                        ErrorMessage = "Numero de téléphone et/ou mot de passe incorrect !";
+                        ErrorMessage = "Téléphone et/ou mot de passe incorrect !";
                     }
                 }
             }
             else
             {
                 IsRunning = false;
-                ErrorMessage = "Numero de téléphone et mot de passe incorrect sont obligatoires!";
+                ErrorMessage = "Téléphone et mot de passe sont obligatoires!";
             }
 
         }

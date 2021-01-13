@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1086747803380",
+    "project_id": "lookaukwatapps",
+    "storage_bucket": "lookaukwatapps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086747803380:android:e8c9cc4721db37fcfee8a1",
+        "android_client_info": {
+          "package_name": "com.lookaukwat.lookaukwatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086747803380-0rq22qrrlvi5amm9hsrm3141d6pmp0q9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgMKzr5Eq4KncO6lxjtxXDcr5IJZrADg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086747803380-0rq22qrrlvi5amm9hsrm3141d6pmp0q9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -75,6 +75,16 @@
                        Text="{Binding Date}"
                        VerticalOptions="End"
                                        TextColor="Green"></Label>
+                                        <StackLayout Orientation="Horizontal" 
+                                                     Grid.Row="5" 
+                                                     >
+                                            <Image Source="eye"
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               WidthRequest="20" />
+                                            <Label Text="{Binding ViewNumber}"></Label>
+                                        </StackLayout>
 
 
                                         <ImageButton Grid.Row="5"

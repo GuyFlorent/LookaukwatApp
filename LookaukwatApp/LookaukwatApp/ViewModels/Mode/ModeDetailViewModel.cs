@@ -238,5 +238,10 @@ namespace LookaukwatApp.ViewModels.Mode
             await Clipboard.SetTextAsync(uri);
 
         }
+
+        private void OnSendMessage()
+        {
+            PhoneDialerViewModel.PlacePhoneCall(Phone);
+        }
     }
 }

@@ -24,5 +24,6 @@ namespace LookaukwatApp.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
     }
 }

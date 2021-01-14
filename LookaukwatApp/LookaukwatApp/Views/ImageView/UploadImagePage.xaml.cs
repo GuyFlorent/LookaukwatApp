@@ -17,7 +17,7 @@ namespace LookaukwatApp.Views.ImageView
     public partial class UploadImagePage : ContentPage
     {
         private MediaFile _mediaFile;
-        string Uri = "https://192.168.1.66:45455/";
+        string Uri = "https://lookaukwatapi.azurewebsites.net/";
         public UploadImagePage()
         {
             InitializeComponent();

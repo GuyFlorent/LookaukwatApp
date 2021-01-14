@@ -10,91 +10,161 @@
              xmlns:local1="clr-namespace:LookaukwatApp.ViewModels.OtherServices"
              x:Name="Accueil">
 
-    <ContentPage.BindingContext>
-        <local:PublishAnnounceViewModel></local:PublishAnnounceViewModel>
-    </ContentPage.BindingContext>
-
-    <ContentPage.Content>
+    <ScrollView>
         <StackLayout Orientation="Vertical"
-                     Margin="15,35,20,25">
-            <Label Text="Choisir une catégorie"
-                   TextColor="Black"
-                   FontSize="Title"
-                VerticalOptions="Start" 
-                HorizontalOptions="CenterAndExpand" />
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Emploi : "
-                              TextColor="Black"
-                              FontAttributes="Bold"></Span>
-                        <Span Text="Offres et recherche d'emploi"></Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Immobilier : "
-                              TextColor="Black"
-                              FontAttributes="Bold"></Span>
-                        <Span Text="Appartement, bureau, terrain à vendre et à louer..."></Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Maison : "
-                              TextColor="Black"
-                              FontAttributes="Bold"></Span>
-                        <Span Text="Ammeublement, électroménager, décoration, cuisine..."></Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Multimédia : "
-                              TextColor="Black"
-                              FontAttributes="Bold"></Span>
-                        <Span Text="Informatique, Téléphonie,Jeux vidéo..."></Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Mode : "
-                              TextColor="Black"
-                              FontAttributes="Bold"></Span>
-                        <Span Text="Vêtements,  Chaussures, Montres, Bijoux, Sac..."></Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label>
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Voiture : "
-                              TextColor="Black"
-                              FontAttributes="Bold"></Span>
-                        <Span Text="Voiture, location voiture, Moto, pièces auto et moto..."></Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Picker 
-                    x:Name="picker" 
-                    Title="Choisir une catégorie"
-                    VerticalOptions="CenterAndExpand" 
-                    HorizontalOptions="CenterAndExpand"
-                    ItemsSource="{Binding liste}"
-                    SelectedItem="{Binding Categori, Mode=TwoWay}">
+                     Margin="4,20,4,20">
 
-            </Picker>
 
-            <Button Text="Suivant"
-                    Command="{Binding GetCategoryCommand }"></Button>
+            <Label IsVisible="false" x:Name="ProductId" Text="{Binding ItemId}"></Label>
+
+            <Label Text="Vous pouvez ajouter jusqu'a trois(3) images"
+               HorizontalOptions="Center"
+               TextColor="Black"
+               FontSize="Subtitle"
+               FontAttributes="Bold"></Label>
+
+            <Label Text="Image 1"
+               TextColor="Blue"></Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackLayout x:Name="FirstImage" Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="image"
+                           HeightRequest="30"></Image>
+                        <Button Text="Choisir dans galerie"
+                BackgroundColor="Teal"
+                TextColor="Wheat"
+                FontSize="11"
+                Clicked="PickPhoto_Click"></Button>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                             Grid.Column="1">
+                        <Image Source="camera"
+                           HeightRequest="30"></Image>
+                        <Button Text="Prendre une photo"
+                BackgroundColor="Navy"
+                TextColor="White"
+                FontSize="11"
+                Clicked="TakePhoto_Click"
+                ></Button>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+            <StackLayout x:Name="StackFirstActivity" IsVisible="false">
+
+                <ActivityIndicator x:Name="FirstActivity" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+
+            </StackLayout>
+            <Label x:Name="response"
+               TextColor="Green"></Label>
+
+            <Image x:Name="FileImage"
+               Source="add_image"
+               WidthRequest="150"
+               HeightRequest="150"></Image>
+
+            <Label Text="Image 2"
+               TextColor="Blue"></Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackLayout x:Name="SecondImage" Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="image"
+                           HeightRequest="30"></Image>
+                        <Button Text="Choisir dans galerie"
+                BackgroundColor="Teal"
+                TextColor="Wheat"
+                FontSize="11"
+                Clicked="PickPhoto_Click1"></Button>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                             Grid.Column="1">
+                        <Image Source="camera"
+                           HeightRequest="30"></Image>
+                        <Button Text="Prendre une photo"
+                BackgroundColor="Navy"
+                TextColor="White"
+                FontSize="11"
+                Clicked="TakePhoto_Click1"
+                ></Button>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+            <StackLayout x:Name="StackSecondActivity" IsVisible="false">
+
+                <ActivityIndicator x:Name="SecondActivity" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+
+            </StackLayout>
+            <Label x:Name="response1"
+               TextColor="Green"></Label>
+
+            <Image x:Name="FileImage1"
+               Source="add_image"
+               WidthRequest="150"
+               HeightRequest="150"></Image>
+
+            <Label Text="Image 3"
+               TextColor="Blue"></Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackLayout x:Name="ThirdImage" Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="image"
+                           HeightRequest="30"></Image>
+                        <Button Text="Choisir dans galerie"
+                BackgroundColor="Teal"
+                TextColor="Wheat"
+                FontSize="11"
+                Clicked="PickPhoto_Click2"></Button>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                             Grid.Column="1">
+                        <Image Source="camera"
+                           HeightRequest="30"></Image>
+                        <Button Text="Prendre une photo"
+                BackgroundColor="Navy"
+                TextColor="White"
+                FontSize="11"
+                Clicked="TakePhoto_Click2"
+                ></Button>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+            <StackLayout x:Name="StackThirdActivity" IsVisible="false">
+
+                <ActivityIndicator x:Name="ThirdActivity" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+
+            </StackLayout>
+            <Label x:Name="response2"
+               TextColor="Green"></Label>
+
+            <Image x:Name="FileImage2"
+               Source="add_image"
+               WidthRequest="150"
+               HeightRequest="150"></Image>
+
+            <Button Text="Valider et publier l'annonce"
+                BackgroundColor="Purple"
+                TextColor="White"
+                FontSize="14"
+                Margin="0,0,0,10"
+                Clicked="Validate_Click"></Button>
+            <StackLayout x:Name="StackValidate" IsVisible="false">
+
+                <ActivityIndicator x:Name="ActivityValidate" IsRunning="false" Color ="#80000000"/>
+
+            </StackLayout>
+
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 
 </ContentPage>

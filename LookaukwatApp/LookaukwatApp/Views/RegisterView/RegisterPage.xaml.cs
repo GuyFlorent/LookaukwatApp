@@ -24,7 +24,7 @@ namespace LookaukwatApp.Views.RegisterView
         private async void LoginPagePopup_Buton(object o, EventArgs e)
         {
             await PopupNavigation.Instance.PopAllAsync();
-            await PopupNavigation.Instance.PushAsync(new LoginPage());
+            await PopupNavigation.Instance.PushAsync(new LoginPage(), true);
         }
     }
 }

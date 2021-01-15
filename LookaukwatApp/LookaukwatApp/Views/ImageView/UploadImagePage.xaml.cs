@@ -22,6 +22,9 @@ namespace LookaukwatApp.Views.ImageView
         {
             InitializeComponent();
             BindingContext = new UploadImageViewModel();
+            Shell.SetTabBarIsVisible(this, false);
+            ActivityValidate.IsVisible = false;
+            ActivityValidate.IsRunning = false;
         }
 
 
@@ -304,11 +307,12 @@ namespace LookaukwatApp.Views.ImageView
         {
             ActivityValidate.IsVisible = true;
             ActivityValidate.IsRunning = true;
+
             var content = new MultipartFormDataContent();
 
-            content.Add(new StreamContent(_mediaFile.GetStream()),
-                "\"file\"",
-                $"\"{_mediaFile.Path}\"");
+            //content.Add(new StreamContent(_mediaFile.GetStream()),
+            //    "\"file\"",
+            //    $"\"{_mediaFile.Path}\"");
             HttpClient client;
 
             var httpClientHandler = new HttpClientHandler();

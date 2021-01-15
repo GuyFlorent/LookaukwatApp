@@ -77,7 +77,7 @@
 
                             <StackLayout Orientation="Vertical">
                                 <Slider Value="{Binding PriceApart}"
-                Maximum="5000000"
+                Maximum="1000000"
                 Minimum="0"
                 MaximumTrackColor="DarkGray"
                 MinimumTrackColor="Blue"
@@ -85,7 +85,7 @@
 
                                 <Label Text="{Binding Source={x:Reference sliderPriceApart},
                               Path=Value,
-                              StringFormat='{0:F0} FCFA / 5 000 000 FCFA +'}"
+                              StringFormat='{0:F0} FCFA / 1 000 000 FCFA +'}"
                    TextColor="Black"></Label>
                             </StackLayout>
 
@@ -197,7 +197,7 @@
                     
                     Title="choisir un matériel"
                     ItemsSource="{Binding FabricMaterials}"
-                    SelectedItem="{Binding FabricMaterial, Mode=TwoWay}">
+                    SelectedItem="{Binding FabricMaterialHouse, Mode=TwoWay}">
                                 </Picker>
                             </StackLayout>
 
@@ -336,7 +336,7 @@
                     
                     Title="choisir le sexe cible"
                     ItemsSource="{Binding UniversList}"
-                    SelectedItem="{Binding Univers, Mode=TwoWay}">
+                    SelectedItem="{Binding UniversMode, Mode=TwoWay}">
                             </Picker>
 
                             <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource ModeCheckingForm}}">
@@ -349,7 +349,7 @@
                     
                     Title="choisir la taille"
                     ItemsSource="{Binding Sizes}"
-                    SelectedItem="{Binding Size, Mode=TwoWay}">
+                    SelectedItem="{Binding SizeMode, Mode=TwoWay}">
                                 </Picker>
                             </StackLayout>
                             <Label Text="Couleur"
@@ -361,7 +361,7 @@
                     
                     Title="choisir la couleur"
                     ItemsSource="{Binding ColorList}"
-                    SelectedItem="{Binding Color, Mode=TwoWay}">
+                    SelectedItem="{Binding ColorMode, Mode=TwoWay}">
                             </Picker>
 
                             <Label Text="L'état de l'article"
@@ -389,7 +389,7 @@
                     
                     Title="Choisir une rubrique"
                     ItemsSource="{Binding MultimediaRubriqueList}"
-                    SelectedItem="{Binding MultimediaRubrique, Mode=TwoWay}">
+                    SelectedItem="{Binding MultimediaRubrique}">
                             </Picker>
 
                             <Label Text="Marque"
@@ -400,7 +400,7 @@
                     
                     Title="choisir une marque"
                     ItemsSource="{Binding MultimediaBrands}"
-                    SelectedItem="{Binding MultimediaBrand, Mode=TwoWay}">
+                    SelectedItem="{Binding MultimediaBrand}">
                             </Picker>
 
                             <Label Text="Modèle"
@@ -411,7 +411,7 @@
                             <Picker 
                     
                     Title="Choisir le model"
-                    ItemsSource="{Binding MultimediaModels}"
+                    ItemsSource="{Binding MultimediaModels, Mode=TwoWay}"
                     SelectedItem="{Binding MultimediaModel, Mode=TwoWay}">
                             </Picker>
 
@@ -496,7 +496,7 @@
 
                             <StackLayout Orientation="Vertical">
                                 <Slider Value="{Binding PriceVehicule}"
-                Maximum="10000000"
+                Maximum="2000000"
                 Minimum="0"
                 MaximumTrackColor="DarkGray"
                 MinimumTrackColor="Blue"
@@ -504,7 +504,7 @@
 
                                 <Label Text="{Binding Source={x:Reference sliderPriceVehicule},
                               Path=Value,
-                              StringFormat='{0:F0} FCFA / 10 000 000 FCFA +'}"
+                              StringFormat='{0:F0} FCFA / 2 000 000 FCFA +'}"
                    TextColor="Black"></Label>
                             </StackLayout>
 

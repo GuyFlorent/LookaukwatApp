@@ -15,6 +15,7 @@ namespace LookaukwatApp.Views.MultimediaView
         public MultimediaAddFirstPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

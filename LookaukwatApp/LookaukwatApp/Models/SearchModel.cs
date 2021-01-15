@@ -55,6 +55,7 @@ namespace LookaukwatApp.Models
         //Vehicule
 
         public int PriceVehicule { get; set; }
+        public string VehiculeRubrique { get; set; }
         public string VehiculeBrand { get; set; }
         public string VehiculeModel { get; set; }
         public string VehiculeType { get; set; }

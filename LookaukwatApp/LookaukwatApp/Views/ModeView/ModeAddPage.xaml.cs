@@ -15,6 +15,7 @@ namespace LookaukwatApp.Views.ModeView
         public ModeAddPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

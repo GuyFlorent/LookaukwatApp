@@ -41,15 +41,19 @@
                     <Entry Placeholder="Saisir le nom du quartier"
                    Text="{Binding Street}"></Entry>
 
-                    <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
-                    
-                    <Button Text="Suivant"
-                    Command="{Binding PostApartCommad}"
-                    VerticalOptions="EndAndExpand"></Button>
-
                     
                 </StackLayout>
             </ScrollView>
+
+            <StackLayout Margin="15,0,20,20">
+                <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+
+                <Button Text="Suivant"
+                        CornerRadius="20"
+                    Command="{Binding PostApartCommad}"
+                    VerticalOptions="EndAndExpand"></Button>
+
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

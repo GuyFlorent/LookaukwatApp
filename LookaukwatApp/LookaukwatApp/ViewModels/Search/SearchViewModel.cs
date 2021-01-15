@@ -692,229 +692,241 @@ namespace LookaukwatApp.ViewModels.Search
 
         private void UpdateModellist(string brand, string rubrique)
         {
-            if (rubrique == "Téléphonie")
+            try
             {
-                MultimediaModels.Clear();
-                switch (brand)
+
+           if(MultimediaModels != null)
                 {
-                    case "Apple":
-                        foreach (var model in ModelApplePhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Huawei":
-                        foreach (var model in ModelHuaweiPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Samsung":
-                        foreach (var model in ModelSamsungPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Sony":
-                        foreach (var model in ModelSonyPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Alcatel":
-                        foreach (var model in ModelAlcatelPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Asus":
-                        foreach (var model in ModelAzusPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Honor":
-                        foreach (var model in ModelHonorPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "HTC":
-                        foreach (var model in ModelHTCPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Lenovo":
-                        foreach (var model in ModelLenovoPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "LG":
-                        foreach (var model in ModelLGPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Microsoft":
-                        foreach (var model in ModelMicrosoftPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Motorola":
-                        foreach (var model in ModelMotorolaPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Nokia":
-                        foreach (var model in ModelMicrosoftPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "One plus":
-                        foreach (var model in ModelOnePlusPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Wiko":
-                        foreach (var model in ModelWikoPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Xaomi":
-                        foreach (var model in ModelXaomiPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "ZTE":
-                        foreach (var model in ModelZTEPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    default:
-                        MultimediaModels.Add("Autre");
-                        break;
+                    MultimediaModels.Clear();
                 }
-            }
-            else if (rubrique == "Accésoires téléphonie")
+            
+                if (rubrique == "Téléphonie")
+                {
+
+                    switch (brand)
+                    {
+                        case "Apple":
+                            foreach (var model in ModelApplePhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Huawei":
+                            foreach (var model in ModelHuaweiPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Samsung":
+                            foreach (var model in ModelSamsungPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Sony":
+                            foreach (var model in ModelSonyPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Alcatel":
+                            foreach (var model in ModelAlcatelPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Asus":
+                            foreach (var model in ModelAzusPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Honor":
+                            foreach (var model in ModelHonorPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "HTC":
+                            foreach (var model in ModelHTCPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Lenovo":
+                            foreach (var model in ModelLenovoPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "LG":
+                            foreach (var model in ModelLGPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Microsoft":
+                            foreach (var model in ModelMicrosoftPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Motorola":
+                            foreach (var model in ModelMotorolaPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Nokia":
+                            foreach (var model in ModelMicrosoftPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "One plus":
+                            foreach (var model in ModelOnePlusPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Wiko":
+                            foreach (var model in ModelWikoPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Xaomi":
+                            foreach (var model in ModelXaomiPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "ZTE":
+                            foreach (var model in ModelZTEPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        default:
+                            MultimediaModels.Add("Autre");
+                            break;
+                    }
+                }
+                else if (rubrique == "Accésoires téléphonie")
+                {
+                    MultimediaModels.Clear();
+                    switch (brand)
+                    {
+                        case "Apple":
+                            foreach (var model in ModelApplePhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Huawei":
+                            foreach (var model in ModelHuaweiPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Samsung":
+                            foreach (var model in ModelSamsungPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Sony":
+                            foreach (var model in ModelSonyPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Alcatel":
+                            foreach (var model in ModelAlcatelPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Asus":
+                            foreach (var model in ModelAzusPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Honor":
+                            foreach (var model in ModelHonorPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "HTC":
+                            foreach (var model in ModelHTCPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Lenovo":
+                            foreach (var model in ModelLenovoPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "LG":
+                            foreach (var model in ModelLGPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Microsoft":
+                            foreach (var model in ModelMicrosoftPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Motorola":
+                            foreach (var model in ModelMotorolaPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Nokia":
+                            foreach (var model in ModelMicrosoftPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "One plus":
+                            foreach (var model in ModelOnePlusPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Wiko":
+                            foreach (var model in ModelWikoPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "Xaomi":
+                            foreach (var model in ModelXaomiPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        case "ZTE":
+                            foreach (var model in ModelZTEPhoneAccesorieMultimediaList)
+                            {
+                                MultimediaModels.Add(model);
+                            }
+                            break;
+                        default:
+                            MultimediaModels.Add("Autre");
+                            break;
+                    }
+                }
+            }catch(Exception ex)
             {
-                MultimediaModels.Clear();
-                switch (brand)
-                {
-                    case "Apple":
-                        foreach (var model in ModelApplePhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Huawei":
-                        foreach (var model in ModelHuaweiPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Samsung":
-                        foreach (var model in ModelSamsungPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Sony":
-                        foreach (var model in ModelSonyPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Alcatel":
-                        foreach (var model in ModelAlcatelPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Asus":
-                        foreach (var model in ModelAzusPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Honor":
-                        foreach (var model in ModelHonorPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "HTC":
-                        foreach (var model in ModelHTCPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Lenovo":
-                        foreach (var model in ModelLenovoPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "LG":
-                        foreach (var model in ModelLGPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Microsoft":
-                        foreach (var model in ModelMicrosoftPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Motorola":
-                        foreach (var model in ModelMotorolaPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Nokia":
-                        foreach (var model in ModelMicrosoftPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "One plus":
-                        foreach (var model in ModelOnePlusPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Wiko":
-                        foreach (var model in ModelWikoPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "Xaomi":
-                        foreach (var model in ModelXaomiPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    case "ZTE":
-                        foreach (var model in ModelZTEPhoneAccesorieMultimediaList)
-                        {
-                            MultimediaModels.Add(model);
-                        }
-                        break;
-                    default:
-                        MultimediaModels.Add("Autre");
-                        break;
-                }
+                Console.WriteLine(ex.ToString());
             }
 
 
@@ -985,19 +997,26 @@ namespace LookaukwatApp.ViewModels.Search
             set
             {
                 SetProperty(ref Multimediabrand, value);
-                UpdateModellist(value, MultimediaRubrique);
-                NumberOfResult();
+                try
+                {
+                    UpdateModellist(value, MultimediaRubrique);
+                    NumberOfResult();
+                }catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+               
             }
         }
 
 
-        private string Multimediamodel;
+        private string multimediaModel;
         public string MultimediaModel
         {
-            get { return Multimediamodel; }
+            get { return multimediaModel; }
             set
             {
-                SetProperty(ref Multimediamodel, Uri.UnescapeDataString(value));
+                SetProperty(ref multimediaModel, value);
                 NumberOfResult();
             }
         }
@@ -1008,7 +1027,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return Multimediacapacity; }
             set
             {
-                SetProperty(ref Multimediacapacity, Uri.UnescapeDataString(value));
+                SetProperty(ref Multimediacapacity, value);
                 NumberOfResult();
             }
         }
@@ -1204,24 +1223,24 @@ namespace LookaukwatApp.ViewModels.Search
             }
         }
 
-        private string year = "2021";
-        public string Year
+        private int year = 2021;
+        public int Year
         {
             get { return year; }
             set
             {
-                SetProperty(ref year, Uri.UnescapeDataString(value));
+                SetProperty(ref year, value);
                 NumberOfResult();
             }
         }
 
-        private string mileage = "300000";
-        public string Mileage
+        private int mileage = 300000;
+        public int Mileage
         {
             get { return mileage; }
             set
             {
-                SetProperty(ref mileage, Uri.UnescapeDataString(value));
+                SetProperty(ref mileage, value);
                 NumberOfResult();
             }
         }
@@ -1383,76 +1402,83 @@ namespace LookaukwatApp.ViewModels.Search
 
         private async void NumberOfResult()
         {
-            switch (SearchOrAskJob)
+            try
             {
-                case "J'offre":
 
-                    switch (Categori)
-                    {
 
-                        case "Emploi":
-                            TitlePage = "Plus de filtres dans Emploi";
-                            Result = await _apiServices.GetResultOfferSeachNumberJobAsync(Categori, Town, SearchOrAskJob, TypeContract, ActivitySector, PriceJob);
+                switch (SearchOrAskJob)
+                {
+                    case "J'offre":
 
-                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
-                            break;
-                        case "Immobilier":
-                            TitlePage = "Plus de filtres dans Immobilier";
-                            Result = await _apiServices.GetResultOfferSeachNumberApartAsync(Categori, Town, SearchOrAskJob, PriceApart, RoomNumberAppart,
-                                FurnitureOrNotAppart, TypeAppart, ApartSurfaceAppart);
+                        switch (Categori)
+                        {
 
-                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                            case "Emploi":
+                                TitlePage = "Plus de filtres dans Emploi";
+                                Result = await _apiServices.GetResultOfferSeachNumberJobAsync(Categori, Town, SearchOrAskJob, TypeContract, ActivitySector, PriceJob);
 
-                            break;
-                        case "Multimédia":
-                            TitlePage = "Plus de filtres dans Multimédia";
-                            Result = await _apiServices.GetResultOfferSeachNumberMultiAsync("Multimedia", Town, SearchOrAskJob, PriceMulti, MultimediaRubrique,
-                                MultimediaBrand, MultimediaModel, MultimediaCapacity);
+                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                break;
+                            case "Immobilier":
+                                TitlePage = "Plus de filtres dans Immobilier";
+                                Result = await _apiServices.GetResultOfferSeachNumberApartAsync(Categori, Town, SearchOrAskJob, PriceApart, RoomNumberAppart,
+                                    FurnitureOrNotAppart, TypeAppart, ApartSurfaceAppart);
 
-                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
 
-                            break;
-                        case "Maison":
-                            TitlePage = "Plus de filtres dans Maison";
-                            Result = await _apiServices.GetResultOfferSeachNumberHouseAsync(Categori, Town, SearchOrAskJob, PriceHouse, RubriqueHouse, TypeHouse,
-                                FabricMaterialHouse, StateHouse, ColorHouse);
+                                break;
+                            case "Multimédia":
+                                TitlePage = "Plus de filtres dans Multimédia";
+                                Result = await _apiServices.GetResultOfferSeachNumberMultiAsync("Multimedia", Town, SearchOrAskJob, PriceMulti, MultimediaRubrique,
+                                    MultimediaBrand, MultimediaModel, MultimediaCapacity);
 
-                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
 
-                            break;
-                        case "Mode":
-                            TitlePage = "Plus de filtres dans Mode";
-                            Result = await _apiServices.GetResultOfferSeachNumberModeAsync(Categori, Town, SearchOrAskJob, PriceMode, RubriqueMode, TypeMode,
-                                BrandMode, UniversMode, SizeMode, State, ColorMode);
+                                break;
+                            case "Maison":
+                                TitlePage = "Plus de filtres dans Maison";
+                                Result = await _apiServices.GetResultOfferSeachNumberHouseAsync(Categori, Town, SearchOrAskJob, PriceHouse, RubriqueHouse, TypeHouse,
+                                    FabricMaterialHouse, StateHouse, ColorHouse);
 
-                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
 
-                            break;
-                        case "Véhicule":
-                            TitlePage = "Plus de filtres dans Véhicule";
-                            Result = await _apiServices.GetResultOfferSeachNumberVehiculeAsync("Vehicule", Town, SearchOrAskJob, PriceVehicule, VehiculeRubrique, VehiculeBrand, VehiculeModel,
-                                VehiculeType, Petrol, Year, Mileage, NumberOfDoor, GearBox, Vehiculestate, Color);
+                                break;
+                            case "Mode":
+                                TitlePage = "Plus de filtres dans Mode";
+                                Result = await _apiServices.GetResultOfferSeachNumberModeAsync(Categori, Town, SearchOrAskJob, PriceMode, RubriqueMode, TypeMode,
+                                    BrandMode, UniversMode, SizeMode, State, ColorMode);
 
-                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
 
-                            break;
+                                break;
+                            case "Véhicule":
+                                TitlePage = "Plus de filtres dans Véhicule";
+                                Result = await _apiServices.GetResultOfferSeachNumberVehiculeAsync("Vehicule", Town, SearchOrAskJob, PriceVehicule, VehiculeRubrique, VehiculeBrand, VehiculeModel,
+                                    VehiculeType, Petrol, Year, Mileage, NumberOfDoor, GearBox, Vehiculestate, Color);
 
-                        default:
-                            Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob); ;
-                            SearchAndResultText = "Rechercher ( " + Result + " annonces )";
-                            break;
-                    }
+                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
 
-                    break;
+                                break;
 
-                case "Je recherche":
+                            default:
+                                Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob); ;
+                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                break;
+                        }
 
-                    Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob);
+                        break;
 
-                    SearchAndResultText = "Rechercher ( " + Result + " annonces )";
-                    break;
+                    case "Je recherche":
+
+                        Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob);
+
+                        SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                        break;
+                }
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.ToString());
             }
-
 
         }
 
@@ -1579,12 +1605,13 @@ namespace LookaukwatApp.ViewModels.Search
                                 Town = Town,
                                 SearchOrAskJob = SearchOrAskJob,
                                 PriceVehicule = PriceVehicule,
+                                VehiculeRubrique = VehiculeRubrique,
                                 VehiculeBrand = VehiculeBrand,
                                 VehiculeModel = VehiculeModel,
                                 VehiculeType = VehiculeType,
                                 Petrol = Petrol,
-                                Year = Year,
-                                Mileage = Mileage,
+                                Year = Year.ToString(),
+                                Mileage = Mileage.ToString(),
                                 NumberOfDoor = NumberOfDoor,
                                 GearBox = GearBox,
                                 VehiculeState = Vehiculestate,

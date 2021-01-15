@@ -15,6 +15,7 @@ namespace LookaukwatApp.Views.HouseView
         public HouseAddPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

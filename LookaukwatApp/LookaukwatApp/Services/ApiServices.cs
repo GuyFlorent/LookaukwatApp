@@ -1044,7 +1044,7 @@ namespace LookaukwatApp.Services
             return result;
         }
 
-        public async Task<int> GetResultOfferSeachNumberVehiculeAsync(string category, string town, string searchOrAskJob, int price,string vehiculeRubrique, string vehiculeBrand, string vehiculeModel, string vehiculeType, string petrol, string year, string mileage, string numberOfDoor, string gearBox, string vehiculestate, string color)
+        public async Task<int> GetResultOfferSeachNumberVehiculeAsync(string category, string town, string searchOrAskJob, int price,string vehiculeRubrique, string vehiculeBrand, string vehiculeModel, string vehiculeType, string petrol, int year, int mileage, string numberOfDoor, string gearBox, string vehiculestate, string color)
         {
             HttpClient client;
 
@@ -1077,7 +1077,7 @@ namespace LookaukwatApp.Services
 
             // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
 
-            var json = await client.GetStringAsync(Uri + "api/Vehicule/GetOfferVehiculeSearch/?categori=" + userSearchCondition.Category + "&town=" + userSearchCondition.Town + "&searchOrAskJob=" + userSearchCondition.SearchOrAskJob + "&price=" + userSearchCondition.PriceVehicule + "&vehiculeBrand=" + userSearchCondition.VehiculeBrand + "&vehiculeModel=" + userSearchCondition.VehiculeModel + "&vehiculeType=" + userSearchCondition.VehiculeType + "&petrol=" + userSearchCondition.Petrol + "&year=" + userSearchCondition.Year + "&mileage=" + userSearchCondition.Mileage + "&numberOfDoor=" + userSearchCondition.NumberOfDoor + "&gearBox=" + userSearchCondition.GearBox + "&vehiculestate=" + userSearchCondition.VehiculeState + "&color=" + userSearchCondition.Color + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize);
+            var json = await client.GetStringAsync(Uri + "api/Vehicule/GetOfferVehiculeSearch/?categori=" + userSearchCondition.Category + "&town=" + userSearchCondition.Town + "&searchOrAskJob=" + userSearchCondition.SearchOrAskJob + "&price=" + userSearchCondition.PriceVehicule + "&vehiculeRubrique=" + userSearchCondition.VehiculeRubrique + "&vehiculeBrand=" + userSearchCondition.VehiculeBrand + "&vehiculeModel=" + userSearchCondition.VehiculeModel + "&vehiculeType=" + userSearchCondition.VehiculeType + "&petrol=" + userSearchCondition.Petrol + "&year=" + userSearchCondition.Year + "&mileage=" + userSearchCondition.Mileage + "&numberOfDoor=" + userSearchCondition.NumberOfDoor + "&gearBox=" + userSearchCondition.GearBox + "&vehiculestate=" + userSearchCondition.VehiculeState + "&color=" + userSearchCondition.Color + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize);
 
             var result = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(json);
 

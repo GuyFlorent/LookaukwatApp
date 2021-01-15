@@ -15,6 +15,7 @@ namespace LookaukwatApp.Views.JobView
         public JobAddPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

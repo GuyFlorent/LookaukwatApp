@@ -18,6 +18,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <StackLayout>
     <ScrollView>
         <StackLayout Orientation="Vertical"
                      Margin="15,35,20,25">
@@ -198,12 +199,16 @@
                        Keyboard="Numeric"></Entry>
 
 
+           
+        </StackLayout>
+    </ScrollView>
+
+        <StackLayout Margin="15,0,20,20">
             <Button Text="Suivant"
                     Command="{Binding NextVehiculeCommad}"
                     VerticalOptions="EndAndExpand"
-                    CornerRadius="5"
-                    Margin="0,0,0,20"></Button>
+                    CornerRadius="20"></Button>
 
         </StackLayout>
-    </ScrollView>
+    </StackLayout>
 </ContentPage>

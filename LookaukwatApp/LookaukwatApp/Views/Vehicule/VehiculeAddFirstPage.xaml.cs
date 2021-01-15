@@ -15,6 +15,7 @@ namespace LookaukwatApp.Views.Vehicule
         public VehiculeAddFirstPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

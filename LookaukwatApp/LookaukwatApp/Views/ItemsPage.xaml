@@ -94,8 +94,8 @@
                                             <Image Grid.RowSpan="4" 
                        Source="{Binding Image }"
                        Aspect="AspectFill"
-                       HeightRequest="100"
-                       WidthRequest="100"></Image>
+                       HeightRequest="120"
+                       WidthRequest="120"></Image>
 
                                             <Label Grid.Column="1"
                        Text="{Binding Title}"

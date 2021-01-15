@@ -89,7 +89,7 @@ namespace LookaukwatApp.ViewModels.Search
                     // var items = await _apiServices.GetProductsAsync(page, PageSize);
                     //numberOfProduct = await _apiServices.Get_AllNumber_ProductsAsync();
                     IsBusy = false;
-
+                  
                     // return the items that need to be added
                     return items;
                 },
@@ -128,6 +128,7 @@ namespace LookaukwatApp.ViewModels.Search
             finally
             {
                 IsRefressing = false;
+                IsRunning = false;
             }
         }
 
@@ -219,7 +220,7 @@ namespace LookaukwatApp.ViewModels.Search
                             Items.AddRange(resultImo);
                             list = resultImo;
                             break;
-                        case "Multimédia":
+                        case "Multimedia":
 
                             var resultMulti = await _apiServices.GetResultOfferSeachMultiAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
                             Items.AddRange(resultMulti);
@@ -237,7 +238,7 @@ namespace LookaukwatApp.ViewModels.Search
                             Items.AddRange(resultMode);
                             list = resultMode;
                             break;
-                        case "Véhicule":
+                        case "Vehicule":
 
                             var resultVehicule = await _apiServices.GetResultOfferSearchVehiculeAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
                             Items.AddRange(resultVehicule);

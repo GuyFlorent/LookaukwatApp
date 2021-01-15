@@ -15,6 +15,7 @@ namespace LookaukwatApp.Views.AppartmentView
         public ApartAddPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

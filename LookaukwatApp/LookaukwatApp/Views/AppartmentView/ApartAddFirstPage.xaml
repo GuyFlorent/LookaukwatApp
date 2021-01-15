@@ -15,7 +15,8 @@
             <converter:ApartCheckingForm x:Key="ApartCheckingForm"></converter:ApartCheckingForm>
         </ResourceDictionary>
     </ContentPage.Resources>
-
+    
+    <StackLayout>
     <ScrollView>
         <StackLayout Orientation="Vertical"
                      Margin="15,35,20,25">
@@ -84,11 +85,18 @@
                        Keyboard="Numeric"></Entry>
 
 
-            <Button Text="Suivant"
-                    Command="{Binding NextApartCommad}"
-                    VerticalOptions="EndAndExpand"
-                Margin="0,0,0,20"></Button>
-
+           
         </StackLayout>
     </ScrollView>
+
+        <StackLayout Margin="15,0,20,20">
+            <Button Text="Suivant"
+                    CornerRadius="20"
+                    Command="{Binding NextApartCommad}"
+                    VerticalOptions="EndAndExpand"
+                ></Button>
+
+        </StackLayout>
+        
+    </StackLayout>
 </ContentPage>

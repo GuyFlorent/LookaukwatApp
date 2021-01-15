@@ -11,7 +11,7 @@
 
     <ContentPage.Content>
 
-
+        <StackLayout>
         <ScrollView>
             <StackLayout Orientation="Vertical"
                      Margin="15,35,20,25">
@@ -87,13 +87,16 @@
                        Keyboard="Numeric"></Entry>
 
 
-                <Button Text="Suivant"
-                    Command="{Binding NextMultimediaCommad}"
-                    VerticalOptions="CenterAndExpand"
-                        Margin="0,0,0,20"
-                        CornerRadius="5"></Button>
 
             </StackLayout>
         </ScrollView>
+            
+            <StackLayout Margin="15,0,20,20">
+                <Button Text="Suivant"
+                    Command="{Binding NextMultimediaCommad}"
+                    VerticalOptions="CenterAndExpand"
+                        CornerRadius="20"></Button>
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

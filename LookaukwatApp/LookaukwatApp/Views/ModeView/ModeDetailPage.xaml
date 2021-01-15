@@ -420,25 +420,43 @@
             </StackLayout>
         </StackLayout>
     </ScrollView>
-        <StackLayout HeightRequest="130" BackgroundColor="#2196F3">
+        <StackLayout HeightRequest="160" BackgroundColor="#2196F3">
 
             <Grid Margin="10,0,0,5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="14*"></RowDefinition>
+                    <RowDefinition Height="9*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <ImageButton Source="icon_phone"
                                  HeightRequest="40"
                                  WidthRequest="40"
+                             HorizontalOptions="Start"
+                             Aspect="AspectFit"
                                  BackgroundColor="Transparent"
                                  Command="{Binding CallUserCommand}"></ImageButton>
                 <Label Grid.Row="1"
                            Text="Contacter"
+                       HorizontalOptions="Start"
+                       TextColor="White"
+                           FontAttributes="Italic"></Label>
+
+                <ImageButton Source="messages"
+                              Aspect="AspectFit"
+                                 Grid.Column="1"
+                             HorizontalOptions="Start"
+                                 HeightRequest="40"
+                                 WidthRequest="40"
+                                 BackgroundColor="Transparent"
+                                 Command="{Binding SendMessageCommand}"></ImageButton>
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       HorizontalOptions="Start"
+                           Text="Message"
                        TextColor="White"
                            FontAttributes="Italic"></Label>
             </Grid>

@@ -2,6 +2,7 @@
 using LookaukwatApp.Models;
 using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.ViewModels;
+using LookaukwatApp.ViewModels.Message;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -66,6 +67,24 @@ namespace LookaukwatApp.Services
             var json = await client.DeleteAsync(Uri + "api/Product/?id=" + id);
 
             return json.IsSuccessStatusCode;
+        }
+
+        public async Task SendMessageToPublisherAsync(ContactEmailUserViewModel contact)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+            var json = JsonConvert.SerializeObject(contact);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            var response = await client.PostAsync(Uri + "api/Product/PostMessage", content);
+            Debug.WriteLine(response);
         }
 
         public async Task<bool> LogoutASync(string accessToken)

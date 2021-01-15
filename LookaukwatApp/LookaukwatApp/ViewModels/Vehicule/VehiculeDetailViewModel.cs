@@ -1,7 +1,10 @@
-﻿using LookaukwatApp.Models.MobileModels;
+﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.OtherServices;
+using LookaukwatApp.Views.MessageView;
 using LookaukwatApp.Views.Vehicule;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -50,6 +53,7 @@ namespace LookaukwatApp.ViewModels.Vehicule
         public Command CallUserCommand { get; set; }
         public Command ShareCommand { get; set; }
         public Command ClipBoardCommand { get; set; }
+        public Command SendMessageCommand { get; set; }
 
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
@@ -206,6 +210,7 @@ namespace LookaukwatApp.ViewModels.Vehicule
             ItemTapped = new Command<SimilarProductViewModel>(OnItemSelected);
             ShareCommand = new Command(OnShareCommand);
             ClipBoardCommand = new Command(OnClipboard);
+            SendMessageCommand = new Command(OnSendMessage);
         }
 
         public async void LoadItemId(string itemId)
@@ -272,6 +277,22 @@ namespace LookaukwatApp.ViewModels.Vehicule
             var uri = "https://lookaukwat.com/Vehicule/VehiculeDetail/" + Id;
             await Clipboard.SetTextAsync(uri);
 
+        }
+
+        private async void OnSendMessage()
+        {
+            contactUserViewModel contact = new contactUserViewModel()
+            {
+                NameSender = Settings.FirstName,
+                EmailSender = Settings.Username,
+                Category = "Mode",
+                Linkshare = "https://lookaukwat.com/Mode/ModeDetail/" + Id,
+                RecieverEmail = Email,
+                RecieverName = Name,
+                SubjectSender = "Votre article en vente sur lookaukwat me plaît"
+            };
+
+            await PopupNavigation.Instance.PushAsync(new ContactEmailUserPage(contact));
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LookaukwatApp.Models.MobileModels
 {
-    public class contactUserViewModel
+    public class contactUserViewModel 
     {
         public string NameSender { get; set; }
 
@@ -16,7 +16,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string Linkshare { get; set; }
         public string RecieverEmail { get; set; }
         public string RecieverName { get; set; }
-        public string targetId { get; set; }
+        //public string targetId { get; set; }
         //public HttpPostedFileBase file { get; set; }
         //public string attachFile { get; set; }
         public string Category { get; set; }

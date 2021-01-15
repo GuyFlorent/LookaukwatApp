@@ -24,5 +24,11 @@ namespace LookaukwatApp.Views.RegisterView
             await PopupNavigation.Instance.PopAllAsync();
             await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
         }
+
+        private async void ClosePoppup_Button(object o, EventArgs e)
+        {
+            await PopupNavigation.Instance.PopAllAsync();
+
+        }
     }
 }

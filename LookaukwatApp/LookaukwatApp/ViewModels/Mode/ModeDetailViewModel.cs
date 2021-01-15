@@ -1,7 +1,10 @@
-﻿using LookaukwatApp.Models.MobileModels;
+﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.OtherServices;
+using LookaukwatApp.Views.MessageView;
 using LookaukwatApp.Views.ModeView;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -45,6 +48,7 @@ namespace LookaukwatApp.ViewModels.Mode
         public Command CallUserCommand { get; set; }
         public Command ShareCommand { get; set; }
         public Command ClipBoardCommand { get; set; }
+        public Command SendMessageCommand { get; set; }
         public int Id { get; set; }
 
         //Similar item selected
@@ -173,6 +177,7 @@ namespace LookaukwatApp.ViewModels.Mode
             ItemTapped = new Command<SimilarProductViewModel>(OnItemSelected);
             ShareCommand = new Command(OnShareCommand);
             ClipBoardCommand = new Command(OnClipboard);
+            SendMessageCommand = new Command(OnSendMessage);
         }
 
         public async void LoadItemId(string itemId)
@@ -239,9 +244,20 @@ namespace LookaukwatApp.ViewModels.Mode
 
         }
 
-        private void OnSendMessage()
+        private async void OnSendMessage()
         {
-            PhoneDialerViewModel.PlacePhoneCall(Phone);
+            contactUserViewModel contact = new contactUserViewModel() 
+            {
+                NameSender = Settings.FirstName,
+                EmailSender = Settings.Username,
+                Category = "Mode",
+                Linkshare = "https://lookaukwat.com/Mode/ModeDetail/" + Id,
+                RecieverEmail = Email,
+                RecieverName = Name,
+                SubjectSender = "Votre article en vente sur lookaukwat me plaît"
+        };
+            
+              await PopupNavigation.Instance.PushAsync(new ContactEmailUserPage(contact));
         }
     }
 }

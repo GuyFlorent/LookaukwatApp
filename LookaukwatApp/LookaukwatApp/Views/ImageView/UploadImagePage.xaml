@@ -4,7 +4,12 @@
              x:Class="LookaukwatApp.Views.ImageView.UploadImagePage"
              BackgroundColor="White"
              Title="Ajouter des photos">
-    
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}"
+                             />
+    </Shell.BackButtonBehavior>
+
     <ScrollView>
         <StackLayout Orientation="Vertical"
                      Margin="4,20,4,20">
@@ -146,18 +151,16 @@
                Source="add_image"
                WidthRequest="150"
                HeightRequest="150"></Image>
-
+            
+            <ActivityIndicator x:Name="ActivityValidate" IsRunning="false" Color ="#80000000"/>
+            
             <Button Text="Valider et publier l'annonce"
                 BackgroundColor="Purple"
                 TextColor="White"
                 FontSize="14"
                 Margin="0,0,0,10"
                 Clicked="Validate_Click"></Button>
-            <StackLayout x:Name="StackValidate" IsVisible="false">
-
-                <ActivityIndicator x:Name="ActivityValidate" IsRunning="false" Color ="#80000000"/>
-
-            </StackLayout>
+           
 
         </StackLayout>
     </ScrollView>

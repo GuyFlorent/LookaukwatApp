@@ -48,18 +48,16 @@
                        FontAttributes="Bold"></Label>
                     <Entry Placeholder="Saisir le nom du quartier"
                    Text="{Binding Street}"></Entry>
-
+                    
+                    <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+                    
                     <Button Text="Suivant"
                     Command="{Binding PostMultimediaCommad}"
                     VerticalOptions="EndAndExpand"
                             CornerRadius="5"
                             Margin="0,0,0,20"></Button>
 
-                    <StackLayout IsVisible="{Binding IsRunning}">
-
-                        <ActivityIndicator IsRunning="{Binding IsRunning}" Color ="#80000000"/>
-
-                    </StackLayout>
+                    
                 </StackLayout>
             </ScrollView>
         </StackLayout>

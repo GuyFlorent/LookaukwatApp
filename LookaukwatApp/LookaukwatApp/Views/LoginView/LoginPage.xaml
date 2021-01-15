@@ -19,12 +19,17 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout Margin="20,35,20,25"
                      Padding="24"
                      Spacing="24"
                      BackgroundColor="White"
                      VerticalOptions="Center">
-
+            <Button Text="Fermer" 
+                   HorizontalOptions="End"
+                    BackgroundColor="Transparent"
+                   TextColor="Blue"
+                    Clicked="ClosePoppup_Button"></Button>
             <StackLayout Orientation="Horizontal">
                 <StackLayout Orientation="Horizontal">
                     <RadioButton 
@@ -111,14 +116,15 @@
                     <Label Text="Mémoriser le mot de passe ?"></Label>
                     <Switch IsToggled="False"></Switch>
                 </StackLayout>-->
-                <Button Text="Se connecter"
+                    <ActivityIndicator IsVisible="{Binding IsRunning}" 
+                                   IsRunning="{Binding IsRunning}" 
+                                   Color ="#80000000"/>
+                    <Button Text="Se connecter"
                         TextColor="White"
                    CornerRadius="20"
                     Command="{Binding LoginByPhoneCommand }"></Button>
 
-                <ActivityIndicator IsVisible="{Binding IsRunning}" 
-                                   IsRunning="{Binding IsRunning}" 
-                                   Color ="#80000000"/>
+                
                 <Button Text="Vous avez oublié votre mot de passe ?"
                     TextColor="Blue"
                     BackgroundColor="Transparent"
@@ -146,6 +152,6 @@
             </StackLayout>
 
         </StackLayout>
-
+        </ScrollView>
     </ContentPage.Content>
 </pages:PopupPage>

@@ -302,7 +302,7 @@ namespace LookaukwatApp.Views.ImageView
 
         private async void Validate_Click(object o, EventArgs e)
         {
-            StackValidate.IsVisible = true;
+            ActivityValidate.IsVisible = true;
             ActivityValidate.IsRunning = true;
             var content = new MultipartFormDataContent();
 
@@ -318,11 +318,13 @@ namespace LookaukwatApp.Views.ImageView
 
             client = new HttpClient(httpClientHandler);
             string id = ProductId.Text;
-            // string Uri = "https://192.168.1.66:45460/";
+            
             await client.PostAsync(Uri + "api/Product/UpdateProductImage/?id=" + id, content);
-            StackValidate.IsVisible = false;
+
+            ActivityValidate.IsVisible = false;
             ActivityValidate.IsRunning = false;
-            await DisplayAlert("Alerte", "Votre annonce a été publié avec succèss. Merci de votre confiance", "Ok");
+
+            await DisplayAlert("Alerte", "Votre annonce a été publié avec succès. Merci de votre confiance", "Ok");
 
             await Shell.Current.GoToAsync("///MainPage");
         }

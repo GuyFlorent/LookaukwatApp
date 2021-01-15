@@ -282,4 +282,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\eye.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\messages.png" />
+  </ItemGroup>
 </Project>

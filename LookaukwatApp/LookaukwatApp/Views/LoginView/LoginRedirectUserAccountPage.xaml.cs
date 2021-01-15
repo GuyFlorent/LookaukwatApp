@@ -36,5 +36,11 @@ namespace LookaukwatApp.Views.LoginView
         {
            await Browser.OpenAsync("https://lookaukwat.com/Home/Contact");
         }
+
+        private async void ClosePoppup_Button(object o, EventArgs e)
+        {
+            await PopupNavigation.Instance.PopAllAsync();
+
+        }
     }
 }

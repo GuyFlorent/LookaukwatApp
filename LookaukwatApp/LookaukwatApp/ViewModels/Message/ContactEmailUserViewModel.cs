@@ -6,14 +6,6 @@ using Xamarin.Forms;
 namespace LookaukwatApp.ViewModels.Message
 {
  
-    [QueryProperty(nameof(Category), nameof(Category))]
-    [QueryProperty(nameof(RecieverName), nameof(RecieverName))]
-    [QueryProperty(nameof(RecieverEmail), nameof(RecieverEmail))]
-    [QueryProperty(nameof(Linkshare), nameof(Linkshare))]
-    [QueryProperty(nameof(Message), nameof(Message))]
-    [QueryProperty(nameof(EmailSender), nameof(EmailSender))]
-    [QueryProperty(nameof(SubjectSender), nameof(SubjectSender))]
-    [QueryProperty(nameof(NameSender), nameof(NameSender))]
     public class ContactEmailUserViewModel : BaseViewModel
     {
         private string nameSender;

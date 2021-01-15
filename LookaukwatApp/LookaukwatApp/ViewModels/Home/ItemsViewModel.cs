@@ -56,6 +56,7 @@ namespace LookaukwatApp.ViewModels.Home
             finally
             {
                 IsRefressing = false;
+                IsRunning = false;
             }
         }
 

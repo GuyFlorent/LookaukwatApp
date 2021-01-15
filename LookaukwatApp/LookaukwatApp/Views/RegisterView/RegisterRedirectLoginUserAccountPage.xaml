@@ -27,6 +27,12 @@
                      BackgroundColor="White"
                      VerticalOptions="Center">
 
+                <Button Text="Fermer" 
+                   HorizontalOptions="End"
+                    BackgroundColor="Transparent"
+                   TextColor="Blue"
+                    Clicked="ClosePoppup_Button"></Button>
+
                 <Label Text="{Binding ErrorMessage1}"
                    TextColor="Red"
                        IsVisible="{Binding ErrorMessage1, Converter={StaticResource StringNullOrEmptyBoolConverter}}"></Label>
@@ -63,14 +69,15 @@
                 <Label Text="Save Password"></Label>
                 <Switch IsToggled="False"></Switch>
             </StackLayout>-->
+                <ActivityIndicator IsVisible="{Binding IsRunning}" 
+                                   IsRunning="{Binding IsRunning}" 
+                                   Color ="#80000000"/>
                 <Button Text="Créer"
                     TextColor="White"
                         CornerRadius="20"
                     Command="{Binding RegisterReturnUserAccountCommand}"></Button>
 
-                <ActivityIndicator IsVisible="{Binding IsRunning}" 
-                                   IsRunning="{Binding IsRunning}" 
-                                   Color ="#80000000"/>
+               
 
                 <StackLayout>
                     <Label Text="Avez vous déja un compte? " TextColor="Black"></Label>

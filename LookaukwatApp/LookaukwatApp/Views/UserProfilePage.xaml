@@ -44,7 +44,7 @@
                         ></Button>
                 </Grid>
 
-                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand" />
 
                 <Grid  Margin="0,0,0,20">
                     <Grid.ColumnDefinitions>
@@ -64,7 +64,7 @@
                         ></Button>
                 </Grid>
 
-                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand" />
 
                 <Grid  Margin="0,0,0,20">
                     <Grid.ColumnDefinitions>
@@ -114,7 +114,7 @@
                     </StackLayout>
                 </Grid>
 
-                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand" />
 
                 <Grid  Margin="0,0,0,20">
                     <Grid.ColumnDefinitions>

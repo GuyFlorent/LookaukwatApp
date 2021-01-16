@@ -1296,104 +1296,104 @@ namespace LookaukwatApp.ViewModels.Search
             TitlePage = "Plus de filtres";
             // for every search categori
             SearchOrSaskList = StaticListViewModel.OfferOSearchList;
-            Categoryliste = StaticListViewModel.GetCategoryList;
-            TownList = StaticListViewModel.GetTownCameroonList;
+            Categoryliste = StaticListViewModel.GetCategoryListSearch;
+            TownList = StaticListViewModel.GetTownCameroonListSearch;
 
             //Search command
             SearchCommand = new Command(OnSearch);
 
             // for Appart
             #region Appart
-            TypeList = StaticListViewModel.GetListApartType;
-            FurnitureOrNotList = StaticListViewModel.GetListFurnitureOrNot;
+            TypeList = StaticListViewModel.GetListApartTypeSearch;
+            FurnitureOrNotList = StaticListViewModel.GetListFurnitureOrNotSearch;
             #endregion
 
             // For House
             #region House
-            HouseRubriqueList = StaticListHouseViewModel.GetRubriqueHouseListt;
-            TypeAmebleumentHouseList = StaticListHouseViewModel.GetTypeAmebleumentHouseList;
-            TypeOutilTableHouseList = StaticListHouseViewModel.GetTypeOutilTableHouseList;
-            TypeDecorationHouseList = StaticListHouseViewModel.GetTypeDecorationHouseList;
-            TypeLingeHouseList = StaticListHouseViewModel.GetTypeLingeHouseList;
-            FabricMaterialAmmeblementDecorationList = StaticListHouseViewModel.GetFabricMaterialAmmeblementDecorationList;
-            FabricMaterialOutilTableList = StaticListHouseViewModel.GetFabricMaterialOutilTableList;
-            FabricMaterialLingeList = StaticListHouseViewModel.GetFabricMaterialLingeList;
-            HouseColorList = StaticListModeViewModel.GetColorModeList;
-            HouseStateList = StaticListHouseViewModel.GetStateHouseList;
+            HouseRubriqueList = StaticListHouseViewModel.GetRubriqueHouseListtSearch;
+            TypeAmebleumentHouseList = StaticListHouseViewModel.GetTypeAmebleumentHouseListSearch;
+            TypeOutilTableHouseList = StaticListHouseViewModel.GetTypeOutilTableHouseListSearch;
+            TypeDecorationHouseList = StaticListHouseViewModel.GetTypeDecorationHouseListSearch;
+            TypeLingeHouseList = StaticListHouseViewModel.GetTypeLingeHouseListSearch;
+            FabricMaterialAmmeblementDecorationList = StaticListHouseViewModel.GetFabricMaterialAmmeblementDecorationListSearch;
+            FabricMaterialOutilTableList = StaticListHouseViewModel.GetFabricMaterialOutilTableListSearch;
+            FabricMaterialLingeList = StaticListHouseViewModel.GetFabricMaterialLingeListSearch;
+            HouseColorList = StaticListModeViewModel.GetColorModeListSearch;
+            HouseStateList = StaticListHouseViewModel.GetStateHouseListSearch;
             #endregion
 
             // For Job
             #region Job
-            ContractList = StaticListViewModel.GetWorkContratTypeList;
-            ActivitysectorList = StaticListViewModel.GetActivitySectortList;
+            ContractList = StaticListViewModel.GetWorkContratTypeListSearch;
+            ActivitysectorList = StaticListViewModel.GetActivitySectortListSearch;
             #endregion
 
             //For Mode
             #region Mode
-            TypeAccesorieLugagesList = StaticListModeViewModel.GetTypeAccesorieLugagesList;
-            TypeBabyClothesList = StaticListModeViewModel.GetTypeBabyClothesList;
-            TypeBabyEquipmentList = StaticListModeViewModel.GetTypeBabyEquipmentList;
-            TypeClothesList = StaticListModeViewModel.GetTypeClothesList;
-            TypeShoesList = StaticListModeViewModel.GetTypeShoesList;
+            TypeAccesorieLugagesList = StaticListModeViewModel.GetTypeAccesorieLugagesListSearch;
+            TypeBabyClothesList = StaticListModeViewModel.GetTypeBabyClothesListSearch;
+            TypeBabyEquipmentList = StaticListModeViewModel.GetTypeBabyEquipmentListSearch;
+            TypeClothesList = StaticListModeViewModel.GetTypeClothesListSearch;
+            TypeShoesList = StaticListModeViewModel.GetTypeShoesListSearch;
             TypeWatchJewelryList = StaticListModeViewModel.GetTypeWatchJewelryList;
-            RubriqueList = StaticListModeViewModel.GetRubriqueModeList;
-            BrandClothesList = StaticListModeViewModel.GetBrandClothesList;
-            BrandShoesList = StaticListModeViewModel.GetBrandShoesList;
-            UniversList = StaticListModeViewModel.GetUniversList;
-            SizeClothesList = StaticListModeViewModel.GetSeizeClothesList;
-            SizeShoesList = StaticListModeViewModel.GetSizeShoesList;
-            ColorList = StaticListModeViewModel.GetColorModeList;
-            StateList = StaticListModeViewModel.GetStateModeList;
+            RubriqueList = StaticListModeViewModel.GetRubriqueModeListSearch;
+            BrandClothesList = StaticListModeViewModel.GetBrandClothesListSearch;
+            BrandShoesList = StaticListModeViewModel.GetBrandShoesListSearch;
+            UniversList = StaticListModeViewModel.GetUniversListSearch;
+            SizeClothesList = StaticListModeViewModel.GetSeizeClothesListSearch;
+            SizeShoesList = StaticListModeViewModel.GetSizeShoesListSearch;
+            ColorList = StaticListModeViewModel.GetColorModeListSearch;
+            StateList = StaticListModeViewModel.GetStateModeListSearch;
             #endregion
 
             // For Multimedia
             #region Multimedia
 
-            MultimediaRubriqueList = StaticListMultimediaViewModel.GetTypeMultimediaList;
-            BrandConsoleGamequeMultimediaList = StaticListMultimediaViewModel.GetBrandConsoleGamequeMultimediaList;
-            BrandInformatiquePhotocopyMultimediaList = StaticListMultimediaViewModel.GetBrandInformatiquePhotocopyMultimediaList;
-            BrandTVGameMultimediaList = StaticListMultimediaViewModel.GetBrandTVGameMultimediaList;
-            BrandSonMultimediaList = StaticListMultimediaViewModel.GetBrandSonMultimediaList;
-            BrandPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetBrandPhoneAccesorieMultimediaList;
-            ModelInformatiquePhotocopyMultimediaList = StaticListMultimediaViewModel.GetModelInformatiquePhotocopyMultimediaList;
-            ModelConsoleGameMultimediaList = StaticListMultimediaViewModel.GetModelConsoleGameMultimediaList;
-            ModelApplePhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelApplePhoneAccesorieMultimediaList;
-            ModelHuaweiPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelHuaweiPhoneAccesorieMultimediaList;
-            ModelSamsungPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelSamsungPhoneAccesorieMultimediaList;
-            ModelSonyPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelSonyPhoneAccesorieMultimediaList;
-            ModelAlcatelPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelAlcatelPhoneAccesorieMultimediaList;
-            ModelAzusPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelAzusPhoneAccesorieMultimediaList;
-            ModelHonorPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelHonorPhoneAccesorieMultimediaList;
-            ModelHTCPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelHTCPhoneAccesorieMultimediaList;
-            ModelLenovoPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelLenovoPhoneAccesorieMultimediaList;
-            ModelMicrosoftPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelMicrosoftPhoneAccesorieMultimediaList;
-            ModelLGPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelLGPhoneAccesorieMultimediaList;
-            ModelMotorolaPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelMotorolaPhoneAccesorieMultimediaList;
-            ModelOnePlusPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelOnePlusPhoneAccesorieMultimediaList;
-            ModelWikoPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelWikoPhoneAccesorieMultimediaList;
-            ModelXaomiPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelXaomiPhoneAccesorieMultimediaList;
-            ModelZTEPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelZTEPhoneAccesorieMultimediaList;
-            ModelTVGameMultimediaList = StaticListMultimediaViewModel.GetModelTVGameMultimediaList;
-            ModelSonGamequeMultimediaList = StaticListMultimediaViewModel.GetModelSonGamequeMultimediaList;
-            CapacityMultimediaList = StaticListMultimediaViewModel.GetCapacityMultimediaList;
+            MultimediaRubriqueList = StaticListMultimediaViewModel.GetTypeMultimediaListSearch;
+            BrandConsoleGamequeMultimediaList = StaticListMultimediaViewModel.GetBrandConsoleGamequeMultimediaListSearch;
+            BrandInformatiquePhotocopyMultimediaList = StaticListMultimediaViewModel.GetBrandInformatiquePhotocopyMultimediaListSearch;
+            BrandTVGameMultimediaList = StaticListMultimediaViewModel.GetBrandTVGameMultimediaListSearch;
+            BrandSonMultimediaList = StaticListMultimediaViewModel.GetBrandSonMultimediaListSearch;
+            BrandPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetBrandPhoneAccesorieMultimediaListSearch;
+            ModelInformatiquePhotocopyMultimediaList = StaticListMultimediaViewModel.GetModelInformatiquePhotocopyMultimediaListSearch;
+            ModelConsoleGameMultimediaList = StaticListMultimediaViewModel.GetModelConsoleGameMultimediaListSearch;
+            ModelApplePhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelApplePhoneAccesorieMultimediaListSearch;
+            ModelHuaweiPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelHuaweiPhoneAccesorieMultimediaListSearch;
+            ModelSamsungPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelSamsungPhoneAccesorieMultimediaListSearch;
+            ModelSonyPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelSonyPhoneAccesorieMultimediaListSearch;
+            ModelAlcatelPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelAlcatelPhoneAccesorieMultimediaListSearch;
+            ModelAzusPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelAzusPhoneAccesorieMultimediaListSearch;
+            ModelHonorPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelHonorPhoneAccesorieMultimediaListSearch;
+            ModelHTCPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelHTCPhoneAccesorieMultimediaListSearch;
+            ModelLenovoPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelLenovoPhoneAccesorieMultimediaListSearch;
+            ModelMicrosoftPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelMicrosoftPhoneAccesorieMultimediaListSearch;
+            ModelLGPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelLGPhoneAccesorieMultimediaListSearch;
+            ModelMotorolaPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelMotorolaPhoneAccesorieMultimediaListSearch;
+            ModelOnePlusPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelOnePlusPhoneAccesorieMultimediaListSearch;
+            ModelWikoPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelWikoPhoneAccesorieMultimediaListSearch;
+            ModelXaomiPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelXaomiPhoneAccesorieMultimediaListSearch;
+            ModelZTEPhoneAccesorieMultimediaList = StaticListMultimediaViewModel.GetModelZTEPhoneAccesorieMultimediaListSearch;
+            ModelTVGameMultimediaList = StaticListMultimediaViewModel.GetModelTVGameMultimediaListSearch;
+            ModelSonGamequeMultimediaList = StaticListMultimediaViewModel.GetModelSonGamequeMultimediaListSearch;
+            CapacityMultimediaList = StaticListMultimediaViewModel.GetCapacityMultimediaListSearch;
             #endregion
 
             // For vehicule
             #region vehicule
-            RubriqueVehiculeList = StaticListVehiculeViewModel.GetRubriqueVehiculeList;
-            BrandVehiculeAutoList = StaticListVehiculeViewModel.GetBrandVehiculeAutoList;
-            BrandVehiculeMotoList = StaticListVehiculeViewModel.GetBrandVehiculeMotoList;
-            ModelVehiculeAutoToyotaList = StaticListVehiculeViewModel.GetModelVehiculeAutoToyotaList;
-            ModelVehiculeAutoHyundaiList = StaticListVehiculeViewModel.GetModelVehiculeAutoHyundaiList;
-            ModelVehiculeAutoMercedesList = StaticListVehiculeViewModel.GetModelVehiculeAutoMercedesList;
-            ModelVehiculeAutoMazdaList = StaticListVehiculeViewModel.GetModelVehiculeAutoMazdaList;
-            ModelVehiculeAutoKiaList = StaticListVehiculeViewModel.GetModelVehiculeAutoKiaList;
-            TypeVehiculeAutoList = StaticListVehiculeViewModel.GetTypeVehiculeAutoList;
-            PetrolVehiculeList = StaticListVehiculeViewModel.GetPetrolVehiculeList;
-            NumberOfDoorVehiculeList = StaticListVehiculeViewModel.GetNumberOfDoorVehiculeList;
-            ColorVehiculeList = StaticListVehiculeViewModel.GetColorVehiculeList;
-            GearBoxVehiculeList = StaticListVehiculeViewModel.GetGearBoxVehiculeList;
-            StateVehiculeList = StaticListVehiculeViewModel.GetStateVehiculeList;
+            RubriqueVehiculeList = StaticListVehiculeViewModel.GetRubriqueVehiculeListSearch;
+            BrandVehiculeAutoList = StaticListVehiculeViewModel.GetBrandVehiculeAutoListSearch;
+            BrandVehiculeMotoList = StaticListVehiculeViewModel.GetBrandVehiculeMotoListSearch;
+            ModelVehiculeAutoToyotaList = StaticListVehiculeViewModel.GetModelVehiculeAutoToyotaListSearch;
+            ModelVehiculeAutoHyundaiList = StaticListVehiculeViewModel.GetModelVehiculeAutoHyundaiListSearch;
+            ModelVehiculeAutoMercedesList = StaticListVehiculeViewModel.GetModelVehiculeAutoMercedesListSearch;
+            ModelVehiculeAutoMazdaList = StaticListVehiculeViewModel.GetModelVehiculeAutoMazdaListSearch;
+            ModelVehiculeAutoKiaList = StaticListVehiculeViewModel.GetModelVehiculeAutoKiaListSearch;
+            TypeVehiculeAutoList = StaticListVehiculeViewModel.GetTypeVehiculeAutoListSearch;
+            PetrolVehiculeList = StaticListVehiculeViewModel.GetPetrolVehiculeListSearch;
+            NumberOfDoorVehiculeList = StaticListVehiculeViewModel.GetNumberOfDoorVehiculeListSearch;
+            ColorVehiculeList = StaticListVehiculeViewModel.GetColorVehiculeListSearch;
+            GearBoxVehiculeList = StaticListVehiculeViewModel.GetGearBoxVehiculeListSearch;
+            StateVehiculeList = StaticListVehiculeViewModel.GetStateVehiculeListSearch;
 
             #endregion
 

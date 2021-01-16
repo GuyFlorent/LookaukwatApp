@@ -159,5 +159,163 @@ namespace LookaukwatApp.ViewModels.StaticList
             "Non meublé",
         };
 
+
+        /////////////////////////////For Search  //////////////////////////////////
+
+
+        public static IList<string> GetCategoryListSearch = new List<string>()
+        {
+            "Toutes",
+            "Emploi",
+             "Immobilier",
+             "Maison",
+            "Multimédia",
+            "Mode",
+           "Véhicule"
+
+        };
+       
+        public static List<string> GetWorkContratTypeListSearch = new List<string>()
+        {
+            "Tout",
+            "CDI",
+            "CDD",
+            "Stage/Alternance",
+            "Sans contrat",
+            "Autre"
+        };
+
+        public static List<string> GetActivitySectortListSearch = new List<string>()
+        {
+           "Tout",
+           "Ingénieur",
+           "Agriculture",
+           "Immobilier",
+           "Corp médicale",
+           "Enseignement",
+           "Hôtellerie/Restauration",
+           "Sport",
+           "Technique",
+           "Maçonnerie",
+           "Couture",
+           "Sérigraphie",
+           "Infographie",
+           "Electricien",
+           "Electricien",
+           "Taximan",
+           "Bensikineur",
+           "Comptable",
+           "Service à la personne",
+           "Prestation de service",
+           "Commnication",
+           "Commercial",
+           "Sécurité",
+           "Administration",
+           "Autre"
+        };
+
+        public static List<string> GetTownCameroonListSearch = new List<string>()
+        {
+            "Toutes",
+            "Douala",
+            "Yaoundé",
+            "Garoua",
+            "Bamenda",
+            "Maroua",
+            "Nkongsamba",
+            "Bafoussam",
+            "Ngaoundéré",
+            "Bertoua",
+            "Loum",
+            "Kumba",
+            "Kumbo",
+            "Foumban",
+            "Mbouda",
+            "Dschang",
+            "Limbé",
+            "Ebolowa",
+            "Kousséri",
+            "Guider",
+            "Meiganga",
+            "Yagoua",
+            "Mbalmayo",
+            "Bafang",
+            "Tiko",
+            "Bafia",
+            "Wum",
+            "Kribi",
+            "Buea",
+            "Sangmélima",
+            "Foumbot",
+            "Bangangté",
+            "Batouri",
+            "Banyo",
+            "Nkambé",
+            "Bali",
+            "Mbanga",
+            "Mokolo",
+            "Melong",
+            "Manjo",
+            "Garoua-Boulaï",
+            "Mora",
+            "Kaélé",
+            "Tibati",
+            "Ndop",
+            "Akonolinga",
+            "Eséka",
+            "Mamfé",
+            "Obala",
+            "Muyuka",
+            "Nanga-Eboko",
+            "Abong-Mbang",
+            "Fundong",
+            "Nkoteng",
+            "Fontem",
+            "Mbandjock",
+            "Touboro",
+            "Ngaoundal",
+            "Yokadouma",
+            "Pitoa",
+            "Tombel",
+            "Kékem",
+            "Magba",
+            "Bélabo",
+            "Tonga",
+            "Maga",
+            "Koutaba",
+            "Blangoua",
+            "Guidiguis",
+            "Bogo",
+            "Batibo",
+            "Yabassi",
+            "Figuil",
+            "Makénéné",
+            "Gazawa",
+            "Tcholliré",
+            "Edéa"
+        };
+
+        public static List<string> GetListApartTypeSearch = new List<string>
+        {
+            "Tout",
+            "Appartement à louer",
+            "Entrepot à louer",
+            "Boutique à louer",
+            "Chambre à louer",
+            "studio à louer",
+            "Maison à louer",
+            "Maison à louer",
+            "Bureau à louer",
+            "Maison à Vendre",
+            "terrain à vendre",
+            "Autre"
+        };
+
+        public static List<string> GetListFurnitureOrNotSearch = new List<string>
+        {
+            "Tout",
+            "Meublé",
+            "Non meublé",
+        };
     }
 }

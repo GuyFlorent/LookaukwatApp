@@ -18,7 +18,7 @@ namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-        string Uri = "https://lookaukwatapi.azurewebsites.net/";
+        string Uri = "https://192.168.1.66:45455/";
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword)
         {
             HttpClient client;

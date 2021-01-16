@@ -99,6 +99,7 @@
 
                                             <Label Grid.Column="1"
                        Text="{Binding Title}"
+                       TextColor="Black"
                        FontAttributes="Bold"></Label>
 
                                             <Label Grid.Column="1"
@@ -124,7 +125,7 @@
                            Grid.Row="3"
                        Text="{Binding Date}"
                        VerticalOptions="End"
-                                       TextColor="Green"></Label>
+                                       ></Label>
                                         </Grid>
 
                                         <StackLayout.GestureRecognizers>
@@ -149,7 +150,7 @@
                                 </Trigger>
                             </Grid.Triggers>
                              <!--the loading content--> 
-                            <Label Text="Chargement..." TextColor="DeepPink" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                            <Label Text="Chargement..." TextColor="SkyBlue" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
                         </Grid>
                     </ListView.Footer>
 

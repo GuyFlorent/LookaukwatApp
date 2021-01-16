@@ -58,7 +58,7 @@ namespace LookaukwatApp.ViewModels.Search
             }
         }
 
-        private const int PageSize = 10;
+        private const int PageSize = 30;
 
         private string numberOfresult;
         public string NumberOfresult

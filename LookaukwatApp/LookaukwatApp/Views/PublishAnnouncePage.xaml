@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LookaukwatApp.Views.PublishAnnouncePage"
               xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Publish"
-             xmlns:converter="clr-namespace:LookaukwatApp.Converter">
+             xmlns:converter="clr-namespace:LookaukwatApp.Converter"
+             Title="Publier une annonce">
     
     <ContentPage.BindingContext>
         <local:PublishAnnounceViewModel></local:PublishAnnounceViewModel>

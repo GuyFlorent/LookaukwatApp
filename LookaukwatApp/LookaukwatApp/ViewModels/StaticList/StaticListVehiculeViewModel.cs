@@ -256,5 +256,271 @@ namespace LookaukwatApp.ViewModels.StaticList
 
         };
 
+        ////////////////////For Search ///////////////////////////////////
+
+        public static List<string> GetRubriqueVehiculeListSearch = new List<string>
+        {
+           "Toutes",
+           "Voitures",
+"Location voitures",
+"Motos",
+"Equipement Auto",
+"Equipement Moto"
+        };
+        public static List<string> GetBrandVehiculeAutoListSearch = new List<string>
+        {
+            "Toutes",
+            "Toyota",
+"Mercedes",
+"Hyundrai",
+"Mazda",
+"Kia",
+"Autre"
+        };
+        public static List<string> GetModelVehiculeAutoToyotaListSearch = new List<string>
+        {
+            "Tout",
+            "4-runner",
+"Avensis",
+"Aygo",
+"C-hr",
+"Camry",
+"Carina",
+"Celica",
+"Corolla",
+"Cressida",
+"Escape",
+"GRSupra",
+"Gt86",
+"Hi Ace",
+"iq",
+"Land Cruiser",
+"Lc.Td",
+"Lexus",
+"GRSupra",
+"Lite-ace",
+"Mirai",
+"Model",
+"Modet F",
+"Mr",
+"Mr2",
+"Paseo",
+"Picnic",
+"Proace Combi",
+"Proace verso",
+"Rav 4",
+"Runner",
+"Starlet",
+"Supra",
+"Tercel",
+"Urban Cruiser",
+"Verso",
+"Yaris",
+"Autre"
+        };
+        public static List<string> GetModelVehiculeAutoHyundaiListSearch = new List<string>
+        {
+            "Tout",
+            "Accent",
+"Atos",
+"Azera",
+"Coupe",
+"Elantra",
+"Golloper",
+"Genesis",
+"Getz",
+"Grandeur",
+"I10",
+"I20",
+"I30",
+"I40",
+"Iq",
+"Ioniq",
+"I×35",
+"I×55",
+"Kona",
+"Lantra",
+"Matrix",
+"Nexo",
+"Tucson",
+"Autre"
+        };
+        public static List<string> GetModelVehiculeAutoMercedesListSearch = new List<string>
+        {
+            "Tout",
+            "190-series",
+"200",
+"220",
+"230",
+"240",
+"250",
+"260",
+"280",
+"300",
+"350",
+"400",
+"500",
+"560",
+"AMG",
+"AMG GT",
+"Citan Combi",
+"I×55",
+"Classe A",
+"Classe B",
+"Classe C",
+"Classe Cl",
+"Classe Cla",
+"Classe Clk",
+"Classe Cls",
+"Classe E",
+"Classe G",
+"Classe GLE",
+"Classe Gl",
+"Classe Gla",
+"Classe Glk",
+"Classe M",
+"Classe R",
+"Classe S",
+"Classe SI Roadster",
+"Classe V",
+"EQC",
+"GLB",
+"GLC",
+"Autre"
+        };
+        public static List<string> GetModelVehiculeAutoMazdaListSearch = new List<string>
+        {
+            "Tout",
+            "121",
+"2",
+"3",
+"323",
+"5",
+"6",
+"626",
+"929",
+"Cx-3",
+"Cx-30",
+"Cx-5",
+"Cx-7",
+"Demio",
+"Mpv",
+" Mx-3",
+"Mx-5",
+"Mx-6",
+"Premacy",
+"5",
+"Rx-7",
+"Rx-8",
+"Tribute",
+"Xedos",
+"Autre"
+        };
+        public static List<string> GetModelVehiculeAutoKiaListSearch = new List<string>
+        {
+            "Tout",
+            "Carnival",
+"Cee D",
+"Cerato",
+"Clarus",
+"Leo",
+"Magentis",
+"Niro",
+"Opirus",
+"Optima",
+"Picanto",
+"Pride",
+"Pride Break",
+"Pro Cee D",
+"Rio",
+"Sephia",
+"Shuma",
+"Sorento",
+"Soul",
+"Sportage",
+"Stinger",
+"Stonic",
+"Venga",
+"XCeed",
+"Autre"
+        };
+        public static List<string> GetBrandVehiculeMotoListSearch = new List<string>
+        {
+            "Toutes",
+            "Barjac",
+"Bli",
+"Kawasaki",
+"Harley davidson",
+"Suziki",
+"Autre"
+        };
+        public static List<string> GetTypeVehiculeAutoListSearch = new List<string>
+        {
+            "Tout",
+            "4×4,Suv",
+"Berline",
+"Break",
+"Cabriolet",
+"Camion",
+"Citadine",
+"Coupé",
+"Minibus",
+"Monospaces",
+"Autre"
+        };
+        public static List<string> GetPetrolVehiculeListSearch = new List<string>
+        {
+            "Tout",
+            "Essence",
+"Diesel",
+"Hybride",
+"Electrique",
+"GPL",
+"Autre"
+        };
+        public static List<string> GetNumberOfDoorVehiculeListSearch = new List<string>
+        {
+            "Toutes",
+            "2",
+"3",
+"4",
+"5",
+"6",
+"Autre"
+        };
+        public static List<string> GetColorVehiculeListSearch = new List<string>
+        {
+            "Toutes",
+            "Argent",
+"Beige",
+"Blanc",
+"Bleu",
+"Bordeaux",
+"Gris",
+"Ivoire",
+"Jaune",
+"Marron",
+"Noir",
+"Orange",
+"Rose",
+"Rouge",
+"Vert",
+"Violet",
+"Autre"
+        };
+        public static List<string> GetGearBoxVehiculeListSearch = new List<string>
+        {
+            "Toutes",
+            "Manuelle",
+            "Automatique"
+        };
+        public static List<string> GetStateVehiculeListSearch = new List<string>
+        {
+            "Tout",
+            "Neuf",
+            "Occasion"
+
+        };
+
     }
 }

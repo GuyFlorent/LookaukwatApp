@@ -30,6 +30,8 @@ namespace LookaukwatApp.ViewModels.Vehicule
         private string phone;
         private string email;
         private string searchOrAsk;
+        private string street;
+        private string town;
         //for House model
         private string rubriqueVehicule;
         private string brandVehicule;
@@ -127,6 +129,18 @@ namespace LookaukwatApp.ViewModels.Vehicule
             get => description;
             set => SetProperty(ref description, value);
         }
+
+        public string Street
+        {
+            get => street;
+            set => SetProperty(ref street, value);
+        }
+        public string Town
+        {
+            get => town;
+            set => SetProperty(ref town, value);
+        }
+
 
         public string ItemId
         {
@@ -229,6 +243,8 @@ namespace LookaukwatApp.ViewModels.Vehicule
                 Email = item.UserEmail;
                 SearchOrAsk = item.SearchOrAsk;
                 Price = item.Price;
+                Town = item.Town;
+                Street = item.Street;
                 //for House model
                 Rubrique = item.RubriqueVehicule;
                 Brand = item.BrandVehicule;

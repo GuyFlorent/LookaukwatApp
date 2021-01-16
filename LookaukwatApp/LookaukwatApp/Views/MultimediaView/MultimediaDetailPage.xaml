@@ -204,7 +204,7 @@
                                FontAttributes="Bold" />
                 </Grid>
 
-                <Grid Margin="0,0,0,20">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.15*" />
                         <ColumnDefinition Width="0.85*" />
@@ -228,7 +228,37 @@
                                FontAttributes="Bold" />
                 </Grid>
 
-                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.15*" />
+                            <ColumnDefinition Width="0.85*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Image Source="map_marker"
+                         
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
+                        <Label Grid.Column="1"
+                               Text="Position"
+                               FontAttributes="Italic" />
+                        <Label Grid.Column="1"
+                           Grid.Row="1"
+                           TextColor="Black"
+                               FontAttributes="Bold">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Town}"></Span>
+                                    <Span Text=", "></Span>
+                                    <Span Text="{Binding Street}"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                    <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
 
                 <Label Text="Description"
                        TextColor="Black"

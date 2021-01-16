@@ -12,7 +12,7 @@
         <ScrollView>
             <StackLayout Margin="20,35,20,25">
 
-                <Label>
+                <Label Margin="0,0,0,10">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Bienvenue "
@@ -37,7 +37,7 @@
                        HorizontalOptions="Start"></Image>
                     <Button Grid.Column="1"
                     Text="Profil"
-                        TextColor="Black"
+                        TextColor="Blue"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                         Command="{Binding ProfileUserCommand}"
@@ -57,7 +57,7 @@
                        HorizontalOptions="Start"></Image>
                     <Button Grid.Column="1"
                     Text="Mes annonces"
-                        TextColor="Black"
+                        TextColor="Blue"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                         Command="{Binding UserAnnounceCommand}"
@@ -97,7 +97,7 @@
 
                         <Button 
                     Text="Informations personnelles"
-                        TextColor="Black"
+                        TextColor="Blue"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                        Command="{Binding UserPersonalInfoCommand}"
@@ -106,7 +106,7 @@
 
                         <Button 
                     Text="Modifier mon mot de passe"
-                        TextColor="Black"
+                        TextColor="Blue"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                         Command="{Binding UpdateUserPasswordCommand}"
@@ -147,7 +147,7 @@
 
                         <Button 
                     Text="Nous contacter"
-                        TextColor="Black"
+                        TextColor="Blue"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                        Command="{Binding ContactUsCommand}"
@@ -156,7 +156,7 @@
 
                         <Button 
                     Text="Qui sommes nous?"
-                        TextColor="Black"
+                        TextColor="Blue"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                         Command="{Binding AboutUsCommand}"
@@ -164,7 +164,7 @@
                     </StackLayout>
                 </Grid>
 
-                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand" />
 
                 <StackLayout Orientation="Horizontal">
                     <Button Text="Me déconnecter"

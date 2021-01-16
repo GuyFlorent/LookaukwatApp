@@ -32,6 +32,8 @@ namespace LookaukwatApp.ViewModels.Job
         private string name;
         private string phone;
         private string email;
+        private string street;
+        private string town;
         ObservableCollection<string> images = new ObservableCollection<string>();
         public ObservableCollection<string> Images { get => images; set => SetProperty(ref images, value); }
 
@@ -83,6 +85,16 @@ namespace LookaukwatApp.ViewModels.Job
             set => SetProperty(ref email, value);
         }
 
+        public string Street
+        {
+            get => street;
+            set => SetProperty(ref street, value);
+        }
+        public string Town
+        {
+            get => town;
+            set => SetProperty(ref town, value);
+        }
 
         public string Date
         {
@@ -162,6 +174,8 @@ namespace LookaukwatApp.ViewModels.Job
                 Name = item.User.FirstName;
                 phone = item.User.PhoneNumber;
                 Email = item.User.Email;
+                Town = item.Town;
+                Street = item.Street;
                 var img = item.Images.Select(s => s.ImageMobile);
                 foreach (var im in img)
                 {

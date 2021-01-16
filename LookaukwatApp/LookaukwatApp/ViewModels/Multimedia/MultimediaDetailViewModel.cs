@@ -30,6 +30,8 @@ namespace LookaukwatApp.ViewModels.Multimedia
         private string phone;
         private string email;
         private string searchOrAsk;
+        private string street;
+        private string town;
         //for Apart model
         private string brand;
         private string type;
@@ -122,6 +124,17 @@ namespace LookaukwatApp.ViewModels.Multimedia
             set => SetProperty(ref description, value);
         }
 
+        public string Street
+        {
+            get => street;
+            set => SetProperty(ref street, value);
+        }
+        public string Town
+        {
+            get => town;
+            set => SetProperty(ref town, value);
+        }
+
         public string ItemId
         {
             get
@@ -184,7 +197,9 @@ namespace LookaukwatApp.ViewModels.Multimedia
                 Email = item.UserEmail;
                 SearchOrAsk = item.SearchOrAsk;
                 Price = item.Price;
-                //for Apart model
+                Town = item.Town;
+                Street = item.Street;
+                //for multimedia model
                 Brand = item.Brand;
                 Model = item.Model;
                 Type = item.Type;

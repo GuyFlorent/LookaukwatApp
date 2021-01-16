@@ -30,6 +30,8 @@ namespace LookaukwatApp.ViewModels.House
         private string phone;
         private string email;
         private string searchOrAsk;
+        private string street;
+        private string town;
         //for House model
         private string rubrique;
         private string type;
@@ -120,6 +122,16 @@ namespace LookaukwatApp.ViewModels.House
             set => SetProperty(ref description, value);
         }
 
+        public string Street
+        {
+            get => street;
+            set => SetProperty(ref street, value);
+        }
+        public string Town
+        {
+            get => town;
+            set => SetProperty(ref town, value);
+        }
         public string ItemId
         {
             get
@@ -187,6 +199,8 @@ namespace LookaukwatApp.ViewModels.House
                 Email = item.UserEmail;
                 SearchOrAsk = item.SearchOrAsk;
                 Price = item.Price;
+                Price = item.Price;
+                Town = item.Town;
                 //for House model
                 Rubrique = item.RubriqueHouse;
                 FabricMateriale = item.FabricMaterialeHouse;

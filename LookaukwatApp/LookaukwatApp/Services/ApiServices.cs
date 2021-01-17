@@ -791,7 +791,7 @@ namespace LookaukwatApp.Services
         }
 
 
-        public async Task<JobModel> GetUniqueJobAsync(int id)
+        public async Task<JobModelViewModel> GetUniqueJobAsync(int id)
         {
             HttpClient client;
 
@@ -807,7 +807,7 @@ namespace LookaukwatApp.Services
 
             var json = await client.GetStringAsync(Uri+"api/JobModels/?id=" + id);
 
-            var Job = JsonConvert.DeserializeObject<JobModel>(json);
+            var Job = JsonConvert.DeserializeObject<JobModelViewModel>(json);
 
             return Job;
 

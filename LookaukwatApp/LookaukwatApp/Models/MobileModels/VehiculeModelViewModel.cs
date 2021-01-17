@@ -7,7 +7,8 @@ namespace LookaukwatApp.Models.MobileModels
     public class VehiculeModelViewModel
     {
         public int id { get; set; }
-
+        public string Lat { get; set; }
+        public string Lon { get; set; }
         public string SearchOrAsk { get; set; }
 
         public string Town { get; set; }

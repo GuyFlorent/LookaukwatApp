@@ -12,7 +12,10 @@ namespace LookaukwatApp.Models
 
         public string ActivitySector { get; set; }
 
-        public List<SimilarProductViewModel> SimilarProduct { get; set; }
+        //public List<SimilarProductViewModel> SimilarProduct { get; set; }
 
+        //public string Lat { get; set; }
+
+        //public string Lon { get; set; }
     }
 }

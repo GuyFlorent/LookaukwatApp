@@ -30,7 +30,6 @@ namespace LookaukwatApp.Models.MobileModels
             if (elapsTime.TotalMinutes < 60)
             {
                 time = elapsTime.Minutes;
-                time = -1 * time;
                 period = "minutes";
             }
             else if (elapsTime.TotalMinutes > 60 && elapsTime.TotalMinutes < 1440)

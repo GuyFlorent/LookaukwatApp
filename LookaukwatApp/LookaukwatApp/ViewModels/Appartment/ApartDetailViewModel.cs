@@ -32,6 +32,8 @@ namespace LookaukwatApp.ViewModels.Appartment
         private string searchOrAsk;
         private string street;
         private string town;
+        private string lat;
+        private string lon;
         //for Apart model
         private int apartSurface;
         private string type;
@@ -129,6 +131,16 @@ namespace LookaukwatApp.ViewModels.Appartment
             get => town;
             set => SetProperty(ref town, value);
         }
+        public string Lat
+        {
+            get => lat;
+            set => SetProperty(ref lat, value);
+        }
+        public string Lon
+        {
+            get => lon;
+            set => SetProperty(ref lon, value);
+        }
 
         public string ItemId
         {
@@ -194,6 +206,8 @@ namespace LookaukwatApp.ViewModels.Appartment
                 Price = item.Price;
                 Town = item.Town;
                 Street = item.Street;
+                Lat = item.Lat;
+                Lon = item.Lon;
                 //for Apart model
                 FurnitureOrNot = item.FurnitureOrNot;
                 ApartSurface = item.ApartSurface;

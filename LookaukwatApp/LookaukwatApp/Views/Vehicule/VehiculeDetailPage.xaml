@@ -52,8 +52,11 @@
             SelectedIndicatorColor="Black" />
 
             <StackLayout Margin="10,15,10,15">
-
-                <Label Text="{Binding Title}"
+                    <StackLayout IsVisible="false">
+                        <Label x:Name="Lat" Text="{Binding Lat}"></Label>
+                        <Label x:Name="Lon" Text="{Binding Lon}"></Label>
+                    </StackLayout>
+                    <Label Text="{Binding Title}"
                    FontSize="20"
                    FontAttributes="Bold"></Label>
 
@@ -430,18 +433,25 @@
                         <Label Grid.Column="1"
                                Text="Position"
                                FontAttributes="Italic" />
-                        <Label Grid.Column="1"
-                           Grid.Row="1"
+                        <StackLayout Grid.Column="1"
+                                     Grid.Row="1"
+                                     Orientation="Horizontal">
+                            <Label 
                            TextColor="Black"
                                FontAttributes="Bold">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{Binding Town}"></Span>
-                                    <Span Text=", "></Span>
-                                    <Span Text="{Binding Street}"></Span>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Town}"></Span>
+                                        <Span Text=", "></Span>
+                                        <Span Text="{Binding Street}"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Button Text="voir itinéraire"
+                                    Clicked="Map_Click"
+                                    CornerRadius="20"></Button>
+                        </StackLayout>
                     </Grid>
                     <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
 

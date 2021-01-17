@@ -18,7 +18,7 @@ namespace LookaukwatApp.Models
         public int Price { get; set; }
 
         public DateTime DateAdd { get; set; }
-        public string Date { get => ConvertDate(DateAdd); }
+      //  public string Date { get => ConvertDate(DateAdd); }
 
         public string SearchOrAskJob { get; set; }
 
@@ -28,29 +28,29 @@ namespace LookaukwatApp.Models
         public virtual ProductCoordinateModel Coordinate { get; set; }
         public virtual List<ImageProcductModel> Images { get; set; }
 
-        private string ConvertDate(DateTime date)
-        {
-            TimeSpan elapsTime = DateTime.Now - date;
-            string period = null;
-            int time = 0;
+        //private string ConvertDate(DateTime date)
+        //{
+        //    TimeSpan elapsTime = DateTime.Now - date;
+        //    string period = null;
+        //    int time = 0;
 
-            if (elapsTime.TotalMinutes < 60)
-            {
-                time = elapsTime.Minutes;
-                period = "minutes";
-            }
-            else if (elapsTime.TotalMinutes > 60 && elapsTime.TotalMinutes < 1440)
-            {
-                time = elapsTime.Hours;
-                period = "Heures";
-            }
-            else if (elapsTime.TotalMinutes > 1440)
-            {
-                time = elapsTime.Days;
-                period = "Jours";
-            }
+        //    if (elapsTime.TotalMinutes < 60)
+        //    {
+        //        time = elapsTime.Minutes;
+        //        period = "minutes";
+        //    }
+        //    else if (elapsTime.TotalMinutes > 60 && elapsTime.TotalMinutes < 1440)
+        //    {
+        //        time = elapsTime.Hours;
+        //        period = "Heures";
+        //    }
+        //    else if (elapsTime.TotalMinutes > 1440)
+        //    {
+        //        time = elapsTime.Days;
+        //        period = "Jours";
+        //    }
 
-            return "Ajoutée il y'a " + time.ToString() + " " + period;
-        }
+        //    return "Ajoutée il y'a " + time.ToString() + " " + period;
+        //}
     }
 }

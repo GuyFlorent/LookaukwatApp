@@ -151,7 +151,6 @@ namespace LookaukwatApp.ViewModels.Login
                 else
                 {
 
-
                     var accesstonken = await _apiServices.LoginASync(userEmail, Password);
 
                     Settings.AccessToken = accesstonken;

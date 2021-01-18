@@ -58,6 +58,7 @@
                     </StackLayout>
                 <Label Text="{Binding Title}"
                    FontSize="20"
+                       MaxLines="1"
                    FontAttributes="Bold"></Label>
 
                 <Label  TextColor="Red"

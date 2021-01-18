@@ -288,4 +288,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\map_marker.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\check.png" />
+  </ItemGroup>
 </Project>

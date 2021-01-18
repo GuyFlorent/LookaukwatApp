@@ -48,7 +48,7 @@
 
 
 
-        <Button Text="Filtre"
+        <Button Text="Filtres"
                     Grid.Column="0"
                     CornerRadius="5"
                     BackgroundColor="LightSkyBlue"

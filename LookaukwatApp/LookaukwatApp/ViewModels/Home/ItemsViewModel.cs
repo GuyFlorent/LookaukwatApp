@@ -1,4 +1,5 @@
-﻿using LookaukwatApp.Models.MobileModels;
+﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.Appartment;
 using LookaukwatApp.ViewModels.House;
@@ -6,13 +7,16 @@ using LookaukwatApp.ViewModels.Job;
 using LookaukwatApp.ViewModels.Mode;
 using LookaukwatApp.ViewModels.Multimedia;
 using LookaukwatApp.ViewModels.Vehicule;
+using LookaukwatApp.Views;
 using LookaukwatApp.Views.AppartmentView;
 using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.JobView;
 using LookaukwatApp.Views.ModeView;
 using LookaukwatApp.Views.MultimediaView;
 using LookaukwatApp.Views.SearchView;
+using LookaukwatApp.Views.SortView;
 using LookaukwatApp.Views.Vehicule;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,6 +27,8 @@ using Xamarin.Forms.Extended;
 
 namespace LookaukwatApp.ViewModels.Home
 {
+    [QueryProperty(nameof(SortBy), nameof(SortBy))]
+    [QueryProperty(nameof(IsSort), nameof(IsSort))]
     public class ItemsViewModel : BaseViewModel
     {
         private ProductForMobileViewModel _selectedItem;
@@ -32,10 +38,43 @@ namespace LookaukwatApp.ViewModels.Home
 
         public Command LoadItemsCommand { get; }
         public Command FilterCommand { get; }
+        public Command SortPageCommand { get; }
+       
         
         public Command<ProductForMobileViewModel> ItemTapped { get; }
 
 
+        private string sortBy = "MostRecent";
+        
+
+        bool isSort = false;
+        public bool IsSort
+        {
+            get { return isSort; }
+            set
+            {
+                
+                SetProperty(ref isSort, value);
+                if(value == true)
+                {
+                    Settings.SortItemPage = SortBy;
+                    DownloadDataAsync(SortBy);
+                }
+               
+            }
+        }
+
+        public string SortBy
+        {
+            get => sortBy;
+            set
+            {
+
+                SetProperty(ref sortBy, value);
+
+                
+            }
+        }
 
         async Task ExecuteLoadItemsCommand()
         {
@@ -44,8 +83,8 @@ namespace LookaukwatApp.ViewModels.Home
             try
             {
                 Items.Clear();
-
-                var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize);
+                SortBy = Settings.SortItemPage;
+                var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize, SortBy);
                 Items.AddRange(items);
 
             }
@@ -81,6 +120,14 @@ namespace LookaukwatApp.ViewModels.Home
         {
              await Shell.Current.GoToAsync(nameof(SearchPage));
         }
+
+        private async void OnSortPage()
+        {
+            SortBy = Settings.SortItemPage;
+            await PopupNavigation.Instance.PushAsync(new SortItemsPage(SortBy));
+           // await Shell.Current.GoToAsync(nameof(SortItemsPage));
+        }
+
 
         async void OnItemSelected(ProductForMobileViewModel item)
         {
@@ -127,15 +174,18 @@ namespace LookaukwatApp.ViewModels.Home
 
         private const int PageSize = 30;
 
-
-        public InfiniteScrollCollection<ProductForMobileViewModel> Items { get; }
-
+        InfiniteScrollCollection<ProductForMobileViewModel> items;
+        public InfiniteScrollCollection<ProductForMobileViewModel> Items { get => items; set => SetProperty(ref items, value); }
+       // public InfiniteScrollCollection<ProductForMobileViewModel> Items { get; set; }
+ 
         public ItemsViewModel()
         {
             TitlePage = "Lookaukwat";
             GetTotalNumberOfProduct();
            
             FilterCommand = new Command(OnFilter);
+            SortPageCommand = new Command(OnSortPage);
+           
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);
             Items = new InfiniteScrollCollection<ProductForMobileViewModel>
@@ -146,8 +196,8 @@ namespace LookaukwatApp.ViewModels.Home
 
                     // load the next page
                     var page = Items.Count / PageSize;
-
-                    var items = await _apiServices.GetProductsAsync(page, PageSize);
+                    SortBy = Settings.SortItemPage;
+                    var items = await _apiServices.GetProductsAsync(page, PageSize, SortBy);
                     //numberOfProduct = await _apiServices.Get_AllNumber_ProductsAsync();
                     IsBusy = false;
 
@@ -160,18 +210,40 @@ namespace LookaukwatApp.ViewModels.Home
                     return Items.Count < numberOfProduct;
                 }
             };
-
-            DownloadDataAsync();
+            Settings.SortItemPage = "";
+            DownloadDataAsync(SortBy);
         }
 
-        private async Task DownloadDataAsync()
+        //public async void OnApearing( string sortBy, bool isSort)
+        //{
+        //    if (IsSort)
+        //    {
+               
+        //        await DownloadDataAsync(SortBy);
+        //    }
+        //    IsSort = false;
+        //}
+
+        private async Task DownloadDataAsync(string sortBy)
         {
             IsRunning = true;
-            var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize);
-
+            try
+            {
+                Items.Clear();
+                var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize, sortBy);
+                
             Items.AddRange(items);
-
-            IsRunning = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+               
+                IsRunning = false;
+            }
+           
         }
 
         private async void GetTotalNumberOfProduct()

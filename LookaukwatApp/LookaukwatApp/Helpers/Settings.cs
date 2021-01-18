@@ -32,6 +32,18 @@ namespace LookaukwatApp.Helpers
                 AppSettings.AddOrUpdateValue("JsonSearchSave", value);
             }
         }
+
+        public static string SortItemPage
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("SortItemPage", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("SortItemPage", value);
+            }
+        }
         public static string Username
         {
             get

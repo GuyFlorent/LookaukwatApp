@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.SortView.SortItemsPage"
+                  xmlns:viewModels="clr-namespace:LookaukwatApp.ViewModels.SortBy"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:converter="clr-namespace:LookaukwatApp.Converter"
+                 Shell.PresentationMode="ModalAnimated"
+             >
+
+
+    <ContentPage.BindingContext>
+        <viewModels:SortByViewModel></viewModels:SortByViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter"></converter:StringNullOrEmptyBoolConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Margin="130,5,0,200"
+                     Padding="5"
+                     Spacing="5"
+                     BackgroundColor="GhostWhite"
+                     VerticalOptions="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+           
+                <Button Text="Tri : Plus récentes"
+                        TextColor="Black"
+                         BackgroundColor="Transparent"
+                        Command="{Binding MostRecentCommand}"></Button>
+                <Image Source="check"
+                       x:Name="mostRecent"
+                       Grid.Column="1"></Image>
+
+            <Button Text="Tri : Plus anciennes"
+                    TextColor="Black"
+                     BackgroundColor="Transparent"
+                    Grid.Row="1"
+                    Command="{Binding MostOldCommand}"></Button>
+            <Image Source="check"
+                       Grid.Column="1"
+                   x:Name="mostOld"
+                   Grid.Row="1"></Image>
+
+            <Button Text="Tri : Prix croissant"
+                    TextColor="Black"
+                    BackgroundColor="Transparent"
+                    Grid.Row="2"
+                    Command="{Binding LowerPriceCommand}"></Button>
+            <Image Source="check"
+                       Grid.Column="1"
+                   x:Name="LowerPrice"
+                   Grid.Row="2"></Image>
+
+            <Button Text="Tri : Prix décroissant"
+                    TextColor="Black"
+                     BackgroundColor="Transparent"
+                    Grid.Row="3"
+                    Command="{Binding HeigherPriceCommand}"></Button>
+            <Image Source="check"
+                       Grid.Column="1"
+                   x:Name="HeigherPrice"
+                   Grid.Row="3"></Image>
+
+        </Grid>
+            </StackLayout>
+    </ContentPage.Content>
+</pages:PopupPage>

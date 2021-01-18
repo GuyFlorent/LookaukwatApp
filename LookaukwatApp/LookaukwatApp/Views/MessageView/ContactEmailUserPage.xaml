@@ -46,15 +46,14 @@
             <Editor x:Name="Description"
                     Placeholder="Description et le lieu excacte"
                     AutoSize="TextChanges"></Editor>
-
+            <ActivityIndicator x:Name="Indicator" 
+                                   Color ="#80000000"/>
             <Button Text="Envoyer"
                     TextColor="White"
                         CornerRadius="20"
                     Clicked="SendMessage_Button"></Button>
 
-            <ActivityIndicator x:Name="Indicator" 
-                                   Color ="#80000000"/>
-           
+            
         </StackLayout>
     </ScrollView>
 </pages:PopupPage>

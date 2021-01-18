@@ -1,6 +1,9 @@
 ﻿using LookaukwatApp.Helpers;
 using LookaukwatApp.Services;
+using LookaukwatApp.Views.LoginView;
+using LookaukwatApp.Views.RegisterView;
 using LookaukwatApp.Views.UserView;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -106,8 +109,7 @@ namespace LookaukwatApp.ViewModels.User
         public Command UserPersonalInfoCommand { get; }
 
 
-        string accessToken = Settings.AccessToken;
-
+       
         private bool ValidateChangePassword()
         {
             return !String.IsNullOrWhiteSpace(OldPassword)
@@ -123,68 +125,119 @@ namespace LookaukwatApp.ViewModels.User
         }
         private async void OnUserAnnouce()
         {
+            string accessToken = Settings.AccessToken;
+            string username = Settings.Username;
+            string password = Settings.Password;
+
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
                 await Shell.Current.GoToAsync(nameof(UserAnnoucePage));
             }
+            else if(!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+            {
+                await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
+            }
+
             else
             {
-                await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
+                await PopupNavigation.Instance.PushAsync(new RegisterRedirectLoginUserAccountPage());
+
             }
         }
 
         private async void OnUserProfile()
         {
+            string accessToken = Settings.AccessToken;
+            string username = Settings.Username;
+            string password = Settings.Password;
+
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
                 await Shell.Current.GoToAsync(nameof(UserPage));
             }
-            else
+            else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
             {
-                await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
+                await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
+            }
+
+            else 
+            {
+                await PopupNavigation.Instance.PushAsync(new RegisterRedirectLoginUserAccountPage());
+
             }
         }
 
         private async void OnUpdateUserPage()
         {
+            string accessToken = Settings.AccessToken;
+            string username = Settings.Username;
+            string password = Settings.Password;
+
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
                 await Shell.Current.GoToAsync(nameof(UserUpdateInfoPage));
             }
+            else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+            {
+                await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
+            }
+
             else
             {
-                await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
+                await PopupNavigation.Instance.PushAsync(new RegisterRedirectLoginUserAccountPage());
+
             }
         }
 
         private async void OnUserPersonalInfo()
         {
+            string accessToken = Settings.AccessToken;
+            string username = Settings.Username;
+            string password = Settings.Password;
+
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
                 await Shell.Current.GoToAsync(nameof(UserPersonalInfoPage));
             }
+             else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+            {
+                await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
+            }
+
             else
             {
-                await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
+                await PopupNavigation.Instance.PushAsync(new RegisterRedirectLoginUserAccountPage());
+
             }
         }
 
         private async void OnUserPassword()
         {
+            string accessToken = Settings.AccessToken;
+            string username = Settings.Username;
+            string password = Settings.Password;
+
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
                 await Shell.Current.GoToAsync(nameof(UpdateUserPasswordPage));
             }
+            else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+            {
+                await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
+            }
+
             else
             {
-                await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
+                await PopupNavigation.Instance.PushAsync(new RegisterRedirectLoginUserAccountPage());
+
             }
         }
 
         private async void OnChangePassword()
         {
             var accessToken = Settings.AccessToken;
-
+            string username = Settings.Username;
+            string password = Settings.Password;
             if (accessToken != null)
             {
                 if ((newPassword.Length < 6 || confirmPassword.Length < 6) && newPassword != confirmPassword)
@@ -215,6 +268,16 @@ namespace LookaukwatApp.ViewModels.User
                 }
 
 
+
+            }
+            else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+            {
+                await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
+            }
+
+            else
+            {
+                await PopupNavigation.Instance.PushAsync(new RegisterRedirectLoginUserAccountPage());
 
             }
 

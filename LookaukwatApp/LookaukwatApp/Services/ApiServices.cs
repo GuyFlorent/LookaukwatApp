@@ -207,11 +207,19 @@ namespace LookaukwatApp.Services
 
             client = new HttpClient(httpClientHandler);
 
+            var model = new UserPhoneViewModel()
+            {
+                phoneNumber = phone
+            };
+            var jsonn = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(jsonn);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
             // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
 
-            var json = await client.GetStringAsync(Uri + "api/Product/GetUserName/?phone=" + phone);
-
-            var UserName = JsonConvert.DeserializeObject<string>(json);
+            var json = await client.PostAsync(Uri + "api/Product/GetUserName/",content);
+            var jwt = await json.Content.ReadAsStringAsync();
+            var UserName = JsonConvert.DeserializeObject<string>(jwt);
            
             return UserName;
         }
@@ -543,7 +551,7 @@ namespace LookaukwatApp.Services
 
             };
 
-            var json = JsonConvert.SerializeObject(model);
+            var json = JsonConvert.SerializeObject(modele);
 
             HttpContent content = new StringContent(json);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
@@ -706,7 +714,7 @@ namespace LookaukwatApp.Services
         }
 
 
-        public async Task<List<ProductForMobileViewModel>> GetProductsAsync(int pageIndex, int pageSize)
+        public async Task<List<ProductForMobileViewModel>> GetProductsAsync(int pageIndex, int pageSize, string sortBy)
         {
             HttpClient client;
 
@@ -719,7 +727,7 @@ namespace LookaukwatApp.Services
 
             // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
 
-            var json = await client.GetStringAsync(Uri+"api/Product/GetProductScrollView/?pageIndex=" + pageIndex + "&pageSize="+pageSize);
+            var json = await client.GetStringAsync(Uri+"api/Product/GetProductScrollView/?pageIndex=" + pageIndex + "&pageSize="+pageSize + "&sortBy=" + sortBy);
 
             var List = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(json);
            // var liste = List.Skip(pageIndex * pageSize).Take(pageSize).ToList();

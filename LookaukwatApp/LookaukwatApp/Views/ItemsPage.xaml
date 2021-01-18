@@ -10,6 +10,9 @@
              xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              x:Name="BrowseItemsPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Tri"   Command="{Binding SortPageCommand}" />
+    </ContentPage.ToolbarItems>
     <Shell.SearchHandler>
 
         <local1:ProductSearchHandler Placeholder="Que recherchez vous?"
@@ -67,6 +70,7 @@
                       CachingStrategy="RecycleElement" 
                       HasUnevenRows="True"
                       SelectionMode="None"
+                          x:Name="mylist"
                       SeparatorVisibility="None">
                     <ListView.Behaviors>
                         <extended:InfiniteScrollBehavior  IsLoadingMore="{Binding IsBusy}" />
@@ -99,6 +103,7 @@
 
                                             <Label Grid.Column="1"
                        Text="{Binding Title}"
+                        MaxLines="1"
                        TextColor="Black"
                        FontAttributes="Bold"></Label>
 

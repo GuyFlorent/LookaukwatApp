@@ -12,6 +12,7 @@ using LookaukwatApp.Views.MultimediaView;
 using LookaukwatApp.Views.PublishView;
 using LookaukwatApp.Views.RegisterView;
 using LookaukwatApp.Views.SearchView;
+using LookaukwatApp.Views.SortView;
 using LookaukwatApp.Views.UserView;
 using LookaukwatApp.Views.Vehicule;
 using System;
@@ -33,7 +34,7 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(Views.PublishAnnouncePage), typeof(Views.PublishAnnouncePage));
             Routing.RegisterRoute(nameof(Views.UserProfilePage), typeof(Views.UserProfilePage));
             Routing.RegisterRoute(nameof(UserPage), typeof(UserPage));
-           // Routing.RegisterRoute(nameof(Views.HomeView.ItemsPage), typeof(Views.HomeView.ItemsPage));
+            Routing.RegisterRoute(nameof(Views.ItemsPage), typeof(Views.ItemsPage));
             Routing.RegisterRoute(nameof(JobAddPage), typeof(JobAddPage));
             Routing.RegisterRoute(nameof(LoginRedirectUserAccountPage), typeof(LoginRedirectUserAccountPage));
             Routing.RegisterRoute(nameof(RegisterRedirectLoginUserAccountPage), typeof(RegisterRedirectLoginUserAccountPage));
@@ -61,6 +62,7 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
             Routing.RegisterRoute(nameof(ResultSearchPage), typeof(ResultSearchPage));
             Routing.RegisterRoute(nameof(ContactEmailUserPage), typeof(ContactEmailUserPage));
+            Routing.RegisterRoute(nameof(SortItemsPage), typeof(SortItemsPage));
         }
 
     }

@@ -26,6 +26,8 @@ using Xamarin.Forms.Extended;
 
 namespace LookaukwatApp.ViewModels.Search
 {
+    [QueryProperty(nameof(SortBy), nameof(SortBy))]
+    [QueryProperty(nameof(IsSort), nameof(IsSort))]
     [QueryProperty(nameof(JsonSearchModel), nameof(JsonSearchModel))]
     [QueryProperty(nameof(NumberOfresult), nameof(NumberOfresult))]
     public class ResultSearchViewModel : BaseViewModel
@@ -37,6 +39,7 @@ namespace LookaukwatApp.ViewModels.Search
         public Command LoadItemsCommand { get; }
         public Command FilterCommand { get; }
         public Command BackCommand { get; }
+        public Command SortPageCommand { get; }
         public Command<ProductForMobileViewModel> ItemTapped { get; }
 
         private string jsonSearchModel;
@@ -51,10 +54,15 @@ namespace LookaukwatApp.ViewModels.Search
             }
             set
             {
-                jsonSearchModel = value;
+                SetProperty(ref jsonSearchModel, value);
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    Settings.JsonSearchSave = value;
+                    int pageIndex = 0;
+                    var item = ShowResult(pageIndex, SortBy);
+                }
+                
                
-                int pageIndex = 0;
-               var item =  ShowResult(pageIndex);
             }
         }
 
@@ -64,7 +72,45 @@ namespace LookaukwatApp.ViewModels.Search
         public string NumberOfresult
         {
             get { return numberOfresult; }
-            set { SetProperty(ref numberOfresult, value); }
+            set 
+            {
+                SetProperty(ref numberOfresult, value);
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    Settings.NumberOfSearchReasult = value;
+                }
+            }
+        }
+
+        private string sortBy = "MostRecent";
+
+        bool isSort = false;
+        public bool IsSort
+        {
+            get { return isSort; }
+            set
+            {
+
+                SetProperty(ref isSort, value);
+                if (value == true)
+                {
+                    Settings.SortIResultSearch = SortBy;
+                   // DownloadDataAsync(SortBy);
+                }
+
+            }
+        }
+
+        public string SortBy
+        {
+            get => sortBy;
+            set
+            {
+
+                SetProperty(ref sortBy, value);
+
+
+            }
         }
         public InfiniteScrollCollection<ProductForMobileViewModel> Items { get; }
 
@@ -84,8 +130,18 @@ namespace LookaukwatApp.ViewModels.Search
 
                     // load the next page
                     var page = Items.Count / PageSize;
-
-                    var items = await ShowResult(page);
+                    SortBy = Settings.SortIResultSearch;
+                    var items = new List<ProductForMobileViewModel>();
+                    if (!string.IsNullOrWhiteSpace(JsonSearchModel))
+                    {
+                         items = await ShowResult(page, SortBy);
+                    }
+                    else
+                    {
+                        var json = Settings.JsonSearchSave;
+                        items = await ShowResultInfiniteDScroll(json,page, SortBy);
+                    }
+                    
                     // var items = await _apiServices.GetProductsAsync(page, PageSize);
                     //numberOfProduct = await _apiServices.Get_AllNumber_ProductsAsync();
                     IsBusy = false;
@@ -95,6 +151,10 @@ namespace LookaukwatApp.ViewModels.Search
                 },
                 OnCanLoadMore = () =>
                 {
+                    if (string.IsNullOrWhiteSpace(NumberOfresult))
+                    {
+                        NumberOfresult = Settings.NumberOfSearchReasult;
+                    }
 
                     return Items.Count < Convert.ToInt32(NumberOfresult);
                 }
@@ -113,12 +173,17 @@ namespace LookaukwatApp.ViewModels.Search
 
                 //var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize);
                 //Items.AddRange(items);
+                SortBy = Settings.SortIResultSearch;
                 if (string.IsNullOrWhiteSpace(JsonSearchModel))
                 {
                     JsonSearchModel = Settings.JsonSearchSave;
                 }
-                int pageIndex = 0;
-                var items = ShowResult(pageIndex);
+                else
+                {
+                    int pageIndex = 0;
+                    var items = ShowResult(pageIndex, SortBy);
+                }
+              
 
             }
             catch (Exception ex)
@@ -196,7 +261,7 @@ namespace LookaukwatApp.ViewModels.Search
         }
 
 
-        private async Task<List<ProductForMobileViewModel>> ShowResult(int pageIndex)
+        private async Task<List<ProductForMobileViewModel>> ShowResult(int pageIndex, string sortBy)
         {
             IsRunning = true;
             SearchModel UserSearchCondition = JsonConvert.DeserializeObject<SearchModel>(JsonSearchModel);
@@ -210,43 +275,43 @@ namespace LookaukwatApp.ViewModels.Search
 
                         case "Emploi":
 
-                            var resultJob = await _apiServices.GetResultOfferSeachJobAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
+                            var resultJob = await _apiServices.GetResultOfferSeachJobAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                             Items.AddRange(resultJob);
                             list = resultJob;
                             break;
                         case "Immobilier":
 
-                            var resultImo = await _apiServices.GetResultOfferSeachApartAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
+                            var resultImo = await _apiServices.GetResultOfferSeachApartAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                             Items.AddRange(resultImo);
                             list = resultImo;
                             break;
                         case "Multimedia":
 
-                            var resultMulti = await _apiServices.GetResultOfferSeachMultiAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
+                            var resultMulti = await _apiServices.GetResultOfferSeachMultiAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                             Items.AddRange(resultMulti);
                             list = resultMulti;
                             break;
                         case "Maison":
 
-                            var resultHouse = await _apiServices.GetResultOfferSeachHouseAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
+                            var resultHouse = await _apiServices.GetResultOfferSeachHouseAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                             Items.AddRange(resultHouse);
                             list = resultHouse;
                             break;
                         case "Mode":
 
-                            var resultMode = await _apiServices.GetResultOfferSeachModeAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
+                            var resultMode = await _apiServices.GetResultOfferSeachModeAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                             Items.AddRange(resultMode);
                             list = resultMode;
                             break;
                         case "Vehicule":
 
-                            var resultVehicule = await _apiServices.GetResultOfferSearchVehiculeAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
+                            var resultVehicule = await _apiServices.GetResultOfferSearchVehiculeAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                             Items.AddRange(resultVehicule);
                             list = resultVehicule;
                             break;
 
                         default:
-                            var resultOffer = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
+                            var resultOffer = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                             Items.AddRange(resultOffer);
                             list = resultOffer;
                             break;
@@ -256,7 +321,77 @@ namespace LookaukwatApp.ViewModels.Search
 
                 case "Je recherche":
 
-                    var resultAsk = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize);
+                    var resultAsk = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
+                    Items.AddRange(resultAsk);
+                    list = resultAsk;
+                    break;
+            }
+            IsRunning = false;
+            return list;
+        }
+
+
+        private async Task<List<ProductForMobileViewModel>> ShowResultInfiniteDScroll(string json,int pageIndex, string sortBy)
+        {
+            IsRunning = true;
+            SearchModel UserSearchCondition = JsonConvert.DeserializeObject<SearchModel>(json);
+            List<ProductForMobileViewModel> list = new List<ProductForMobileViewModel>();
+            switch (UserSearchCondition.SearchOrAskJob)
+            {
+                case "J'offre":
+
+                    switch (UserSearchCondition.Category)
+                    {
+
+                        case "Emploi":
+
+                            var resultJob = await _apiServices.GetResultOfferSeachJobAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
+                            Items.AddRange(resultJob);
+                            list = resultJob;
+                            break;
+                        case "Immobilier":
+
+                            var resultImo = await _apiServices.GetResultOfferSeachApartAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
+                            Items.AddRange(resultImo);
+                            list = resultImo;
+                            break;
+                        case "Multimedia":
+
+                            var resultMulti = await _apiServices.GetResultOfferSeachMultiAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
+                            Items.AddRange(resultMulti);
+                            list = resultMulti;
+                            break;
+                        case "Maison":
+
+                            var resultHouse = await _apiServices.GetResultOfferSeachHouseAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
+                            Items.AddRange(resultHouse);
+                            list = resultHouse;
+                            break;
+                        case "Mode":
+
+                            var resultMode = await _apiServices.GetResultOfferSeachModeAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
+                            Items.AddRange(resultMode);
+                            list = resultMode;
+                            break;
+                        case "Vehicule":
+
+                            var resultVehicule = await _apiServices.GetResultOfferSearchVehiculeAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
+                            Items.AddRange(resultVehicule);
+                            list = resultVehicule;
+                            break;
+
+                        default:
+                            var resultOffer = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
+                            Items.AddRange(resultOffer);
+                            list = resultOffer;
+                            break;
+                    }
+
+                    break;
+
+                case "Je recherche":
+
+                    var resultAsk = await _apiServices.GetResultAskAndOfferSearchAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                     Items.AddRange(resultAsk);
                     list = resultAsk;
                     break;

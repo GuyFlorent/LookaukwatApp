@@ -7,6 +7,8 @@
              Title="{Binding Title}">
 
 
+   
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter"></converter:StringNullOrEmptyBoolConverter>

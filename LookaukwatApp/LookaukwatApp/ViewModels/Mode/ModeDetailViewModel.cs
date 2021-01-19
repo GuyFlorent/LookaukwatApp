@@ -16,6 +16,7 @@ using Xamarin.Forms;
 namespace LookaukwatApp.ViewModels.Mode
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
+   
     public class ModeDetailViewModel : BaseViewModel
     {
         ApiServices _apiServices = new ApiServices();
@@ -53,6 +54,7 @@ namespace LookaukwatApp.ViewModels.Mode
         public Command ShareCommand { get; set; }
         public Command ClipBoardCommand { get; set; }
         public Command SendMessageCommand { get; set; }
+        public Command BackCommand { get; set; }
         public int Id { get; set; }
 
         //Similar item selected
@@ -203,6 +205,7 @@ namespace LookaukwatApp.ViewModels.Mode
             ShareCommand = new Command(OnShareCommand);
             ClipBoardCommand = new Command(OnClipboard);
             SendMessageCommand = new Command(OnSendMessage);
+           
         }
 
         public async void LoadItemId(string itemId)

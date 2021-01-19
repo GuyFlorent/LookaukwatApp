@@ -18,7 +18,7 @@ namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-        string Uri = "https://192.168.1.66:45455/";
+        string Uri = "https://10.1.2.48:45455/";
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword)
         {
             HttpClient client;
@@ -1072,7 +1072,7 @@ namespace LookaukwatApp.Services
             return result;
         }
 
-        public async Task<List<ProductForMobileViewModel>> GetResultOfferSearchVehiculeAsync(SearchModel userSearchCondition, int pageIndex, int pageSize)
+        public async Task<List<ProductForMobileViewModel>> GetResultOfferSearchVehiculeAsync(SearchModel userSearchCondition, int pageIndex, int pageSize, string sortBy)
         {
             HttpClient client;
 
@@ -1092,7 +1092,7 @@ namespace LookaukwatApp.Services
             return result;
         }
 
-        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachModeAsync(SearchModel userSearchCondition, int pageIndex, int pageSize)
+        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachModeAsync(SearchModel userSearchCondition, int pageIndex, int pageSize, string sortBy)
         {
             HttpClient client;
 
@@ -1113,7 +1113,7 @@ namespace LookaukwatApp.Services
         }
 
 
-        public async Task<List<ProductForMobileViewModel>> GetResultAskAndOfferSearchAsync(SearchModel userSearchCondition, int pageIndex, int pageSize)
+        public async Task<List<ProductForMobileViewModel>> GetResultAskAndOfferSearchAsync(SearchModel userSearchCondition, int pageIndex, int pageSize, string sortBy)
         {
             HttpClient client;
 
@@ -1133,7 +1133,7 @@ namespace LookaukwatApp.Services
             return result;
         }
 
-        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachMultiAsync(SearchModel userSearchCondition, int pageIndex, int pageSize)
+        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachMultiAsync(SearchModel userSearchCondition, int pageIndex, int pageSize, string sortBy)
         {
             HttpClient client;
 
@@ -1153,7 +1153,7 @@ namespace LookaukwatApp.Services
             return result;
         }
 
-        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachHouseAsync(SearchModel userSearchCondition, int pageIndex, int pageSize)
+        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachHouseAsync(SearchModel userSearchCondition, int pageIndex, int pageSize, string sortBy)
         {
             HttpClient client;
 
@@ -1173,7 +1173,7 @@ namespace LookaukwatApp.Services
             return result;
         }
 
-        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachApartAsync(SearchModel userSearchCondition, int pageIndex, int pageSize)
+        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachApartAsync(SearchModel userSearchCondition, int pageIndex, int pageSize, string sortBy)
         {
             HttpClient client;
 
@@ -1193,7 +1193,7 @@ namespace LookaukwatApp.Services
             return result;
         }
 
-        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachJobAsync(SearchModel userSearchCondition, int pageIndex, int pageSize)
+        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachJobAsync(SearchModel userSearchCondition, int pageIndex, int pageSize, string sortBy)
         {
             HttpClient client;
 

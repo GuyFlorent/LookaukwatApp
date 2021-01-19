@@ -17,6 +17,7 @@ using Xamarin.Forms;
 namespace LookaukwatApp.ViewModels.Job
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    
     class JobDetailsViewModel : BaseViewModel
     {
         ApiServices _apiServices = new ApiServices();
@@ -45,6 +46,7 @@ namespace LookaukwatApp.ViewModels.Job
         public Command ShareCommand { get; set; }
         public Command ClipBoardCommand { get; set; }
         public Command SendMessageCommand { get; set; }
+       
 
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
@@ -168,6 +170,7 @@ namespace LookaukwatApp.ViewModels.Job
             ShareCommand = new Command(OnShareCommand);
             ClipBoardCommand = new Command(OnClipboard);
             SendMessageCommand = new Command(OnSendMessage);
+            
         }
 
         public async void LoadItemId(string itemId)

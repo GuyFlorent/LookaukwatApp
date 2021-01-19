@@ -44,6 +44,30 @@ namespace LookaukwatApp.Helpers
                 AppSettings.AddOrUpdateValue("SortItemPage", value);
             }
         }
+
+        public static string NumberOfSearchReasult
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("NumberOfSearchReasult", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("NumberOfSearchReasult", value);
+            }
+        }
+
+        public static string SortIResultSearch
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("SortIResultSearch", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("SortIResultSearch", value);
+            }
+        }
         public static string Username
         {
             get

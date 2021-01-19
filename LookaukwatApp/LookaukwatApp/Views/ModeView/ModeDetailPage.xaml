@@ -7,6 +7,7 @@
              Title="{Binding Title}">
 
 
+  
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter"></converter:StringNullOrEmptyBoolConverter>
@@ -444,13 +445,13 @@
                                         <Label Text="{Binding Town}"
                                                 ></Label>
 
-                                        <!--<StackLayout.GestureRecognizers>
+                                        <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:ModeDetailViewModel}}, Path=ItemTapped}"		
                                 CommandParameter="{Binding .}">
                                             </TapGestureRecognizer>
-                                        </StackLayout.GestureRecognizers>-->
+                                        </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>

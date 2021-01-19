@@ -5,6 +5,8 @@
               xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Job" 
              Title="{Binding Title}">
 
+    
+    
     <StackLayout>
         <ScrollView>
         <StackLayout >

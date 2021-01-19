@@ -41,5 +41,8 @@ namespace LookaukwatApp.Views.ModeView
             await Map.OpenAsync(location, options);
 
         }
+
+       
+
     }
 }

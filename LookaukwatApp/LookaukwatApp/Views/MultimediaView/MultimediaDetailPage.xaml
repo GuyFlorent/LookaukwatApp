@@ -5,6 +5,8 @@
               xmlns:converter="clr-namespace:LookaukwatApp.Converter"
              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Multimedia"  
              Title="{Binding Title}">
+
+    
     
     <ContentPage.Resources>
         <ResourceDictionary>

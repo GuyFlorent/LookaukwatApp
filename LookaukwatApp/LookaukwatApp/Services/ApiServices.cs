@@ -18,7 +18,7 @@ namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-        string Uri = "https://10.1.2.48:45455/";
+        string Uri = "https://lookaukwatapi.azurewebsites.net/";
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword)
         {
             HttpClient client;
@@ -262,7 +262,6 @@ namespace LookaukwatApp.Services
                 RoomNumber = roomNumber,
                 FurnitureOrNot = furnitureOrNot,
                 Category = categorie,
-                DateAdd = DateTime.Now,
                 Coordinate = coor
 
             };
@@ -387,7 +386,6 @@ namespace LookaukwatApp.Services
                 ModelVehicule = model,
                 NumberOfDoorVehicule = numberOfDoor,
                 Category = categorie,
-                DateAdd = DateTime.Now,
                 Coordinate = coor
 
             };
@@ -485,7 +483,6 @@ namespace LookaukwatApp.Services
                 StateHouse = state,
                 FabricMaterialeHouse =fabricMaterial,
                 Category = categorie,
-                DateAdd = DateTime.Now,
                 Coordinate = coor
 
             };
@@ -546,7 +543,6 @@ namespace LookaukwatApp.Services
                 Model = model,
                 Capacity = capacity,
                 Category = categorie,
-                DateAdd = DateTime.Now,
                 Coordinate = coor
 
             };
@@ -611,7 +607,6 @@ namespace LookaukwatApp.Services
                 StateMode = state,
                 UniversMode = univers,
                 Category = categorie,
-                DateAdd = DateTime.Now,
                 Coordinate = coor
 
             };
@@ -671,7 +666,6 @@ namespace LookaukwatApp.Services
                 TypeContract = typeContract,
                 ActivitySector = activitySector,
                 Category = categorie,
-                DateAdd = DateTime.Now,
                 Coordinate = coor
 
             };

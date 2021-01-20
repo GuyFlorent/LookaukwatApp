@@ -61,7 +61,7 @@
                        MaxLines="1"
                    FontAttributes="Bold"></Label>
 
-                <Label  TextColor="Red"
+                <Label  TextColor="Orange"
                     VerticalOptions="Center">
                     <Label.FormattedText>
                         <FormattedString>
@@ -357,7 +357,7 @@
                                                TextColor="Black"
                                                FontAttributes="Bold"
                                                MaxLines="1"/>
-                                        <Label  TextColor="Red"
+                                            <Label  TextColor="Orange"
                     VerticalOptions="Center">
                                             <Label.FormattedText>
                                                 <FormattedString>

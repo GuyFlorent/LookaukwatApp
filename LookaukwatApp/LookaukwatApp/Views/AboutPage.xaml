@@ -35,8 +35,8 @@
                         <Image Source="image"
                            HeightRequest="30"></Image>
                         <Button Text="Choisir dans galerie"
-                BackgroundColor="Teal"
-                TextColor="Wheat"
+                 CornerRadius="20"
+                TextColor="White"
                 FontSize="11"
                 Clicked="PickPhoto_Click"></Button>
                     </StackLayout>
@@ -45,7 +45,7 @@
                         <Image Source="camera"
                            HeightRequest="30"></Image>
                         <Button Text="Prendre une photo"
-                BackgroundColor="Navy"
+               CornerRadius="20"
                 TextColor="White"
                 FontSize="11"
                 Clicked="TakePhoto_Click"
@@ -78,8 +78,9 @@
                         <Image Source="image"
                            HeightRequest="30"></Image>
                         <Button Text="Choisir dans galerie"
-                BackgroundColor="Teal"
-                TextColor="Wheat"
+                
+                                CornerRadius="20"
+                TextColor="White"
                 FontSize="11"
                 Clicked="PickPhoto_Click1"></Button>
                     </StackLayout>
@@ -88,7 +89,8 @@
                         <Image Source="camera"
                            HeightRequest="30"></Image>
                         <Button Text="Prendre une photo"
-                BackgroundColor="Navy"
+                
+                                CornerRadius="20"
                 TextColor="White"
                 FontSize="11"
                 Clicked="TakePhoto_Click1"

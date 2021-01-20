@@ -195,8 +195,7 @@ namespace LookaukwatApp.ViewModels.Search
             {
                 Items.Clear();
 
-                //var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize);
-                //Items.AddRange(items);
+               
                 SortBy = Settings.SortIResultSearch;
                 if (string.IsNullOrWhiteSpace(JsonSearchModel))
                 {

@@ -241,7 +241,7 @@ namespace LookaukwatApp.ViewModels.Job
                 NameSender = Settings.FirstName,
                 EmailSender = Settings.Username,
                 Category = "Mode",
-                Linkshare = "https://lookaukwat.com/Mode/ModeDetail/" + Id,
+                Linkshare = "https://lookaukwat.azurewebsites.net/Job/JobDetail/" + Id,
                 RecieverEmail = Email,
                 RecieverName = Name,
                 SubjectSender = "Votre article en vente sur lookaukwat me plaît"

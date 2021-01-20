@@ -319,7 +319,7 @@ namespace LookaukwatApp.ViewModels.Vehicule
                 NameSender = Settings.FirstName,
                 EmailSender = Settings.Username,
                 Category = "Mode",
-                Linkshare = "https://lookaukwat.com/Mode/ModeDetail/" + Id,
+                Linkshare = "https://lookaukwat.com/Vehicule/VehiculeDetail/" + Id,
                 RecieverEmail = Email,
                 RecieverName = Name,
                 SubjectSender = "Votre article en vente sur lookaukwat me plaît"

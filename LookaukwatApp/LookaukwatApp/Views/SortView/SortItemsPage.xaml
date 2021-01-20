@@ -25,6 +25,8 @@
                      Spacing="5"
                      BackgroundColor="GhostWhite"
                      VerticalOptions="Center">
+
+            <StackLayout x:Name="SortItemHomePage">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
@@ -78,5 +80,62 @@
 
         </Grid>
             </StackLayout>
+
+            <StackLayout  x:Name="SortSearchPage">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Text="Tri : Plus récentes"
+                        TextColor="Black"
+                         BackgroundColor="Transparent"
+                        Command="{Binding MostRecentSearchCommand}"></Button>
+                    <Image Source="check"
+                       x:Name="mostRecentSearch"
+                       Grid.Column="1"></Image>
+
+                    <Button Text="Tri : Plus anciennes"
+                    TextColor="Black"
+                     BackgroundColor="Transparent"
+                    Grid.Row="1"
+                    Command="{Binding MostOldSearchCommand}"></Button>
+                    <Image Source="check"
+                       Grid.Column="1"
+                   x:Name="mostOldSearch"
+                   Grid.Row="1"></Image>
+
+                    <Button Text="Tri : Prix croissant"
+                    TextColor="Black"
+                    BackgroundColor="Transparent"
+                    Grid.Row="2"
+                    Command="{Binding LowerPriceSearchCommand}"></Button>
+                    <Image Source="check"
+                       Grid.Column="1"
+                   x:Name="LowerPriceSearch"
+                   Grid.Row="2"></Image>
+
+                    <Button Text="Tri : Prix décroissant"
+                    TextColor="Black"
+                     BackgroundColor="Transparent"
+                    Grid.Row="3"
+                    Command="{Binding HeigherPriceSearchCommand}"></Button>
+                    <Image Source="check"
+                       Grid.Column="1"
+                   x:Name="HeigherPriceSearch"
+                   Grid.Row="3"></Image>
+
+                </Grid>
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </pages:PopupPage>

@@ -14,8 +14,10 @@ using LookaukwatApp.Views.JobView;
 using LookaukwatApp.Views.ModeView;
 using LookaukwatApp.Views.MultimediaView;
 using LookaukwatApp.Views.SearchView;
+using LookaukwatApp.Views.SortView;
 using LookaukwatApp.Views.Vehicule;
 using Newtonsoft.Json;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -40,6 +42,7 @@ namespace LookaukwatApp.ViewModels.Search
         public Command FilterCommand { get; }
         public Command BackCommand { get; }
         public Command SortPageCommand { get; }
+       
         public Command<ProductForMobileViewModel> ItemTapped { get; }
 
         private string jsonSearchModel;
@@ -95,7 +98,16 @@ namespace LookaukwatApp.ViewModels.Search
                 if (value == true)
                 {
                     Settings.SortIResultSearch = SortBy;
-                   // DownloadDataAsync(SortBy);
+                    if (string.IsNullOrWhiteSpace(JsonSearchModel))
+                    {
+                        JsonSearchModel = Settings.JsonSearchSave;
+                    }
+                    else
+                    {
+                        int pageIndex = 0;
+                        var items = ShowResult(pageIndex, SortBy);
+                    }
+                    
                 }
 
             }
@@ -112,13 +124,18 @@ namespace LookaukwatApp.ViewModels.Search
 
             }
         }
-        public InfiniteScrollCollection<ProductForMobileViewModel> Items { get; }
+
+        InfiniteScrollCollection<ProductForMobileViewModel> items;
+        public InfiniteScrollCollection<ProductForMobileViewModel> Items { get => items; set => SetProperty(ref items, value); }
+       // public InfiniteScrollCollection<ProductForMobileViewModel> Items { get; }
 
         public ResultSearchViewModel()
         {
             //numberOfProduct = _apiServices.Get_AllNumber_ProductsAsync().Result;
             FilterCommand = new Command(OnFilter);
             BackCommand = new Command(OnBack);
+            SortPageCommand = new Command(OnSortPage);
+           
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);
 
@@ -160,7 +177,14 @@ namespace LookaukwatApp.ViewModels.Search
                 }
             };
 
-           
+            Settings.SortIResultSearch = "";
+        }
+
+        private async void OnSortPage()
+        {
+            SortBy = Settings.SortIResultSearch;
+            await PopupNavigation.Instance.PushAsync(new SortItemsPage(SortBy, "searchPage"));
+            // await Shell.Current.GoToAsync(nameof(SortItemsPage));
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -264,6 +288,7 @@ namespace LookaukwatApp.ViewModels.Search
         private async Task<List<ProductForMobileViewModel>> ShowResult(int pageIndex, string sortBy)
         {
             IsRunning = true;
+            
             SearchModel UserSearchCondition = JsonConvert.DeserializeObject<SearchModel>(JsonSearchModel);
             List<ProductForMobileViewModel> list = new List<ProductForMobileViewModel>();
             switch (UserSearchCondition.SearchOrAskJob)

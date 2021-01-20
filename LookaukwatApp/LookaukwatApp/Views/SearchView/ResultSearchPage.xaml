@@ -9,6 +9,9 @@
              xmlns:local1="clr-namespace:LookaukwatApp.ViewModels.OtherServices"
              x:Name="ResultSearch">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Tri"   Command="{Binding SortPageCommand}" />
+    </ContentPage.ToolbarItems>
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior  Command="{Binding BackCommand}" 
@@ -58,7 +61,7 @@
             <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
        
         <RefreshView  Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsRefressing, Mode=TwoWay}" >
-            <ListView ItemsSource="{Binding Items}" 
+            <ListView ItemsSource="{Binding Items,Mode=TwoWay}" 
                       CachingStrategy="RecycleElement" 
                       HasUnevenRows="True"
                       SelectionMode="None"

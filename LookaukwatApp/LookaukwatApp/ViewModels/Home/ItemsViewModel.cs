@@ -124,7 +124,7 @@ namespace LookaukwatApp.ViewModels.Home
         private async void OnSortPage()
         {
             SortBy = Settings.SortItemPage;
-            await PopupNavigation.Instance.PushAsync(new SortItemsPage(SortBy));
+            await PopupNavigation.Instance.PushAsync(new SortItemsPage(SortBy, "itemsPage"));
            // await Shell.Current.GoToAsync(nameof(SortItemsPage));
         }
 

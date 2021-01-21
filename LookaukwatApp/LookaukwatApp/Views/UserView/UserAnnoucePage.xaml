@@ -8,17 +8,134 @@
     <ContentPage.BindingContext>
         <local:UserAnounceViewModel />
     </ContentPage.BindingContext>
-    <StackLayout>
+
+
+
+
+    <CollectionView ItemsSource="{Binding Items}"
+                ItemsLayout="VerticalGrid, 2"
+                     x:Name="UserAnounce">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                
+                <Frame Margin="0,0,0,10"  
+                                   HasShadow="True"
+                                   BorderColor="Blue"
+                       BackgroundColor="GhostWhite">
+
+                    <StackLayout >
+                        <Grid x:Name="Item" BackgroundColor="GhostWhite">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.ColumnSpan="2"
+                       Source="{Binding Image}"
+                       Aspect="AspectFill"
+                       HeightRequest="100"
+                       WidthRequest="100" />
+                    <Label Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                       Text="{Binding Title}"
+                       FontAttributes="Bold"
+                       LineBreakMode="TailTruncation" />
+                    
+                        <Label 
+                           Grid.Row="2"
+                           TextColor="Orange"
+                           LineBreakMode="TailTruncation"
+                       FontAttributes="Italic"
+                       VerticalOptions="Start">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Price}"></Span>
+                                    <Span Text=" FCFA"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+
+
+                        <StackLayout Orientation="Horizontal" 
+                                     Grid.Row="2"
+                                     Grid.Column="1"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Start"
+                                                     >
+                            <Image Source="eye"
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               WidthRequest="20" />
+                            <Label Text="{Binding ViewNumber}"></Label>
+                        </StackLayout>
+
+                            <Label 
+                           Grid.Row="3"
+                                Grid.ColumnSpan="2"
+                       Text="{Binding Date}"
+                       VerticalOptions="Start"
+                                       ></Label>
+
+                            <ImageButton Grid.Row="4"
+                                            
+                                             Source="trash"
+                                             BackgroundColor="Red"
+                                             Command="{Binding DeleteCommand}"
+                                             BindingContext="{Binding Source={x:Reference UserAnounce}, Path=BindingContext}"
+                                             CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                             HorizontalOptions="Start"
+                                             ></ImageButton>
+                        <ImageButton Source="pencil"
+                               Grid.Row="4"
+                               HorizontalOptions="End"
+                                     BackgroundColor="Transparent"
+                               Grid.Column="1"
+                               Aspect="AspectFit"
+                               HeightRequest="30"
+                               WidthRequest="30" 
+                               Command="{Binding EditCommand}"
+                               BindingContext="{Binding Source={x:Reference UserAnounce}, Path=BindingContext}"
+                               CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" />
+                    </Grid>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:UserAnounceViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+
+                    </StackLayout>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+
+
+
+    <!--<StackLayout>
         <StackLayout Margin="20,10,20,25">
 
-            <ListView ItemsSource="{Binding Items}" 
-                      CachingStrategy="RecycleElement" 
-                      HasUnevenRows="True"
+            <CollectionView ItemsSource="{Binding Items}" 
+                     
                       SelectionMode="None"
-                      SeparatorColor="Blue"
+                      
                       x:Name="UserAnounce">
-
-                <ListView.ItemTemplate>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"></GridItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
                             <Frame Margin="0,0,0,10"  
@@ -29,30 +146,29 @@
 
                                     <Grid x:Name="Item">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="35"></RowDefinition>
+                                            <RowDefinition Height="35"></RowDefinition>
+                                           
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="70"></ColumnDefinition>
+                                            <ColumnDefinition Width="140"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
-                                        <Image Grid.ColumnSpan="2" 
+                                        <Image Grid.RowSpan="2" 
                        Source="{Binding Image }"
                        Aspect="AspectFill"
-                       HeightRequest="100"
-                       WidthRequest="100"></Image>
+                       HeightRequest="60"
+                       WidthRequest="60"></Image>
 
-                                        <Label Grid.Row="1"
+                                        <Label Grid.Column="1"
                        Text="{Binding Title}"
                        FontAttributes="Bold"
                                        MaxLines="1"></Label>
 
+                                   
                                         <Label 
-                           Grid.Row="2"
+                                            Grid.Column="1"
+                           Grid.Row="1"
                            TextColor="Red"
                            
                            VerticalOptions="Center">
@@ -64,7 +180,7 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                        <Label 
+                                        --><!--<Label 
                            Grid.Row="3"
                        Text="{Binding Town}"
                        VerticalOptions="End"></Label>
@@ -96,7 +212,7 @@
                                              CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                              HorizontalOptions="End"
                                              VerticalOptions="Start"
-                                             ></ImageButton>
+                                             ></ImageButton>--><!--
                                     </Grid>
 
                                     <StackLayout.GestureRecognizers>
@@ -110,9 +226,9 @@
                             </Frame>
                         </ViewCell>
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                </CollectionView.ItemTemplate>
 
-            </ListView>
+            </CollectionView>
         </StackLayout>
 
         <StackLayout IsVisible="{Binding IsBusy}" Padding="12"
@@ -121,8 +237,8 @@
 
             <ActivityIndicator IsRunning="{Binding IsBusy}" Color ="#80000000"/>
 
-            <!--<Label Text="Loading..." HorizontalOptions="Center" TextColor="White"/>-->
+            --><!--<Label Text="Loading..." HorizontalOptions="Center" TextColor="White"/>--><!--
 
         </StackLayout>
-    </StackLayout>
+    </StackLayout>-->
 </ContentPage>

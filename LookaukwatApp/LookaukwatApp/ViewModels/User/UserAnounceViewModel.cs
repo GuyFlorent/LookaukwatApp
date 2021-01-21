@@ -2,12 +2,14 @@
 using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.Appartment;
+using LookaukwatApp.ViewModels.Edit;
 using LookaukwatApp.ViewModels.House;
 using LookaukwatApp.ViewModels.Job;
 using LookaukwatApp.ViewModels.Mode;
 using LookaukwatApp.ViewModels.Multimedia;
 using LookaukwatApp.ViewModels.Vehicule;
 using LookaukwatApp.Views.AppartmentView;
+using LookaukwatApp.Views.EditView;
 using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.JobView;
 using LookaukwatApp.Views.ModeView;
@@ -27,7 +29,7 @@ namespace LookaukwatApp.ViewModels.User
         ApiServices _apiServices = new ApiServices();
         public Command LoadItemsCommand { get; }
         public Command DeleteCommand { get; }
-        // public Command AddItemCommand { get; }
+        public Command EditCommand { get; }
         public Command<ProductForMobileViewModel> ItemTapped { get; }
         public ObservableCollection<ProductForMobileViewModel> Items { get; set; }
         public UserAnounceViewModel()
@@ -39,7 +41,7 @@ namespace LookaukwatApp.ViewModels.User
             DeleteCommand = new Command(async (e) =>
             {
                 var itm = e as ProductForMobileViewModel;
-                var response = await App.Current.MainPage.DisplayAlert("Notification", "Voulez vous vraiment suprimer cette annonce ?", "Oui", "Non");
+                var response = await Shell.Current.DisplayAlert("Notification", "Voulez vous vraiment suprimer cette annonce ?", "Oui", "Non");
 
                 if (response)
                 {
@@ -50,6 +52,32 @@ namespace LookaukwatApp.ViewModels.User
                         Items.Remove(itm);
                 }
             });
+
+            EditCommand = new Command(async (e) =>
+            {
+                var item = e as ProductForMobileViewModel;
+
+                //switch (item.Category)
+                //{
+                //    case "Emploi":
+                //        break;
+                //    case "Immobilier":
+                //        break;
+                //    case "Maison":
+                //        break;
+                //    case "Mode":
+                //        break;
+                //    case "Multimedia":
+                //        break;
+                //    case "Vehicule":
+                //        break;
+                //}
+
+                await Shell.Current.GoToAsync($"{nameof(EditPage)}?{nameof(EditViewModel.Id)}={item.id}&{nameof(EditViewModel.Category)}={item.Category}");
+
+
+            });
+
             DownloadDataAsync();
         }
 

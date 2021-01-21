@@ -1,7 +1,7 @@
 ﻿using LookaukwatApp.ViewModels;
 using LookaukwatApp.Views;
 using LookaukwatApp.Views.AppartmentView;
-
+using LookaukwatApp.Views.EditView;
 using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.JobView;
@@ -62,7 +62,8 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
             Routing.RegisterRoute(nameof(ResultSearchPage), typeof(ResultSearchPage));
             Routing.RegisterRoute(nameof(ContactEmailUserPage), typeof(ContactEmailUserPage));
-           // Routing.RegisterRoute(nameof(SortItemsPage), typeof(SortItemsPage));
+            Routing.RegisterRoute(nameof(EditPage), typeof(EditPage));
+            Routing.RegisterRoute(nameof(EditImagePage), typeof(EditImagePage));
         }
 
 

@@ -18,7 +18,7 @@ namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-        string Uri = "https://lookaukwatapi.azurewebsites.net/";
+        string Uri = "https://192.168.1.66:45455/";
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword)
         {
             HttpClient client;
@@ -48,6 +48,47 @@ namespace LookaukwatApp.Services
             var response = await client.PostAsync(Uri+"api/Account/Register", content);
 
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<List<ImageProcductModel>> GetImagesAsyn(string itemId)
+        {
+            var accessToken = Settings.AccessToken;
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Product/GetImages/?ProductId=" + itemId);
+
+            var mode = JsonConvert.DeserializeObject<List<ImageProcductModel>>(json);
+
+            return mode;
+        }
+
+        public async Task<bool> DeleteImageAsync(string accessToken, Guid id)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.DeleteAsync(Uri + "api/Product/DeleteImages/?ImageId=" + id);
+
+            return json.IsSuccessStatusCode;
         }
 
         public async Task<bool> DeleteProduct(string accessToken, int id)

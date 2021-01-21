@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.EditView.EditPage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Edit" 
+             Title="{Binding TitlePage}">
+    <ContentPage.BindingContext>
+        <local:EditViewModel></local:EditViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Margin="15,35,20,25">
+            <StackLayout VerticalOptions="Start">
+                <Label Text="Ajouter / Supprimer les images"
+                       TextColor="Black"
+                       FontSize="Subtitle"></Label>
+                <Button Text="Modifier les images"
+                        CornerRadius="20"
+                        Command="{Binding EditImageCommad}"></Button>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="Center">
+                <Label Text="Ajouter / Modifier les critères"
+                       TextColor="Black"
+                       FontSize="Subtitle"></Label>
+                <Button Text="Modifier les critères"
+                        CornerRadius="20"
+                        Command="{Binding EditCritereCommad}"></Button>
+            </StackLayout>
+
+            <StackLayout VerticalOptions="End">
+                <Label Text=" Modifier le titre, description, ville et quartier"
+                       TextColor="Black"
+                       FontSize="Subtitle"></Label>
+                <Button Text="Modifier"
+                        CornerRadius="20"
+                        Command="{Binding EditDescriptionTileTownCommad}"></Button>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

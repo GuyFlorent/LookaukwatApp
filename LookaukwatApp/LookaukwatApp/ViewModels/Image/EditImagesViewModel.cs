@@ -15,14 +15,21 @@ using Xamarin.Forms;
 namespace LookaukwatApp.ViewModels.Image
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class UploadImageViewModel : BaseViewModel
+    public class EditImagesViewModel : BaseViewModel
     {
         ApiServices _apiServices = new ApiServices();
         private string itemId;
         public string ItemId
         {
-            get => itemId;
-            set => SetProperty(ref itemId, value);
+            get
+            {
+                return itemId;
+            }
+            set
+            {
+                itemId = value;
+                GetProductImage(value);
+            }
         }
 
         private string message;
@@ -38,21 +45,18 @@ namespace LookaukwatApp.ViewModels.Image
         public Command AddImageGaleryCommad { get; }
         public Command AddImageTakeCommad { get; }
         public Command DeleteImageCommand { get; }
-        public Command PublishCommand { get; }
 
-
-        public Command BackCommand { get; }
-        public UploadImageViewModel()
+        public EditImagesViewModel()
         {
-            BackCommand = new Command(OnBack);
+            TitlePage = "Ajouter / supprimer les images";
             AddImageGaleryCommad = new Command(OnAddImageGalery);
             AddImageTakeCommad = new Command(OnImageTake);
-            PublishCommand = new Command(OnPublish);
             Items = new ObservableCollection<ImageProcductModel>();
             DeleteImageCommand = new Command(async (e) =>
             {
+                
                 var itm = e as ImageProcductModel;
-                var response = await Shell.Current.DisplayAlert("Alerte !!!", "Voulez vous vraiment suprimer cette image ?", "Oui", "Non");
+                var response = await Shell.Current.DisplayAlert("Notification", "Voulez vous vraiment suprimer cette image ?", "Oui", "Non");
 
                 if (response)
                 {
@@ -66,41 +70,21 @@ namespace LookaukwatApp.ViewModels.Image
                 }
             });
         }
-        private async void OnBack()
+
+       
+
+        private async void GetProductImage(string ItemId)
         {
-            var acessToken = Settings.AccessToken;
-            int id = Convert.ToInt32(ItemId);
-            var response = await Shell.Current.DisplayAlert("Alerte !!!", "Si vous retournez, votre annonce sera supprimée. Voulez vous vraiment continuer ?", "Oui", "Non");
-           
-            if (response)
-            await _apiServices.DeleteProduct(acessToken,id);
-            await Shell.Current.GoToAsync("///MainPage");
+            List<ImageProcductModel> items = await _apiServices.GetImagesAsyn(ItemId);
+
+            foreach (var prod in items)
+            {
+                Items.Add(prod);
+            }
         }
 
-        private async void OnPublish()
-        {
-            IsRunning = true;
-            var content = new MultipartFormDataContent();
 
-           
-            HttpClient client;
-
-            var httpClientHandler = new HttpClientHandler();
-
-            httpClientHandler.ServerCertificateCustomValidationCallback =
-            (message, cert, chain, errors) => { return true; };
-
-            client = new HttpClient(httpClientHandler);
-            string id = ItemId;
-
-            await client.PostAsync(Uri + "api/Product/UpdateProductImage/?id=" + id, content);
-            IsRunning = false;
-            await Shell.Current.DisplayAlert("Alerte", "Votre annonce a été publié avec succès. Merci de votre confiance", "Ok");
-
-            await Shell.Current.GoToAsync("///MainPage");
-        }
-
-        private async void OnAddImageGalery()
+        public async void OnAddImageGalery()
         {
             await CrossMedia.Current.Initialize();
             if (!CrossMedia.Current.IsPickPhotoSupported)
@@ -128,8 +112,6 @@ namespace LookaukwatApp.ViewModels.Image
                 IsBusy = false;
                 Message = "Désolé une erreur s'est produite !";
             }
-
-                
         }
 
 
@@ -189,9 +171,8 @@ namespace LookaukwatApp.ViewModels.Image
             var jwt = await httpResponseMessage.Content.ReadAsStringAsync();
             var Image = JsonConvert.DeserializeObject<ImageProcductModel>(jwt);
 
-
+           
             return Image;
         }
-
     }
 }

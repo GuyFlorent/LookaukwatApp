@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LookaukwatApp.Views.ImageView.UploadImagePage"
-             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Image" 
+             x:Class="LookaukwatApp.Views.ImageView.EditImagePage"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Image"
              xmlns:converter="clr-namespace:LookaukwatApp.Converter"
-             BackgroundColor="White"
-             Title="Ajouter des photos">
+             Title="{Binding TitlePage}">
 
     <ContentPage.BindingContext>
-        <local:UploadImageViewModel></local:UploadImageViewModel>
+        <local:EditImagesViewModel></local:EditImagesViewModel>
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
@@ -17,21 +16,16 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding BackCommand}"
-                             />
-    </Shell.BackButtonBehavior>
-
     <StackLayout>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackLayout  Orientation="Horizontal">
+            <StackLayout x:Name="FirstImage" Orientation="Horizontal">
                 <StackLayout Orientation="Horizontal">
                     <Image Source="image"
-                           HeightRequest="40"></Image>
+                           HeightRequest="30"></Image>
                     <Button Text="Choisir dans galerie"
                  CornerRadius="20"
                 TextColor="White"
@@ -51,37 +45,37 @@
                 </StackLayout>
             </StackLayout>
         </Grid>
-        
+
         <ActivityIndicator IsVisible="{Binding IsBusy}"  IsRunning="{Binding IsBusy}" Color ="#80000000"/>
-        
+
         <Label IsVisible="{Binding Message, Converter={StaticResource StringNullOrEmptyBoolConverter}}" 
                Text="{Binding Message}" TextColor="Red"></Label>
-        
+
         <CollectionView ItemsSource="{Binding Items}"
                 ItemsLayout="VerticalGrid, 2"
                      x:Name="UserImage">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
 
-                    <Frame Margin="0,0,0,10"  
+                <Frame Margin="0,0,0,10"  
                                    HasShadow="True"
                                    BorderColor="Blue"
                        BackgroundColor="GhostWhite">
 
-                        <StackLayout >
-                            <Grid x:Name="Item" BackgroundColor="GhostWhite">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-
-                                <Image 
+                    <StackLayout >
+                        <Grid x:Name="Item" BackgroundColor="GhostWhite">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <Image 
                        Source="{Binding ImageMobile}"
                        Aspect="AspectFill"
                        HeightRequest="150"
                        WidthRequest="150" />
-
-                                <ImageButton Grid.Row="1"
+                          
+                            <ImageButton Grid.Row="1"
                                             
                                          VerticalOptions="End"
                                              Source="trash"
@@ -91,10 +85,10 @@
                                              CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                              HorizontalOptions="End"
                                              ></ImageButton>
+                            
+                        </Grid>
 
-                            </Grid>
-
-                            <!--<StackLayout.GestureRecognizers>
+                        <!--<StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:UserAnounceViewModel}}, Path=ItemTapped}"		
@@ -102,21 +96,10 @@
                             </TapGestureRecognizer>
                         </StackLayout.GestureRecognizers>-->
 
-                        </StackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <StackLayout Margin="4,5,4,10">
-
-            <ActivityIndicator IsVisible="{Binding IsRunning}"  IsRunning="{Binding IsRunning}" Color ="#80000000"/>
-
-            <Button Text="Valider et publier l'annonce"
-                TextColor="White"
-                FontSize="14"
-                    CornerRadius="20"
-                Command="{Binding PublishCommand}"></Button>
-        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
     </StackLayout>
 </ContentPage>

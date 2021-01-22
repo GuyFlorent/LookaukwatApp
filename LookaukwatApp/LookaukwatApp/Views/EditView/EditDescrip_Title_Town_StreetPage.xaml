@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.EditView.EditDescrip_Title_Town_StreetPage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Edit"
+             Title="{Binding TitlePage}">
+    <ContentPage.BindingContext>
+        <local:EditDescrip_Title_Town_StreetViewModel></local:EditDescrip_Title_Town_StreetViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Margin="15,35,20,25">
+                <Label Text="Titre"
+                       TextColor="Black"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Entry Placeholder="Saisir le titre de l'annonce"
+                   Text="{Binding Title}"
+                       MaxLength="40"
+                       ClearButtonVisibility="WhileEditing"></Entry>
+                <Label Text="Description"
+                       TextColor="Black"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Editor Placeholder="Donnez une description claire du bien"
+                    Text="{Binding Description}"
+                    
+                    AutoSize="TextChanges"></Editor>
+                <Label Text="Ville"
+                       TextColor="Black"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Picker 
+                    x:Name="pickerTown" 
+                    Title="Choisir la ville"
+                    ItemsSource="{Binding TownList}"
+                    SelectedItem="{Binding Town, Mode=TwoWay}">
+                </Picker>
+                <Label Text="Quartier"
+                       TextColor="Black"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Entry Placeholder="Saisir le nom du quartier"
+                   Text="{Binding Street}"
+                   ClearButtonVisibility="WhileEditing"></Entry>
+            </StackLayout>
+
+            <StackLayout  Margin="15,15,20,15">
+                <Button Text="Modifier"
+                        CornerRadius="20"
+                        Command="{Binding EditCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

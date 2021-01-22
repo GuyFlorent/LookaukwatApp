@@ -28,8 +28,18 @@ namespace LookaukwatApp.Views
             if (response)
             {
                 Settings.AccessToken = "";
+                var username = Settings.Username;
+                var password = Settings.Password;
+                if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+                {
+                    await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
+                }
 
-                await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
+                else if (string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password))
+                {
+                    await PopupNavigation.Instance.PushAsync(new RegisterRedirectLoginUserAccountPage());
+
+                }
             }
         }
 

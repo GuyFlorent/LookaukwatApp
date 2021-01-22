@@ -15,6 +15,7 @@ namespace LookaukwatApp.Views.UserView
         public UpdateUserPasswordPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

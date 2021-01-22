@@ -1,6 +1,7 @@
 ﻿using LookaukwatApp.Helpers;
 using LookaukwatApp.ViewModels.Image;
 using LookaukwatApp.ViewModels.Job;
+using LookaukwatApp.Views.EditView;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.JobView;
 using System;
@@ -51,6 +52,7 @@ namespace LookaukwatApp.ViewModels.Edit
             TitlePage = "Modifier l'annonce";
             EditImageCommad = new Command(OnEditImage);
             EditCritereCommad = new Command(OnEditCritere);
+            EditDescriptionTileTownCommad = new Command(OnEditDescriptionTileTown);
         }
 
         public async void OnEditImage()
@@ -93,21 +95,11 @@ namespace LookaukwatApp.ViewModels.Edit
 
         private async void OnEditDescriptionTileTown()
         {
-            //switch (item.Category)
-            //{
-            //    case "Emploi":
-            //        break;
-            //    case "Immobilier":
-            //        break;
-            //    case "Maison":
-            //        break;
-            //    case "Mode":
-            //        break;
-            //    case "Multimedia":
-            //        break;
-            //    case "Vehicule":
-            //        break;
-            //}
+            if (string.IsNullOrWhiteSpace(Id))
+            {
+                Id = Settings.ItemUpDateId;
+            }
+            await Shell.Current.GoToAsync($"{nameof(EditDescrip_Title_Town_StreetPage)}?{nameof(EditDescrip_Title_Town_StreetViewModel.ItemId)}={Id}");
         }
 
 

@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace LookaukwatApp.Views.EditView
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EditPage : ContentPage
+	public partial class EditDescrip_Title_Town_StreetPage : ContentPage
 	{
-		public EditPage ()
+		public EditDescrip_Title_Town_StreetPage ()
 		{
 			InitializeComponent ();
 			Shell.SetTabBarIsVisible(this, false);

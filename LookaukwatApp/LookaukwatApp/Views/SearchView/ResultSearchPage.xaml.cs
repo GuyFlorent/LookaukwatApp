@@ -16,6 +16,7 @@ namespace LookaukwatApp.Views.SearchView
         public ResultSearchPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
             BindingContext = new ResultSearchViewModel();
         }
     }

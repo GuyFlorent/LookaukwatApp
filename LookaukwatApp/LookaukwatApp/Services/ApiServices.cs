@@ -72,6 +72,72 @@ namespace LookaukwatApp.Services
             return mode;
         }
 
+        public async Task EditProductWithSamePropertieAsync(string accessToken, string itemId, string title, string description, string town, string street)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            //get lat and lon
+            var address = $"{street + " " + town + " " + "Cameroun"}";
+            var locations = await Geocoding.GetLocationsAsync(address);
+            var location = locations?.FirstOrDefault();
+            ProductCoordinateModel coor = new ProductCoordinateModel() { };
+            if (location != null)
+            {
+
+                coor.Lat = location.Latitude.ToString();
+                coor.Lon = location.Longitude.ToString();
+
+            }
+
+            var model = new ProductModel()
+            {
+                id = Convert.ToInt32(itemId),
+                Title = title,
+                Description = description,
+                Town = town,
+                Street = street,
+                Coordinate = coor
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+            var response = await client.PutAsync(Uri + "api/Product/?id=" + itemId, content);
+
+            Debug.WriteLine(response);
+        }
+
+        public async Task<ProductModel> GetProductSameParamAsync(int id)
+        {
+
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Product/GetProductWithSameParm/?id=" + id);
+
+            var prod = JsonConvert.DeserializeObject<ProductModel>(json);
+
+            return prod;
+        }
+
         public async Task<JobModelViewModel> GetUniqueJobCritereAsync(int id)
         {
             HttpClient client;

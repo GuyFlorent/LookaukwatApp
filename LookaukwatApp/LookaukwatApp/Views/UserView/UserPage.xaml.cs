@@ -15,6 +15,7 @@ namespace LookaukwatApp.Views.UserView
         public UserPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

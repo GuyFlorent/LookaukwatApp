@@ -33,6 +33,30 @@ namespace LookaukwatApp.Helpers
             }
         }
 
+        public static string ItemUpDateId
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("ItemUpDateId", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("ItemUpDateId", value);
+            }
+        }
+
+        public static string CategoryUpDateId
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("CategoryUpDateId", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("CategoryUpDateId", value);
+            }
+        }
+
         public static string SortItemPage
         {
             get

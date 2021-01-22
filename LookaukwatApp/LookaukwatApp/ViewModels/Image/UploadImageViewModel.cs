@@ -32,7 +32,7 @@ namespace LookaukwatApp.ViewModels.Image
             set => SetProperty(ref message, value);
         }
 
-        string Uri = "https://192.168.1.66:45455/";
+        string Uri = "https://lookaukwatapi.azurewebsites.net/";
         private MediaFile _mediaFile;
         public ObservableCollection<ImageProcductModel> Items { get; set; }
         public Command AddImageGaleryCommad { get; }

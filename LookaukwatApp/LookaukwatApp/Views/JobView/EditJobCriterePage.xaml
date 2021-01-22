@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.JobView.EditJobCriterePage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Job"
+             Title="{Binding TitlePage}">
+
+    <ContentPage.BindingContext>
+        <local:JobEditCritereViewModel></local:JobEditCritereViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+        <StackLayout Margin="15,35,20,25">
+            <Label Text="J'offre ou je recherche?"
+                       TextColor="Black"
+                            FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+
+            <Picker 
+                    x:Name="pickerSearcheOrAsk" 
+                    Title="Choisir entre J'offre ou je recherche"
+                    ItemsSource="{Binding SearchOrSaskList}"
+                    SelectedItem="{Binding SearchOrAskJob, Mode=TwoWay}">
+            </Picker>
+            <Label Text="Secteur d'activité"
+                       TextColor="Black"
+                            FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+            <Picker 
+                    x:Name="pickerActivitySectork" 
+                    Title="Choisir le secteur d'activité"
+                    ItemsSource="{Binding ActivitysectorList}"
+                    SelectedItem="{Binding ActivitySector, Mode=TwoWay}">
+            </Picker>
+            <Label Text="Type de contrat"
+                       TextColor="Black"
+                            FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+            <Picker 
+                    x:Name="pickerTypeContract" 
+                    Title="Choisir le type de contrat"
+                    ItemsSource="{Binding ContractList}"
+                    SelectedItem="{Binding TypeContract, Mode=TwoWay}">
+            </Picker>
+            <Label Text="Salaire (FCFA)"
+                       TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+            <Entry Placeholder="Saisir le salaire en entier ou juste zéro (0)"
+                   Text="{Binding Price}"
+                       Keyboard="Numeric"></Entry>
+        </StackLayout>
+
+            <StackLayout  Margin="15,15,20,15">
+                <Button Text="Modifier"
+                        CornerRadius="20"
+                        Command="{Binding EditCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

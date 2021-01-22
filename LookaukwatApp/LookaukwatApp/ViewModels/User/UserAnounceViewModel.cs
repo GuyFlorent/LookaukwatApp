@@ -57,22 +57,6 @@ namespace LookaukwatApp.ViewModels.User
             {
                 var item = e as ProductForMobileViewModel;
 
-                //switch (item.Category)
-                //{
-                //    case "Emploi":
-                //        break;
-                //    case "Immobilier":
-                //        break;
-                //    case "Maison":
-                //        break;
-                //    case "Mode":
-                //        break;
-                //    case "Multimedia":
-                //        break;
-                //    case "Vehicule":
-                //        break;
-                //}
-
                 await Shell.Current.GoToAsync($"{nameof(EditPage)}?{nameof(EditViewModel.Id)}={item.id}&{nameof(EditViewModel.Category)}={item.Category}");
 
 

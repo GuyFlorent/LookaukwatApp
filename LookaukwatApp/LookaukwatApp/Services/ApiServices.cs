@@ -18,7 +18,7 @@ namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-        string Uri = "https://192.168.1.66:45455/";
+        string Uri = "https://10.1.2.48:45455/";
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword)
         {
             HttpClient client;
@@ -70,6 +70,59 @@ namespace LookaukwatApp.Services
             var mode = JsonConvert.DeserializeObject<List<ImageProcductModel>>(json);
 
             return mode;
+        }
+
+        public async Task<JobModelViewModel> GetUniqueJobCritereAsync(int id)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/JobModels/GetJobCritere/?id=" + id);
+
+            var Job = JsonConvert.DeserializeObject<JobModelViewModel>(json);
+
+            return Job;
+        }
+
+        public async Task EditJobCritereAsync(string itemId, int price, string searchOrAskJob, string typeContract, string activitySector, string accessToken)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+            
+            var model = new JobModel()
+            {
+               id = Convert.ToInt32(itemId),
+                Price = price,
+                SearchOrAskJob = searchOrAskJob,
+                TypeContract = typeContract,
+                ActivitySector = activitySector,
+              
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+            var response = await client.PutAsync(Uri + "api/JobModels/?id="+itemId, content);
+
+            Debug.WriteLine(response);
+            
         }
 
         public async Task<bool> DeleteImageAsync(string accessToken, Guid id)

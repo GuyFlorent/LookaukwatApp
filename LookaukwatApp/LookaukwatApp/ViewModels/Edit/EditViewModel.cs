@@ -1,7 +1,11 @@
 ﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.ViewModels.Appartment;
+using LookaukwatApp.ViewModels.House;
 using LookaukwatApp.ViewModels.Image;
 using LookaukwatApp.ViewModels.Job;
+using LookaukwatApp.Views.AppartmentView;
 using LookaukwatApp.Views.EditView;
+using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.JobView;
 using System;
@@ -75,22 +79,40 @@ namespace LookaukwatApp.ViewModels.Edit
             {
                 Category = Settings.CategoryUpDateId;
             }
-            switch (Category)
+            try
             {
-                case "Emploi":
-                    await Shell.Current.GoToAsync($"{nameof(EditJobCriterePage)}?{nameof(JobEditCritereViewModel.ItemId)}={Id}");
-                    break;
-                case "Immobilier":
-                    break;
-                case "Maison":
-                    break;
-                case "Mode":
-                    break;
-                case "Multimedia":
-                    break;
-                case "Vehicule":
-                    break;
+                switch (Category)
+                {
+                    case "Emploi":
+                        await Shell.Current.GoToAsync($"{nameof(EditJobCriterePage)}?{nameof(JobEditCritereViewModel.ItemId)}={Id}");
+                        break;
+                    case "Immobilier":
+
+                        await Shell.Current.GoToAsync($"{nameof(ApartEditCriterePage)}?{nameof(ApartEditCritereViewModel.ItemId)}={Id}");
+
+                        break;
+                    case "Maison":
+                         await Shell.Current.GoToAsync($"{nameof(HouseEditCriterePage)}?{nameof(HouseEditCritereViewModel.ItemId)}={Id}");
+
+                        break;
+                    case "Mode":
+                        // await Shell.Current.GoToAsync($"{nameof(ApartEditCriterePage)}?{nameof(ApartEditCritereViewModel.ItemId)}={Id}");
+
+                        break;
+                    case "Multimedia":
+                        // await Shell.Current.GoToAsync($"{nameof(ApartEditCriterePage)}?{nameof(ApartEditCritereViewModel.ItemId)}={Id}");
+
+                        break;
+                    case "Vehicule":
+                        //  await Shell.Current.GoToAsync($"{nameof(ApartEditCriterePage)}?{nameof(ApartEditCritereViewModel.ItemId)}={Id}");
+
+                        break;
+                }
+            } catch(Exception ex)
+            {
+                Console.WriteLine(ex);
             }
+            
         }
 
         private async void OnEditDescriptionTileTown()

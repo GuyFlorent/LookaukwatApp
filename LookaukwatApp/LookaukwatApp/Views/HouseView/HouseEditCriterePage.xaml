@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.HouseView.HouseEditCriterePage"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.House" 
+             xmlns:converter="clr-namespace:LookaukwatApp.Converter"
+             Title="{Binding TitlePage}">
+
+    <ContentPage.BindingContext>
+        <local:HouseEditCritereViewModel></local:HouseEditCritereViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:HouseCheckingForm x:Key="HouseCheckingForm"></converter:HouseCheckingForm>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+            <StackLayout Margin="15,35,20,25">
+                <Label Text="J'offre ou je recherche?"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Picker 
+                     
+                    Title="Choisir entre J'offre ou je recherche"
+                    ItemsSource="{Binding SearchOrSaskList}"
+                    SelectedItem="{Binding SearchOrAskJob, Mode=TwoWay}">
+                </Picker>
+                <Label Text="Rubrique"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Picker 
+                    
+                    Title="Choisir une rubrique"
+                    ItemsSource="{Binding RubriqueList}"
+                    SelectedItem="{Binding Rubrique, Mode=TwoWay}">
+                </Picker>
+                <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource HouseCheckingForm}}">
+                    <Label Text="type"
+                   TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                    <Picker 
+                    
+                    Title="choisir un type"
+                    ItemsSource="{Binding Types}"
+                    SelectedItem="{Binding Type, Mode=TwoWay}">
+                    </Picker>
+
+                    <Label Text="Matériel de fabrication"
+                       TextColor="Black"
+                        FontSize="Subtitle"
+                       FontAttributes="Bold">
+                    </Label>
+                    <Picker 
+                    
+                    Title="choisir un matériel"
+                    ItemsSource="{Binding FabricMaterials}"
+                    SelectedItem="{Binding FabricMaterial, Mode=TwoWay}">
+                    </Picker>
+                </StackLayout>
+
+
+                <Label Text="Couleur"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                </Label>
+                <Picker 
+                    
+                    Title="choisir la couleur"
+                    ItemsSource="{Binding ColorList}"
+                    SelectedItem="{Binding Color, Mode=TwoWay}">
+                </Picker>
+
+                <Label Text="L'état de l'article"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                </Label>
+                <Picker 
+                    
+                    Title="choisir l'état de l'article"
+                    ItemsSource="{Binding StateList}"
+                    SelectedItem="{Binding State, Mode=TwoWay}">
+                </Picker>
+
+                <Label Text="Prix (FCFA)"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                </Label>
+                <Entry Placeholder="2"
+                   Text="{Binding Price}"
+                       Keyboard="Numeric"></Entry>
+            </StackLayout>
+            </ScrollView>
+            <StackLayout  Margin="15,15,20,15">
+                <Button Text="Modifier"
+                        CornerRadius="20"
+                        Command="{Binding EditCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

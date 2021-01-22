@@ -2,6 +2,7 @@
 using LookaukwatApp.Models;
 using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.ViewModels;
+using LookaukwatApp.ViewModels.Appartment;
 using LookaukwatApp.ViewModels.Message;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -72,6 +73,60 @@ namespace LookaukwatApp.Services
             return mode;
         }
 
+        public async Task EditApartCritereAsync(string itemId, int price, string searchOrAsk, string type, int roomNumber, string furnitureOrNot, int apartSurface, string accessToken)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            var model = new ApartModelViewModel()
+            {
+                id = Convert.ToInt32(itemId),
+                Price = price,
+                SearchOrAsk = searchOrAsk,
+                Type = type,
+                RoomNumber = roomNumber,
+                FurnitureOrNot = furnitureOrNot,
+                ApartSurface = apartSurface
+               
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+            var response = await client.PutAsync(Uri + "api/Apartment/?id=" + itemId, content);
+
+            Debug.WriteLine(response);
+        }
+
+        public async Task<ApartModelViewModel> GetUniqueApartCritereAsync(int id)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Apartment/GetApartCritere/?id=" + id);
+
+            var apart = JsonConvert.DeserializeObject<ApartModelViewModel>(json);
+
+            return apart;
+        }
+
         public async Task EditProductWithSamePropertieAsync(string accessToken, string itemId, string title, string description, string town, string street)
         {
             HttpClient client;
@@ -136,6 +191,61 @@ namespace LookaukwatApp.Services
             var prod = JsonConvert.DeserializeObject<ProductModel>(json);
 
             return prod;
+        }
+
+        public async Task EditHouseCritereAsync(string itemId, int price, string searchOrAskJob, string rubrique, string fabricMaterial, string type, string color, string state, string accessToken)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            var model = new HouseModel()
+            {
+                id = Convert.ToInt32(itemId),
+                Price = price,
+                SearchOrAskJob = searchOrAskJob,
+                RubriqueHouse = rubrique,
+                TypeHouse = type,
+                ColorHouse = color,
+                StateHouse = state,
+                FabricMaterialeHouse = fabricMaterial,
+
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+            var response = await client.PutAsync(Uri + "api/House/?id=" + itemId, content);
+
+            Debug.WriteLine(response);
+        }
+
+        public async Task<HouseModelViewModel> GetUniqueHouseCritereAsync(int id)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/House/GetHouseCritere/?id=" + id);
+
+            var house = JsonConvert.DeserializeObject<HouseModelViewModel>(json);
+
+            return house;
         }
 
         public async Task<JobModelViewModel> GetUniqueJobCritereAsync(int id)

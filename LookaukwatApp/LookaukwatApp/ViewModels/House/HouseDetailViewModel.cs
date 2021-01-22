@@ -215,6 +215,7 @@ namespace LookaukwatApp.ViewModels.House
                 Price = item.Price;
                 Price = item.Price;
                 Town = item.Town;
+                Street = item.Street;
                 Lat = item.Lat;
                 Lon = item.Lon;
                 //for House model

@@ -1,18 +1,34 @@
-﻿using LookaukwatApp.Models;
+﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.StaticList;
 using LookaukwatApp.Views.ModeView;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
-using System.Web;
 using Xamarin.Forms;
-
 namespace LookaukwatApp.ViewModels.Mode
 {
-    public class ModeViewModel : BaseViewModel
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    public class ModeEditCritereViewModel : BaseViewModel
     {
+        ApiServices _apiServices = new ApiServices();
+
+        private string itemId;
+        public string ItemId
+        {
+            get
+            {
+                return itemId;
+            }
+            set
+            {
+                itemId = value;
+                LoadItemId(value);
+            }
+        }
+
         ObservableCollection<string> types = new ObservableCollection<string>();
         public ObservableCollection<string> Types { get => types; set => SetProperty(ref types, value); }
 
@@ -196,17 +212,9 @@ namespace LookaukwatApp.ViewModels.Mode
         }
 
 
-        private bool Validate()
+        public ModeEditCritereViewModel()
         {
-            return !String.IsNullOrWhiteSpace(SearchOrAskJob)
-                && !String.IsNullOrWhiteSpace(Rubrique);
-               
-        }
-        public ModeViewModel()
-        {
-            NextModeCommad = new Command(OnNextApart, Validate);
-            this.PropertyChanged +=
-              (_, __) => NextModeCommad.ChangeCanExecute();
+            EditCommad = new Command(OnEdit);
             //TitlePage = "Titre,description, ville, quartier...";
             TypeAccesorieLugagesList = StaticListModeViewModel.GetTypeAccesorieLugagesList;
             TypeBabyClothesList = StaticListModeViewModel.GetTypeBabyClothesList;
@@ -226,31 +234,44 @@ namespace LookaukwatApp.ViewModels.Mode
         }
 
 
-        public Command NextModeCommad { get; }
+        public Command EditCommad { get; }
 
-
-        async void OnNextApart()
+        public async void OnEdit()
         {
-            ModeModel model = new ModeModel
-            {
-                Price = Price,
-                SearchOrAskJob = SearchOrAskJob,
-                RubriqueMode = Rubrique,
-                BrandMode = Brand,
-                TypeMode = Type,
-                ColorMode = Color,
-                SizeMode = Size,
-                StateMode = State,
-                UniversMode = Univers,
-               
-            };
-
-            string json = JsonConvert.SerializeObject(model);
-           string data = HttpUtility.UrlEncode(json);
-            //  await Shell.Current.GoToAsync($"{nameof(ModeAddPage)}?{nameof(ModeEndViewModel.Price)}={Price}&{nameof(ModeEndViewModel.Rubrique)}={Rubrique}&{nameof(ModeEndViewModel.Type)}={Type}&{nameof(ModeEndViewModel.Size)}={Size}&{nameof(ModeEndViewModel.Color)}={Color}&{nameof(ModeEndViewModel.SearchOrAskJob)}={SearchOrAskJob}&{nameof(ModeEndViewModel.Univers)}={Univers}&{nameof(ModeEndViewModel.Brand)}={Brand}&{nameof(ModeEndViewModel.State)}={State}");
-            await Shell.Current.GoToAsync($"{nameof(ModeAddPage)}?{nameof(ModeEndViewModel.Json)}={data}");
+            var accessToken = Settings.AccessToken;
+            await _apiServices.EditModeCritereAsync(ItemId, Price, SearchOrAskJob, Rubrique, Brand, Type,Univers,Size, Color, State, accessToken);
+            await Shell.Current.DisplayAlert("Information", "Modifier avec succès", "Ok");
+            await Shell.Current.GoToAsync("..");
 
         }
 
+        public async void LoadItemId(string itemId)
+        {
+            IsRunning = true;
+            try
+            {
+                var id = Convert.ToInt32(itemId);
+                var item = await _apiServices.GetUniqueModeCritereAsync(id);
+               
+                SearchOrAskJob = item.SearchOrAsk;
+                Price = item.Price;
+                
+                //for mode model
+                Rubrique = item.Rubrique;
+                Brand = item.Brand;
+                Type = item.Type;
+                Univers = item.Univers;
+                Size = item.Size;
+                Color = item.Color;
+                State = item.State;
+
+                IsRunning = false;
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Failed to Load Item");
+            }
+
+        }
     }
 }

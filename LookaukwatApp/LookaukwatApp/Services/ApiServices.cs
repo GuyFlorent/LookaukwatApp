@@ -13,13 +13,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Xamarin.Essentials;
 
 namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-        string Uri = "https://10.1.2.48:45455/";
+        string Uri = "https://lookaukwatapi.azurewebsites.net/";
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword)
         {
             HttpClient client;
@@ -225,6 +226,63 @@ namespace LookaukwatApp.Services
             var response = await client.PutAsync(Uri + "api/House/?id=" + itemId, content);
 
             Debug.WriteLine(response);
+        }
+
+        public async Task EditModeCritereAsync(string itemId, int price, string searchOrAskJob, string rubrique, string brand, string type, string univers, string size, string color, string state, string accessToken)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            var model = new ModeModelViewModel()
+            {
+                id = Convert.ToInt32(itemId),
+                Price = price,
+                SearchOrAsk = searchOrAskJob,
+                Rubrique = rubrique,
+                Brand = brand,
+                Type = type,
+                Univers = univers,
+                Color = color,
+                State = state,
+               Size = size
+
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+            var response = await client.PutAsync(Uri + "api/Mode/?id=" + itemId, content);
+
+            Debug.WriteLine(response);
+        }
+
+        public async Task<ModeModelViewModel> GetUniqueModeCritereAsync(int id)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Mode/GetModeCritere/?id=" + id);
+
+            var house = JsonConvert.DeserializeObject<ModeModelViewModel>(json);
+
+            return house;
         }
 
         public async Task<HouseModelViewModel> GetUniqueHouseCritereAsync(int id)
@@ -1249,6 +1307,8 @@ namespace LookaukwatApp.Services
 
             // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
 
+            rubriqueMode = HttpUtility.UrlEncode(rubriqueMode);
+            brandMode = HttpUtility.UrlEncode(brandMode);
             var json = await client.GetStringAsync(Uri + "api/Mode/GetOfferModeSearchNumber/?categori=" + categori + "&town=" + town + "&searchOrAskJob=" + searchOrAskJob +  "&price=" + price + "&rubriqueMode=" + rubriqueMode + "&typeMode=" + typeMode + "&brandMode=" + brandMode + "&universMode=" + universMode + "&sizeMode=" + sizeMode + "&state=" + state + "&colorMode=" + colorMode);
 
             int result = JsonConvert.DeserializeObject<int>(json);

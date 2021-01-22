@@ -68,6 +68,7 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(EditDescrip_Title_Town_StreetPage), typeof(EditDescrip_Title_Town_StreetPage));
             Routing.RegisterRoute(nameof(ApartEditCriterePage), typeof(ApartEditCriterePage));
             Routing.RegisterRoute(nameof(HouseEditCriterePage), typeof(HouseEditCriterePage));
+            Routing.RegisterRoute(nameof(ModeEditCriterePage), typeof(ModeEditCriterePage));
         }
 
 

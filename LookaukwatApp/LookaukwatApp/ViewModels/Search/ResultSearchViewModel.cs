@@ -23,6 +23,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Xamarin.Forms;
 using Xamarin.Forms.Extended;
 
@@ -287,8 +288,8 @@ namespace LookaukwatApp.ViewModels.Search
         private async Task<List<ProductForMobileViewModel>> ShowResult(int pageIndex, string sortBy)
         {
             IsRunning = true;
-            
-            SearchModel UserSearchCondition = JsonConvert.DeserializeObject<SearchModel>(JsonSearchModel);
+            string data = HttpUtility.UrlDecode(JsonSearchModel);
+            SearchModel UserSearchCondition = JsonConvert.DeserializeObject<SearchModel>(data);
             List<ProductForMobileViewModel> list = new List<ProductForMobileViewModel>();
             switch (UserSearchCondition.SearchOrAskJob)
             {
@@ -322,7 +323,7 @@ namespace LookaukwatApp.ViewModels.Search
                             list = resultHouse;
                             break;
                         case "Mode":
-
+                            
                             var resultMode = await _apiServices.GetResultOfferSeachModeAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                             Items.AddRange(resultMode);
                             list = resultMode;
@@ -358,7 +359,8 @@ namespace LookaukwatApp.ViewModels.Search
         private async Task<List<ProductForMobileViewModel>> ShowResultInfiniteDScroll(string json,int pageIndex, string sortBy)
         {
             IsRunning = true;
-            SearchModel UserSearchCondition = JsonConvert.DeserializeObject<SearchModel>(json);
+            string data = HttpUtility.UrlEncode(JsonSearchModel);
+            SearchModel UserSearchCondition = JsonConvert.DeserializeObject<SearchModel>(data);
             List<ProductForMobileViewModel> list = new List<ProductForMobileViewModel>();
             switch (UserSearchCondition.SearchOrAskJob)
             {

@@ -19,25 +19,38 @@
                FontSize="Small"></Label>
 
                     <Label Text="Titre"
-                       TextColor="Black"></Label>
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"
+                           ></Label>
+                    
                     <Entry Placeholder="Saisir le titre de l'annonce"
                    Text="{Binding Title}"></Entry>
                     <Label Text="Description"
-                       TextColor="Black"></Label>
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                    
                     <Editor Placeholder="Donnez une description assez claire du bien immobilier et le lieu excacte"
                     Text="{Binding Description}"
                     
                     AutoSize="TextChanges"></Editor>
                     <Label Text="Ville"
-                       TextColor="Black"></Label>
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
                     <Picker 
                     x:Name="pickerTown" 
                     Title="Choisir la ville"
                     ItemsSource="{Binding TownList}"
                     SelectedItem="{Binding Town, Mode=TwoWay}">
                     </Picker>
+                    
                     <Label Text="Quartier"
-                       TextColor="Black"></Label>
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                    
                     <Entry Placeholder="Saisir le nom du quartier"
                    Text="{Binding Street}"></Entry>
 

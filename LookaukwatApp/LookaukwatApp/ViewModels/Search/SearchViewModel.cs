@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Web;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Search
@@ -1592,8 +1593,8 @@ namespace LookaukwatApp.ViewModels.Search
                             };
 
                             JsonSearchModel = JsonConvert.SerializeObject(searchModelMode);
-
-                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
+                            string data = HttpUtility.UrlEncode(JsonSearchModel);
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={data}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
 
 
                             break;

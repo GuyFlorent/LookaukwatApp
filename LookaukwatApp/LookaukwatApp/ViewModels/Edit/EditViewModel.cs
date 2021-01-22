@@ -3,11 +3,13 @@ using LookaukwatApp.ViewModels.Appartment;
 using LookaukwatApp.ViewModels.House;
 using LookaukwatApp.ViewModels.Image;
 using LookaukwatApp.ViewModels.Job;
+using LookaukwatApp.ViewModels.Mode;
 using LookaukwatApp.Views.AppartmentView;
 using LookaukwatApp.Views.EditView;
 using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.JobView;
+using LookaukwatApp.Views.ModeView;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -96,7 +98,7 @@ namespace LookaukwatApp.ViewModels.Edit
 
                         break;
                     case "Mode":
-                        // await Shell.Current.GoToAsync($"{nameof(ApartEditCriterePage)}?{nameof(ApartEditCritereViewModel.ItemId)}={Id}");
+                         await Shell.Current.GoToAsync($"{nameof(ModeEditCriterePage)}?{nameof(ModeEditCritereViewModel.ItemId)}={Id}");
 
                         break;
                     case "Multimedia":

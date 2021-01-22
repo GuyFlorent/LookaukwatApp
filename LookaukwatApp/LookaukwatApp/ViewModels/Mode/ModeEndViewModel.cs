@@ -1,24 +1,28 @@
 ﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.Models;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.Image;
 using LookaukwatApp.ViewModels.StaticList;
 using LookaukwatApp.Views.ImageView;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Mode
 {
-    [QueryProperty(nameof(Price), nameof(Price))]
-    [QueryProperty(nameof(Type), nameof(Type))]
-    [QueryProperty(nameof(Rubrique), nameof(Rubrique))]
-    [QueryProperty(nameof(Brand), nameof(Brand))]
-    [QueryProperty(nameof(SearchOrAskJob), nameof(SearchOrAskJob))]
-    [QueryProperty(nameof(Univers), nameof(Univers))]
-    [QueryProperty(nameof(Size), nameof(Size))]
-    [QueryProperty(nameof(State), nameof(State))]
-    [QueryProperty(nameof(Color), nameof(Color))]
+    //[QueryProperty(nameof(Price), nameof(Price))]
+    //[QueryProperty(nameof(Type), nameof(Type))]
+    //[QueryProperty(nameof(Rubrique), nameof(Rubrique))]
+    //[QueryProperty(nameof(Brand), nameof(Brand))]
+    //[QueryProperty(nameof(SearchOrAskJob), nameof(SearchOrAskJob))]
+    //[QueryProperty(nameof(Univers), nameof(Univers))]
+    //[QueryProperty(nameof(Size), nameof(Size))]
+    //[QueryProperty(nameof(State), nameof(State))]
+    //[QueryProperty(nameof(Color), nameof(Color))]
+    [QueryProperty(nameof(Json), nameof(Json))]
     public class ModeEndViewModel : BaseViewModel
     {
         ApiServices _apiServices = new ApiServices();
@@ -60,6 +64,20 @@ namespace LookaukwatApp.ViewModels.Mode
             get => price;
             set => SetProperty(ref price, value);
         }
+
+        private string json;
+        public string Json
+        {
+            get => json;
+            set
+            { 
+                SetProperty(ref json, value);
+
+                UpdateParam();
+            }
+        }
+
+
         private string searchOrAskJob;
         public string SearchOrAskJob
         {
@@ -82,7 +100,7 @@ namespace LookaukwatApp.ViewModels.Mode
             set
             {
                 SetProperty(ref rubrique, Uri.UnescapeDataString(value));
-
+               
             }
 
         }
@@ -156,6 +174,29 @@ namespace LookaukwatApp.ViewModels.Mode
                 Id = ProductId;
                 await Shell.Current.GoToAsync($"{nameof(UploadImagePage)}?{nameof(UploadImageViewModel.ItemId)}={ProductId}");
 
+            }
+        }
+
+
+        private  void UpdateParam()
+        {
+            try
+            {
+               var data = HttpUtility.UrlDecode(Json);
+
+                var model = JsonConvert.DeserializeObject<ModeModel>(data);
+            Price = model.Price.ToString();
+            SearchOrAskJob = model.SearchOrAskJob;
+            Rubrique = model.RubriqueMode;
+            Brand = model.BrandMode;
+            Type = model.TypeMode;
+            Color = model.ColorMode;
+            Size = model.SizeMode;
+            State = State;
+            Univers = Univers;
+            } catch(Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
     }

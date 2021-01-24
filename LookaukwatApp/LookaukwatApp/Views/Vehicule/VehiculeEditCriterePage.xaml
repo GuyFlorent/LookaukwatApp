@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.Vehicule.VehiculeEditCriterePage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Vehicule" 
+             xmlns:converter="clr-namespace:LookaukwatApp.Converter"
+             Title="{Binding TitlePage}">
+
+    <ContentPage.BindingContext>
+        <local:VehiculeEditCritereViewModel></local:VehiculeEditCritereViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:VehiculeModelAutoCheckingForm x:Key="VehiculeModelAutoCheckingForm"></converter:VehiculeModelAutoCheckingForm>
+            <converter:VehiculeModelMotoAccessoryChecking x:Key="VehiculeModelMotoAccessoryChecking"></converter:VehiculeModelMotoAccessoryChecking>
+            <converter:VehiculeAutoMotoCheckingForm x:Key="VehiculeAutoMotoCheckingForm"></converter:VehiculeAutoMotoCheckingForm>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Orientation="Vertical"
+                     Margin="15,35,20,25">
+                    <Label Text="J'offre ou je recherche?"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+
+                    <Picker 
+                     
+                    Title="Choisir entre J'offre ou je recherche"
+                    ItemsSource="{Binding SearchOrSaskList}"
+                    SelectedItem="{Binding SearchOrAskJob, Mode=TwoWay}">
+                    </Picker>
+                    <Label Text="Rubrique"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                    <Picker 
+                    
+                    Title="Choisir une rubrique"
+                    ItemsSource="{Binding RubriqueVehiculeList}"
+                    SelectedItem="{Binding Rubrique, Mode=TwoWay}">
+                    </Picker>
+
+                    <Label Text="Marque"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                    </Label>
+                    <Picker 
+                    
+                    Title="choisir une marque"
+                    ItemsSource="{Binding Brands}"
+                    SelectedItem="{Binding Brand, Mode=TwoWay}">
+                    </Picker>
+                    <!--only for moto accessory moto and auto-->
+                    <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource VehiculeModelMotoAccessoryChecking}}">
+
+                        <Label Text="Modèle"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                        </Label>
+                        <Entry Placeholder="Ex : Nanfang moto 2015, moteur, Pneu..."
+                   Text="{Binding Model}"
+                       Keyboard="Text"></Entry>
+                    </StackLayout>
+                    <!--only for auto and rent auto-->
+
+                    <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
+                        <Label Text="Modèle"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                        </Label>
+                        <Picker 
+                    
+                    Title="choisir un model"
+                    ItemsSource="{Binding Models}"
+                    SelectedItem="{Binding Model, Mode=TwoWay}">
+                        </Picker>
+                    </StackLayout>
+
+                    <Label Text="L'état"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                    </Label>
+                    <Picker 
+                    
+                    Title="choisir la l'état de votre bien"
+                    ItemsSource="{Binding StateVehiculeList}"
+                    SelectedItem="{Binding State, Mode=TwoWay}">
+                    </Picker>
+                    <!--only for auto-->
+                    <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
+                        <Label Text="type"
+                   TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                        <Picker 
+                    
+                    Title="choisir le type de voiture"
+                    ItemsSource="{Binding TypeVehiculeAutoList}"
+                    SelectedItem="{Binding Type, Mode=TwoWay}">
+                        </Picker>
+                    </StackLayout>
+                    <!--only for auto and moto bike not accessory-->
+                    <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource VehiculeAutoMotoCheckingForm}}">
+                        <Label Text="Carburant"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                        </Label>
+                        <Picker 
+                    
+                    Title="choisir le type de carburant"
+                    ItemsSource="{Binding PetrolVehiculeList}"
+                    SelectedItem="{Binding Petrol, Mode=TwoWay}">
+                        </Picker>
+
+                        <Label Text="Année"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                        </Label>
+                        <Entry Placeholder="1998"
+                   Text="{Binding Year}"
+                       Keyboard="Numeric"></Entry>
+                        
+                        <Label Text="Première mise en circulation"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                        </Label>
+                        <Entry Placeholder="11/1998"
+                   Text="{Binding FirstYear}"
+                       Keyboard="Default"></Entry>
+
+                        <Label Text="Kilométrage (km)"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                        </Label>
+                        <Entry Placeholder="156486"
+                   Text="{Binding Mileage}"
+                       Keyboard="Numeric"></Entry>
+                    </StackLayout>
+                    <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
+                        <Label Text="Nombre de portes"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                        </Label>
+                        <Picker 
+                    
+                    Title="choisir le nombre de portes de la voitures"
+                    ItemsSource="{Binding NumberOfDoorVehiculeList}"
+                    SelectedItem="{Binding NumberOfDoor, Mode=TwoWay}">
+                        </Picker>
+                    </StackLayout >
+                    <Label Text="Couleur"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                    </Label>
+                    <Picker 
+                    
+                    Title="choisir la couleur"
+                    ItemsSource="{Binding ColorVehiculeList}"
+                    SelectedItem="{Binding Color, Mode=TwoWay}">
+                    </Picker>
+
+                    <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
+                        <Label Text="Transmission"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                        </Label>
+                        <Picker 
+                    
+                    Title="choisir le type de boîte de vitesse"
+                    ItemsSource="{Binding GearBoxVehiculeList}"
+                    SelectedItem="{Binding GearBox, Mode=TwoWay}">
+                        </Picker>
+                    </StackLayout>
+                    <Label Text="Prix (FCFA)"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                    </Label>
+                    <Entry Placeholder="2"
+                   Text="{Binding Price}"
+                       Keyboard="Numeric"></Entry>
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout  Margin="15,15,20,15">
+                <Button Text="Modifier"
+                        CornerRadius="20"
+                        Command="{Binding EditCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

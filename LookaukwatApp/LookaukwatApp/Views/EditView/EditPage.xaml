@@ -13,7 +13,8 @@
             <StackLayout VerticalOptions="Start">
                 <Label Text="Ajouter / Supprimer les images"
                        TextColor="Black"
-                       FontSize="Subtitle"></Label>
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
                 <Button Text="Modifier les images"
                         CornerRadius="20"
                         Command="{Binding EditImageCommad}"></Button>
@@ -22,7 +23,8 @@
             <StackLayout VerticalOptions="Center">
                 <Label Text="Ajouter / Modifier les critères"
                        TextColor="Black"
-                       FontSize="Subtitle"></Label>
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
                 <Button Text="Modifier les critères"
                         CornerRadius="20"
                         Command="{Binding EditCritereCommad}"></Button>
@@ -31,7 +33,8 @@
             <StackLayout VerticalOptions="End">
                 <Label Text=" Modifier le titre, description, ville et quartier"
                        TextColor="Black"
-                       FontSize="Subtitle"></Label>
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
                 <Button Text="Modifier"
                         CornerRadius="20"
                         Command="{Binding EditDescriptionTileTownCommad}"></Button>

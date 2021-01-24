@@ -120,7 +120,7 @@ namespace LookaukwatApp.ViewModels.Login
                 {
                     Settings.Password = password;
                     await PopupNavigation.Instance.PopAllAsync();
-                    await Shell.Current.GoToAsync("//MainPage/PublishAnnouncePage");
+                   // await Shell.Current.GoToAsync("//MainPage/PublishAnnouncePage");
                     IsRunning = false;
                 }
                 else
@@ -159,7 +159,7 @@ namespace LookaukwatApp.ViewModels.Login
                     {
                         Settings.Password = password;
                         await PopupNavigation.Instance.PopAllAsync();
-                        await Shell.Current.GoToAsync("//MainPage/PublishAnnouncePage");
+                        //await Shell.Current.GoToAsync("//MainPage/PublishAnnouncePage");
                         IsRunning = false;
                     }
                     else
@@ -189,7 +189,7 @@ namespace LookaukwatApp.ViewModels.Login
                 {
                     Settings.Password = password;
                     await PopupNavigation.Instance.PopAllAsync();
-                    await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
+                    //await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
                     IsRunning = false;
                 }
                 else
@@ -226,7 +226,7 @@ namespace LookaukwatApp.ViewModels.Login
                     {
                         Settings.Password = password;
                         await PopupNavigation.Instance.PopAllAsync();
-                        await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
+                        //await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
                         IsRunning = false;
                     }
                     else

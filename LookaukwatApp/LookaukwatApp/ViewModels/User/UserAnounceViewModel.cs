@@ -30,14 +30,31 @@ namespace LookaukwatApp.ViewModels.User
         public Command LoadItemsCommand { get; }
         public Command DeleteCommand { get; }
         public Command EditCommand { get; }
+        public Command PublishAnnounceCommand { get; }
         public Command<ProductForMobileViewModel> ItemTapped { get; }
         public ObservableCollection<ProductForMobileViewModel> Items { get; set; }
+        
+        bool isItems = false;
+        public bool IsItems
+        {
+            get { return isItems; }
+            set { SetProperty(ref isItems, value); }
+        }
+        
+        bool isListItems = false;
+        public bool IsListItems
+        {
+            get { return isListItems; }
+            set { SetProperty(ref isListItems, value); }
+        }
+
         public UserAnounceViewModel()
         {
             TitlePage = "Mes annonces";
             //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);
             Items = new ObservableCollection<ProductForMobileViewModel>();
+            PublishAnnounceCommand = new Command(OnPublish);
             DeleteCommand = new Command(async (e) =>
             {
                 var itm = e as ProductForMobileViewModel;
@@ -63,6 +80,11 @@ namespace LookaukwatApp.ViewModels.User
             });
 
             DownloadDataAsync();
+        }
+
+        public async void OnPublish()
+        {
+            await Shell.Current.GoToAsync("//MainPage/PublishAnnouncePage");
         }
 
         async void OnItemSelected(ProductForMobileViewModel item)
@@ -112,10 +134,21 @@ namespace LookaukwatApp.ViewModels.User
             IsBusy = true;
             var items = await _apiServices.GetUserProductsAsync(accessToken);
 
-            foreach (var prod in items)
+            if(items.Count == 0)
             {
-                Items.Add(prod);
+                IsListItems = false;
+                IsItems = true;
             }
+            else
+            {
+                IsListItems = true;
+                foreach (var prod in items)
+                {
+                    Items.Add(prod);
+                }
+            }
+            
+           
             IsBusy = false;
         }
 

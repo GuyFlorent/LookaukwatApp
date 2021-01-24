@@ -20,7 +20,7 @@ namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-        string Uri = "https://lookaukwatapi.azurewebsites.net/";
+        string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword)
         {
             HttpClient client;
@@ -262,6 +262,68 @@ namespace LookaukwatApp.Services
             var response = await client.PutAsync(Uri + "api/Mode/?id=" + itemId, content);
 
             Debug.WriteLine(response);
+        }
+
+        public async Task EditVehiculeCritereAsync(string itemId, int price, string searchOrAskJob, string rubrique, string brand, string type, string color, string petrol, string year, string mileage, string numberOfDoor, string gearBox, string model, string state, string firstyear, string accessToken)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            var modele = new VehiculeModelViewModel()
+            {
+                id = Convert.ToInt32(itemId),
+                Price = price,
+                SearchOrAsk = searchOrAskJob,
+                RubriqueVehicule = rubrique,
+                BrandVehicule = brand,
+                TypeVehicule = type,
+                ModelVehicule = model,
+                ColorVehicule = color,
+                StateVehicule = state,
+                YearVehicule = year,
+                MileageVehicule = mileage,
+                FirstYearVehicule = firstyear,
+                GearBoxVehicule = gearBox,
+                NumberOfDoorVehicule = numberOfDoor,
+                PetrolVehicule = petrol
+
+            };
+
+            var json = JsonConvert.SerializeObject(modele);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+            var response = await client.PutAsync(Uri + "api/Vehicule/?id=" + itemId, content);
+
+            Debug.WriteLine(response);
+        }
+
+        public async Task<VehiculeModelViewModel> GetUniqueVehiculeCritereAsync(int id)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Vehicule/GetVehiculediaCritere/?id=" + id);
+
+            var house = JsonConvert.DeserializeObject<VehiculeModelViewModel>(json);
+
+            return house;
         }
 
         public async Task<ModeModelViewModel> GetUniqueModeCritereAsync(int id)
@@ -550,6 +612,61 @@ namespace LookaukwatApp.Services
             var UserName = JsonConvert.DeserializeObject<string>(jwt);
            
             return UserName;
+        }
+
+        public async Task EditMultimediaCritereAsync(string itemId, int price, string searchOrAskJob, string rubrique, string brand, string model, string capacity, string accessToken)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            var modele = new MultimediaModelViewModel()
+            {
+                id = Convert.ToInt32(itemId),
+                Price = price,
+                SearchOrAsk = searchOrAskJob,
+                Brand = brand,
+                Type = rubrique,
+                Model = model,
+                Capacity = capacity,
+              
+
+            };
+
+            var json = JsonConvert.SerializeObject(modele);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+            var response = await client.PutAsync(Uri + "api/Multimedia/?id=" + itemId, content);
+
+            Debug.WriteLine(response);
+        }
+
+        public async Task<MultimediaModelViewModel> GetUniqueMultimediaCritereAsync(int id)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Multimedia/GetMultimediaCritere/?id=" + id);
+
+            var house = JsonConvert.DeserializeObject<MultimediaModelViewModel>(json);
+
+            return house;
         }
 
         public async Task<int> ApartPostAsync(string accessToken, string titleApart, string description, string town, string street, int price, string searchOrAskJob, int roomNumber, int apartSurface, string furnitureOrNot, string type)
@@ -1428,7 +1545,8 @@ namespace LookaukwatApp.Services
             client = new HttpClient(httpClientHandler);
 
             // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
-
+            userSearchCondition.RubriqueMode = HttpUtility.UrlEncode(userSearchCondition.RubriqueMode);
+            userSearchCondition.BrandMode = HttpUtility.UrlEncode(userSearchCondition.BrandMode);
             var json = await client.GetStringAsync(Uri + "api/Mode/GetOfferModeSearch/?categori=" + userSearchCondition.Category + "&town=" + userSearchCondition.Town + "&searchOrAskJob=" + userSearchCondition.SearchOrAskJob + "&price=" + userSearchCondition.PriceMode + "&rubriqueMode=" + userSearchCondition.RubriqueMode + "&typeMode=" + userSearchCondition.TypeMode + "&brandMode=" + userSearchCondition.BrandMode + "&universMode=" + userSearchCondition.UniversMode + "&sizeMode=" + userSearchCondition.SizeMode + "&state=" + userSearchCondition.State + "&colorMode=" + userSearchCondition.ColorMode + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&sortBy=" + sortBy);
 
             var result = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(json);

@@ -149,11 +149,18 @@ namespace LookaukwatApp.ViewModels.House
             get => color;
             set => SetProperty(ref color, value);
         }
+        private bool Validate()
+        {
+            return !String.IsNullOrWhiteSpace(SearchOrAskJob)
+                && !String.IsNullOrWhiteSpace(Rubrique);
 
+        }
 
         public HouseViewModel()
         {
-            NextMultimediaCommad = new Command(OnNextMultimedia);
+            NextMultimediaCommad = new Command(OnNextMultimedia, Validate);
+            this.PropertyChanged +=
+             (_, __) => NextMultimediaCommad.ChangeCanExecute();
             //TitlePage = "Titre,description, ville, quartier...";
             RubriqueList = StaticListHouseViewModel.GetRubriqueHouseListt;
             TypeAmebleumentHouseList = StaticListHouseViewModel.GetTypeAmebleumentHouseList;
@@ -171,7 +178,7 @@ namespace LookaukwatApp.ViewModels.House
 
         public Command NextMultimediaCommad { get; }
 
-
+        
         async void OnNextMultimedia()
         {
 

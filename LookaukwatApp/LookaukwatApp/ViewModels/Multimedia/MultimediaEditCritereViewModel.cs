@@ -1,15 +1,36 @@
-﻿using LookaukwatApp.ViewModels.StaticList;
+﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.Services;
+using LookaukwatApp.ViewModels.StaticList;
 using LookaukwatApp.Views.MultimediaView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Multimedia
 {
-    public class MultimediaViewModel : BaseViewModel
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    public class MultimediaEditCritereViewModel : BaseViewModel
     {
+        ApiServices _apiServices = new ApiServices();
+
+        private string itemId;
+
+        public string ItemId
+        {
+            get
+            {
+                return itemId;
+            }
+            set
+            {
+                itemId = value;
+                LoadItemId(value);
+            }
+        }
+
         ObservableCollection<string> models = new ObservableCollection<string>();
         public ObservableCollection<string> Models { get => models; set => SetProperty(ref models, value); }
 
@@ -443,18 +464,11 @@ namespace LookaukwatApp.ViewModels.Multimedia
             set => SetProperty(ref capacity, value);
         }
 
-        private bool Validate()
-        {
-            return !String.IsNullOrWhiteSpace(SearchOrAskJob)
-                && !String.IsNullOrWhiteSpace(Rubrique);
 
-        }
-        public MultimediaViewModel()
+        public MultimediaEditCritereViewModel()
         {
-            NextMultimediaCommad = new Command(OnNextMultimedia, Validate);
-            this.PropertyChanged +=
-             (_, __) => NextMultimediaCommad.ChangeCanExecute();
-            //TitlePage = "Titre,description, ville, quartier...";
+            EditCommand = new Command(OnEdit);
+            TitlePage = "Modifier l'annonce";
             RubriqueList = StaticListMultimediaViewModel.GetTypeMultimediaList;
             BrandConsoleGamequeMultimediaList = StaticListMultimediaViewModel.GetBrandConsoleGamequeMultimediaList;
             BrandInformatiquePhotocopyMultimediaList = StaticListMultimediaViewModel.GetBrandInformatiquePhotocopyMultimediaList;
@@ -485,16 +499,40 @@ namespace LookaukwatApp.ViewModels.Multimedia
             SearchOrSaskList = StaticListViewModel.OfferOSearchList;
         }
 
+        public Command EditCommand { get; }
 
-        public Command NextMultimediaCommad { get; }
-
-        
-        async void OnNextMultimedia()
+        public async void OnEdit()
         {
-
-            await Shell.Current.GoToAsync($"{nameof(MultimediaAddPage)}?{nameof(MultimediaEndViewModel.Price)}={Price}&{nameof(MultimediaEndViewModel.Rubrique)}={Rubrique}&{nameof(MultimediaEndViewModel.Brand)}={Brand}&{nameof(MultimediaEndViewModel.Model)}={Model}&{nameof(MultimediaEndViewModel.Capacity)}={Capacity}&{nameof(MultimediaEndViewModel.SearchOrAskJob)}={SearchOrAskJob}");
-
+            var accessToken = Settings.AccessToken;
+            await _apiServices.EditMultimediaCritereAsync(ItemId, Price, SearchOrAskJob, Rubrique, Brand, Model, Capacity, accessToken);
+            await Shell.Current.DisplayAlert("Information", "Modifier avec succès", "Ok");
+            await Shell.Current.GoToAsync("..");
         }
 
+        public async void LoadItemId(string itemId)
+        {
+            IsRunning = true;
+            try
+            {
+                var id = Convert.ToInt32(itemId);
+                var item = await _apiServices.GetUniqueMultimediaCritereAsync(id);
+                
+                SearchOrAskJob = item.SearchOrAsk;
+                Price = item.Price;
+
+                //for multimedia model
+                Rubrique = item.Type;
+                Brand = item.Brand;
+                Model = item.Model;
+                Capacity = item.Capacity;
+
+                IsRunning = false;
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Failed to Load Item");
+            }
+
+        }
     }
 }

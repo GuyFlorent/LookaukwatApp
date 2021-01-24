@@ -4,12 +4,16 @@ using LookaukwatApp.ViewModels.House;
 using LookaukwatApp.ViewModels.Image;
 using LookaukwatApp.ViewModels.Job;
 using LookaukwatApp.ViewModels.Mode;
+using LookaukwatApp.ViewModels.Multimedia;
+using LookaukwatApp.ViewModels.Vehicule;
 using LookaukwatApp.Views.AppartmentView;
 using LookaukwatApp.Views.EditView;
 using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.JobView;
 using LookaukwatApp.Views.ModeView;
+using LookaukwatApp.Views.MultimediaView;
+using LookaukwatApp.Views.Vehicule;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,6 +25,8 @@ namespace LookaukwatApp.ViewModels.Edit
     [QueryProperty(nameof(Category), nameof(Category))]
     public class EditViewModel : BaseViewModel
     {
+        
+
         private string id;
         public string Id
         {
@@ -44,6 +50,7 @@ namespace LookaukwatApp.ViewModels.Edit
                 SetProperty(ref category, value);
                 if (!string.IsNullOrWhiteSpace(value))
                 {
+                    TitlePage = "Modifier l'annonce " + value;
                     Settings.CategoryUpDateId = value;
                 }
             }
@@ -55,7 +62,7 @@ namespace LookaukwatApp.ViewModels.Edit
 
         public EditViewModel()
         {
-            TitlePage = "Modifier l'annonce";
+            TitlePage = "Modifier l'annonce ";
             EditImageCommad = new Command(OnEditImage);
             EditCritereCommad = new Command(OnEditCritere);
             EditDescriptionTileTownCommad = new Command(OnEditDescriptionTileTown);
@@ -102,11 +109,11 @@ namespace LookaukwatApp.ViewModels.Edit
 
                         break;
                     case "Multimedia":
-                        // await Shell.Current.GoToAsync($"{nameof(ApartEditCriterePage)}?{nameof(ApartEditCritereViewModel.ItemId)}={Id}");
+                         await Shell.Current.GoToAsync($"{nameof(MultimediaEditCriterePage)}?{nameof(MultimediaEditCritereViewModel.ItemId)}={Id}");
 
                         break;
                     case "Vehicule":
-                        //  await Shell.Current.GoToAsync($"{nameof(ApartEditCriterePage)}?{nameof(ApartEditCritereViewModel.ItemId)}={Id}");
+                         await Shell.Current.GoToAsync($"{nameof(VehiculeEditCriterePage)}?{nameof(VehiculeEditCritereViewModel.ItemId)}={Id}");
 
                         break;
                 }

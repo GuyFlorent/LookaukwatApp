@@ -54,10 +54,17 @@ namespace LookaukwatApp.ViewModels.Appartment
             set => SetProperty(ref apartSurface, value);
         }
 
+        private bool Validate()
+        {
+            return !String.IsNullOrWhiteSpace(SearchOrAskJob)
+                && !String.IsNullOrWhiteSpace(Type);
 
+        }
         public ApartViewModel()
         {
-            NextApartCommad = new Command(OnNextApart);
+            NextApartCommad = new Command(OnNextApart, Validate);
+            this.PropertyChanged +=
+              (_, __) => NextApartCommad.ChangeCanExecute();
             TitlePage = "Titre,description, ville, quartier...";
             TypeList = StaticListViewModel.GetListApartType;
             FurnitureOrNotList = StaticListViewModel.GetListFurnitureOrNot;
@@ -67,7 +74,7 @@ namespace LookaukwatApp.ViewModels.Appartment
 
         public Command NextApartCommad { get; }
 
-
+       
         async void OnNextApart()
         {
 

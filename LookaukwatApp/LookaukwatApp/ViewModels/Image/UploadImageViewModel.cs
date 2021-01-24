@@ -77,27 +77,41 @@ namespace LookaukwatApp.ViewModels.Image
             await Shell.Current.GoToAsync("///MainPage");
         }
 
+        private bool validateImage()
+        {
+          
+                return IsBusy == false;
+            
+           
+        }
         private async void OnPublish()
         {
-            IsRunning = true;
-            var content = new MultipartFormDataContent();
+            if (IsBusy)
+            {
+                await Shell.Current.DisplayAlert("Alerte", "veuillez patienter la fin du téléchargement de l'image avant de valider", "ok");
+            }
+            else
+            {
+                IsRunning = true;
+                var content = new MultipartFormDataContent();
 
-           
-            HttpClient client;
 
-            var httpClientHandler = new HttpClientHandler();
+                HttpClient client;
 
-            httpClientHandler.ServerCertificateCustomValidationCallback =
-            (message, cert, chain, errors) => { return true; };
+                var httpClientHandler = new HttpClientHandler();
 
-            client = new HttpClient(httpClientHandler);
-            string id = ItemId;
+                httpClientHandler.ServerCertificateCustomValidationCallback =
+                (message, cert, chain, errors) => { return true; };
 
-            await client.PostAsync(Uri + "api/Product/UpdateProductImage/?id=" + id, content);
-            IsRunning = false;
-            await Shell.Current.DisplayAlert("Alerte", "Votre annonce a été publié avec succès. Merci de votre confiance", "Ok");
+                client = new HttpClient(httpClientHandler);
+                string id = ItemId;
 
-            await Shell.Current.GoToAsync("///MainPage");
+                await client.PostAsync(Uri + "api/Product/UpdateProductImage/?id=" + id, content);
+                IsRunning = false;
+                await Shell.Current.DisplayAlert("Alerte", "Votre annonce a été publiée avec succès. Lookaukwat vous remercie de votre confiance", "Ok");
+
+                await Shell.Current.GoToAsync("///MainPage");
+            }
         }
 
         private async void OnAddImageGalery()

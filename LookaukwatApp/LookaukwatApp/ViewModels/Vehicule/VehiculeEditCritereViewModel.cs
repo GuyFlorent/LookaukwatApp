@@ -1,16 +1,34 @@
-﻿using LookaukwatApp.ViewModels.StaticList;
+﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.Services;
+using LookaukwatApp.ViewModels.StaticList;
 using LookaukwatApp.Views.Vehicule;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Vehicule
 {
-    public class VehiculeViewModel : BaseViewModel
+    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+    class VehiculeEditCritereViewModel : BaseViewModel
     {
+        ApiServices _apiServices = new ApiServices();
 
+        private string itemId;
+        public string ItemId
+        {
+            get
+            {
+                return itemId;
+            }
+            set
+            {
+                itemId = value;
+                LoadItemId(value);
+            }
+        }
 
         ObservableCollection<string> brands = new ObservableCollection<string>();
         public ObservableCollection<string> Brands { get => brands; set => SetProperty(ref brands, value); }
@@ -198,7 +216,7 @@ namespace LookaukwatApp.ViewModels.Vehicule
         public string Year
         {
             get => year;
-            set { SetProperty(ref year, value); FirstYear = "01/" + value; }
+            set => SetProperty(ref year, value);
         }
 
         private string mileage;
@@ -234,18 +252,11 @@ namespace LookaukwatApp.ViewModels.Vehicule
             set => SetProperty(ref color, value);
         }
 
-        private bool Validate()
-        {
-            return !String.IsNullOrWhiteSpace(SearchOrAskJob)
-                && !String.IsNullOrWhiteSpace(Rubrique);
 
-        }
-        public VehiculeViewModel()
+        public VehiculeEditCritereViewModel()
         {
-            NextVehiculeCommad = new Command(OnNextVehicule, Validate);
-            this.PropertyChanged +=
-             (_, __) => NextVehiculeCommad.ChangeCanExecute();
-            //TitlePage = "Titre,description, ville, quartier...";
+            EditCommand = new Command(OnEdit);
+            TitlePage = "Modifier mon annonce";
             RubriqueVehiculeList = StaticListVehiculeViewModel.GetRubriqueVehiculeList;
             BrandVehiculeAutoList = StaticListVehiculeViewModel.GetBrandVehiculeAutoList;
             BrandVehiculeMotoList = StaticListVehiculeViewModel.GetBrandVehiculeMotoList;
@@ -263,16 +274,47 @@ namespace LookaukwatApp.ViewModels.Vehicule
             SearchOrSaskList = StaticListViewModel.OfferOSearchList;
         }
 
+        public Command EditCommand { get; set; }
 
-        public Command NextVehiculeCommad { get; }
-
-      
-        async void OnNextVehicule()
+        public async void OnEdit()
         {
+            var accessToken = Settings.AccessToken;
+            await _apiServices.EditVehiculeCritereAsync(ItemId, Price, SearchOrAskJob, Rubrique, Brand, Type, Color, Petrol, Year, Mileage,NumberOfDoor,GearBox, Model, State,FirstYear, accessToken);
+            await Shell.Current.DisplayAlert("Information", "Modifier avec succès", "Ok");
+            await Shell.Current.GoToAsync("..");
+        }
+        public async void LoadItemId(string itemId)
+        {
+            IsRunning = true;
+            try
+            {
+                var id = Convert.ToInt32(itemId);
+                var item = await _apiServices.GetUniqueVehiculeCritereAsync(id);
+                
+                SearchOrAskJob = item.SearchOrAsk;
+                Price = item.Price;
+                //for House model
+                Rubrique = item.RubriqueVehicule;
+                Brand = item.BrandVehicule;
+                Type = item.TypeVehicule;
+                Color = item.ColorVehicule;
+                Petrol = item.PetrolVehicule;
+                Year = item.YearVehicule;
+                Mileage = item.MileageVehicule;
+                NumberOfDoor = item.NumberOfDoorVehicule;
+                GearBox = item.GearBoxVehicule;
+                Model = item.ModelVehicule;
+                State = item.StateVehicule;
+                FirstYear = item.FirstYearVehicule;
 
-            await Shell.Current.GoToAsync($"{nameof(VehiculeAddPage)}?{nameof(VehiculeEndViewModel.Price)}={Price}&{nameof(VehiculeEndViewModel.Rubrique)}={Rubrique}&{nameof(VehiculeEndViewModel.Type)}={Type}&{nameof(VehiculeEndViewModel.Model)}={Model}&{nameof(VehiculeEndViewModel.Color)}={Color}&{nameof(VehiculeEndViewModel.SearchOrAskJob)}={SearchOrAskJob}&{nameof(VehiculeEndViewModel.Petrol)}={Petrol}&{nameof(VehiculeEndViewModel.Brand)}={Brand}&{nameof(VehiculeEndViewModel.State)}={State}&{nameof(VehiculeEndViewModel.FirstYear)}={FirstYear}&{nameof(VehiculeEndViewModel.Year)}={Year}&{nameof(VehiculeEndViewModel.NumberOfDoor)}={NumberOfDoor}&{nameof(VehiculeEndViewModel.GearBox)}={GearBox}&{nameof(VehiculeEndViewModel.Mileage)}={Mileage}");
+               
+                IsRunning = false;
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Failed to Load Item");
+            }
 
         }
-
     }
 }

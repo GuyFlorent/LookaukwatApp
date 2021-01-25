@@ -45,12 +45,14 @@ namespace LookaukwatApp.ViewModels.Image
         public Command AddImageGaleryCommad { get; }
         public Command AddImageTakeCommad { get; }
         public Command DeleteImageCommand { get; }
+        public Command ValidCommand { get; }
 
         public EditImagesViewModel()
         {
             TitlePage = "Ajouter / supprimer les images";
             AddImageGaleryCommad = new Command(OnAddImageGalery);
             AddImageTakeCommad = new Command(OnImageTake);
+            ValidCommand = new Command(OnValid);
             Items = new ObservableCollection<ImageProcductModel>();
             DeleteImageCommand = new Command(async (e) =>
             {
@@ -72,7 +74,11 @@ namespace LookaukwatApp.ViewModels.Image
         }
 
        
-
+        private async void OnValid()
+        {
+            await Shell.Current.DisplayAlert("Information !", "Modifiée avec succès", "Ok");
+            await Shell.Current.GoToAsync("..");
+        }
         private async void GetProductImage(string ItemId)
         {
             IsBusy = true;

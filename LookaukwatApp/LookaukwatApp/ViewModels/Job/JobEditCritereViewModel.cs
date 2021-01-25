@@ -92,9 +92,11 @@ namespace LookaukwatApp.ViewModels.Job
         }
         public async void OnEdit()
         {
+            IsBusy = true;
             var accessToken = Settings.AccessToken;
             await _apiServices.EditJobCritereAsync(ItemId, Price, SearchOrAskJob, TypeContract, ActivitySector, accessToken);
-            await Shell.Current.DisplayAlert("Information", "Modifier avec succès", "Ok");
+            IsBusy = false;
+            await Shell.Current.DisplayAlert("Information", "Modifiée avec succès", "Ok");
             await Shell.Current.GoToAsync("..");
 
         }

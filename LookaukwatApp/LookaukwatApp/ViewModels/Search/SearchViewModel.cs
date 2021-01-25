@@ -106,7 +106,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return searchOrAskJob; }
             set
             {
-                SetProperty(ref searchOrAskJob, Uri.UnescapeDataString(value));
+                SetProperty(ref searchOrAskJob, value);
                 NumberOfResult();
             }
 
@@ -135,7 +135,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return typeAppart; }
             set
             {
-                SetProperty(ref typeAppart, Uri.UnescapeDataString(value));
+                SetProperty(ref typeAppart, value);
                 NumberOfResult();
             }
         }
@@ -145,7 +145,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return furnitureOrNotAppart; }
             set
             {
-                SetProperty(ref furnitureOrNotAppart, Uri.UnescapeDataString(value));
+                SetProperty(ref furnitureOrNotAppart, value);
                 NumberOfResult();
             }
         }
@@ -275,7 +275,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return typeHouse; }
             set
             {
-                SetProperty(ref typeHouse, Uri.UnescapeDataString(value));
+                SetProperty(ref typeHouse, value);
                 NumberOfResult();
             }
         }
@@ -301,7 +301,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return fabricMaterialHouse; }
             set
             {
-                SetProperty(ref fabricMaterialHouse, Uri.UnescapeDataString(value));
+                SetProperty(ref fabricMaterialHouse, value);
                 NumberOfResult();
             }
         }
@@ -313,7 +313,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return stateHouse; }
             set
             {
-                SetProperty(ref stateHouse, Uri.UnescapeDataString(value));
+                SetProperty(ref stateHouse, value);
                 NumberOfResult();
             }
         }
@@ -324,7 +324,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return colorHouse; }
             set
             {
-                SetProperty(ref colorHouse, Uri.UnescapeDataString(value));
+                SetProperty(ref colorHouse, value);
                 NumberOfResult();
             }
         }
@@ -352,7 +352,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return typeContract; }
             set
             {
-                SetProperty(ref typeContract, Uri.UnescapeDataString(value));
+                SetProperty(ref typeContract, value);
                 NumberOfResult();
             }
         }
@@ -362,7 +362,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return activitySector; }
             set
             {
-                SetProperty(ref activitySector, Uri.UnescapeDataString(value));
+                SetProperty(ref activitySector, value);
                 NumberOfResult();
             }
         }
@@ -381,88 +381,93 @@ namespace LookaukwatApp.ViewModels.Search
 
         private void UpdateTypelist(string rubrique)
         {
-            Types.Clear();
-            Brands.Clear();
-            Sizes.Clear();
-            switch (rubrique)
+            try
             {
-                case "Vêtements":
-                    foreach (var list in TypeClothesList)
-                    {
-                        Types.Add(list);
-                    }
-                    foreach (var brand in BrandClothesList)
-                    {
-                        Brands.Add(brand);
-                    }
-                    foreach (var size in SizeClothesList)
-                    {
-                        Sizes.Add(size);
-                    }
-                    break;
-                case "Chaussures":
-                    foreach (var list in TypeShoesList)
-                    {
-                        Types.Add(list);
-                    }
-                    foreach (var brand in BrandShoesList)
-                    {
-                        Brands.Add(brand);
-                    }
-                    foreach (var size in SizeShoesList)
-                    {
-                        Sizes.Add(size);
-                    }
-                    break;
-                case "Accesoires & Bagagerie":
-                    foreach (var list in TypeAccesorieLugagesList)
-                    {
-                        Types.Add(list);
-                    }
 
-                    foreach (var brand in BrandClothesList)
-                    {
-                        Brands.Add(brand);
-                    }
-                    break;
-                case "Montres & Bijoux":
-                    foreach (var list in TypeWatchJewelryList)
-                    {
-                        Types.Add(list);
-                    }
 
-                    foreach (var brand in BrandClothesList)
-                    {
-                        Brands.Add(brand);
-                    }
-                    break;
-                case "Equipement bébé":
-                    foreach (var list in TypeBabyEquipmentList)
-                    {
-                        Types.Add(list);
-                    }
+                Types.Clear();
+                Brands.Clear();
+                Sizes.Clear();
+                switch (rubrique)
+                {
+                    case "Vêtements":
+                        foreach (var list in TypeClothesList)
+                        {
+                            Types.Add(list);
+                        }
+                        foreach (var brand in BrandClothesList)
+                        {
+                            Brands.Add(brand);
+                        }
+                        foreach (var size in SizeClothesList)
+                        {
+                            Sizes.Add(size);
+                        }
+                        break;
+                    case "Chaussures":
+                        foreach (var list in TypeShoesList)
+                        {
+                            Types.Add(list);
+                        }
+                        foreach (var brand in BrandShoesList)
+                        {
+                            Brands.Add(brand);
+                        }
+                        foreach (var size in SizeShoesList)
+                        {
+                            Sizes.Add(size);
+                        }
+                        break;
+                    case "Accesoires & Bagagerie":
+                        foreach (var list in TypeAccesorieLugagesList)
+                        {
+                            Types.Add(list);
+                        }
 
-                    foreach (var brand in BrandClothesList)
-                    {
-                        Brands.Add(brand);
-                    }
-                    break;
-                case "Vêtements bébé":
-                    foreach (var list in TypeBabyClothesList)
-                    {
-                        Types.Add(list);
-                    }
+                        foreach (var brand in BrandClothesList)
+                        {
+                            Brands.Add(brand);
+                        }
+                        break;
+                    case "Montres & Bijoux":
+                        foreach (var list in TypeWatchJewelryList)
+                        {
+                            Types.Add(list);
+                        }
 
-                    foreach (var brand in BrandClothesList)
-                    {
-                        Brands.Add(brand);
-                    }
-                    foreach (var size in SizeClothesList)
-                    {
-                        Sizes.Add(size);
-                    }
-                    break;
-            }
+                        foreach (var brand in BrandClothesList)
+                        {
+                            Brands.Add(brand);
+                        }
+                        break;
+                    case "Equipement bébé":
+                        foreach (var list in TypeBabyEquipmentList)
+                        {
+                            Types.Add(list);
+                        }
+
+                        foreach (var brand in BrandClothesList)
+                        {
+                            Brands.Add(brand);
+                        }
+                        break;
+                    case "Vêtements bébé":
+                        foreach (var list in TypeBabyClothesList)
+                        {
+                            Types.Add(list);
+                        }
+
+                        foreach (var brand in BrandClothesList)
+                        {
+                            Brands.Add(brand);
+                        }
+                        foreach (var size in SizeClothesList)
+                        {
+                            Sizes.Add(size);
+                        }
+                        break;
+                }
+            }catch(Exception e) { Console.WriteLine(e); }
         }
 
 
@@ -499,7 +504,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return typeMode; }
             set
             {
-                SetProperty(ref typeMode, Uri.UnescapeDataString(value));
+                SetProperty(ref typeMode, value);
                 NumberOfResult();
             }
         }
@@ -512,9 +517,13 @@ namespace LookaukwatApp.ViewModels.Search
             }
             set
             {
-                SetProperty(ref rubriqueMode, Uri.UnescapeDataString(value));
-                UpdateTypelist(value);
-                NumberOfResult();
+                SetProperty(ref rubriqueMode, value);
+                try
+                {
+                    UpdateTypelist(value);
+                    NumberOfResult();
+                }catch(Exception ex) { Console.WriteLine(ex); }
+                
             }
 
         }
@@ -525,7 +534,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return brandMode; }
             set
             {
-                SetProperty(ref brandMode, Uri.UnescapeDataString(value));
+                SetProperty(ref brandMode, value);
                 NumberOfResult();
             }
         }
@@ -536,7 +545,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return universMode; }
             set
             {
-                SetProperty(ref universMode, Uri.UnescapeDataString(value));
+                SetProperty(ref universMode, value);
                 NumberOfResult();
             }
         }
@@ -547,7 +556,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return sizeMode; }
             set
             {
-                SetProperty(ref sizeMode, Uri.UnescapeDataString(value));
+                SetProperty(ref sizeMode, value);
                 NumberOfResult();
             }
         }
@@ -1197,7 +1206,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return Vehiculemodel; }
             set
             {
-                SetProperty(ref Vehiculemodel, Uri.UnescapeDataString(value));
+                SetProperty(ref Vehiculemodel,value);
                 NumberOfResult();
             }
         }
@@ -1208,7 +1217,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return Vehiculetype; }
             set
             {
-                SetProperty(ref Vehiculetype, Uri.UnescapeDataString(value));
+                SetProperty(ref Vehiculetype, value);
                 NumberOfResult();
             }
         }
@@ -1219,7 +1228,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return petrol; }
             set
             {
-                SetProperty(ref petrol, Uri.UnescapeDataString(value));
+                SetProperty(ref petrol, value);
                 NumberOfResult();
             }
         }
@@ -1252,7 +1261,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return numberOfDoor; }
             set
             {
-                SetProperty(ref numberOfDoor, Uri.UnescapeDataString(value));
+                SetProperty(ref numberOfDoor, value);
                 NumberOfResult();
             }
         }
@@ -1262,7 +1271,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return gearBox; }
             set
             {
-                SetProperty(ref gearBox, Uri.UnescapeDataString(value));
+                SetProperty(ref gearBox, value);
                 NumberOfResult();
             }
         }
@@ -1272,7 +1281,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return Vehiculestate; }
             set
             {
-                SetProperty(ref Vehiculestate, Uri.UnescapeDataString(value));
+                SetProperty(ref Vehiculestate, value);
                 NumberOfResult();
             }
         }
@@ -1283,7 +1292,7 @@ namespace LookaukwatApp.ViewModels.Search
             get { return color; }
             set
             {
-                SetProperty(ref color, Uri.UnescapeDataString(value));
+                SetProperty(ref color, value);
                 NumberOfResult();
             }
         }

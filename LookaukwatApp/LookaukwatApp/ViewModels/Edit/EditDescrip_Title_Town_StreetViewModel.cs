@@ -77,8 +77,10 @@ namespace LookaukwatApp.ViewModels.Edit
         }
         public async void OnEdit()
         {
+            IsBusy = true;
             var accessToken = Settings.AccessToken;
             await _apiServices.EditProductWithSamePropertieAsync(accessToken , ItemId, Title, Description, Town, Street);
+            IsBusy = false;
             await Shell.Current.DisplayAlert("Information", "Modifier avec succès", "Ok");
             await Shell.Current.GoToAsync("..");
         }

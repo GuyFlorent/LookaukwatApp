@@ -278,9 +278,11 @@ namespace LookaukwatApp.ViewModels.Vehicule
 
         public async void OnEdit()
         {
+            IsBusy = true;
             var accessToken = Settings.AccessToken;
             await _apiServices.EditVehiculeCritereAsync(ItemId, Price, SearchOrAskJob, Rubrique, Brand, Type, Color, Petrol, Year, Mileage,NumberOfDoor,GearBox, Model, State,FirstYear, accessToken);
-            await Shell.Current.DisplayAlert("Information", "Modifier avec succès", "Ok");
+            IsBusy = false;
+            await Shell.Current.DisplayAlert("Information", "Modifiée avec succès", "Ok");
             await Shell.Current.GoToAsync("..");
         }
         public async void LoadItemId(string itemId)

@@ -390,10 +390,10 @@
     </ScrollView>
         <StackLayout HeightRequest="160" BackgroundColor="#2196F3">
 
-            <Grid Margin="10,0,0,5">
+            <Grid Margin="10,0,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="14*"></RowDefinition>
-                    <RowDefinition Height="9*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -401,8 +401,8 @@
                 </Grid.ColumnDefinitions>
 
                 <ImageButton Source="icon_phone"
-                                 HeightRequest="40"
-                                 WidthRequest="40"
+                                 HeightRequest="30"
+                                 WidthRequest="30"
                              HorizontalOptions="Start"
                              Aspect="AspectFit"
                                  BackgroundColor="Transparent"
@@ -417,8 +417,8 @@
                               Aspect="AspectFit"
                                  Grid.Column="1"
                              HorizontalOptions="Start"
-                                 HeightRequest="40"
-                                 WidthRequest="40"
+                                 HeightRequest="30"
+                                 WidthRequest="30"
                                  BackgroundColor="Transparent"
                                  Command="{Binding SendMessageCommand}"></ImageButton>
                 <Label Grid.Row="1"

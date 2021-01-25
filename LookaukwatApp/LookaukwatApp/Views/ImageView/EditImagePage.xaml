@@ -17,6 +17,7 @@
     </ContentPage.Resources>
 
     <StackLayout>
+        <StackLayout>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -45,7 +46,7 @@
                 </StackLayout>
             </StackLayout>
         </Grid>
-
+        </StackLayout>
         <ActivityIndicator IsVisible="{Binding IsBusy}"  IsRunning="{Binding IsBusy}" Color ="#80000000"/>
 
         <Label IsVisible="{Binding Message, Converter={StaticResource StringNullOrEmptyBoolConverter}}" 
@@ -101,5 +102,12 @@
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
+
+        <StackLayout Margin="10,2,10,4">
+            <Button Text="Modifier"
+                    TextColor="White"
+                    CornerRadius="20"
+                    Command="{Binding ValidCommand}"></Button>
+        </StackLayout>
     </StackLayout>
 </ContentPage>

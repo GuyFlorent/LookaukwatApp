@@ -238,9 +238,11 @@ namespace LookaukwatApp.ViewModels.Mode
 
         public async void OnEdit()
         {
+            IsBusy = true;
             var accessToken = Settings.AccessToken;
             await _apiServices.EditModeCritereAsync(ItemId, Price, SearchOrAskJob, Rubrique, Brand, Type,Univers,Size, Color, State, accessToken);
-            await Shell.Current.DisplayAlert("Information", "Modifier avec succès", "Ok");
+            IsBusy = false;
+            await Shell.Current.DisplayAlert("Information", "Modifiée avec succès", "Ok");
             await Shell.Current.GoToAsync("..");
 
         }

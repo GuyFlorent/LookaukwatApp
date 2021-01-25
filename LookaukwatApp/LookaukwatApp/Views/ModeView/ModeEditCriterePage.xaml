@@ -131,6 +131,9 @@
             </ScrollView>
 
             <StackLayout  Margin="15,15,20,15">
+
+                <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color ="#80000000"/>
+
                 <Button Text="Modifier"
                         CornerRadius="20"
                         Command="{Binding EditCommad}"></Button>

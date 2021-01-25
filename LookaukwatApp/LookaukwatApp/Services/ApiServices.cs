@@ -1445,7 +1445,7 @@ namespace LookaukwatApp.Services
             client = new HttpClient(httpClientHandler);
 
             // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
-
+            typeHouse = HttpUtility.UrlEncode(typeHouse);
             var json = await client.GetStringAsync(Uri + "api/House/GetOfferHouseSearchNumber/?categori=" + categori + "&town=" + town + "&searchOrAskJob=" + searchOrAskJob  + "&price=" + price + "&rubriqueHouse=" + rubriqueHouse + "&typeHouse=" + typeHouse + "&fabricMaterialHouse=" + fabricMaterialHouse + "&stateHouse=" + stateHouse + "&colorHouse=" + colorHouse);
 
             int result = JsonConvert.DeserializeObject<int>(json);
@@ -1465,7 +1465,7 @@ namespace LookaukwatApp.Services
             client = new HttpClient(httpClientHandler);
 
             // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
-
+            multimediaRubrique = HttpUtility.UrlEncode(multimediaRubrique);
             var json = await client.GetStringAsync(Uri + "api/Multimedia/GetOfferMultiSearchNumber/?categori=" + categori + "&town=" + town + "&searchOrAskJob=" + searchOrAskJob +  "&price=" + price + "&multimediaRubrique=" + multimediaRubrique + "&multimediaBrand=" + multimediaBrand + "&multimediaModel=" + multimediaModel + "&multimediaCapacity=" + multimediaCapacity);
 
             int result = JsonConvert.DeserializeObject<int>(json);
@@ -1587,7 +1587,7 @@ namespace LookaukwatApp.Services
             client = new HttpClient(httpClientHandler);
 
             // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
-
+            userSearchCondition.MultimediaRubrique = HttpUtility.UrlEncode(userSearchCondition.MultimediaRubrique);
             var json = await client.GetStringAsync(Uri + "api/Multimedia/GetOfferMultiSearch/?categori=" + userSearchCondition.Category + "&town=" + userSearchCondition.Town + "&searchOrAskJob=" + userSearchCondition.SearchOrAskJob + "&price=" + userSearchCondition.PriceMulti + "&multimediaRubrique=" + userSearchCondition.MultimediaRubrique + "&multimediaBrand=" + userSearchCondition.MultimediaBrand + "&multimediaModel=" + userSearchCondition.MultimediaModel + "&multimediaCapacity=" + userSearchCondition.MultimediaCapacity + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&sortBy=" + sortBy);
 
             var result = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(json);
@@ -1607,7 +1607,7 @@ namespace LookaukwatApp.Services
             client = new HttpClient(httpClientHandler);
 
             // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
-
+            userSearchCondition.TypeHouse = HttpUtility.UrlEncode(userSearchCondition.TypeHouse);
             var json = await client.GetStringAsync(Uri + "api/House/GetOfferHouseSearch/?categori=" + userSearchCondition.Category + "&town=" + userSearchCondition.Town + "&searchOrAskJob=" + userSearchCondition.SearchOrAskJob + "&price=" + userSearchCondition.PriceHouse + "&rubriqueHouse=" + userSearchCondition.RubriqueHouse + "&typeHouse=" + userSearchCondition.TypeHouse + "&fabricMaterialHouse=" + userSearchCondition.FabricMaterialHouse + "&stateHouse=" + userSearchCondition.StateHouse + "&colorHouse=" + userSearchCondition.ColorHouse + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&sortBy=" + sortBy);
 
             var result = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(json);

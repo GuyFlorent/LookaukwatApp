@@ -87,9 +87,11 @@ namespace LookaukwatApp.ViewModels.Appartment
 
         public async void OnEdit()
         {
+            IsBusy = true;
             var accessToken = Settings.AccessToken;
             await _apiServices.EditApartCritereAsync(ItemId, Price, SearchOrAsk, Type, RoomNumber,FurnitureOrNot,ApartSurface, accessToken);
-            await Shell.Current.DisplayAlert("Information", "Modifier avec succès", "Ok");
+            IsBusy = false;
+            await Shell.Current.DisplayAlert("Information", "Modifiée avec succès", "Ok");
             await Shell.Current.GoToAsync("..");
         }
 

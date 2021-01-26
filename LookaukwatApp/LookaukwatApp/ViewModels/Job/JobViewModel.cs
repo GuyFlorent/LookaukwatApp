@@ -71,7 +71,15 @@ namespace LookaukwatApp.ViewModels.Job
         public string ActivitySector
         {
             get => activitySector;
-            set => SetProperty(ref activitySector, value);
+            set 
+            { 
+                SetProperty(ref activitySector, value);
+                if (value != "Autre")
+                {
+                    SearchrText = "Je recherche un emploi de " + value;
+                    OfferText = "J'offre un emploi de " + value;
+                }
+            }
         }
 
         private bool ValidateLoging()
@@ -80,6 +88,55 @@ namespace LookaukwatApp.ViewModels.Job
                 && !String.IsNullOrWhiteSpace(Description)
                 && !String.IsNullOrWhiteSpace(Street);
         }
+
+
+        private bool isOffer = true;
+        public bool IsOffer
+        {
+            get { return isOffer; }
+            set
+            {
+                SetProperty(ref isOffer, value);
+
+                if (value == true)
+                {
+                    IsSearch = false;
+                    SearchOrAskJob = "J'offre";
+                }
+            }
+        }
+        private bool isSearch = false;
+
+        public bool IsSearch
+        {
+            get { return isSearch; }
+            set
+            {
+                SetProperty(ref isSearch, value);
+
+                if (value == true)
+                {
+                    IsOffer = false;
+                    SearchOrAskJob = "Je recherche";
+
+                }
+            }
+        }
+
+        private string offerText = "J'offre du travail / prestation de service";
+        public string OfferText
+        {
+            get => offerText;
+            set => SetProperty(ref offerText, value);
+        }
+
+        private string searchText = "Je recherche du travail / prestation de service";
+        public string SearchrText
+        {
+            get => searchText;
+            set => SetProperty(ref searchText, value);
+        }
+
         public JobViewModel()
         {
             PostJobCommad = new Command(OnPostJob, ValidateLoging);

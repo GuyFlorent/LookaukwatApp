@@ -111,7 +111,12 @@ namespace LookaukwatApp.ViewModels.House
         public string Type
         {
             get => type;
-            set => SetProperty(ref type, value);
+            set 
+            { 
+                SetProperty(ref type, value);
+                SearchrText = "Je recherche un(e) " + value;
+                OfferText = "Je vends un(e) " + value;
+            }
         }
         private string rubrique;
         public string Rubrique
@@ -123,6 +128,7 @@ namespace LookaukwatApp.ViewModels.House
             set
             {
                 SetProperty(ref rubrique, value);
+                
                 UpdateTypelist(value);
             }
 
@@ -149,12 +155,64 @@ namespace LookaukwatApp.ViewModels.House
             get => color;
             set => SetProperty(ref color, value);
         }
+
+       
         private bool Validate()
         {
             return !String.IsNullOrWhiteSpace(SearchOrAskJob)
                 && !String.IsNullOrWhiteSpace(Rubrique);
 
         }
+
+        private bool isOffer = true;
+        public bool IsOffer
+        {
+            get { return isOffer; }
+            set
+            {
+                SetProperty(ref isOffer, value);
+
+                if (value == true)
+                {
+                    IsSearch = false;
+                    SearchOrAskJob = "J'offre";
+                }
+            }
+        }
+        private bool isSearch = false;
+
+        public bool IsSearch
+        {
+            get { return isSearch; }
+            set
+            {
+                SetProperty(ref isSearch, value);
+
+                if (value == true)
+                {
+                    IsOffer = false;
+                    SearchOrAskJob = "Je recherche";
+                   
+                }
+            }
+        }
+
+        private string offerText = "Je vends";
+        public string OfferText
+        {
+            get => offerText;
+            set => SetProperty(ref offerText, value);
+        }
+
+        private string searchText = "Je recherche";
+        public string SearchrText
+        {
+            get => searchText;
+            set => SetProperty(ref searchText, value);
+        }
+
+
+
 
         public HouseViewModel()
         {

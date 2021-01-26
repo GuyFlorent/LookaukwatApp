@@ -2,6 +2,7 @@
 using LookaukwatApp.ViewModels.Job;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,10 +31,10 @@ namespace LookaukwatApp.Views.JobView
 
         private async void Map_Click(object sender, EventArgs e)
         {
-            if (!double.TryParse(Lat.Text, out double lat))
+            if (!double.TryParse(Lat.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lat))
                 return;
 
-            if (!double.TryParse(Lon.Text, out double lon))
+            if (!double.TryParse(Lon.Text.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double lon))
                 return;
 
             var location = new Location(lat, lon);

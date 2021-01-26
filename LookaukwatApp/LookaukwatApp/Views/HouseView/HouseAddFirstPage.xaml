@@ -24,7 +24,7 @@
                TextColor="Black"
                FontSize="Small"></Label>
 
-            <Label Text="J'offre ou je recherche?"
+            <!--<Label Text="J'offre ou je recherche?"
                        TextColor="Black"
                     FontSize="Subtitle"
                        FontAttributes="Bold"></Label>
@@ -33,7 +33,7 @@
                     Title="Choisir entre J'offre ou je recherche"
                     ItemsSource="{Binding SearchOrSaskList}"
                     SelectedItem="{Binding SearchOrAskJob, Mode=TwoWay}">
-            </Picker>
+            </Picker>-->
             <Label Text="Rubrique"
                    TextColor="Black"
                     FontSize="Subtitle"
@@ -44,19 +44,48 @@
                     ItemsSource="{Binding RubriqueList}"
                     SelectedItem="{Binding Rubrique, Mode=TwoWay}">
             </Picker>
-            <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource HouseCheckingForm}}">
-                <Label Text="type"
+
+
+               
+
+
+                <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource HouseCheckingForm}}">
+                    <Label Text="type"
                    TextColor="Black"
                         FontSize="Subtitle"
                        FontAttributes="Bold"></Label>
-                <Picker 
+                    <Picker 
                     
                     Title="choisir un type"
                     ItemsSource="{Binding Types}"
                     SelectedItem="{Binding Type, Mode=TwoWay}">
-                </Picker>
+                    </Picker>
+                </StackLayout>
 
-                <Label Text="Matériel de fabrication"
+                <!--For search and ask-->
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <RadioButton 
+                             IsChecked="{Binding IsOffer}"></RadioButton>
+                        <Label Text="Offres"
+                           TextColor="Black"
+                                   FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                    </StackLayout>
+                    <Label Text="{Binding OfferText}"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <RadioButton IsChecked="{Binding IsSearch}" ></RadioButton>
+                        <Label Text="Demandes"
+                           TextColor="Black"
+                                   FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                    </StackLayout>
+                    <Label Text="{Binding SearchrText}"></Label>
+                </StackLayout>
+
+
+                <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource HouseCheckingForm}}">
+                        <Label Text="Matériel de fabrication"
                        TextColor="Black"
                         FontSize="Subtitle"
                        FontAttributes="Bold">

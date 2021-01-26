@@ -20,7 +20,7 @@ namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-        string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
+        string Uri = "https://lookaukwatapi.azurewebsites.net/";
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword, string parrainValue)
         {
             HttpClient client;

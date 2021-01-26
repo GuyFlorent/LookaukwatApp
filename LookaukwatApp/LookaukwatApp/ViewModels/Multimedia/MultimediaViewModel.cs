@@ -433,7 +433,15 @@ namespace LookaukwatApp.ViewModels.Multimedia
         public string Model
         {
             get => model;
-            set => SetProperty(ref model, value);
+            set 
+            { 
+                SetProperty(ref model, value);
+                if (value != "Autre")
+                {
+                    SearchrText = "Je recherche un(e) " + value;
+                    OfferText = "Je vends un(e) " + value;
+                }
+            }
         }
 
         private string capacity;
@@ -449,6 +457,56 @@ namespace LookaukwatApp.ViewModels.Multimedia
                 && !String.IsNullOrWhiteSpace(Rubrique);
 
         }
+
+
+        private bool isOffer = true;
+        public bool IsOffer
+        {
+            get { return isOffer; }
+            set
+            {
+                SetProperty(ref isOffer, value);
+
+                if (value == true)
+                {
+                    IsSearch = false;
+                    SearchOrAskJob = "J'offre";
+                }
+            }
+        }
+        private bool isSearch = false;
+
+        public bool IsSearch
+        {
+            get { return isSearch; }
+            set
+            {
+                SetProperty(ref isSearch, value);
+
+                if (value == true)
+                {
+                    IsOffer = false;
+                    SearchOrAskJob = "Je recherche";
+
+                }
+            }
+        }
+
+        private string offerText = "Je vends";
+        public string OfferText
+        {
+            get => offerText;
+            set => SetProperty(ref offerText, value);
+        }
+
+        private string searchText = "Je recherche";
+        public string SearchrText
+        {
+            get => searchText;
+            set => SetProperty(ref searchText, value);
+        }
+
+
         public MultimediaViewModel()
         {
             NextMultimediaCommad = new Command(OnNextMultimedia, Validate);

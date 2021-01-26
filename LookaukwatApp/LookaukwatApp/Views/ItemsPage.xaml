@@ -41,12 +41,12 @@
         <local:ItemsViewModel />
     </ContentPage.BindingContext>
 
-    <StackLayout>
-        <Image  Source="logo_lookaukwat_xam1.png"
+    <StackLayout >
+        <Image x:Name="Img" Source="logo_lookaukwat_xam1.png"
                HorizontalOptions="Center"
                HeightRequest="30"/>
 
-        <StackLayout Margin="20,10,20,25">
+        <StackLayout Margin="20,10,10,0">
 
 
             <!--<Label Text="Infinite Scroll" FontSize="52" TextColor="DeepPink" Margin="20,0" />
@@ -71,7 +71,8 @@
                       HasUnevenRows="True"
                       SelectionMode="None"
                           x:Name="mylist"
-                      SeparatorVisibility="None">
+                      SeparatorVisibility="None"
+                          ItemAppearing="ListView_ItemAppearing">
                     <ListView.Behaviors>
                         <extended:InfiniteScrollBehavior  IsLoadingMore="{Binding IsBusy}" />
                     </ListView.Behaviors>

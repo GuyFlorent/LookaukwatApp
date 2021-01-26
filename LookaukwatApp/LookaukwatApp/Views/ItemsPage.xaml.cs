@@ -30,6 +30,29 @@ namespace LookaukwatApp.Views
            
         }
 
+
+        int lastItemIndex;
+        int currentItemIndex;
+
+        void ListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
+        {
+            //MyItemType item = e.Item as MyItemType;
+
+            //currentItemIndex = Items.IndexOf(item);
+            currentItemIndex = e.ItemIndex;
+            if (currentItemIndex > lastItemIndex)
+            {
+                Img.IsVisible = false;
+            }
+            else
+            {
+                Img.IsVisible = true;
+            }
+            lastItemIndex = currentItemIndex;
+        }
+
+
+
         //public ItemsPage(string sort , bool isSort)
         //{
         //    InitializeComponent();

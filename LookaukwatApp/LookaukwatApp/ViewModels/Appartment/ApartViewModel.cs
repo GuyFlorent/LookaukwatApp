@@ -31,7 +31,15 @@ namespace LookaukwatApp.ViewModels.Appartment
         public string Type
         {
             get => type;
-            set => SetProperty(ref type, value);
+            set 
+            { 
+                SetProperty(ref type, value); 
+                if(value != "Autre")
+                {
+                    SearchrText = "Je recherche un(e) " + value;
+                    OfferText = "J'ai un(e) " + value;
+                }
+            }
         }
         private string furnitureOrNot;
         public string FurnitureOrNot
@@ -60,6 +68,56 @@ namespace LookaukwatApp.ViewModels.Appartment
                 && !String.IsNullOrWhiteSpace(Type);
 
         }
+
+
+        private bool isOffer = true;
+        public bool IsOffer
+        {
+            get { return isOffer; }
+            set
+            {
+                SetProperty(ref isOffer, value);
+
+                if (value == true)
+                {
+                    IsSearch = false;
+                    SearchOrAskJob = "J'offre";
+                }
+            }
+        }
+        private bool isSearch = false;
+
+        public bool IsSearch
+        {
+            get { return isSearch; }
+            set
+            {
+                SetProperty(ref isSearch, value);
+
+                if (value == true)
+                {
+                    IsOffer = false;
+                    SearchOrAskJob = "Je recherche";
+
+                }
+            }
+        }
+
+        private string offerText = "Je vends";
+        public string OfferText
+        {
+            get => offerText;
+            set => SetProperty(ref offerText, value);
+        }
+
+        private string searchText = "Je recherche";
+        public string SearchrText
+        {
+            get => searchText;
+            set => SetProperty(ref searchText, value);
+        }
+
+
         public ApartViewModel()
         {
             NextApartCommad = new Command(OnNextApart, Validate);

@@ -43,62 +43,68 @@
 
             </Picker>
 
-            <Label IsVisible="{Binding Categori, Converter={StaticResource JobCheckSearchCategory}}">
+            <Label IsVisible="{Binding Categori, Converter={StaticResource JobCheckSearchCategory}}"
+                   FontSize="20">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Emploi : "
                               TextColor="Black"
-                              FontAttributes="Bold"></Span>
-                        <Span Text="Offres et recherche d'emploi"></Span>
+                              ></Span>
+                        <Span Text="Offres et recherche d'emploi, prestation de service"></Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <Label IsVisible="{Binding Categori, Converter={StaticResource ApartCheckSearchCategory}}">
+            <Label IsVisible="{Binding Categori, Converter={StaticResource ApartCheckSearchCategory}}"
+                   FontSize="20">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Immobilier : "
                               TextColor="Black"
-                              FontAttributes="Bold"></Span>
-                        <Span Text="Appartement, bureau, terrain à vendre et à louer..."></Span>
+                              ></Span>
+                        <Span Text="Appartement (meublé/non meublé), bureau, terrain à vendre et à louer..."></Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <Label IsVisible="{Binding Categori, Converter={StaticResource HouseCheckSearchCategory}}">
+            <Label IsVisible="{Binding Categori, Converter={StaticResource HouseCheckSearchCategory}}"
+                   FontSize="20">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Maison : "
                               TextColor="Black"
-                              FontAttributes="Bold"></Span>
+                              ></Span>
                         <Span Text="Ammeublement, électroménager, décoration, cuisine, jardinage..."></Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <Label IsVisible="{Binding Categori, Converter={StaticResource MultimediaCheckSearchCategory}}">
+            <Label IsVisible="{Binding Categori, Converter={StaticResource MultimediaCheckSearchCategory}}"
+                   FontSize="20">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Multimédia : "
                               TextColor="Black"
-                              FontAttributes="Bold"></Span>
+                             ></Span>
                         <Span Text="Informatique, Téléphonie, Téléviseur, Jeux vidéo..."></Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <Label IsVisible="{Binding Categori, Converter={StaticResource ModeCheckSearchCategory}}">
+            <Label IsVisible="{Binding Categori, Converter={StaticResource ModeCheckSearchCategory}}"
+                   FontSize="20">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Mode : "
                               TextColor="Black"
-                              FontAttributes="Bold"></Span>
+                              ></Span>
                         <Span Text="Vêtements,  Chaussures, Montres, Bijoux, Sac..."></Span>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <Label IsVisible="{Binding Categori, Converter={StaticResource VehiculeCheckSearchCategory}}">
+            <Label IsVisible="{Binding Categori, Converter={StaticResource VehiculeCheckSearchCategory}}"
+                   FontSize="20">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="Véhicule : "
                               TextColor="Black"
-                              FontAttributes="Bold"></Span>
+                              ></Span>
                         <Span Text="Voiture, location voiture, Moto, pièces auto et moto..."></Span>
                     </FormattedString>
                 </Label.FormattedText>

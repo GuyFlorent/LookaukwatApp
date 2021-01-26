@@ -65,6 +65,22 @@
                    IsPassword="True"
                    Text="{Binding ConfirmPassword}"></Entry>
 
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox  IsChecked="{Binding IsParrainCheck}" />
+                    <Label Grid.Column="1" Text="Avez vous été parrainé ?"></Label>
+                </Grid>
+                <StackLayout IsVisible="{Binding IsParrainCheck}">
+                    <Picker 
+                    Title="Choisir un parrain"
+                    ItemsSource="{Binding Parrains}"
+                    SelectedItem="{Binding ParrainName, Mode=TwoWay}">
+                    </Picker>
+                </StackLayout>
+
                 <!--<StackLayout Orientation="Horizontal">
                 <Label Text="Save Password"></Label>
                 <Switch IsToggled="False"></Switch>

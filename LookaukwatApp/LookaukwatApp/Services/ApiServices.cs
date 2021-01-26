@@ -21,7 +21,7 @@ namespace LookaukwatApp.Services
     public class ApiServices
     {
         string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
-        public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword)
+        public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword, string parrainValue)
         {
             HttpClient client;
 
@@ -39,7 +39,8 @@ namespace LookaukwatApp.Services
                 FirstName = firstName,
                 Phone = phone,
                 Password = password,
-                ConfirmPassword = confirmPassword
+                ConfirmPassword = confirmPassword,
+                ParrainName = parrainValue
 
             };
 
@@ -126,6 +127,27 @@ namespace LookaukwatApp.Services
             var apart = JsonConvert.DeserializeObject<ApartModelViewModel>(json);
 
             return apart;
+        }
+
+        public async Task<IDictionary<string, string>> GetListParrainAsync()
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Product/GetParrainList/");
+
+            var ParrainList = JsonConvert.DeserializeObject<IDictionary<string, string>>(json);
+
+            return ParrainList;
         }
 
         public async Task EditProductWithSamePropertieAsync(string accessToken, string itemId, string title, string description, string town, string street)

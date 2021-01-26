@@ -9,6 +9,7 @@
         <local:UserAnounceViewModel />
     </ContentPage.BindingContext>
 
+   
 
     <StackLayout>
 

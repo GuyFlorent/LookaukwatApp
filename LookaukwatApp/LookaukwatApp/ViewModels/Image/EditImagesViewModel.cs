@@ -1,6 +1,7 @@
 ﻿using LookaukwatApp.Helpers;
 using LookaukwatApp.Models;
 using LookaukwatApp.Services;
+using LookaukwatApp.Views.ImageView;
 using Newtonsoft.Json;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
@@ -46,13 +47,14 @@ namespace LookaukwatApp.ViewModels.Image
         public Command AddImageTakeCommad { get; }
         public Command DeleteImageCommand { get; }
         public Command ValidCommand { get; }
-
+        public Command TappedCommand { get; set; }
         public EditImagesViewModel()
         {
             TitlePage = "Ajouter / supprimer les images";
             AddImageGaleryCommad = new Command(OnAddImageGalery);
             AddImageTakeCommad = new Command(OnImageTake);
             ValidCommand = new Command(OnValid);
+            TappedCommand = new Command<string>(OnTappedImage);
             Items = new ObservableCollection<ImageProcductModel>();
             DeleteImageCommand = new Command(async (e) =>
             {
@@ -73,7 +75,13 @@ namespace LookaukwatApp.ViewModels.Image
             });
         }
 
-       
+
+        public async void OnTappedImage(string image)
+        {
+            ObservableCollection<string> images = new ObservableCollection<string> { image };
+            await App.Current.MainPage.Navigation.PushAsync(new DisplayFullImagePage(images));
+        }
+
         private async void OnValid()
         {
             await Shell.Current.DisplayAlert("Information !", "Modifiée avec succès", "Ok");

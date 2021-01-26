@@ -12,7 +12,7 @@ namespace LookaukwatApp.Views.Vehicule
         public VehiculeDetailPage()
         {
             InitializeComponent();
-            BindingContext = new VehiculeDetailViewModel();
+           // BindingContext = new VehiculeDetailViewModel();
             Shell.SetTabBarIsVisible(this, false);
         }
 

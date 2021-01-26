@@ -3,12 +3,14 @@ using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.Views.AppartmentView;
+using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.MessageView;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -52,6 +54,7 @@ namespace LookaukwatApp.ViewModels.Appartment
         public Command ShareCommand { get; set; }
         public Command ClipBoardCommand { get; set; }
         public Command SendMessageCommand { get; set; }
+        public Command TappedImageCommand { get; set; }
         
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
@@ -152,7 +155,10 @@ namespace LookaukwatApp.ViewModels.Appartment
             set
             {
                 itemId = value;
-                LoadItemId(value);
+                if (value != null)
+                {
+                    LoadItemId(value);
+                }
             }
         }
         //for Apart model
@@ -187,9 +193,17 @@ namespace LookaukwatApp.ViewModels.Appartment
             ShareCommand = new Command(OnShareCommand);
             ClipBoardCommand = new Command(OnClipboard);
             SendMessageCommand = new Command(OnSendMessage);
+            TappedImageCommand = new Command<string>(OnTappedImage);
            
         }
 
+
+        public async void OnTappedImage(string image)
+        {
+            var index = Images.IndexOf(image);
+            Images.Move(index, 0);
+            await App.Current.MainPage.Navigation.PushAsync(new DisplayFullImagePage(Images));
+        }
         public async void LoadItemId(string itemId)
         {
             IsRunning = true;
@@ -233,6 +247,7 @@ namespace LookaukwatApp.ViewModels.Appartment
             catch (Exception)
             {
                 Debug.WriteLine("Failed to Load Item");
+                IsRunning = false;
             }
 
         }

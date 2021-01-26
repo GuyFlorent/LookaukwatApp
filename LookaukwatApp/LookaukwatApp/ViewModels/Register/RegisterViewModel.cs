@@ -4,6 +4,7 @@ using LookaukwatApp.Views.LoginView;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Forms;
 
@@ -71,9 +72,41 @@ namespace LookaukwatApp.ViewModels.Register
             set => SetProperty(ref confirmPassword, value);
         }
 
+        ObservableCollection<string> parrains = new ObservableCollection<string>();
+        public ObservableCollection<string> Parrains { get => parrains; set => SetProperty(ref parrains, value); }
+
+        private IDictionary<string, string> listParrian = new Dictionary<string, string>();
+        public IDictionary<string,string> ListParrian { get => listParrian; set => SetProperty(ref listParrian, value); }
+
+        bool isParrainCheck = false;
+        public bool IsParrainCheck
+        {
+            get { return isParrainCheck; }
+            set
+            {
+                SetProperty(ref isParrainCheck, value); 
+                if(value == true)
+                {
+                    GetParrainList();
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+        private string parrainName;
+        public string ParrainName
+        {
+            get => parrainName;
+            set => SetProperty(ref parrainName, value);
+        }
+
         public RegisterViewModel()
         {
             TitlePage = "Creation de compte";
+            
             RegisterCommand = new Command(OnRegister, ValidateRegister);
             RegisterReturnUserAccountCommand = new Command(OnRegisterReturnUserAccount);
             LoginCommand = new Command(OnLoginClicked);
@@ -97,6 +130,18 @@ namespace LookaukwatApp.ViewModels.Register
              && !String.IsNullOrWhiteSpace(Password)
              && !String.IsNullOrWhiteSpace(ConfirmPassword)
                ;
+        }
+
+        private async void GetParrainList()
+        {
+            Parrains.Clear();
+            ListParrian.Clear();
+            ListParrian = await _apiServices.GetListParrainAsync();
+
+            foreach(var key in ListParrian.Keys)
+            {
+                Parrains.Add(key);
+            }
         }
 
         private async void OnLoginClicked(object obj)
@@ -163,7 +208,12 @@ namespace LookaukwatApp.ViewModels.Register
 
                 if (checkPhoneExist == false && checkEmailExist == false && (Password.Length >= 6 && confirmPassword.Length >= 6) && Password == confirmPassword)
                 {
-                    var isSuccess = await _apiServices.RegisterAsync(Email, FirstName, Phone, Password, ConfirmPassword);
+                    string parrainValue = null;
+                    if (!string.IsNullOrWhiteSpace(ParrainName))
+                    {
+                        parrainValue = ListParrian[ParrainName];
+                    }
+                    var isSuccess = await _apiServices.RegisterAsync(Email, FirstName, Phone, Password, ConfirmPassword, parrainValue);
 
 
                     if (isSuccess)
@@ -247,7 +297,13 @@ namespace LookaukwatApp.ViewModels.Register
 
                 if (checkPhoneExist == false && checkEmailExist == false && (Password.Length >= 6 && confirmPassword.Length >= 6) && Password == confirmPassword)
                 {
-                    var isSuccess = await _apiServices.RegisterAsync(Email, FirstName, Phone, Password, ConfirmPassword);
+                    string parrainValue = null;
+                    if (!string.IsNullOrWhiteSpace(ParrainName))
+                    {
+                        parrainValue = ListParrian[ParrainName];
+                    }
+
+                    var isSuccess = await _apiServices.RegisterAsync(Email, FirstName, Phone, Password, ConfirmPassword, parrainValue);
 
 
                     if (isSuccess)

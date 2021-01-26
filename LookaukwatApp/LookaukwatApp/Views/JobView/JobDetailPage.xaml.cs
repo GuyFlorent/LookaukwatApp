@@ -17,7 +17,7 @@ namespace LookaukwatApp.Views.JobView
         public JobDetailPage()
         {
             InitializeComponent();
-            BindingContext = new JobDetailsViewModel();
+            //BindingContext = new JobDetailsViewModel();
             Shell.SetTabBarIsVisible(this, false);
         }
 

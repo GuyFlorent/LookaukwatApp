@@ -12,6 +12,7 @@ namespace LookaukwatApp.ViewModels.Job
 {
     public class JobViewModel : BaseViewModel
     {
+       
         ApiServices _apiServices = new ApiServices();
         public IList<string> ContractList { get; }
         public IList<string> ActivitysectorList { get; }

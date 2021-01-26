@@ -2,6 +2,7 @@
 using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.OtherServices;
+using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.MessageView;
 using LookaukwatApp.Views.MultimediaView;
 using Rg.Plugins.Popup.Services;
@@ -52,7 +53,7 @@ namespace LookaukwatApp.ViewModels.Multimedia
         public Command ShareCommand { get; set; }
         public Command ClipBoardCommand { get; set; }
         public Command SendMessageCommand { get; set; }
-       
+        public Command TappedImageCommand { get; set; }
 
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
@@ -158,7 +159,10 @@ namespace LookaukwatApp.ViewModels.Multimedia
             set
             {
                 itemId = value;
-                LoadItemId(value);
+                if (value != null)
+                {
+                    LoadItemId(value);
+                }
             }
         }
         //for Apart model
@@ -193,9 +197,16 @@ namespace LookaukwatApp.ViewModels.Multimedia
             ShareCommand = new Command(OnShareCommand);
             ClipBoardCommand = new Command(OnClipboard);
             SendMessageCommand = new Command(OnSendMessage);
-           
+            TappedImageCommand = new Command<string>(OnTappedImage);
         }
 
+
+        public async void OnTappedImage(string image)
+        {
+            var index = Images.IndexOf(image);
+            Images.Move(index, 0);
+            await App.Current.MainPage.Navigation.PushAsync(new DisplayFullImagePage(Images));
+        }
         public async void LoadItemId(string itemId)
         {
             IsRunning = true;
@@ -240,6 +251,7 @@ namespace LookaukwatApp.ViewModels.Multimedia
             catch (Exception)
             {
                 Debug.WriteLine("Failed to Load Item");
+                IsRunning = false;
             }
 
         }

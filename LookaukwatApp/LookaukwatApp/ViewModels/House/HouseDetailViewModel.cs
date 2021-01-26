@@ -3,6 +3,7 @@ using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.Views.HouseView;
+using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.MessageView;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -53,7 +54,7 @@ namespace LookaukwatApp.ViewModels.House
         public Command ShareCommand { get; set; }
         public Command ClipBoardCommand { get; set; }
         public Command SendMessageCommand { get; set; }
-       
+        public Command TappedImageCommand { get; set; }
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
 
@@ -154,7 +155,10 @@ namespace LookaukwatApp.ViewModels.House
             set
             {
                 itemId = value;
-                LoadItemId(value);
+                if (value != null)
+                {
+                    LoadItemId(value);
+                }
             }
         }
         //for House model
@@ -194,9 +198,15 @@ namespace LookaukwatApp.ViewModels.House
             ShareCommand = new Command(OnShareCommand);
             ClipBoardCommand = new Command(OnClipboard);
             SendMessageCommand = new Command(OnSendMessage);
-            
+            TappedImageCommand = new Command<string>(OnTappedImage);
         }
 
+        public async void OnTappedImage(string image)
+        {
+            var index = Images.IndexOf(image);
+            Images.Move(index, 0);
+            await App.Current.MainPage.Navigation.PushAsync(new DisplayFullImagePage(Images));
+        }
         public async void LoadItemId(string itemId)
         {
             IsRunning = true;
@@ -242,6 +252,7 @@ namespace LookaukwatApp.ViewModels.House
             catch (Exception)
             {
                 Debug.WriteLine("Failed to Load Item");
+                IsRunning = false;
             }
 
         }

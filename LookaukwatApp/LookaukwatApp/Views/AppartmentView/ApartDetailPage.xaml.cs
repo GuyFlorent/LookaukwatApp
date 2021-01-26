@@ -16,7 +16,7 @@ namespace LookaukwatApp.Views.AppartmentView
         public ApartDetailPage()
         {
             InitializeComponent();
-            BindingContext = new ApartDetailViewModel();
+           // BindingContext = new ApartDetailViewModel();
             Shell.SetTabBarIsVisible(this, false);
         }
 

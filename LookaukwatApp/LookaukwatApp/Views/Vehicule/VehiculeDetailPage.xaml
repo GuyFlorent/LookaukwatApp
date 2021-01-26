@@ -7,8 +7,10 @@
              Title="{Binding Title}">
 
 
-   
-    
+    <ContentPage.BindingContext>
+        <local:VehiculeDetailViewModel></local:VehiculeDetailViewModel>
+    </ContentPage.BindingContext>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter"></converter:StringNullOrEmptyBoolConverter>
@@ -18,7 +20,7 @@
     <StackLayout>
         <ScrollView>
         <StackLayout >
-            <ActivityIndicator IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+            <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
                 <CarouselView ItemsSource="{Binding Images}"
                           IndicatorView="indicatorview"
                           HeightRequest="380">
@@ -26,21 +28,22 @@
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
-                                <Frame HasShadow="True"
-                       BorderColor="DarkGray"
-                       CornerRadius="5"
-                       Margin="20"
-                       HeightRequest="300"
-                       HorizontalOptions="Center"
-                       VerticalOptions="StartAndExpand">
 
-                                    <Image Source="{Binding .}"
+
+                                <Image Source="{Binding .}"
                                Aspect="AspectFill"
                                HeightRequest="300"
-                               WidthRequest="300"
-                               HorizontalOptions="Center" />
+                               HorizontalOptions="FillAndExpand"/>
 
-                                </Frame>
+
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:VehiculeDetailViewModel}}, Path=TappedImageCommand}"		
+                                CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
                             </StackLayout>
                         </DataTemplate>
                     </CarouselView.ItemTemplate>
@@ -51,7 +54,7 @@
             AbsoluteLayout.LayoutFlags="PositionProportional"
             IndicatorColor="LightGray"
             IndicatorSize="10"
-            SelectedIndicatorColor="Black" />
+            SelectedIndicatorColor="Blue" />
 
             <StackLayout Margin="10,15,10,15">
                     <StackLayout IsVisible="false">

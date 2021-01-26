@@ -16,7 +16,7 @@ namespace LookaukwatApp.Views.ModeView
         public ModeDetailPage()
         {
             InitializeComponent();
-            BindingContext = new ModeDetailViewModel();
+           // BindingContext = new ModeDetailViewModel();
             Shell.SetTabBarIsVisible(this, false);
         }
 

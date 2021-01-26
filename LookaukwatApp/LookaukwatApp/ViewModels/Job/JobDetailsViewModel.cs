@@ -2,6 +2,7 @@
 using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.OtherServices;
+using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.JobView;
 using LookaukwatApp.Views.MessageView;
 using Rg.Plugins.Popup.Services;
@@ -46,7 +47,7 @@ namespace LookaukwatApp.ViewModels.Job
         public Command ShareCommand { get; set; }
         public Command ClipBoardCommand { get; set; }
         public Command SendMessageCommand { get; set; }
-       
+        public Command TappedImageCommand { get; set; }
 
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
@@ -158,7 +159,10 @@ namespace LookaukwatApp.ViewModels.Job
             set
             {
                 itemId = value;
-                LoadItemId(value);
+                if (value != null)
+                {
+                    LoadItemId(value);
+                }
             }
         }
 
@@ -170,7 +174,15 @@ namespace LookaukwatApp.ViewModels.Job
             ShareCommand = new Command(OnShareCommand);
             ClipBoardCommand = new Command(OnClipboard);
             SendMessageCommand = new Command(OnSendMessage);
-            
+            TappedImageCommand = new Command<string>(OnTappedImage);
+
+        }
+
+        public async void OnTappedImage(string image)
+        {
+            var index = Images.IndexOf(image);
+            Images.Move(index, 0);
+            await App.Current.MainPage.Navigation.PushAsync(new DisplayFullImagePage(Images));
         }
 
         public async void LoadItemId(string itemId)
@@ -212,6 +224,7 @@ namespace LookaukwatApp.ViewModels.Job
             catch (Exception)
             {
                 Debug.WriteLine("Failed to Load Item");
+                IsRunning = false;
             }
 
         }

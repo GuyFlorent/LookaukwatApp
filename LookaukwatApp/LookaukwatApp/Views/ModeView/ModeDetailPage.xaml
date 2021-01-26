@@ -6,8 +6,10 @@
              x:Class="LookaukwatApp.Views.ModeView.ModeDetailPage"
              Title="{Binding Title}">
 
+    <ContentPage.BindingContext>
+        <local:ModeDetailViewModel></local:ModeDetailViewModel>
+    </ContentPage.BindingContext>
 
-  
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter"></converter:StringNullOrEmptyBoolConverter>
@@ -24,24 +26,25 @@
 
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <Frame HasShadow="True"
-                       BorderColor="DarkGray"
-                       CornerRadius="5"
-                       Margin="20"
-                       HeightRequest="300"
-                       HorizontalOptions="Center"
-                       VerticalOptions="StartAndExpand">
+                            <StackLayout>
+
 
                                 <Image Source="{Binding .}"
                                Aspect="AspectFill"
                                HeightRequest="300"
-                               WidthRequest="300"
-                               HorizontalOptions="Center" />
+                               HorizontalOptions="FillAndExpand"/>
 
-                            </Frame>
-                        </StackLayout>
-                    </DataTemplate>
+
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ModeDetailViewModel}}, Path=TappedImageCommand}"		
+                                CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
             <IndicatorView
@@ -50,7 +53,7 @@
             AbsoluteLayout.LayoutFlags="PositionProportional"
             IndicatorColor="LightGray"
             IndicatorSize="10"
-            SelectedIndicatorColor="Black" />
+            SelectedIndicatorColor="Blue" />
 
             <StackLayout Margin="10,15,10,15">
                     <StackLayout IsVisible="false">

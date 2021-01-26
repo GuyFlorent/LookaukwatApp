@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.OtherServices"
+             x:Class="LookaukwatApp.Views.ImageView.DisplayFullImagePage"
+             BackgroundColor="Black">
+
+    <Shell.TitleView>
+        <Image Source="logo_lookaukwat_xam1.png"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+    </Shell.TitleView>
+
+    <StackLayout>
+
+    <CarouselView x:Name="CarouselImages"
+                          IndicatorView="indicatorview"
+                          >
+
+        <CarouselView.ItemTemplate>
+            <DataTemplate>
+                   
+                
+                            <local:PinchToZoomContainer>
+                                <local:PinchToZoomContainer.Content>
+                                <Image Source="{Binding .}"
+                               Aspect="AspectFill"
+                              WidthRequest="{DynamicResource FullScreenWidth}"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="CenterAndExpand"/>
+                                </local:PinchToZoomContainer.Content>
+                            </local:PinchToZoomContainer>
+                     
+
+            </DataTemplate>
+        </CarouselView.ItemTemplate>
+    </CarouselView>
+    <IndicatorView
+            x:Name="indicatorview"
+            AbsoluteLayout.LayoutBounds="0.5,0.95,100,100"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            IndicatorColor="LightGray"
+            IndicatorSize="10"
+            SelectedIndicatorColor="Blue" />
+    </StackLayout>
+</ContentPage>

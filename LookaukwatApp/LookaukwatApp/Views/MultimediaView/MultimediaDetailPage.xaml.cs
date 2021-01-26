@@ -16,7 +16,7 @@ namespace LookaukwatApp.Views.MultimediaView
         public MultimediaDetailPage()
         {
             InitializeComponent();
-            BindingContext = new MultimediaDetailViewModel();
+            //BindingContext = new MultimediaDetailViewModel();
             Shell.SetTabBarIsVisible(this, false);
         }
 

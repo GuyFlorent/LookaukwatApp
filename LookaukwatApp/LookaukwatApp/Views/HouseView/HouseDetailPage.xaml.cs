@@ -16,7 +16,7 @@ namespace LookaukwatApp.Views.HouseView
         public HouseDetailPage()
         {
             InitializeComponent();
-            BindingContext = new HouseDetailViewModel();
+            //BindingContext = new HouseDetailViewModel();
             Shell.SetTabBarIsVisible(this, false);
         }
 

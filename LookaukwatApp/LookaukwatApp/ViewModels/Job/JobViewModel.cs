@@ -86,7 +86,9 @@ namespace LookaukwatApp.ViewModels.Job
         {
             return !String.IsNullOrWhiteSpace(TitleJob)
                 && !String.IsNullOrWhiteSpace(Description)
-                && !String.IsNullOrWhiteSpace(Street);
+                && !String.IsNullOrWhiteSpace(Street)
+                && !String.IsNullOrWhiteSpace(ActivitySector)
+                && !String.IsNullOrWhiteSpace(TypeContract);
         }
 
 

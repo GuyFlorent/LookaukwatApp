@@ -40,7 +40,7 @@ namespace LookaukwatApp.Views.LoginView
         private async void ClosePoppup_Button(object o, EventArgs e)
         {
             await PopupNavigation.Instance.PopAllAsync();
-
+            await Shell.Current.GoToAsync("//MainPage/ItemsPage");
         }
     }
 }

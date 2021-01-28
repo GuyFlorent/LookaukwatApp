@@ -19,6 +19,7 @@ namespace LookaukwatApp.Models.MobileModels
 
         public DateTime DateAdd { get; set; }
         public string Date { get; set; }
+        public string DateLetter { get; set; }
         public string Image { get; set; }
 
       

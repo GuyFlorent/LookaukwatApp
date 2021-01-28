@@ -15,6 +15,8 @@
             <converter:VehiculeModelAutoCheckingForm x:Key="VehiculeModelAutoCheckingForm"></converter:VehiculeModelAutoCheckingForm>
             <converter:VehiculeModelMotoAccessoryChecking x:Key="VehiculeModelMotoAccessoryChecking"></converter:VehiculeModelMotoAccessoryChecking>
             <converter:VehiculeAutoMotoCheckingForm x:Key="VehiculeAutoMotoCheckingForm"></converter:VehiculeAutoMotoCheckingForm>
+            <converter:VehiculeAutoOtherBrandModel x:Key="VehiculeAutoOtherBrandModel"></converter:VehiculeAutoOtherBrandModel>
+            <converter:VehiculeAuto_Different_OtherBrandModel x:Key="VehiculeAuto_Different_OtherBrandModel"></converter:VehiculeAuto_Different_OtherBrandModel>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -74,6 +76,8 @@
             <!--only for auto and rent auto-->
 
             <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
+
+                    <StackLayout IsVisible="{Binding Brand, Converter={StaticResource VehiculeAuto_Different_OtherBrandModel}}">
                 <Label Text="Modèle"
                        TextColor="Black"
                     FontSize="Subtitle"
@@ -86,6 +90,23 @@
                     SelectedItem="{Binding Model, Mode=TwoWay}">
                 </Picker>
             </StackLayout>
+
+                    <!--only for auto other brand-->
+
+                    <StackLayout IsVisible="{Binding Brand, Converter={StaticResource VehiculeAutoOtherBrandModel}}">
+                        <Label Text="Modèle"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                        </Label>
+                        <Entry Placeholder="Ex : Bmw serie 8, Opel Tigra ..."
+                   Text="{Binding Model}"
+                       Keyboard="Text"></Entry>
+                    </StackLayout>
+
+                </StackLayout>
+
+               
 
 
                 <!--For search and ask-->

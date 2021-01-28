@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using Xamarin.Forms;
 
@@ -1136,8 +1137,15 @@ namespace LookaukwatApp.ViewModels.Search
                         }
                         break;
                     default:
+                        GetEquipmentModel(rubrique, brand);
                         break;
                 }
+            }else if(rubrique == "Equipement Auto" || rubrique == "Equipement Moto")
+            {
+                VehiculeModels.Clear();
+
+                GetEquipmentModel(rubrique, brand);
+                
             }
         }
 
@@ -1674,5 +1682,13 @@ namespace LookaukwatApp.ViewModels.Search
 
         }
 
+        private async void GetEquipmentModel(string rubrique, string brand)
+        {
+           var liste =  await _apiServices.GetVehiculeEquipementModelAsync(rubrique, brand);
+            foreach (var model in liste)
+            {
+                VehiculeModels.Add(model);
+            }
+        }
     }
 }

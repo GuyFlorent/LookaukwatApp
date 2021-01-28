@@ -130,7 +130,7 @@
 
                                             <Label Grid.Column="1"
                            Grid.Row="3"
-                       Text="{Binding Date}"
+                       Text="{Binding DateLetter}"
                        VerticalOptions="End"
                                        ></Label>
                                         </Grid>

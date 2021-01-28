@@ -1597,6 +1597,26 @@ namespace LookaukwatApp.Services
             return result;
         }
 
+        public async Task<List<string>> GetVehiculeEquipementModelAsync(string rubrique, string brand)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+           // userSearchCondition.MultimediaRubrique = HttpUtility.UrlEncode(userSearchCondition.MultimediaRubrique);
+            var json = await client.GetStringAsync(Uri + "api/Vehicule/GetModel/?rubrique=" + rubrique + "&brand=" + brand);
+
+            var result = JsonConvert.DeserializeObject<List<string>>(json);
+
+            return result;
+        }
+
         public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachMultiAsync(SearchModel userSearchCondition, int pageIndex, int pageSize, string sortBy)
         {
             HttpClient client;

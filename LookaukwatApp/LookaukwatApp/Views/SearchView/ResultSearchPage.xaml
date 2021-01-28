@@ -75,10 +75,11 @@
                         <ViewCell>
                             <Frame Margin="0,0,0,10"  
                                    HasShadow="True"
-                                   BorderColor="SkyBlue">
+                                   BorderColor="SkyBlue"
+                                    BackgroundColor="GhostWhite">
                                 <StackLayout BackgroundColor="GhostWhite">
 
-                                    <Grid >
+                                    <Grid BackgroundColor="GhostWhite">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"></RowDefinition>
                                             <RowDefinition Height="*"></RowDefinition>

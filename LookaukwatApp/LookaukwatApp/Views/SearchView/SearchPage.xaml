@@ -36,16 +36,18 @@
                 <StackLayout Margin="20,35,20,25">
 
                     <Label Text="Choisir une catégorie"
-                   TextColor="Blue"
+                   TextColor="#2196F3"
                     FontSize="Subtitle"
+                           FontAttributes="Bold"
                        />
                     <Picker Title="Choisir une catégorie"
                     ItemsSource="{Binding Categoryliste}"
                     SelectedItem="{Binding Categori, Mode=TwoWay}"></Picker>
 
                     <Label Text="Choisir une ville"
-                   TextColor="Blue"
+                  TextColor="#2196F3"
                     FontSize="Subtitle"
+                           FontAttributes="Bold"
                        />
                     <Picker Title="Choisir une ville"
                     ItemsSource="{Binding TownList}"
@@ -60,8 +62,9 @@
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource ApartCheckSearchCategory}}">
 
                             <Label Text="Type de bien"
-                       TextColor="Blue"
+                      TextColor="#2196F3"
                     FontSize="Subtitle"
+                           FontAttributes="Bold"
                        ></Label>
                             <Picker 
                     
@@ -71,8 +74,9 @@
                             </Picker>
 
                             <Label Text="Prix/Loyer Maximal"
-                   TextColor="Blue"
+                   TextColor="#2196F3"
                     FontSize="Subtitle"
+                           FontAttributes="Bold"
                       />
 
                             <StackLayout Orientation="Vertical">
@@ -80,7 +84,7 @@
                 Maximum="1000000"
                 Minimum="0"
                 MaximumTrackColor="DarkGray"
-                MinimumTrackColor="Blue"
+                MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceApart"/>
 
                                 <Label Text="{Binding Source={x:Reference sliderPriceApart},
@@ -91,8 +95,9 @@
 
 
                             <Label Text="Surface maximale"
-                   TextColor="Blue"
+                    TextColor="#2196F3"
                     FontSize="Subtitle"
+                           FontAttributes="Bold"
                        />
 
                             <StackLayout Orientation="Vertical">
@@ -100,7 +105,7 @@
                 Maximum="2000"
                 Minimum="0"
                MaximumTrackColor="DarkGray"
-                MinimumTrackColor="Blue"
+                MinimumTrackColor="#2196F3"
                     x:Name="sliderSurface"/>
 
                                 <Label Text="{Binding Source={x:Reference sliderSurface},
@@ -113,8 +118,9 @@
                             <StackLayout IsVisible="{Binding TypeAppart, Converter={StaticResource ApartCheckingForm}}">
 
                                 <Label Text="Nombre de pièces maximal"
-                   TextColor="Blue"
+                    TextColor="#2196F3"
                     FontSize="Subtitle"
+                           FontAttributes="Bold"
                        />
 
                                 <StackLayout Orientation="Vertical">
@@ -122,7 +128,7 @@
                 Maximum="10"
                 Minimum="0"
                 MaximumTrackColor="DarkGray"
-                MinimumTrackColor="Blue"
+                MinimumTrackColor="#2196F3"
                     x:Name="sliderNumberOfRoom"/>
 
                                     <Label Text="{Binding Source={x:Reference sliderNumberOfRoom},
@@ -132,8 +138,9 @@
                                 </StackLayout>
 
                                 <Label Text="Meublé/Non meublé"
-                       TextColor="Blue"
+                       TextColor="#2196F3"
                     FontSize="Subtitle"
+                                       FontAttributes="Bold"
                        ></Label>
                                 <Picker 
                     
@@ -148,8 +155,9 @@
 
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource HouseCheckSearchCategory}}">
                             <Label Text="Rubrique"
-                   TextColor="Blue"
+                      TextColor="#2196F3"
                     FontSize="Subtitle"
+                           FontAttributes="Bold"
                        ></Label>
                             <Picker 
                     
@@ -159,8 +167,9 @@
                             </Picker>
                             <StackLayout IsVisible="{Binding RubriqueHouse, Converter={StaticResource HouseCheckingForm}}">
                                 <Label Text="type"
-                   TextColor="Blue"
-                        FontSize="Subtitle"
+                      TextColor="#2196F3"
+                    FontSize="Subtitle"
+                           FontAttributes="Bold"
                       ></Label>
                                 <Picker 
                     
@@ -170,8 +179,9 @@
                                 </Picker>
 
                                 <Label Text="Prix maximal"
-                   TextColor="Blue"
+                     TextColor="#2196F3"
                     FontSize="Subtitle"
+                           FontAttributes="Bold"
                       />
 
                                 <StackLayout Orientation="Vertical">
@@ -179,7 +189,7 @@
                 Maximum="100000"
                 Minimum="0"
                MaximumTrackColor="DarkGray"
-                MinimumTrackColor="Blue"
+                MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceHouse"/>
 
                                     <Label Text="{Binding Source={x:Reference sliderPriceHouse},
@@ -189,8 +199,9 @@
                                 </StackLayout>
 
                                 <Label Text="Matériel de fabrication"
-                       TextColor="Blue"
-                        FontSize="Subtitle"
+                      TextColor="#2196F3"
+                    FontSize="Subtitle"
+                           FontAttributes="Bold"
                        >
                                 </Label>
                                 <Picker 
@@ -203,8 +214,9 @@
 
 
                             <Label Text="Couleur"
-                       TextColor="Blue"
+                      TextColor="#2196F3"
                     FontSize="Subtitle"
+                           FontAttributes="Bold"
                       >
                             </Label>
                             <Picker 
@@ -215,8 +227,9 @@
                             </Picker>
 
                             <Label Text="L'état de l'article"
-                       TextColor="Blue"
+                     TextColor="#2196F3"
                     FontSize="Subtitle"
+                           FontAttributes="Bold"
                        >
                             </Label>
                             <Picker 
@@ -231,8 +244,9 @@
 
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource JobCheckSearchCategory}}">
                             <Label Text="Secteur d'activité"
-                       TextColor="Blue"
+                       TextColor="#2196F3"
                             FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       ></Label>
                             <Picker 
                     x:Name="pickerActivitySectork" 
@@ -241,8 +255,9 @@
                     SelectedItem="{Binding ActivitySector, Mode=TwoWay}">
                             </Picker>
                             <Label Text="Type de contrat"
-                       TextColor="Blue"
+                       TextColor="#2196F3"
                             FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        ></Label>
                             <Picker 
                     x:Name="pickerTypeContract" 
@@ -252,8 +267,9 @@
                             </Picker>
 
                             <Label Text="Salaire maximal"
-                   TextColor="Blue"
+                   TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       />
 
                             <StackLayout Orientation="Vertical">
@@ -261,7 +277,7 @@
                 Maximum="300000"
                 Minimum="0"
                 MaximumTrackColor="DarkGray"
-                MinimumTrackColor="Blue"
+                MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceJob"/>
 
                                 <Label Text="{Binding Source={x:Reference sliderPriceJob},
@@ -275,8 +291,9 @@
 
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource ModeCheckSearchCategory}}">
                             <Label Text="Rubrique"
-                   TextColor="Blue"
+                  TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        ></Label>
                             <Picker 
                     
@@ -286,8 +303,9 @@
                             </Picker>
 
                             <Label Text="type"
-                   TextColor="Blue"
+                   TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       ></Label>
                             <Picker 
                     
@@ -297,8 +315,9 @@
                             </Picker>
 
                             <Label Text="Marque"
-                       TextColor="Blue"
+                      TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                             </Label>
                             <Picker 
@@ -309,8 +328,9 @@
                             </Picker>
 
                             <Label Text="Prix maximal"
-                   TextColor="Blue"
+                  TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       />
 
                             <StackLayout Orientation="Vertical">
@@ -318,7 +338,7 @@
                 Maximum="100000"
                 Minimum="0"
                  MaximumTrackColor="DarkGray"
-                MinimumTrackColor="Blue"
+                MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceMode"/>
 
                                 <Label Text="{Binding Source={x:Reference sliderPriceMode},
@@ -328,8 +348,9 @@
                             </StackLayout>
 
                             <Label Text="Sexe"
-                       TextColor="Blue"
+                      TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                             </Label>
                             <Picker 
@@ -341,8 +362,9 @@
 
                             <StackLayout IsVisible="{Binding Rubrique, Converter={StaticResource ModeCheckingForm}}">
                                 <Label Text="Taille"
-                       TextColor="Blue"
+                       TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       >
                                 </Label>
                                 <Picker 
@@ -353,8 +375,9 @@
                                 </Picker>
                             </StackLayout>
                             <Label Text="Couleur"
-                       TextColor="Blue"
+                       TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                             </Label>
                             <Picker 
@@ -365,8 +388,9 @@
                             </Picker>
 
                             <Label Text="L'état de l'article"
-                       TextColor="Blue"
+                      TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                             </Label>
                             <Picker 
@@ -382,8 +406,9 @@
 
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource MultimediaCheckSearchCategory}}">
                             <Label Text="Rubrique"
-                   TextColor="Blue"
-                        FontSize="Subtitle"
+                   TextColor="#2196F3"
+                    FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        ></Label>
                             <Picker 
                     
@@ -393,8 +418,9 @@
                             </Picker>
 
                             <Label Text="Marque"
-                   TextColor="Blue"
-                        FontSize="Subtitle"
+                  TextColor="#2196F3"
+                    FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       ></Label>
                             <Picker 
                     
@@ -404,8 +430,9 @@
                             </Picker>
 
                             <Label Text="Modèle"
-                       TextColor="Blue"
+                       TextColor="#2196F3"
                         FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                             </Label>
                             <Picker 
@@ -416,8 +443,9 @@
                             </Picker>
 
                             <Label Text="Prix maximal"
-                   TextColor="Blue"
-                        FontSize="Subtitle"
+                    TextColor="#2196F3"
+                    FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        />
 
                             <StackLayout Orientation="Vertical">
@@ -425,7 +453,7 @@
                 Maximum="100000"
                 Minimum="0"
                  MaximumTrackColor="DarkGray"
-                MinimumTrackColor="Blue"
+                MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceMultimedia"/>
 
                                 <Label Text="{Binding Source={x:Reference sliderPriceMultimedia},
@@ -435,8 +463,9 @@
                             </StackLayout>
 
                             <Label Text="Capacité"
-                       TextColor="Blue"
-                        FontSize="Subtitle"
+                       TextColor="#2196F3"
+                    FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       >
                             </Label>
                             <Picker 
@@ -451,8 +480,9 @@
 
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource VehiculeCheckSearchCategory}}">
                             <Label Text="Rubrique"
-                   TextColor="Blue"
+                  TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       ></Label>
                             <Picker 
                     
@@ -462,8 +492,9 @@
                             </Picker>
 
                             <Label Text="Marque"
-                       TextColor="Blue"
+                      TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       >
                             </Label>
                             <Picker 
@@ -475,10 +506,11 @@
 
                             <!--only for auto and rent auto-->
 
-                            <StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
+                            <!--<StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">-->
                                 <Label Text="Modèle"
-                       TextColor="Blue"
+                      TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                                 </Label>
                                 <Picker 
@@ -487,11 +519,12 @@
                     ItemsSource="{Binding VehiculeModels}"
                     SelectedItem="{Binding VehiculeModel, Mode=TwoWay}">
                                 </Picker>
-                            </StackLayout>
+                            <!--</StackLayout>-->
 
                             <Label Text="Prix maximal"
-                   TextColor="Blue"
+                    TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        />
 
                             <StackLayout Orientation="Vertical">
@@ -499,7 +532,7 @@
                 Maximum="2000000"
                 Minimum="0"
                 MaximumTrackColor="DarkGray"
-                MinimumTrackColor="Blue"
+                MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceVehicule"/>
 
                                 <Label Text="{Binding Source={x:Reference sliderPriceVehicule},
@@ -509,8 +542,9 @@
                             </StackLayout>
 
                             <Label Text="L'état"
-                       TextColor="Blue"
+                         TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                             </Label>
                             <Picker 
@@ -522,8 +556,9 @@
                             <!--only for auto-->
                             <StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
                                 <Label Text="type"
-                   TextColor="Blue"
+                     TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       ></Label>
                                 <Picker 
                     
@@ -535,8 +570,9 @@
                             <!--only for auto and moto bike not accessory-->
                             <StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeAutoMotoCheckingForm}}">
                                 <Label Text="Carburant"
-                       TextColor="Blue"
+                         TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                                 </Label>
                                 <Picker 
@@ -547,8 +583,9 @@
                                 </Picker>
 
                                 <Label Text="Année"
-                       TextColor="Blue"
+                         TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                                 </Label>
                                 <StackLayout Orientation="Vertical">
@@ -556,7 +593,7 @@
                 Maximum="2021"
                 Minimum="1960"
                 MaximumTrackColor="DarkGray"
-                MinimumTrackColor="Blue"
+                MinimumTrackColor="#2196F3"
                     x:Name="sliderVehiculeYear"/>
 
                                     <Label Text="{Binding Source={x:Reference sliderVehiculeYear},
@@ -566,8 +603,9 @@
                                 </StackLayout>
 
                                 <Label Text="Kilométrage maximal"
-                       TextColor="Blue"
+                       TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                                 </Label>
 
@@ -576,7 +614,7 @@
                 Maximum="300000"
                 Minimum="0"
                  MaximumTrackColor="DarkGray"
-                MinimumTrackColor="Blue"
+                MinimumTrackColor="#2196F3"
                     x:Name="slider"/>
 
                                     <Label Text="{Binding Source={x:Reference slider},
@@ -589,8 +627,9 @@
 
                             <StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
                                 <Label Text="Nombre de portes"
-                       TextColor="Blue"
+                         TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                       >
                                 </Label>
                                 <Picker 
@@ -601,8 +640,9 @@
                                 </Picker>
                             </StackLayout >
                             <Label Text="Couleur"
-                       TextColor="Blue"
+                       TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                             </Label>
                             <Picker 
@@ -614,8 +654,9 @@
 
                             <StackLayout IsVisible="{Binding VehiculeRubrique, Converter={StaticResource VehiculeModelAutoCheckingForm}}">
                                 <Label Text="Transmission"
-                       TextColor="Blue"
+                       TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        >
                                 </Label>
                                 <Picker 
@@ -636,8 +677,9 @@
 
 
                     <Label Text="Type d'annonce"
-                   TextColor="Blue"
+                    TextColor="#2196F3"
                     FontSize="Subtitle"
+                                   FontAttributes="Bold"
                        />
                     <StackLayout Orientation="Horizontal">
                         <StackLayout Orientation="Horizontal">

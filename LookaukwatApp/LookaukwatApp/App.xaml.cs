@@ -42,6 +42,7 @@ namespace LookaukwatApp
 
                     switch (Controler)
                     {
+                        
                         case "Home":
                            
                                 Device.BeginInvokeOnMainThread(async () =>

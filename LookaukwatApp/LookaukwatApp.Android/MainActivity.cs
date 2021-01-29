@@ -14,27 +14,27 @@ namespace LookaukwatApp.Droid
     [IntentFilter(new[] { Android.Content.Intent.ActionView },
                   DataScheme = "https",
                   DataHost = "lookaukwat.com",
-                  DataPathPrefixes = new[] { "/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
+                  DataPathPrefixes = new[] { "/","/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
                   AutoVerify = true,
                   Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Android.Content.Intent.ActionView },
                   DataScheme = "http",
                   DataHost = "lookaukwat.com",
                   AutoVerify = true,
-                 DataPathPrefixes = new[] { "/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
+                 DataPathPrefixes = new[] { "/","/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
                   Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
     
     [IntentFilter(new[] { Android.Content.Intent.ActionView },
                   DataScheme = "https",
                   DataHost = "lookaukwat.azurewebsites.net",
-                  DataPathPrefixes = new[] { "/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule","/Mode", "/House" },
+                  DataPathPrefixes = new[] { "/","/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule","/Mode", "/House" },
                   AutoVerify = true,
                   Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Android.Content.Intent.ActionView },
                   DataScheme = "http",
                   DataHost = "lookaukwat.azurewebsites.net",
                   AutoVerify = true,
-                  DataPathPrefixes = new[] { "/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
+                  DataPathPrefixes = new[] { "/","/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
                   Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

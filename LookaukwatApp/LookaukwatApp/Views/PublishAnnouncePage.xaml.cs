@@ -1,4 +1,5 @@
 ﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.ViewModels.Login;
 using LookaukwatApp.Views.LoginView;
 using LookaukwatApp.Views.RegisterView;
 using Rg.Plugins.Popup.Services;
@@ -29,11 +30,15 @@ namespace LookaukwatApp.Views
             var username = Settings.Username;
             var password = Settings.Password;
 
-            //if (!string.IsNullOrWhiteSpace(token))
-            //{
-            //    await Shell.Current.GoToAsync(nameof(PublishAnnouncePage));
-            //}
-            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && string.IsNullOrWhiteSpace(token))
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+               if(DateTime.UtcNow.AddHours(3)> Settings.AccessTokenExpiration)
+                {
+                    var Vm = new LoginViewModel();
+                    Vm.LoginCommandToRenewToken.Execute(null);
+                }
+            }
+             else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && string.IsNullOrWhiteSpace(token))
             {
                 //await Navigation.PushAsync(new LoginPage());
                 await PopupNavigation.Instance.PushAsync(new LoginPage());
@@ -46,6 +51,7 @@ namespace LookaukwatApp.Views
                 // await Navigation.PushModalAsync(new RegisterPage());
                 // Navigation.RemovePage(this);
             }
+
 
         }
     }

@@ -63,7 +63,7 @@ namespace LookaukwatApp.Views.MessageView
             Indicator.IsVisible = false;
             Indicator.IsRunning = false;
 
-            await DisplayAlert("Alerte", "Votre annonce a été envoyé avec succès. Merci de votre confiance", "Ok");
+            await DisplayAlert("Information", "Votre message a été envoyé avec succès. Merci de votre confiance", "Ok");
             await PopupNavigation.Instance.PopAllAsync();
         }
 

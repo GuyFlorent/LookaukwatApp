@@ -16,6 +16,20 @@ namespace LookaukwatApp.ViewModels.StaticList
            "Véhicule"
 
         };
+
+        public static List<string> SignalAnnouceMotifList = new List<string>()
+        {
+          "Fraude",
+          "Doublon",
+          "Mauvaise catégorie",
+          "Déja vendu",
+          "Discrimination",
+          "Contrefacon",
+          "Autreabus",
+        };
+
+
+
         public static List<string> OfferOSearchList = new List<string>()
         {
           "J'offre",

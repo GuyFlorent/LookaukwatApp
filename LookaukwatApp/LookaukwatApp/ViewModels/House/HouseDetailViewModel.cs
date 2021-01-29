@@ -55,6 +55,7 @@ namespace LookaukwatApp.ViewModels.House
         public Command ClipBoardCommand { get; set; }
         public Command SendMessageCommand { get; set; }
         public Command TappedImageCommand { get; set; }
+        public Command SignalCommand { get; set; }
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
 
@@ -199,6 +200,7 @@ namespace LookaukwatApp.ViewModels.House
             ClipBoardCommand = new Command(OnClipboard);
             SendMessageCommand = new Command(OnSendMessage);
             TappedImageCommand = new Command<string>(OnTappedImage);
+            SignalCommand = new Command(OnSignal);
         }
 
         public async void OnTappedImage(string image)
@@ -280,7 +282,7 @@ namespace LookaukwatApp.ViewModels.House
             {
                 NameSender = Settings.FirstName,
                 EmailSender = Settings.Username,
-                Category = "Mode",
+                Category = "House",
                 Linkshare = "https://lookaukwat.com/House/HouseDetail/" + Id,
                 RecieverEmail = Email,
                 RecieverName = Name,
@@ -288,6 +290,22 @@ namespace LookaukwatApp.ViewModels.House
             };
 
             await PopupNavigation.Instance.PushAsync(new ContactEmailUserPage(contact));
+        }
+
+        private async void OnSignal()
+        {
+            contactUserViewModel contact = new contactUserViewModel()
+            {
+                NameSender = Settings.FirstName,
+                EmailSender = Settings.Username,
+                Category = "House",
+                Linkshare = "https://lookaukwat.com/House/HouseDetail/" + Id,
+                RecieverEmail = "contact@lookaukwat.com",
+                RecieverName = "Staff lookaukwat",
+                SubjectSender = "Votre article en vente sur lookaukwat me plaît"
+            };
+
+            await App.Current.MainPage.Navigation.PushAsync(new SignalAnnoucePage(contact));
         }
     }
 }

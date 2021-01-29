@@ -359,7 +359,19 @@
                    LineBreakMode="WordWrap"
                    Margin="0,0,0,20"></Label>
 
-                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+                    <BoxView Margin="0,0,0,10" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+                    <StackLayout Margin="0,0,0,10"
+                                 Orientation="Horizontal">
+                        <Image Source="flag_triangle"
+                               Aspect="AspectFit"></Image>
+                        <Button Text="Signaler l'annonce"
+                                TextColor="#2196F3"
+                                FontSize="Subtitle"
+                                BackgroundColor="Transparent"
+                                Command="{Binding SignalCommand}"></Button>
+                    </StackLayout>
+
+                    <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
                 <Grid Margin="10,0,10,20">
 
                     <Grid.ColumnDefinitions>

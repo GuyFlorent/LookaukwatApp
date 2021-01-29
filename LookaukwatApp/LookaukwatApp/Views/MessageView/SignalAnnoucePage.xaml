@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.MessageView.SignalAnnoucePage"
+             Title="Signaler un abus">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Envoyer" Clicked="SendMessage_Button" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout Margin="15,35,20,25">
+            <ActivityIndicator x:Name="Indicator" 
+                                   Color ="#80000000"/>
+            <Label Text="Motif"
+                    x:Name="LabelMotif"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold">
+            </Label>
+
+            <Picker 
+                    x:Name="TextMotif"
+                    Title="choisir le motif"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged">
+            </Picker>
+            
+            <Label Text="Prénom"
+                    x:Name="LabelName"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold">
+            </Label>
+            <Entry x:Name="Name" 
+                   Placeholder="Prénom /Raison sociale"
+                   Keyboard="Text"></Entry>
+            
+            <Label Text="Email ou numéro de téléphone"
+                   x:Name="LabelEmail"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold">
+            </Label>
+            <Entry x:Name="Email"
+                   Placeholder="Votre Email ou Numéro de téléphone"
+                   Keyboard="Email"></Entry>
+
+            <Label Text="Description"
+                   x:Name="LabelDescription"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontAttributes="Bold">
+            </Label>
+
+            <Editor x:Name="Description"
+                    Placeholder="Description excacte"
+                    AutoSize="TextChanges"></Editor>
+            
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

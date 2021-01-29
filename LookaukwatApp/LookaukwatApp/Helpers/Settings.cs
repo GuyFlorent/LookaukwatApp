@@ -151,5 +151,17 @@ namespace LookaukwatApp.Helpers
             }
         }
 
+        public static DateTime AccessTokenExpiration
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("AccessTokenExpiration", DateTime.UtcNow);
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("AccessTokenExpiration", value);
+            }
+        }
+
     }
 }

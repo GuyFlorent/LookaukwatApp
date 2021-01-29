@@ -12,6 +12,7 @@ namespace LookaukwatApp.ViewModels.Login
     public class LoginViewModel : BaseViewModel
     {
         public Command LoginCommand { get; set; }
+        public Command LoginCommandToRenewToken { get; set; }
         public Command LoginByPhoneCommand { get; set; }
         public Command LoginUserAccountCommand { get; set; }
         public Command LoginUserAccountByPhoneCommand { get; set; }
@@ -36,7 +37,7 @@ namespace LookaukwatApp.ViewModels.Login
             TitlePage = "Connexion par email";
             LoginCommand = new Command(OnLoginClicked);
             LoginByPhoneCommand = new Command(OnLoginByPhoneClicked);
-            RegisterViewCommand = new Command(OnRegisterViewClicked);
+            LoginCommandToRenewToken = new Command(OnLoginToRenewToken);
             LoginUserAccountCommand = new Command(OnLoginReturnUserClicked);
             LoginUserAccountByPhoneCommand = new Command(OnLoginByPhoneReturnUserClicked);
             this.PropertyChanged +=
@@ -102,10 +103,12 @@ namespace LookaukwatApp.ViewModels.Login
                 }
             }
         }
-        private async void OnRegisterViewClicked(object obj)
+        private async void OnLoginToRenewToken(object obj)
         {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync(nameof(RegisterPage));
+           
+                var accesstonken = await _apiServices.LoginASync(Settings.Username, Settings.Password);
+            if (accesstonken != null)
+                Settings.AccessToken = accesstonken;
         }
         private async void OnLoginClicked()
         {

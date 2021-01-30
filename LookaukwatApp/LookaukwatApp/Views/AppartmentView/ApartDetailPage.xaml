@@ -53,7 +53,7 @@
             AbsoluteLayout.LayoutFlags="PositionProportional"
             IndicatorColor="LightGray"
             IndicatorSize="10"
-            SelectedIndicatorColor="Blue" />
+            SelectedIndicatorColor="#2196F3" />
 
             <StackLayout Margin="10,15,10,15">
                     <StackLayout IsVisible="false">
@@ -76,7 +76,7 @@
                 </Label>
 
                 <Label Text="{Binding Date}"
-                    TextColor="Green" Margin="0,0,0,20"></Label>
+                     Margin="0,0,0,20"></Label>
 
 
                 <Label>
@@ -308,11 +308,11 @@
                     </Grid.ColumnDefinitions>
                     <StackLayout Orientation="Horizontal">
                         <ImageButton Source="share"
-                                 HeightRequest="30"
-                                 WidthRequest="30"
+                                 HeightRequest="35"
+                                 WidthRequest="35"
                                  BackgroundColor="Transparent"
                                  Command="{Binding ShareCommand}"
-                                ></ImageButton>
+                                 Aspect="AspectFit"></ImageButton>
                         <Label 
                            Text="Partager"
                            FontAttributes="Italic"
@@ -324,11 +324,12 @@
                                  HorizontalOptions="End">
                         <ImageButton 
                                  Source="link"
-                                 HeightRequest="30"
-                                 WidthRequest="30"
+                                 HeightRequest="35"
+                                 WidthRequest="35"
                                  BackgroundColor="Transparent"
                                  Command="{Binding ClipBoardCommand}"
-                                 Clicked="CopyLink_Click"></ImageButton>
+                                 Clicked="CopyLink_Click"
+                            Aspect="AspectFit"></ImageButton>
                         <Label 
                            
                            Text="Copier le lien"
@@ -355,12 +356,13 @@
                         <DataTemplate>
                             <StackLayout>
                                 <Frame HasShadow="True"
-                       BorderColor="DarkGray"
+                       BorderColor="#2196F3"
                        CornerRadius="5"
                        Margin="5"
                        HeightRequest="290"
                        HorizontalOptions="Start"
-                       VerticalOptions="Start">
+                       VerticalOptions="Start"
+                       BackgroundColor="GhostWhite"                >
                                     <StackLayout>
 
                                         <Image Source="{Binding Image}"
@@ -382,12 +384,11 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-
-                                        <Label Text="{Binding Date}"
-                                               TextColor="Green" ></Label>
-                                        <Label Text="{Binding Town}"
+                                            <Label Text="{Binding Town}"
                                                 ></Label>
-
+                                            <Label Text="{Binding Date}"
+                                                ></Label>
+                                        
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

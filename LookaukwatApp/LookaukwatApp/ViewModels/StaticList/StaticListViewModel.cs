@@ -25,7 +25,7 @@ namespace LookaukwatApp.ViewModels.StaticList
           "Déja vendu",
           "Discrimination",
           "Contrefacon",
-          "Autreabus",
+          "Autre abus",
         };
 
 

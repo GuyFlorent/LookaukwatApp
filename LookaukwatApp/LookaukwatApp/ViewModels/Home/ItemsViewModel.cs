@@ -172,7 +172,7 @@ namespace LookaukwatApp.ViewModels.Home
 
 
 
-        private const int PageSize = 30;
+        private const int PageSize = 400;
 
         InfiniteScrollCollection<ProductForMobileViewModel> items;
         public InfiniteScrollCollection<ProductForMobileViewModel> Items { get => items; set => SetProperty(ref items, value); }

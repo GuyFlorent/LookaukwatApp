@@ -176,7 +176,7 @@
                     HorizontalOptions="Start"
                     Clicked="LogOut_Click"></Button>
 
-                    <Label Text="Version 1.0.3"
+                    <Label Text="Version 1.0.5"
                            HorizontalOptions="EndAndExpand"
                            ></Label>
                 </StackLayout>

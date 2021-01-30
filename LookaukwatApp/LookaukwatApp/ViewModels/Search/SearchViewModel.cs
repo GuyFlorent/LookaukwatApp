@@ -1435,14 +1435,14 @@ namespace LookaukwatApp.ViewModels.Search
                                 TitlePage = "Plus de filtres dans Emploi";
                                 Result = await _apiServices.GetResultOfferSeachNumberJobAsync(Categori, Town, SearchOrAskJob, TypeContract, ActivitySector, PriceJob);
 
-                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher" +Environment.NewLine + Result + " annonces";
                                 break;
                             case "Immobilier":
                                 TitlePage = "Plus de filtres dans Immobilier";
                                 Result = await _apiServices.GetResultOfferSeachNumberApartAsync(Categori, Town, SearchOrAskJob, PriceApart, RoomNumberAppart,
                                     FurnitureOrNotAppart, TypeAppart, ApartSurfaceAppart);
 
-                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
 
                                 break;
                             case "Multimédia":
@@ -1450,7 +1450,7 @@ namespace LookaukwatApp.ViewModels.Search
                                 Result = await _apiServices.GetResultOfferSeachNumberMultiAsync("Multimedia", Town, SearchOrAskJob, PriceMulti, MultimediaRubrique,
                                     MultimediaBrand, MultimediaModel, MultimediaCapacity);
 
-                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
 
                                 break;
                             case "Maison":
@@ -1458,7 +1458,7 @@ namespace LookaukwatApp.ViewModels.Search
                                 Result = await _apiServices.GetResultOfferSeachNumberHouseAsync(Categori, Town, SearchOrAskJob, PriceHouse, RubriqueHouse, TypeHouse,
                                     FabricMaterialHouse, StateHouse, ColorHouse);
 
-                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
 
                                 break;
                             case "Mode":
@@ -1466,7 +1466,7 @@ namespace LookaukwatApp.ViewModels.Search
                                 Result = await _apiServices.GetResultOfferSeachNumberModeAsync(Categori, Town, SearchOrAskJob, PriceMode, RubriqueMode, TypeMode,
                                     BrandMode, UniversMode, SizeMode, State, ColorMode);
 
-                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
 
                                 break;
                             case "Véhicule":
@@ -1474,13 +1474,13 @@ namespace LookaukwatApp.ViewModels.Search
                                 Result = await _apiServices.GetResultOfferSeachNumberVehiculeAsync("Vehicule", Town, SearchOrAskJob, PriceVehicule, VehiculeRubrique, VehiculeBrand, VehiculeModel,
                                     VehiculeType, Petrol, Year, Mileage, NumberOfDoor, GearBox, Vehiculestate, Color);
 
-                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
 
                                 break;
 
                             default:
                                 Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob); ;
-                                SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                                SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
                                 break;
                         }
 
@@ -1490,7 +1490,7 @@ namespace LookaukwatApp.ViewModels.Search
 
                         Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob);
 
-                        SearchAndResultText = "Rechercher ( " + Result + " annonces )";
+                        SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
                         break;
                 }
             }catch(Exception e)

@@ -28,7 +28,7 @@
             <Button Text="Fermer" 
                    HorizontalOptions="End"
                     BackgroundColor="Transparent"
-                   TextColor="Blue"
+                   TextColor="#2196F3"
                     Clicked="ClosePoppup_Button"></Button>
             <StackLayout Orientation="Horizontal">
                 <StackLayout Orientation="Horizontal">

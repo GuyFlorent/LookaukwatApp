@@ -37,7 +37,7 @@
                        HorizontalOptions="Start"></Image>
                     <Button Grid.Column="1"
                     Text="Profil"
-                        TextColor="Blue"
+                        TextColor="#2196F3"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                         Command="{Binding ProfileUserCommand}"
@@ -57,7 +57,7 @@
                        HorizontalOptions="Start"></Image>
                     <Button Grid.Column="1"
                     Text="Mes annonces"
-                        TextColor="Blue"
+                        TextColor="#2196F3"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                         Command="{Binding UserAnnounceCommand}"
@@ -97,7 +97,7 @@
 
                         <Button 
                     Text="Informations personnelles"
-                        TextColor="Blue"
+                        TextColor="#2196F3"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                        Command="{Binding UserPersonalInfoCommand}"
@@ -106,7 +106,7 @@
 
                         <Button 
                     Text="Modifier mon mot de passe"
-                        TextColor="Blue"
+                        TextColor="#2196F3"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                         Command="{Binding UpdateUserPasswordCommand}"
@@ -147,7 +147,7 @@
 
                         <Button 
                     Text="Nous contacter"
-                        TextColor="Blue"
+                        TextColor="#2196F3"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                        Command="{Binding ContactUsCommand}"
@@ -156,7 +156,7 @@
 
                         <Button 
                     Text="Qui sommes nous?"
-                        TextColor="Blue"
+                        TextColor="#2196F3"
                         FontSize="Subtitle"
                        BackgroundColor="White"
                         Command="{Binding AboutUsCommand}"
@@ -176,7 +176,7 @@
                     HorizontalOptions="Start"
                     Clicked="LogOut_Click"></Button>
 
-                    <Label Text="Version 1.0.1"
+                    <Label Text="Version 1.0.3"
                            HorizontalOptions="EndAndExpand"
                            ></Label>
                 </StackLayout>

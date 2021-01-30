@@ -14,27 +14,60 @@ namespace LookaukwatApp.Droid
     [IntentFilter(new[] { Android.Content.Intent.ActionView },
                   DataScheme = "https",
                   DataHost = "lookaukwat.com",
-                  DataPathPrefixes = new[] { "/","/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
+                  DataPaths = new[] { "/", "/Home" },
+                  DataPathPrefixes = new[] { "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
                   AutoVerify = true,
                   Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Android.Content.Intent.ActionView },
                   DataScheme = "http",
                   DataHost = "lookaukwat.com",
                   AutoVerify = true,
-                 DataPathPrefixes = new[] { "/","/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
+                  DataPaths = new[] { "/", "/Home" },
+                  DataPathPrefixes = new[] { "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
                   Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
     
     [IntentFilter(new[] { Android.Content.Intent.ActionView },
                   DataScheme = "https",
                   DataHost = "lookaukwat.azurewebsites.net",
-                  DataPathPrefixes = new[] { "/","/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule","/Mode", "/House" },
+                  DataPaths = new[] {"/","/Home"},
+                  DataPathPrefixes = new[] {  "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule","/Mode", "/House" },
                   AutoVerify = true,
                   Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
     [IntentFilter(new[] { Android.Content.Intent.ActionView },
                   DataScheme = "http",
                   DataHost = "lookaukwat.azurewebsites.net",
                   AutoVerify = true,
-                  DataPathPrefixes = new[] { "/","/Home", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
+                  DataPaths = new[] { "/", "/Home" },
+                  DataPathPrefixes = new[] { "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
+                  Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
+
+    [IntentFilter(new[] { Android.Content.Intent.ActionView },
+                  DataScheme = "https",
+                  DataHost = "www.lookaukwat.com",
+                  DataPaths = new[] { "/", "/Home" },
+                  DataPathPrefixes = new[] { "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
+                  AutoVerify = true,
+                  Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
+    [IntentFilter(new[] { Android.Content.Intent.ActionView },
+                  DataScheme = "http",
+                  DataHost = "www.lookaukwat.com",
+                  AutoVerify = true,
+                 DataPathPrefixes = new[] {"/Home/", "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
+                  Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
+
+    [IntentFilter(new[] { Android.Content.Intent.ActionView },
+                  DataScheme = "https",
+                  DataHost = "www.lookaukwat.azurewebsites.net",
+                  DataPaths = new[] { "/", "/Home" },
+                  DataPathPrefixes = new[] { "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
+                  AutoVerify = true,
+                  Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
+    [IntentFilter(new[] { Android.Content.Intent.ActionView },
+                  DataScheme = "http",
+                  DataHost = "www.lookaukwat.azurewebsites.net",
+                  AutoVerify = true,
+                  DataPaths = new[] { "/", "/Home" },
+                  DataPathPrefixes = new[] { "/Job", "/ApartmentRental", "/Multimedia", "/Vehicule", "/Mode", "/House" },
                   Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable })]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

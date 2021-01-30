@@ -31,7 +31,7 @@
             <Button Text="Fermer" 
                    HorizontalOptions="End"
                     BackgroundColor="Transparent"
-                   TextColor="Blue"
+                   TextColor="#2196F3"
                     Clicked="ClosePoppup_Button"></Button>
 
 
@@ -82,7 +82,7 @@
                                    Color ="#80000000"/>
 
                 <Button Text="Vous avez oublié votre mot de passe ?"
-                    TextColor="Blue"
+                    TextColor="#2196F3"
                     BackgroundColor="Transparent"
                     Clicked="ForgotPassword_Button"></Button>
 
@@ -91,7 +91,7 @@
                     <Button
                              Clicked ="RegisterViewForUser"
                             CornerRadius="4"
-                            TextColor="Blue"
+                            TextColor="#2196F3"
                             BackgroundColor="Transparent"
                             Text="Créer en 2 minutes ici" />
                 </StackLayout>
@@ -99,7 +99,7 @@
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Des problèmes ?" TextColor="Black"></Label>
                     <Button Text="contactez nous ici"
-                    TextColor="Blue"
+                    TextColor="#2196F3"
                     BackgroundColor="Transparent"
                     Clicked="ContactUs_Button"></Button>
                 </StackLayout>
@@ -132,7 +132,7 @@
                 
 
                 <Button Text="Vous avez oublié votre mot de passe ?"
-                    TextColor="Blue"
+                    TextColor="#2196F3"
                     BackgroundColor="Transparent"
                     Clicked="ForgotPassword_Button"></Button>
 
@@ -141,7 +141,7 @@
                     <Button
                              Clicked ="RegisterViewForUser"
                             CornerRadius="4"
-                            TextColor="Blue"
+                            TextColor="#2196F3"
                             BackgroundColor="Transparent"
                             Text="Créer en 2 minutes ici" />
                 </StackLayout>
@@ -149,7 +149,7 @@
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Des problèmes ?" TextColor="Black"></Label>
                     <Button Text="contactez nous ici"
-                    TextColor="Blue"
+                    TextColor="#2196F3"
                     BackgroundColor="Transparent"
                     Clicked="ContactUs_Button"></Button>
                 </StackLayout>

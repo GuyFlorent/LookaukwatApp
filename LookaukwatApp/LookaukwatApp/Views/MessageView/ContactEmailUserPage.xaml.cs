@@ -81,7 +81,7 @@ namespace LookaukwatApp.Views.MessageView
 
                     break;
 
-                case "House":
+                case "Multimedia":
                     Description.Text = "Bonjour " + ReceiverName + ", votre annonce m'intéresse beaucoup ! Est-elle toujours disponible ? Merci. Cordialement, " + senderName + ".";
 
                     break;

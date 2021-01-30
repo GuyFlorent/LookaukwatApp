@@ -29,12 +29,14 @@ namespace LookaukwatApp.Views.LoginView
 
         private async void ForgotPassword_Button(object o, EventArgs e)
         {
-           await Browser.OpenAsync("https://lookaukwat.com/Account/ForgotPassword");
+            await PopupNavigation.Instance.PopAllAsync();
+            await Browser.OpenAsync("https://lookaukwat.com/Account/ForgotPassword");
         }
 
         private async void ContactUs_Button(object o, EventArgs e)
         {
-           await Browser.OpenAsync("https://lookaukwat.com/Home/Contact");
+            await PopupNavigation.Instance.PopAllAsync();
+            await Browser.OpenAsync("https://lookaukwat.com/Home/Contact");
         }
 
         private async void ClosePoppup_Button(object o, EventArgs e)

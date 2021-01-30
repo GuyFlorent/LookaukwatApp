@@ -13,7 +13,8 @@ namespace LookaukwatApp.ViewModels.OtherServices
             await Share.RequestAsync(new ShareTextRequest
             {
                 Uri = uri,
-                Title = "J'ai trouvé une annonce qui devrait vous intéresser su lookaukwat"
+                Title = "J'ai trouvé une annonce qui devrait vous intéresser sur lookaukwat",
+                Text = "J'ai trouvé une annonce qui devrait vous intéresser sur lookaukwat "+ Environment.NewLine
             });
         }
     }

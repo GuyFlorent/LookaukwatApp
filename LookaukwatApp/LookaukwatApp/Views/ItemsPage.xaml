@@ -56,8 +56,8 @@
             <Button Text="Filtre"
                     Grid.Column="0"
                     CornerRadius="5"
-                    BackgroundColor="LightSkyBlue"
-                    TextColor="Black"
+                    BackgroundColor="#2196F3"
+                    TextColor="White"
                     Command="{Binding FilterCommand}"></Button>
             
             <StackLayout  VerticalOptions="Center" IsVisible="{Binding IsRunning}"
@@ -82,7 +82,7 @@
                             <ViewCell>
                                 <Frame Margin="0,0,0,10"  
                                    HasShadow="True"
-                                   BorderColor="SkyBlue"
+                                   BorderColor="#2196F3"
                                        BackgroundColor="GhostWhite">
                                     <StackLayout BackgroundColor="GhostWhite">
 

@@ -65,7 +65,7 @@
 
                     <Frame Margin="0,0,0,10"  
                                    HasShadow="True"
-                                   BorderColor="Blue"
+                                   BorderColor="#2196F3"
                        BackgroundColor="GhostWhite">
 
                         <StackLayout >

@@ -30,7 +30,7 @@
                 <Button Text="Fermer" 
                    HorizontalOptions="End"
                     BackgroundColor="Transparent"
-                   TextColor="Blue"
+                   TextColor="#2196F3"
                     Clicked="ClosePoppup_Button"></Button>
 
                 <Label Text="{Binding ErrorMessage1}"
@@ -101,7 +101,7 @@
                             
                     Clicked="OnLoginReturnForUserClicked"
                             CornerRadius="4"
-                            TextColor="Blue"
+                            TextColor="#2196F3"
                             BackgroundColor="Transparent"
                             Text="Connectez vous" />
                 </StackLayout>

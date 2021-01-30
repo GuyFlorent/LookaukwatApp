@@ -6,6 +6,7 @@ using LookaukwatApp.ViewModels.Mode;
 using LookaukwatApp.ViewModels.Multimedia;
 using LookaukwatApp.ViewModels.Vehicule;
 using LookaukwatApp.Views;
+using Rg.Plugins.Popup.Services;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -43,16 +44,6 @@ namespace LookaukwatApp
                     switch (Controler)
                     {
                         
-                        case "Home":
-                           
-                                Device.BeginInvokeOnMainThread(async () =>
-                                {
-                                    await Shell.Current.GoToAsync($"//MainPage/ItemsPage");
-                                    
-                                });
-                          
-                            break;
-
                         case "Job":
                             if (!string.IsNullOrEmpty(id))
                             {
@@ -123,10 +114,25 @@ namespace LookaukwatApp
                             break;
 
                         default:
-                            Launcher.OpenAsync(uri);
+                            Browser.OpenAsync(uri);
                             break;
                     }
+                } else if (uri.Segments != null && (uri.Segments.Length == 1 || uri.Segments.Length == 2))
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await Shell.Current.GoToAsync($"//MainPage/ItemsPage");
+
+                    });
                 }
+                else
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+
+                       await Launcher.OpenAsync(uri);
+                    });
+                } 
             }
         }
 

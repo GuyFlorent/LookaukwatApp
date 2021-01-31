@@ -35,6 +35,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string UserPhone { get; set; }
         public string UserEmail { get; set; }
         public List<string> Images { get; set; }
+        public int NumberImages { get; set; }
         public List<SimilarProductViewModel> SimilarProduct { get; set; }
 
         

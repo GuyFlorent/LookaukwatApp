@@ -83,7 +83,10 @@
                                 <Frame Margin="0,0,0,10"  
                                    HasShadow="True"
                                    BorderColor="#2196F3"
-                                       BackgroundColor="GhostWhite">
+                                       BackgroundColor="GhostWhite"
+                                       Padding="0"
+                                       IsClippedToBounds="True"
+                                       CornerRadius="5">
                                     <StackLayout BackgroundColor="GhostWhite">
 
                                         <Grid BackgroundColor="GhostWhite">
@@ -97,12 +100,31 @@
                                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
+                                       
                                             <Image Grid.RowSpan="4" 
                        Source="{Binding Image }"
                        Aspect="AspectFill"
                        HeightRequest="120"
                        WidthRequest="120"></Image>
 
+                                            <Frame Padding="1"
+                                                   Grid.RowSpan="4" 
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Image Source="camera"
+                                                           HeightRequest="20"
+                                                       Aspect="AspectFit"></Image>
+                                                    <Label Text="{Binding NumberImages}"
+                                                       TextColor="Black"
+                                                           FontAttributes="Bold"></Label>
+                                                </StackLayout>
+                                               
+                                            </Frame>
+                                               
+                                           
                                             <Label Grid.Column="1"
                        Text="{Binding Title}"
                         MaxLines="2"

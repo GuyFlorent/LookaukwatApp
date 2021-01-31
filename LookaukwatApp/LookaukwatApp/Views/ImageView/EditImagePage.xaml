@@ -61,7 +61,8 @@
                 <Frame Margin="0,0,0,10"  
                                    HasShadow="True"
                                    BorderColor="#2196F3"
-                       BackgroundColor="GhostWhite">
+                       BackgroundColor="GhostWhite"
+                       Padding="2">
 
                     <StackLayout >
                         <Grid x:Name="Item" BackgroundColor="GhostWhite">

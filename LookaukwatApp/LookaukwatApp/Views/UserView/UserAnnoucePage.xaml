@@ -26,7 +26,8 @@
                 <Frame Margin="0,0,0,10"  
                                    HasShadow="True"
                                    BorderColor="#2196F3"
-                       BackgroundColor="GhostWhite">
+                       BackgroundColor="GhostWhite"
+                       Padding="3">
 
                     <StackLayout >
                         <Grid x:Name="Item" BackgroundColor="GhostWhite">
@@ -46,7 +47,25 @@
                        Aspect="AspectFill"
                        HeightRequest="100"
                        WidthRequest="100" />
-                    <Label Grid.Row="1"
+
+                                    <Frame Padding="1"
+                                                   Grid.ColumnSpan="2" 
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Image Source="camera"
+                                                           HeightRequest="20"
+                                                       Aspect="AspectFit"></Image>
+                                            <Label Text="{Binding NumberImages}"
+                                                       TextColor="Black"
+                                                           FontAttributes="Bold"></Label>
+                                        </StackLayout>
+
+                                    </Frame>
+
+                                    <Label Grid.Row="1"
                            Grid.ColumnSpan="2"
                        Text="{Binding Title}"
                        FontAttributes="Bold"

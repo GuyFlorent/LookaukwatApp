@@ -21,7 +21,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string Date { get; set; }
         public string DateLetter { get; set; }
         public string Image { get; set; }
+        public int NumberImages { get; set; }
 
-      
     }
 }

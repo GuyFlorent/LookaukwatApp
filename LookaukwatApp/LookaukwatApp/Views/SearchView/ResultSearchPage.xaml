@@ -76,7 +76,10 @@
                             <Frame Margin="0,0,0,10"  
                                    HasShadow="True"
                                    BorderColor="#2196F3"
-                                    BackgroundColor="GhostWhite">
+                                    BackgroundColor="GhostWhite"
+                                   Padding="0"
+                                       IsClippedToBounds="True"
+                                       CornerRadius="5">
                                 <StackLayout BackgroundColor="GhostWhite">
 
                                     <Grid BackgroundColor="GhostWhite">
@@ -95,6 +98,23 @@
                        Aspect="AspectFill"
                        HeightRequest="100"
                        WidthRequest="100"></Image>
+
+                                        <Frame Padding="1"
+                                                   Grid.RowSpan="4" 
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Source="camera"
+                                                           HeightRequest="20"
+                                                       Aspect="AspectFit"></Image>
+                                                <Label Text="{Binding NumberImages}"
+                                                       TextColor="Black"
+                                                       FontAttributes="Bold"></Label>
+                                            </StackLayout>
+
+                                        </Frame>
 
                                         <Label Grid.Column="1"
                        Text="{Binding Title}"
@@ -123,7 +143,7 @@
 
                                         <Label Grid.Column="1"
                            Grid.Row="3"
-                       Text="{Binding Date}"
+                       Text="{Binding DateLetter}"
                        VerticalOptions="End"
                                       ></Label>
                                     </Grid>

@@ -19,7 +19,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string Category { get; set; }
 
         public string Image { get; set; }
+        public int NumberImages { get; set; }
 
-       
     }
 }

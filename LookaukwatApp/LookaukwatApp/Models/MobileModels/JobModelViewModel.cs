@@ -29,6 +29,6 @@ namespace LookaukwatApp.Models.MobileModels
         public  ApplicationUser User { get; set; }
         public List<SimilarProductViewModel> SimilarProduct { get; set; }
         public List<ImageProcductModel> Images { get; set; }
-       
+        public int NumberImages { get; set; }
     }
 }

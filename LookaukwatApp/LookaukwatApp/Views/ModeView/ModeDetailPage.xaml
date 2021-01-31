@@ -419,7 +419,7 @@
 
                 <CarouselView ItemsSource="{Binding SimilarProduct}"
                               PeekAreaInsets="70"
-                              HeightRequest="300">
+                              HeightRequest="260">
 
                     <CarouselView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" />
@@ -428,21 +428,42 @@
                         <DataTemplate>
                             <StackLayout>
                                 <Frame HasShadow="True"
-                       BorderColor="#2196F3"
+                       BorderColor="White"
                        CornerRadius="5"
                        Margin="5"
-                       HeightRequest="290"
+                       HeightRequest="250"
                        HorizontalOptions="Start"
                        VerticalOptions="Start"
-                                       BackgroundColor="GhostWhite">
+                                       BackgroundColor="GhostWhite"
+                                       Padding="0"
+                                       IsClippedToBounds="True">
                                     <StackLayout>
 
-                                        <Image Source="{Binding Image}"
+                                            <RelativeLayout HeightRequest="40">
+                                                <Image Source="{Binding Image}"
                                Aspect="AspectFill"
-                               HeightRequest="145"
+                               HeightRequest="154"
                                WidthRequest="250"
                                HorizontalOptions="Center" />
-                                        <Label Text="{Binding Title}"
+                                                <StackLayout Opacity="0.6" TranslationY="130"  BackgroundColor="Transparent">
+                                                    <Frame Padding="1"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                                        <StackLayout Orientation="Horizontal">
+                                                            <Image Source="camera"
+                                                           HeightRequest="20"
+                                                       Aspect="AspectFit"></Image>
+                                                            <Label Text="{Binding NumberImages}"
+                                                       TextColor="Black"
+                                                       FontAttributes="Bold"></Label>
+                                                        </StackLayout>
+
+                                                    </Frame>
+                                                </StackLayout>
+                                            </RelativeLayout>
+                                            <Label Text="{Binding Title}"
                                HorizontalOptions="Start"
                                                TextColor="Black"
                                                FontAttributes="Bold"

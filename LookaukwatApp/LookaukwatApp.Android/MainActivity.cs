@@ -5,6 +5,8 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Android.Content;
+using Rg.Plugins.Popup.Services;
+using Xamarin.Forms;
 
 namespace LookaukwatApp.Droid
 {
@@ -89,6 +91,17 @@ namespace LookaukwatApp.Droid
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
+        }
+
+        public override async void OnBackPressed()
+        {
+            if (Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
+            {
+                // Do something if there are some pages in the `PopupStack`
+                await PopupNavigation.Instance.PopAsync();
+                await Shell.Current.GoToAsync("//MainPage/ItemsPage");
+            }
+            
         }
 
     }

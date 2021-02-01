@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Search"  
              xmlns:model="clr-namespace:LookaukwatApp.Models" 
              xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
-             xmlns:local1="clr-namespace:LookaukwatApp.ViewModels.OtherServices"
+             xmlns:local1="clr-namespace:LookaukwatApp.ViewModels.OtherServices" 
+             xmlns:converter="clr-namespace:LookaukwatApp.Converter"
              x:Name="ResultSearch">
 
     <ContentPage.ToolbarItems>
@@ -46,7 +47,12 @@
         <local:ItemsViewModel />
     </ContentPage.BindingContext>-->
 
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ImageFavoriteConverter x:Key="ImageFavoriteConverter"></converter:ImageFavoriteConverter>
+            <converter:ImageNotFavoriteConverter x:Key="ImageNotFavoriteConverter"></converter:ImageNotFavoriteConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout Margin="20,10,20,25">
 
 
@@ -141,11 +147,49 @@
                        VerticalOptions="End"></Label>
 
 
-                                        <Label Grid.Column="1"
-                           Grid.Row="3"
+                                        <StackLayout Grid.Column="1"
+                                                          Grid.Row="3"
+                                                         Orientation="Horizontal">
+                                            <Label 
+                          HorizontalOptions="Start"
                        Text="{Binding DateLetter}"
                        VerticalOptions="End"
-                                      ></Label>
+                                       ></Label>
+
+                                            <StackLayout IsVisible="{Binding id, Converter={StaticResource ImageFavoriteConverter}}"
+                                                    HorizontalOptions="EndAndExpand">
+
+                                                <Image Source="{Binding RedHeart}"
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               />
+
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ResultSearchViewModel}}, Path=NotFavoriteCommand}"		
+                                CommandParameter="{Binding .}">
+                                                    </TapGestureRecognizer>
+                                                </StackLayout.GestureRecognizers>
+                                            </StackLayout>
+
+                                            <StackLayout IsVisible="{Binding id, Converter={StaticResource ImageNotFavoriteConverter}}"
+                                                    HorizontalOptions="EndAndExpand"
+                                                             >
+                                                <Image Source="{Binding BlackHeart}"
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               />
+
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ResultSearchViewModel}}, Path=NotFavoriteCommand}"		
+                                CommandParameter="{Binding .}">
+                                                    </TapGestureRecognizer>
+                                                </StackLayout.GestureRecognizers>
+                                            </StackLayout>
+                                        </StackLayout>
                                     </Grid>
 
                                     <StackLayout.GestureRecognizers>

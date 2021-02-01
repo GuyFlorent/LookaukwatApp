@@ -40,6 +40,10 @@ namespace LookaukwatApp.Views
                 {
                     mylist.ItemsSource = ListFavorites;
                 }
+                else
+                {
+                    mylist.ItemsSource = "";
+                }
             }
         }
     }

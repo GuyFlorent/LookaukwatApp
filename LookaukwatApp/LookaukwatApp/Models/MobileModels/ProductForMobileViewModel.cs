@@ -25,11 +25,18 @@ namespace LookaukwatApp.Models.MobileModels
         public int NumberImages { get; set; }
 
 
-        private string blackHeart = "https://freeiconshop.com/wp-content/uploads/edd/heart-outline.png";
+        private string blackHeart = "heart_black";
         public string BlackHeart
         {
             get => blackHeart;
             set => SetProperty(ref blackHeart, value);
+        }
+
+        private string redHeart = "heart_red";
+        public string   RedHeart
+        {
+            get => redHeart;
+            set => SetProperty(ref redHeart, value);
         }
 
 

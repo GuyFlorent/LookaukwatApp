@@ -17,6 +17,7 @@ using LookaukwatApp.Views.MultimediaView;
 using LookaukwatApp.Views.SearchView;
 using LookaukwatApp.Views.SortView;
 using LookaukwatApp.Views.Vehicule;
+using Newtonsoft.Json;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -43,8 +44,7 @@ namespace LookaukwatApp.ViewModels.Home
         public Command SortPageCommand { get; }
         public Command NotFavoriteCommand { get; }
 
-        //ObservableCollection<string> listeFavorite = new ObservableCollection<string>();
-        //public ObservableCollection<string> ListeFavoriteItem { get => listeFavorite; set => SetProperty(ref listeFavorite, value); }
+       
         public Command<ProductForMobileViewModel> ItemTapped { get; }
 
 
@@ -62,7 +62,7 @@ namespace LookaukwatApp.ViewModels.Home
                 if(value == true)
                 {
                     Settings.SortItemPage = SortBy;
-                    DownloadDataAsync(SortBy);
+                    DownloadDataSortAsync(SortBy);
                 }
                
             }
@@ -90,7 +90,7 @@ namespace LookaukwatApp.ViewModels.Home
                 SortBy = Settings.SortItemPage;
                 var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize, SortBy);
                 Items.AddRange(items);
-
+                Settings.Products = JsonConvert.SerializeObject(items);
             }
             catch (Exception ex)
             {
@@ -176,7 +176,7 @@ namespace LookaukwatApp.ViewModels.Home
 
 
 
-        private const int PageSize = 400;
+        private const int PageSize = 500;
 
         InfiniteScrollCollection<ProductForMobileViewModel> items;
         public InfiniteScrollCollection<ProductForMobileViewModel> Items { get => items; set => SetProperty(ref items, value); }
@@ -189,22 +189,7 @@ namespace LookaukwatApp.ViewModels.Home
            
             FilterCommand = new Command(OnFilter);
             SortPageCommand = new Command(OnSortPage);
-            //NotFavoriteCommand = new Command( (e) =>
-            //{
-            //    var item = e as ProductForMobileViewModel;
-
-            //    bool response = CheckFavorite.IsFabvorite(item);
-            //    if (response)
-            //    {
-            //        item.BlackHeart = "heart_red";
-            //    }
-            //    else
-            //    {
-            //        item.BlackHeart = "heart_black";
-            //    }
-
-            //});
-
+            
             NotFavoriteCommand = new Command<ProductForMobileViewModel>(OnFavorite);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);
@@ -221,6 +206,8 @@ namespace LookaukwatApp.ViewModels.Home
                     //numberOfProduct = await _apiServices.Get_AllNumber_ProductsAsync();
                     IsBusy = false;
 
+
+
                     // return the items that need to be added
                     return items;
                 },
@@ -231,20 +218,34 @@ namespace LookaukwatApp.ViewModels.Home
                 }
             };
             Settings.SortItemPage = "";
-            DownloadDataAsync(SortBy);
+
+            
+            if (string.IsNullOrWhiteSpace(Settings.Products))
+            {
+                DownloadDataAsync(SortBy);
+            }
+            else
+            {
+                List<ProductForMobileViewModel> ListFavorites = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(Settings.Products);
+                Items.AddRange(ListFavorites);
+            }
+            
         }
 
        
-        private void OnFavorite(ProductForMobileViewModel item)
+        private async void OnFavorite(ProductForMobileViewModel item)
         {
             bool response = CheckFavorite.IsFabvorite(item);
             if (response)
             {
                 item.BlackHeart = "heart_red";
+                item.RedHeart = "heart_red";
+                await Shell.Current.DisplayAlert("Ajoutée aux favoris !", "Vous pouvez contacter l'annonceur à tout moment dans vos favoris pour lui montrer votre intérêt", "ok");
             }
             else
             {
                 item.BlackHeart = "heart_black";
+                item.RedHeart = "heart_black";
             }
         }
 
@@ -257,6 +258,7 @@ namespace LookaukwatApp.ViewModels.Home
                 var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize, sortBy);
                 
             Items.AddRange(items);
+                Settings.Products = JsonConvert.SerializeObject(items);
             }
             catch (Exception ex)
             {
@@ -268,6 +270,29 @@ namespace LookaukwatApp.ViewModels.Home
                 IsRunning = false;
             }
            
+        }
+
+        private async Task DownloadDataSortAsync(string sortBy)
+        {
+            IsRunning = true;
+            try
+            {
+                Items.Clear();
+                var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: PageSize, sortBy);
+
+                Items.AddRange(items);
+               
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+
+                IsRunning = false;
+            }
+
         }
 
         private async void GetTotalNumberOfProduct()

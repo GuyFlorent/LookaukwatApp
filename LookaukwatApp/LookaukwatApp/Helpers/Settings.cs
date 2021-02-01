@@ -21,6 +21,18 @@ namespace LookaukwatApp.Helpers
             }
         }
 
+        public static string Products
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("Products", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("Products", value);
+            }
+        }
+
         public static string JsonSearchSave
         {
             get

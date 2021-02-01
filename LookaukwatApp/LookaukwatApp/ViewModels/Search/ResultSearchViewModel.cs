@@ -7,6 +7,7 @@ using LookaukwatApp.ViewModels.House;
 using LookaukwatApp.ViewModels.Job;
 using LookaukwatApp.ViewModels.Mode;
 using LookaukwatApp.ViewModels.Multimedia;
+using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.ViewModels.Vehicule;
 using LookaukwatApp.Views.AppartmentView;
 using LookaukwatApp.Views.HouseView;
@@ -43,7 +44,7 @@ namespace LookaukwatApp.ViewModels.Search
         public Command FilterCommand { get; }
         public Command BackCommand { get; }
         public Command SortPageCommand { get; }
-       
+        public Command NotFavoriteCommand { get; }
         public Command<ProductForMobileViewModel> ItemTapped { get; }
 
         private string jsonSearchModel;
@@ -136,8 +137,8 @@ namespace LookaukwatApp.ViewModels.Search
             FilterCommand = new Command(OnFilter);
             BackCommand = new Command(OnBack);
             SortPageCommand = new Command(OnSortPage);
-           
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            NotFavoriteCommand = new Command<ProductForMobileViewModel>(OnFavorite);
+             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);
 
             Items = new InfiniteScrollCollection<ProductForMobileViewModel>
@@ -241,6 +242,22 @@ namespace LookaukwatApp.ViewModels.Search
         {
             
             await Shell.Current.GoToAsync("///MainPage");
+        }
+
+        private async void OnFavorite(ProductForMobileViewModel item)
+        {
+            bool response = CheckFavorite.IsFabvorite(item);
+            if (response)
+            {
+                item.BlackHeart = "heart_red";
+                item.RedHeart = "heart_red";
+                await Shell.Current.DisplayAlert("Ajoutée aux favoris !", "Vous pouvez contacter l'annonceur à tout moment dans vos favoris pour lui montrer votre intérêt", "ok");
+            }
+            else
+            {
+                item.BlackHeart = "heart_black";
+                item.RedHeart = "heart_black";
+            }
         }
 
         async void OnItemSelected(ProductForMobileViewModel item)

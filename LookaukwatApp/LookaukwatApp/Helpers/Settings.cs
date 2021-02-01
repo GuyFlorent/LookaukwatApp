@@ -33,6 +33,20 @@ namespace LookaukwatApp.Helpers
             }
         }
 
+
+        public static string JsonFavoriteList
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("JsonFavoriteList", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("JsonFavoriteList", value);
+            }
+        }
+
+
         public static string ItemUpDateId
         {
             get

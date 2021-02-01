@@ -31,6 +31,7 @@
 
     <TabBar  Route="MainPage">
         <ShellContent Title="Rechercher" Icon="icon_search.png" Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Title="Favoris" Icon="heart_black.png" ContentTemplate="{DataTemplate local:FavorisPage}" />
         <ShellContent Title="Publier" Icon="icon_plus.png" ContentTemplate="{DataTemplate local:PublishAnnouncePage}" />
         <ShellContent Title="Compte" Icon="icon_profil.png" ContentTemplate="{DataTemplate local:UserProfilePage}" />
 

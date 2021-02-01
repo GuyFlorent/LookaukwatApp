@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.FavorisPage"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Home"  
+             Title="Mes favoris">
+
+
+
+    <ContentPage.BindingContext>
+        <local:ItemsViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Margin="20,10,10,0">
+            <ListView 
+                      CachingStrategy="RecycleElement" 
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                          x:Name="mylist"
+                      SeparatorVisibility="None">
+               
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="0,0,0,10"  
+                                   HasShadow="True"
+                                   BorderColor="#2196F3"
+                                       BackgroundColor="GhostWhite"
+                                       Padding="0"
+                                       IsClippedToBounds="True"
+                                       CornerRadius="5">
+                                <StackLayout BackgroundColor="GhostWhite">
+
+                                    <Grid BackgroundColor="GhostWhite"
+                                              x:Name="Item">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Image Grid.RowSpan="4" 
+                       Source="{Binding Image }"
+                       Aspect="AspectFill"
+                       HeightRequest="120"
+                       WidthRequest="120"></Image>
+
+                                        <Frame Padding="1"
+                                                   Grid.RowSpan="4" 
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Source="camera"
+                                                           HeightRequest="20"
+                                                       Aspect="AspectFit"></Image>
+                                                <Label Text="{Binding NumberImages}"
+                                                       TextColor="Black"
+                                                           FontAttributes="Bold"></Label>
+                                            </StackLayout>
+
+                                        </Frame>
+
+
+                                        <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                        MaxLines="2"
+                       TextColor="Black"
+                       FontAttributes="Bold"></Label>
+
+                                        <Label Grid.Column="1"
+                           Grid.Row="1"
+                           TextColor="Orange"
+                           
+                           VerticalOptions="Start">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Price}"></Span>
+                                                    <Span Text=" FCFA"></Span>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <Label Grid.Column="1"
+                           Grid.Row="2"
+                       Text="{Binding Town}"
+                       VerticalOptions="End"></Label>
+
+                                        <StackLayout Grid.Column="1"
+                                                          Grid.Row="3"
+                                                         Orientation="Horizontal">
+                                            <Label 
+                          HorizontalOptions="Start"
+                       Text="{Binding DateLetter}"
+                       VerticalOptions="End"
+                                       ></Label>
+                                            
+                                        </StackLayout>
+                                    </Grid>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -72,6 +72,7 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(MultimediaEditCriterePage), typeof(MultimediaEditCriterePage));
             Routing.RegisterRoute(nameof(VehiculeEditCriterePage), typeof(VehiculeEditCriterePage));
             Routing.RegisterRoute(nameof(SignalAnnoucePage), typeof(SignalAnnoucePage));
+            Routing.RegisterRoute(nameof(FavorisPage), typeof(FavorisPage));
         }
 
 

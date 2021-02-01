@@ -297,4 +297,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\flag_triangle.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\heart_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\heart _black.png" />
+  </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
 ﻿
 using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.ViewModels.Home;
+using LookaukwatApp.ViewModels.OtherServices;
+using System;
 using Xamarin.Forms;
 
 
@@ -27,8 +29,28 @@ namespace LookaukwatApp.Views
         public ItemsPage()
         {
             InitializeComponent();
-           
+            
+           // Shell.SetNavBarIsVisible(this, false);
         }
+
+        
+        //private void Favorite_Click(object sender, EventArgs e)
+        //{
+
+        //    ImageButton button = (ImageButton)sender;
+        //    StackLayout listViewItem = (StackLayout)button.Parent;
+        //    //bool response = CheckFavorite.IsFabvorite(item);
+        //    //if (response)
+        //    //{
+        //    //    button.Source = "heart_red";
+        //    //}
+        //    //else
+        //    //{
+        //    //    button.Source = "heart_black";
+        //    //}
+        //    button.Source = "heart_red";
+        //}
+
 
 
         int lastItemIndex;
@@ -43,10 +65,12 @@ namespace LookaukwatApp.Views
             if (currentItemIndex > lastItemIndex)
             {
                 Img.IsVisible = false;
+               
             }
             else
             {
                 Img.IsVisible = true;
+                
             }
             lastItemIndex = currentItemIndex;
         }

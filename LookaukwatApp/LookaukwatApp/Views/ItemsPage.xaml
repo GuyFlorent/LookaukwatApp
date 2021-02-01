@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Home"  
              xmlns:model="clr-namespace:LookaukwatApp.Models"  
              xmlns:local1="clr-namespace:LookaukwatApp.ViewModels.OtherServices" 
-            
-             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
+             xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling" 
+             xmlns:converter="clr-namespace:LookaukwatApp.Converter"
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
@@ -41,6 +41,12 @@
         <local:ItemsViewModel />
     </ContentPage.BindingContext>
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ImageResourceConverter x:Key="ImageResourceConverter"></converter:ImageResourceConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <StackLayout >
         <Image x:Name="Img" Source="logo_lookaukwat_xam1.png"
                HorizontalOptions="Center"
@@ -53,7 +59,7 @@
         <Label Text="Xamarin.Forms" FontSize="46" TextColor="DodgerBlue" Margin="20,0" />-->
 
 
-            <Button Text="Filtre"
+            <Button Text="Filtres"
                     Grid.Column="0"
                     CornerRadius="5"
                     BackgroundColor="#2196F3"
@@ -89,7 +95,8 @@
                                        CornerRadius="5">
                                     <StackLayout BackgroundColor="GhostWhite">
 
-                                        <Grid BackgroundColor="GhostWhite">
+                                        <Grid BackgroundColor="GhostWhite"
+                                              x:Name="Item">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"></RowDefinition>
                                                 <RowDefinition Height="*"></RowDefinition>
@@ -149,12 +156,41 @@
                        Text="{Binding Town}"
                        VerticalOptions="End"></Label>
 
-
-                                            <Label Grid.Column="1"
-                           Grid.Row="3"
+                                            <StackLayout Grid.Column="1"
+                                                          Grid.Row="3"
+                                                         Orientation="Horizontal">
+                                            <Label 
+                          HorizontalOptions="Start"
                        Text="{Binding DateLetter}"
                        VerticalOptions="End"
                                        ></Label>
+                                                <!--<ImageButton Source="{Binding BlackHeart}"
+                                                             
+                                                             HorizontalOptions="EndAndExpand"
+                                                             HeightRequest="20"
+                                                             Aspect="AspectFit"
+                                                             BackgroundColor="GhostWhite"
+                                                             Command="{Binding NotFavoriteCommand}"
+                                                             BindingContext="{Binding Source={x:Reference mylist}, Path=BindingContext}"
+                                                             CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"></ImageButton>-->
+
+
+
+                                                <StackLayout HorizontalOptions="EndAndExpand">
+                                                    <Image Source="{Binding BlackHeart}"
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               />
+
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemsViewModel}}, Path=NotFavoriteCommand}"		
+                                CommandParameter="{Binding .}">
+                                                        </TapGestureRecognizer>
+                                                    </StackLayout.GestureRecognizers>
+                                                </StackLayout>
+                                            </StackLayout>
                                         </Grid>
 
                                         <StackLayout.GestureRecognizers>

@@ -6,6 +6,7 @@ using LookaukwatApp.ViewModels.House;
 using LookaukwatApp.ViewModels.Job;
 using LookaukwatApp.ViewModels.Mode;
 using LookaukwatApp.ViewModels.Multimedia;
+using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.ViewModels.Vehicule;
 using LookaukwatApp.Views;
 using LookaukwatApp.Views.AppartmentView;
@@ -19,6 +20,7 @@ using LookaukwatApp.Views.Vehicule;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,8 +41,10 @@ namespace LookaukwatApp.ViewModels.Home
         public Command LoadItemsCommand { get; }
         public Command FilterCommand { get; }
         public Command SortPageCommand { get; }
-       
-        
+        public Command NotFavoriteCommand { get; }
+
+        //ObservableCollection<string> listeFavorite = new ObservableCollection<string>();
+        //public ObservableCollection<string> ListeFavoriteItem { get => listeFavorite; set => SetProperty(ref listeFavorite, value); }
         public Command<ProductForMobileViewModel> ItemTapped { get; }
 
 
@@ -185,7 +189,23 @@ namespace LookaukwatApp.ViewModels.Home
            
             FilterCommand = new Command(OnFilter);
             SortPageCommand = new Command(OnSortPage);
-           
+            //NotFavoriteCommand = new Command( (e) =>
+            //{
+            //    var item = e as ProductForMobileViewModel;
+
+            //    bool response = CheckFavorite.IsFabvorite(item);
+            //    if (response)
+            //    {
+            //        item.BlackHeart = "heart_red";
+            //    }
+            //    else
+            //    {
+            //        item.BlackHeart = "heart_black";
+            //    }
+
+            //});
+
+            NotFavoriteCommand = new Command<ProductForMobileViewModel>(OnFavorite);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ItemTapped = new Command<ProductForMobileViewModel>(OnItemSelected);
             Items = new InfiniteScrollCollection<ProductForMobileViewModel>
@@ -214,15 +234,19 @@ namespace LookaukwatApp.ViewModels.Home
             DownloadDataAsync(SortBy);
         }
 
-        //public async void OnApearing( string sortBy, bool isSort)
-        //{
-        //    if (IsSort)
-        //    {
-               
-        //        await DownloadDataAsync(SortBy);
-        //    }
-        //    IsSort = false;
-        //}
+       
+        private void OnFavorite(ProductForMobileViewModel item)
+        {
+            bool response = CheckFavorite.IsFabvorite(item);
+            if (response)
+            {
+                item.BlackHeart = "heart_red";
+            }
+            else
+            {
+                item.BlackHeart = "heart_black";
+            }
+        }
 
         private async Task DownloadDataAsync(string sortBy)
         {

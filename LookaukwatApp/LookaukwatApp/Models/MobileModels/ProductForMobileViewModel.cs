@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LookaukwatApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LookaukwatApp.Models.MobileModels
 {
-    public class ProductForMobileViewModel
+    public class ProductForMobileViewModel  : BaseViewModel
     {
         public int id { get; set; }
 
@@ -22,6 +23,15 @@ namespace LookaukwatApp.Models.MobileModels
         public string DateLetter { get; set; }
         public string Image { get; set; }
         public int NumberImages { get; set; }
+
+
+        private string blackHeart = "https://freeiconshop.com/wp-content/uploads/edd/heart-outline.png";
+        public string BlackHeart
+        {
+            get => blackHeart;
+            set => SetProperty(ref blackHeart, value);
+        }
+
 
     }
 }

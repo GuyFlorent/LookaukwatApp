@@ -21,12 +21,6 @@ namespace LookaukwatApp.Views.AppartmentView
             Shell.SetTabBarIsVisible(this, false);
         }
 
-        private async void CopyLink_Click(object sender, EventArgs e)
-        {
-
-            await DisplayAlert("Alerte", "Copier dans le papier-presse", "Ok");
-
-        }
 
         private async void Map_Click(object sender, EventArgs e)
         {

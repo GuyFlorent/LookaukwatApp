@@ -12,7 +12,8 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout Margin="20,10,10,0">
+        <StackLayout>
+        <StackLayout x:Name="Stack_HasResult"  Margin="20,10,10,0">
             <ListView 
                       CachingStrategy="RecycleElement" 
                       HasUnevenRows="True"
@@ -78,12 +79,13 @@
 
                                         <Label Grid.Column="1"
                            Grid.Row="1"
-                           TextColor="Orange"
+                           TextColor="#2196F3"
+                           FontAttributes="Bold"
                            
                            VerticalOptions="Start">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="{Binding Price}"></Span>
+                                                    <Span Text="{Binding PriceConvert}"></Span>
                                                     <Span Text=" FCFA"></Span>
                                                 </FormattedString>
                                             </Label.FormattedText>
@@ -121,5 +123,30 @@
 
             </ListView>
         </StackLayout>
+
+        <StackLayout x:Name="Stack_Has_NoResult"
+                     HorizontalOptions="CenterAndExpand"
+                     VerticalOptions="CenterAndExpand">
+           
+            <Label x:Name="labelTitle" TextColor="Black" FontSize="24" Text="Oups vous n'avez pas encore d'annonce favorite !" YAlign="Center" XAlign="Center" />
+                <Label  TextColor="Black" FontSize="20" Text="Pour ajouter des favoris, sur les annonces :" YAlign="Center" XAlign="Center" />
+                <StackLayout Orientation="Horizontal" Margin="55">
+                    <Label Text="Touchez ici "
+                           TextColor="Black"></Label>
+                    <Image Source="heart_black"
+                           Aspect="AspectFit"
+                           HeightRequest="30"></Image>
+                    <Label Text=" et obtenez cela"
+                           TextColor="Black"></Label>
+                    <Image Source="heart_red"
+                           Aspect="AspectFit"
+                           HeightRequest="30"></Image>
+                </StackLayout>
+        </StackLayout>
+        </StackLayout>
+
+       
+           
+       
     </ContentPage.Content>
 </ContentPage>

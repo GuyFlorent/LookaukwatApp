@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace LookaukwatApp.Models.MobileModels
@@ -15,6 +16,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string Street { get; set; }
 
         public int Price { get; set; }
+        public string PriceConvert { get => Price.ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim(); }
         public string Date { get; set; }
 
         public string SearchOrAskJob { get; set; }

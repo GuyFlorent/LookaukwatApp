@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -21,10 +22,12 @@ namespace LookaukwatApp.ViewModels.Mode
     public class ModeDetailViewModel : BaseViewModel
     {
         ApiServices _apiServices = new ApiServices();
-
+        ModeModelViewModel item;
         private string itemId;
+        private int id;
 
         private int price;
+        private string priceConvert;
         private string title;
         private string description;
         private string date;
@@ -58,8 +61,14 @@ namespace LookaukwatApp.ViewModels.Mode
         public Command BackCommand { get; set; }
         public Command TappedImageCommand { get; set; }
         public Command SignalCommand { get; set; }
-        public int Id { get; set; }
-
+        public Command NotFavoriteCommand { get; set; }
+        public Command FavoriteCommand { get; set; }
+       
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
+        }
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
 
@@ -123,6 +132,11 @@ namespace LookaukwatApp.ViewModels.Mode
             get => price;
             set => SetProperty(ref price, value);
         }
+        public string PriceConvert
+        {
+            get => priceConvert;
+            set => SetProperty(ref priceConvert, value);
+        }
         public string Description
         {
             get => description;
@@ -150,6 +164,21 @@ namespace LookaukwatApp.ViewModels.Mode
             get => lon;
             set => SetProperty(ref lon, value);
         }
+
+        private string blackHeart = "heart_black";
+        public string BlackHeart
+        {
+            get => blackHeart;
+            set => SetProperty(ref blackHeart, value);
+        }
+
+        private string redHeart = "heart_red";
+        public string RedHeart
+        {
+            get => redHeart;
+            set => SetProperty(ref redHeart, value);
+        }
+
         public string ItemId
         {
             get
@@ -207,6 +236,7 @@ namespace LookaukwatApp.ViewModels.Mode
         public ModeDetailViewModel()
         {
             TitlePage = Title;
+            item = new ModeModelViewModel();
             CallUserCommand = new Command(OncallUser);
             ItemTapped = new Command<SimilarProductViewModel>(OnItemSelected);
             ShareCommand = new Command(OnShareCommand);
@@ -214,6 +244,8 @@ namespace LookaukwatApp.ViewModels.Mode
             SendMessageCommand = new Command(OnSendMessage);
             TappedImageCommand = new Command<string>(OnTappedImage);
             SignalCommand = new Command(OnSignal);
+            NotFavoriteCommand = new Command<SimilarProductViewModel>(OnFavorite);
+            FavoriteCommand = new Command(OnFavorite);
         }
 
         public async void OnTappedImage(string image)
@@ -224,11 +256,12 @@ namespace LookaukwatApp.ViewModels.Mode
         }
         public async void LoadItemId(string itemId)
         {
+            IsBusy = false;
             IsRunning = true;
             try
             {
                 var id = Convert.ToInt32(itemId);
-                var item = await _apiServices.GetUniqueModeAsync(id);
+                item = await _apiServices.GetUniqueModeAsync(id);
                 Id = item.id;
                 Title = item.Title;
                 Description = item.Description;
@@ -238,6 +271,7 @@ namespace LookaukwatApp.ViewModels.Mode
                 Email = item.UserEmail;
                 SearchOrAsk = item.SearchOrAsk;
                 Price = item.Price;
+                PriceConvert = item.PriceConvert;
                 Town = item.Town;
                 Street = item.Street;
                 Lat = item.Lat;
@@ -265,6 +299,7 @@ namespace LookaukwatApp.ViewModels.Mode
                 }
 
                 IsRunning = false;
+                IsBusy = true;
             }
             catch (Exception)
             {
@@ -273,6 +308,66 @@ namespace LookaukwatApp.ViewModels.Mode
             }
 
         }
+
+
+        private async void OnFavorite(SimilarProductViewModel item)
+        {
+            ProductForMobileViewModel Itemproduct = new ProductForMobileViewModel()
+            {
+                id = item.id,
+                Category = item.Category,
+                Price = item.Price,
+                Town = item.Town,
+                Title = item.Title,
+                NumberImages = item.NumberImages,
+                Image = item.Image,
+                DateLetter = item.Date,
+                
+            };
+            bool response = CheckFavorite.IsFabvorite(Itemproduct);
+            if (response)
+            {
+                item.BlackHeart = "heart_red";
+                item.RedHeart = "heart_red";
+                await Shell.Current.DisplayAlert("Ajoutée aux favoris !", "Vous pouvez contacter l'annonceur à tout moment dans vos favoris pour lui montrer votre intérêt", "ok");
+            }
+            else
+            {
+                item.BlackHeart = "heart_black";
+                item.RedHeart = "heart_black";
+            }
+        }
+
+
+
+        private async void OnFavorite()
+        {
+            ProductForMobileViewModel Itemproduct = new ProductForMobileViewModel()
+            {
+                id = item.id,
+                Category = "Mode",
+                Price = item.Price,
+                Town = item.Town,
+                Title = item.Title,
+                NumberImages = item.NumberImages,
+                Image = item.Images.First(),
+                DateLetter = item.Date,
+
+            };
+            bool response = CheckFavorite.IsFabvorite(Itemproduct);
+            if (response)
+            {
+                BlackHeart = "heart_red";
+                RedHeart = "heart_red";
+                await Shell.Current.DisplayAlert("Ajoutée aux favoris !", "Vous pouvez contacter l'annonceur à tout moment dans vos favoris pour lui montrer votre intérêt", "ok");
+            }
+            else
+            {
+                BlackHeart = "heart_black";
+                RedHeart = "heart_black";
+            }
+        }
+
 
         private void OncallUser()
         {
@@ -286,6 +381,7 @@ namespace LookaukwatApp.ViewModels.Mode
         }
         private async void OnClipboard()
         {
+            await Shell.Current.DisplayAlert("Alerte", "Copier dans le papier-presse", "Ok");
             var uri = "https://lookaukwat.com/Mode/ModeDetail/" + Id;
             await Clipboard.SetTextAsync(uri);
 

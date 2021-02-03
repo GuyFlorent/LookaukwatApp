@@ -21,6 +21,17 @@ namespace LookaukwatApp.Helpers
             }
         }
 
+        public static string IdItem_For_Image
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("IdItem_For_Image", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("IdItem_For_Image", value);
+            }
+        }
         public static string Products
         {
             get

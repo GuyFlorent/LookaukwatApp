@@ -22,7 +22,8 @@ namespace LookaukwatApp.ViewModels.Job
     class JobDetailsViewModel : BaseViewModel
     {
         ApiServices _apiServices = new ApiServices();
-
+        JobModelViewModel item;
+        private int id;
         private string itemId;
         private int price;
         private string title;
@@ -38,6 +39,7 @@ namespace LookaukwatApp.ViewModels.Job
         private string town;
         private string lat;
         private string lon;
+        private string priceConvert;
         ObservableCollection<string> images = new ObservableCollection<string>();
         public ObservableCollection<string> Images { get => images; set => SetProperty(ref images, value); }
 
@@ -49,7 +51,14 @@ namespace LookaukwatApp.ViewModels.Job
         public Command SendMessageCommand { get; set; }
         public Command TappedImageCommand { get; set; }
         public Command SignalCommand { get; set; }
+        public Command NotFavoriteCommand { get; set; }
+        public Command FavoriteCommand { get; set; }
 
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
+        }
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
 
@@ -72,9 +81,7 @@ namespace LookaukwatApp.ViewModels.Job
             await Shell.Current.GoToAsync($"{nameof(JobDetailPage)}?{nameof(JobDetailsViewModel.ItemId)}={item.id}");
 
         }
-        public int Id { get; set; }
-
-
+       
         public string Name
         {
             get => name;
@@ -150,7 +157,24 @@ namespace LookaukwatApp.ViewModels.Job
             get => description;
             set => SetProperty(ref description, value);
         }
+        private string blackHeart = "heart_black";
+        public string BlackHeart
+        {
+            get => blackHeart;
+            set => SetProperty(ref blackHeart, value);
+        }
 
+        private string redHeart = "heart_red";
+        public string RedHeart
+        {
+            get => redHeart;
+            set => SetProperty(ref redHeart, value);
+        }
+        public string PriceConvert
+        {
+            get => priceConvert;
+            set => SetProperty(ref priceConvert, value);
+        }
         public string ItemId
         {
             get
@@ -170,6 +194,7 @@ namespace LookaukwatApp.ViewModels.Job
         public JobDetailsViewModel()
         {
             TitlePage = Title;
+            item = new JobModelViewModel();
             CallUserCommand = new Command(OncallUser);
             ItemTapped = new Command<SimilarProductViewModel>(OnItemSelected);
             ShareCommand = new Command(OnShareCommand);
@@ -177,6 +202,8 @@ namespace LookaukwatApp.ViewModels.Job
             SendMessageCommand = new Command(OnSendMessage);
             TappedImageCommand = new Command<string>(OnTappedImage);
             SignalCommand = new Command(OnSignal);
+            NotFavoriteCommand = new Command<SimilarProductViewModel>(OnFavorite);
+            FavoriteCommand = new Command(OnFavorite);
         }
 
         public async void OnTappedImage(string image)
@@ -188,11 +215,12 @@ namespace LookaukwatApp.ViewModels.Job
 
         public async void LoadItemId(string itemId)
         {
+            IsBusy = false;
             IsRunning = true;
             try
             {
                 var id = Convert.ToInt32(itemId);
-                var item = await _apiServices.GetUniqueJobAsync(id);
+                item = await _apiServices.GetUniqueJobAsync(id);
                 Id = item.id;
                 Title = item.Title;
                 Description = item.Description;
@@ -213,7 +241,7 @@ namespace LookaukwatApp.ViewModels.Job
                     images.Add(im);
                 }
                 Price = item.Price;
-
+                PriceConvert = item.PriceConvert;
                 //For similar product
                 foreach (var similar in item.SimilarProduct)
                 {
@@ -221,6 +249,7 @@ namespace LookaukwatApp.ViewModels.Job
                 }
 
                 IsRunning = false;
+                IsBusy = true;
             }
             catch (Exception)
             {
@@ -228,6 +257,65 @@ namespace LookaukwatApp.ViewModels.Job
                 IsRunning = false;
             }
 
+        }
+
+
+        private async void OnFavorite(SimilarProductViewModel item)
+        {
+            ProductForMobileViewModel Itemproduct = new ProductForMobileViewModel()
+            {
+                id = item.id,
+                Category = item.Category,
+                Price = item.Price,
+                Town = item.Town,
+                Title = item.Title,
+                NumberImages = item.NumberImages,
+                Image = item.Image,
+                DateLetter = item.Date,
+
+            };
+            bool response = CheckFavorite.IsFabvorite(Itemproduct);
+            if (response)
+            {
+                item.BlackHeart = "heart_red";
+                item.RedHeart = "heart_red";
+                await Shell.Current.DisplayAlert("Ajoutée aux favoris !", "Vous pouvez contacter l'annonceur à tout moment dans vos favoris pour lui montrer votre intérêt", "ok");
+            }
+            else
+            {
+                item.BlackHeart = "heart_black";
+                item.RedHeart = "heart_black";
+            }
+        }
+
+
+
+        private async void OnFavorite()
+        {
+            ProductForMobileViewModel Itemproduct = new ProductForMobileViewModel()
+            {
+                id = item.id,
+                Category = "Emploi",
+                Price = item.Price,
+                Town = item.Town,
+                Title = item.Title,
+                NumberImages = item.NumberImages,
+                Image = item.Images.Select(s =>s.ImageMobile).First(),
+                DateLetter = item.Date,
+
+            };
+            bool response = CheckFavorite.IsFabvorite(Itemproduct);
+            if (response)
+            {
+                BlackHeart = "heart_red";
+                RedHeart = "heart_red";
+                await Shell.Current.DisplayAlert("Ajoutée aux favoris !", "Vous pouvez contacter l'annonceur à tout moment dans vos favoris pour lui montrer votre intérêt", "ok");
+            }
+            else
+            {
+                BlackHeart = "heart_black";
+                RedHeart = "heart_black";
+            }
         }
 
         private void OncallUser()
@@ -243,6 +331,7 @@ namespace LookaukwatApp.ViewModels.Job
 
         private async void OnClipboard()
         {
+            await Shell.Current.DisplayAlert("Alerte", "Copier dans le papier-presse", "Ok");
             var uri = "https://lookaukwat.azurewebsites.net/Job/JobDetail/" + Id;
             await Clipboard.SetTextAsync(uri);
 

@@ -63,10 +63,10 @@ namespace LookaukwatApp.ViewModels.User
                 if (response)
                 {
                     var AccessToken = Settings.AccessToken;
-
+                    Items.Remove(itm);
                     bool resp = await _apiServices.DeleteProduct(AccessToken, itm.id);
-                    if (resp)
-                        Items.Remove(itm);
+                    //if (resp)
+                        
                 }
             });
 

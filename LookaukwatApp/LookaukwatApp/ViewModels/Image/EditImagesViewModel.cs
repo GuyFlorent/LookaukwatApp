@@ -29,7 +29,13 @@ namespace LookaukwatApp.ViewModels.Image
             set
             {
                 itemId = value;
-                GetProductImage(value);
+                if(value != null)
+                {
+                    Settings.IdItem_For_Image = value;
+                    GetProductImage(value);
+                }
+               
+                
             }
         }
 
@@ -66,11 +72,12 @@ namespace LookaukwatApp.ViewModels.Image
                 {
                     IsBusy = true;
                     var AccessToken = Settings.AccessToken;
-
-                    bool resp = await _apiServices.DeleteImageAsync(AccessToken, itm.id);
-                    if (resp)
-                        IsBusy = false;
+                    
                     Items.Remove(itm);
+                    IsBusy = false;
+                    bool resp = await _apiServices.DeleteImageAsync(AccessToken, itm.id);
+                    //if (resp)
+                       
                 }
             });
         }
@@ -179,8 +186,15 @@ namespace LookaukwatApp.ViewModels.Image
             (message, cert, chain, errors) => { return true; };
 
             client = new HttpClient(httpClientHandler);
-            string productId = ItemId;
-
+            string productId;
+            if (ItemId == null)
+            {
+                productId = Settings.IdItem_For_Image;
+            }
+            else
+            {
+                productId = ItemId;
+            }
             var uploadServiceBaseAdress = Uri + "api/Product/UploadImages/?id=" + productId;
             var httpResponseMessage = await client.PostAsync(uploadServiceBaseAdress, content);
             var jwt = await httpResponseMessage.Content.ReadAsStringAsync();

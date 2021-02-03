@@ -22,7 +22,9 @@ namespace LookaukwatApp.ViewModels.Appartment
     public class ApartDetailViewModel : BaseViewModel
     {
         ApiServices _apiServices = new ApiServices();
+        ApartModelViewModel item;
 
+        private int id;
         private string itemId;
 
         private int price;
@@ -37,6 +39,7 @@ namespace LookaukwatApp.ViewModels.Appartment
         private string town;
         private string lat;
         private string lon;
+        private string priceConvert;
         //for Apart model
         private int apartSurface;
         private string type;
@@ -56,7 +59,13 @@ namespace LookaukwatApp.ViewModels.Appartment
         public Command SendMessageCommand { get; set; }
         public Command TappedImageCommand { get; set; }
         public Command SignalCommand { get; set; }
-        
+        public Command NotFavoriteCommand { get; set; }
+        public Command FavoriteCommand { get; set; }
+        public int Id
+        {
+            get => id;
+            set => SetProperty(ref id, value);
+        }
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
 
@@ -77,9 +86,7 @@ namespace LookaukwatApp.ViewModels.Appartment
                 return;
             await Shell.Current.GoToAsync($"{nameof(ApartDetailPage)}?{nameof(ApartDetailViewModel.ItemId)}={item.id}");
         }
-        public int Id { get; set; }
-
-
+       
         public string Name
         {
             get => name;
@@ -147,6 +154,24 @@ namespace LookaukwatApp.ViewModels.Appartment
             set => SetProperty(ref lon, value);
         }
 
+        private string blackHeart = "heart_black";
+        public string BlackHeart
+        {
+            get => blackHeart;
+            set => SetProperty(ref blackHeart, value);
+        }
+
+        private string redHeart = "heart_red";
+        public string RedHeart
+        {
+            get => redHeart;
+            set => SetProperty(ref redHeart, value);
+        }
+        public string PriceConvert
+        {
+            get => priceConvert;
+            set => SetProperty(ref priceConvert, value);
+        }
         public string ItemId
         {
             get
@@ -189,6 +214,7 @@ namespace LookaukwatApp.ViewModels.Appartment
         public ApartDetailViewModel()
         {
             TitlePage = Title;
+            item = new ApartModelViewModel();
             CallUserCommand = new Command(OncallUser);
             ItemTapped = new Command<SimilarProductViewModel>(OnItemSelected);
             ShareCommand = new Command(OnShareCommand);
@@ -196,6 +222,8 @@ namespace LookaukwatApp.ViewModels.Appartment
             SendMessageCommand = new Command(OnSendMessage);
             TappedImageCommand = new Command<string>(OnTappedImage);
             SignalCommand = new Command(OnSignal);
+            NotFavoriteCommand = new Command<SimilarProductViewModel>(OnFavorite);
+            FavoriteCommand = new Command(OnFavorite);
         }
 
 
@@ -207,11 +235,12 @@ namespace LookaukwatApp.ViewModels.Appartment
         }
         public async void LoadItemId(string itemId)
         {
+            IsBusy = false;
             IsRunning = true;
             try
             {
                 var id = Convert.ToInt32(itemId);
-                var item = await _apiServices.GetUniqueApartAsync(id);
+                item = await _apiServices.GetUniqueApartAsync(id);
                 Id = item.id;
                 Title = item.Title;
                 Description = item.Description;
@@ -221,6 +250,7 @@ namespace LookaukwatApp.ViewModels.Appartment
                 Email = item.UserEmail;
                 SearchOrAsk = item.SearchOrAsk;
                 Price = item.Price;
+                PriceConvert = item.PriceConvert;
                 Town = item.Town;
                 Street = item.Street;
                 Lat = item.Lat;
@@ -244,6 +274,7 @@ namespace LookaukwatApp.ViewModels.Appartment
                     SimilarProduct.Add(similar);
                 }
                 IsRunning = false;
+                IsBusy = true;
             }
             catch (Exception)
             {
@@ -251,6 +282,65 @@ namespace LookaukwatApp.ViewModels.Appartment
                 IsRunning = false;
             }
 
+        }
+
+
+        private async void OnFavorite(SimilarProductViewModel item)
+        {
+            ProductForMobileViewModel Itemproduct = new ProductForMobileViewModel()
+            {
+                id = item.id,
+                Category = item.Category,
+                Price = item.Price,
+                Town = item.Town,
+                Title = item.Title,
+                NumberImages = item.NumberImages,
+                Image = item.Image,
+                DateLetter = item.Date,
+
+            };
+            bool response = CheckFavorite.IsFabvorite(Itemproduct);
+            if (response)
+            {
+                item.BlackHeart = "heart_red";
+                item.RedHeart = "heart_red";
+                await Shell.Current.DisplayAlert("Ajoutée aux favoris !", "Vous pouvez contacter l'annonceur à tout moment dans vos favoris pour lui montrer votre intérêt", "ok");
+            }
+            else
+            {
+                item.BlackHeart = "heart_black";
+                item.RedHeart = "heart_black";
+            }
+        }
+
+
+
+        private async void OnFavorite()
+        {
+            ProductForMobileViewModel Itemproduct = new ProductForMobileViewModel()
+            {
+                id = item.id,
+                Category = "Maison",
+                Price = item.Price,
+                Town = item.Town,
+                Title = item.Title,
+                NumberImages = item.NumberImages,
+                Image = item.Images.First(),
+                DateLetter = item.Date,
+
+            };
+            bool response = CheckFavorite.IsFabvorite(Itemproduct);
+            if (response)
+            {
+                BlackHeart = "heart_red";
+                RedHeart = "heart_red";
+                await Shell.Current.DisplayAlert("Ajoutée aux favoris !", "Vous pouvez contacter l'annonceur à tout moment dans vos favoris pour lui montrer votre intérêt", "ok");
+            }
+            else
+            {
+                BlackHeart = "heart_black";
+                RedHeart = "heart_black";
+            }
         }
 
         private void OncallUser()
@@ -265,6 +355,7 @@ namespace LookaukwatApp.ViewModels.Appartment
         }
         private async void OnClipboard()
         {
+            await Shell.Current.DisplayAlert("Alerte", "Copier dans le papier-presse", "Ok");
             var uri = "https://lookaukwat.com/ApartmentRental/ApartDetail/" + Id;
             await Clipboard.SetTextAsync(uri);
 

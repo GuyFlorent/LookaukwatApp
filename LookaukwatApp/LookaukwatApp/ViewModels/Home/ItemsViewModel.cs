@@ -218,6 +218,7 @@ namespace LookaukwatApp.ViewModels.Home
                 }
             };
             Settings.SortItemPage = "";
+            //Settings.Products = "";
 
             
             if (string.IsNullOrWhiteSpace(Settings.Products))

@@ -26,7 +26,7 @@
 
     <ContentPage.Content>
         <StackLayout Orientation="Vertical"
-                     Margin="15,35,20,25">
+                     Margin="15,35,20,5">
             <Label Text="Choisir une catégorie"
                    TextColor="Black"
                    FontSize="Title"

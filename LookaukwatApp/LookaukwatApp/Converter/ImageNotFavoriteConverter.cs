@@ -29,6 +29,7 @@ namespace LookaukwatApp.Converter
                     var item = ListFavorites.FirstOrDefault(model => model.id == ItemId);
                     if (item == null)
                     {
+                        
                         return true;
                     }
                     else

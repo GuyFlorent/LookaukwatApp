@@ -13,16 +13,24 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter"></converter:StringNullOrEmptyBoolConverter>
+            <converter:ImageFavoriteConverter x:Key="ImageFavoriteConverter"></converter:ImageFavoriteConverter>
+            <converter:ImageNotFavoriteConverter x:Key="ImageNotFavoriteConverter"></converter:ImageNotFavoriteConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <StackLayout>
+
+        <RelativeLayout IsVisible="{Binding IsRunning}">
+            <ActivityIndicator TranslationX="150" TranslationY="200" IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+        </RelativeLayout>
+        <StackLayout IsVisible="{Binding IsBusy}">
+      
         <ScrollView>
-        <StackLayout >
-            <ActivityIndicator IsVisible="{Binding IsRunning, Mode=TwoWay}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+            <StackLayout >
+           
             <CarouselView ItemsSource="{Binding Images}"
                           IndicatorView="indicatorview"
-                          HeightRequest="380">
+                          HeightRequest="310">
 
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
@@ -65,11 +73,12 @@
                        MaxLines="1"
                    FontAttributes="Bold"></Label>
 
-                <Label  TextColor="Orange"
+                    <Label  TextColor="#2196F3"
+                           FontAttributes="Bold"
                     VerticalOptions="Center">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding Price}"></Span>
+                                <Span Text="{Binding PriceConvert}"></Span>
                             <Span Text=" FCFA"></Span>
                         </FormattedString>
                     </Label.FormattedText>
@@ -310,13 +319,19 @@
                         <ImageButton Source="share"
                                  HeightRequest="35"
                                  WidthRequest="35"
-                                 BackgroundColor="Transparent"
+                                 BackgroundColor="White"
                                  Command="{Binding ShareCommand}"
                                  Aspect="AspectFit"></ImageButton>
                         <Label 
                            Text="Partager"
                            FontAttributes="Italic"
-                           ></Label>
+                           >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                        Command="{Binding ShareCommand}"
+                                        NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal"
@@ -326,14 +341,19 @@
                                  Source="link"
                                  HeightRequest="35"
                                  WidthRequest="35"
-                                 BackgroundColor="Transparent"
+                                 BackgroundColor="White"
                                  Command="{Binding ClipBoardCommand}"
-                                 Clicked="CopyLink_Click"
                             Aspect="AspectFit"></ImageButton>
                         <Label 
                            
                            Text="Copier le lien"
-                           FontAttributes="Italic"></Label>
+                           FontAttributes="Italic">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                        Command="{Binding ClipBoardCommand}"
+                                        NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
 
                     </StackLayout>
                 </Grid>
@@ -390,17 +410,76 @@
 
                                                     </Frame>
                                                 </StackLayout>
+
+                                                <StackLayout TranslationX="160"
+                                                             Opacity="2"
+                                                             Padding="0"
+                                                             BackgroundColor="Transparent"
+                                                             IsVisible="{Binding id, Converter={StaticResource ImageFavoriteConverter}}">
+                                                    <Frame Padding="0"
+                                                   HorizontalOptions="End"
+                                                   VerticalOptions="End"
+                                                  BackgroundColor="Transparent"
+                                                   Opacity="1">
+                                                        <StackLayout >
+                                                            <Image Source="{Binding RedHeart}"
+                                                          Aspect="AspectFit"
+                                                          HeightRequest="25"
+                                                                           />
+
+                                                            <StackLayout.GestureRecognizers>
+                                                                <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ApartDetailViewModel}}, Path=NotFavoriteCommand}"		
+                                CommandParameter="{Binding .}">
+                                                                </TapGestureRecognizer>
+                                                            </StackLayout.GestureRecognizers>
+                                                        </StackLayout>
+                                                    </Frame>
+
+                                                </StackLayout>
+
+
+                                                <StackLayout TranslationX="160"
+                                                             Opacity="2"
+                                                             Padding="0"
+                                                             BackgroundColor="Transparent"
+                                                             IsVisible="{Binding id, Converter={StaticResource ImageNotFavoriteConverter}}">
+                                                    <Frame Padding="0"
+                                                   HorizontalOptions="End"
+                                                   VerticalOptions="End"
+                                                  BackgroundColor="Transparent"
+                                                   Opacity="1">
+                                                        <StackLayout >
+                                                            <Image Source="{Binding BlackHeart}"
+                                                          Aspect="AspectFit"
+                                                          HeightRequest="25"
+                                                                           />
+
+                                                            <StackLayout.GestureRecognizers>
+                                                                <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ApartDetailViewModel}}, Path=NotFavoriteCommand}"		
+                                CommandParameter="{Binding .}">
+                                                                </TapGestureRecognizer>
+                                                            </StackLayout.GestureRecognizers>
+                                                        </StackLayout>
+                                                    </Frame>
+
+                                                </StackLayout>
+
                                             </RelativeLayout>
                                             <Label Text="{Binding Title}"
                                HorizontalOptions="Start"
                                                TextColor="Black"
                                                FontAttributes="Bold"
                                                MaxLines="1"/>
-                                            <Label  TextColor="Orange"
+                                            <Label  TextColor="#2196F3"
+                           FontAttributes="Bold"
                     VerticalOptions="Center">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="{Binding Price}"></Span>
+                                                        <Span Text="{Binding PriceConvert}"></Span>
                                                     <Span Text=" FCFA"></Span>
                                                 </FormattedString>
                                             </Label.FormattedText>
@@ -437,6 +516,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <ImageButton Source="icon_phone"
@@ -444,13 +524,19 @@
                                  WidthRequest="30"
                              HorizontalOptions="Start"
                              Aspect="AspectFit"
-                                 BackgroundColor="Transparent"
+                                 BackgroundColor="#2196F3"
                                  Command="{Binding CallUserCommand}"></ImageButton>
                 <Label Grid.Row="1"
                            Text="Contacter"
                        HorizontalOptions="Start"
                        TextColor="White"
-                           FontAttributes="Italic"></Label>
+                           FontAttributes="Italic">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                        Command="{Binding CallUserCommand}"
+                                        NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
 
                 <ImageButton Source="messages"
                               Aspect="AspectFit"
@@ -458,17 +544,54 @@
                              HorizontalOptions="Start"
                                  HeightRequest="30"
                                  WidthRequest="30"
-                                 BackgroundColor="Transparent"
+                                 BackgroundColor="#2196F3"
                                  Command="{Binding SendMessageCommand}"></ImageButton>
                 <Label Grid.Row="1"
                        Grid.Column="1"
                        HorizontalOptions="Start"
                            Text="Message"
                        TextColor="White"
-                           FontAttributes="Italic"></Label>
+                           FontAttributes="Italic">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                        Command="{Binding SendMessageCommand}"
+                                        NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                <ImageButton Source="{Binding RedHeart}"
+                           Aspect="AspectFit"
+                           HeightRequest="25"
+                           BackgroundColor="#2196F3"
+                           Grid.Column="2"
+                           IsVisible="{Binding Id, Converter={StaticResource ImageFavoriteConverter}}"
+                           Command="{Binding FavoriteCommand}"/>
+
+
+                <ImageButton Source="{Binding BlackHeart }"
+                           Aspect="AspectFit"
+                           HeightRequest="25"
+                           BackgroundColor="#2196F3" 
+                           Grid.Column="2"
+                           IsVisible="{Binding Id, Converter={StaticResource ImageNotFavoriteConverter}}"
+                                 Command="{Binding FavoriteCommand}"/>
+
+                <Label Grid.Row="1"
+                       Grid.Column="2"
+                       HorizontalOptions="Start"
+                           Text="Sauvegarder"
+                       TextColor="White"
+                           FontAttributes="Italic">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                        Command="{Binding FavoriteCommand}"
+                                        NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
             </Grid>
 
         </StackLayout>
+    </StackLayout>
     </StackLayout>
 
 </ContentPage>

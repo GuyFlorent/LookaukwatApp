@@ -25,10 +25,10 @@
     <StackLayout>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackLayout  Orientation="Horizontal">
+           
                 <StackLayout Orientation="Horizontal">
                     <Image Source="image"
                            HeightRequest="40"></Image>
@@ -49,7 +49,7 @@
                 Command="{Binding AddImageTakeCommad}"
                 ></Button>
                 </StackLayout>
-            </StackLayout>
+           
         </Grid>
         
         <ActivityIndicator IsVisible="{Binding IsBusy}"  IsRunning="{Binding IsBusy}" Color ="#80000000"/>
@@ -63,7 +63,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 
-                    <Frame Margin="0,0,0,10"  
+                    <Frame   
                                    HasShadow="True"
                                    BorderColor="#2196F3"
                        BackgroundColor="GhostWhite"
@@ -73,7 +73,6 @@
                             <Grid x:Name="Item" BackgroundColor="GhostWhite">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
                                 <Image 
@@ -82,11 +81,12 @@
                        HeightRequest="150"
                        WidthRequest="150" />
 
-                                <ImageButton Grid.Row="1"
-                                            
+                                <ImageButton Grid.Row="0"
+                                            Opacity="0.8"
                                          VerticalOptions="End"
                                              Source="trash"
                                              BackgroundColor="Red"
+                                             HeightRequest="25"
                                              Command="{Binding DeleteImageCommand}"
                                              BindingContext="{Binding Source={x:Reference UserImage}, Path=BindingContext}"
                                              CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
@@ -98,6 +98,7 @@
                             <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
+                                Tapped="Tapped_Image"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:UploadImageViewModel}}, Path=TappedImageCommand}"		
                                 CommandParameter="{Binding .}">
                             </TapGestureRecognizer>

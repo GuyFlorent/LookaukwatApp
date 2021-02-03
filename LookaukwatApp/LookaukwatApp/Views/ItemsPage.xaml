@@ -141,12 +141,12 @@
 
                                             <Label Grid.Column="1"
                            Grid.Row="1"
-                           TextColor="Orange"
-                           
+                           TextColor="#2196F3"
+                           FontAttributes="Bold"
                            VerticalOptions="Start">
                                                 <Label.FormattedText>
                                                     <FormattedString>
-                                                        <Span Text="{Binding Price}"></Span>
+                                                        <Span Text="{Binding PriceConvert}"></Span>
                                                         <Span Text=" FCFA"></Span>
                                                     </FormattedString>
                                                 </Label.FormattedText>
@@ -169,7 +169,7 @@
                                                 <StackLayout IsVisible="{Binding id, Converter={StaticResource ImageFavoriteConverter}}"
                                                     HorizontalOptions="EndAndExpand">
 
-                                                    <Image Source="{Binding RedHeart}"
+                                                    <Image Source="{Binding RedHeart, Mode=TwoWay}"
                                Aspect="AspectFit"
                                HeightRequest="20"
                                />
@@ -186,7 +186,7 @@
                                                 <StackLayout IsVisible="{Binding id, Converter={StaticResource ImageNotFavoriteConverter}}"
                                                     HorizontalOptions="EndAndExpand"
                                                              >
-                                                    <Image Source="{Binding BlackHeart}"
+                                                    <Image Source="{Binding BlackHeart,  Mode=TwoWay}"
                                Aspect="AspectFit"
                                HeightRequest="20"
                                />

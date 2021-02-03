@@ -23,7 +23,7 @@
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 
-                <Frame Margin="0,0,0,10"  
+                <Frame  
                                    HasShadow="True"
                                    BorderColor="#2196F3"
                        BackgroundColor="GhostWhite"
@@ -73,13 +73,13 @@
                     
                         <Label 
                            Grid.Row="2"
-                           TextColor="Orange"
+                          TextColor="#2196F3"
                            LineBreakMode="TailTruncation"
                        FontAttributes="Italic"
                        VerticalOptions="Start">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="{Binding Price}"></Span>
+                                                <Span Text="{Binding PriceConvert}"></Span>
                                     <Span Text=" FCFA"></Span>
                                 </FormattedString>
                             </Label.FormattedText>

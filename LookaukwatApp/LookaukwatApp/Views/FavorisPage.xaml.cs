@@ -38,10 +38,16 @@ namespace LookaukwatApp.Views
                 List<ProductForMobileViewModel> ListFavorites = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(Liste);
                 if (ListFavorites.Count > 0)
                 {
+                    Stack_HasResult.IsVisible = true;
+                    Stack_Has_NoResult.IsVisible = false;
                     mylist.ItemsSource = ListFavorites;
+                    
+                    
                 }
                 else
                 {
+                    Stack_Has_NoResult.IsVisible = true;
+                    Stack_HasResult.IsVisible = false;
                     mylist.ItemsSource = "";
                 }
             }

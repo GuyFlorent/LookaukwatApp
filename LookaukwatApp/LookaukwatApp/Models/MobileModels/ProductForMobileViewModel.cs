@@ -1,6 +1,7 @@
 ﻿using LookaukwatApp.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace LookaukwatApp.Models.MobileModels
@@ -17,7 +18,7 @@ namespace LookaukwatApp.Models.MobileModels
 
 
         public int Price { get; set; }
-
+        public string PriceConvert { get => Price.ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim() ; }
         public DateTime DateAdd { get; set; }
         public string Date { get; set; }
         public string DateLetter { get; set; }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace LookaukwatApp.Models.MobileModels
 {
-    public class ModeModelViewModel
+    public class ModeModelViewModel 
     {
 
         public int id { get; set; }
@@ -15,7 +16,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string Town { get; set; }
 
         public int Price { get; set; }
-
+        public string PriceConvert { get => Price.ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim(); }
         public string Title { get; set; }
         public int ViewNumber { get; set; }
         public string Description { get; set; }
@@ -42,7 +43,7 @@ namespace LookaukwatApp.Models.MobileModels
         public List<string> Images { get; set; }
         public int NumberImages { get; set; }
         public List<SimilarProductViewModel> SimilarProduct { get; set; }
-       
+
 
     }
 }

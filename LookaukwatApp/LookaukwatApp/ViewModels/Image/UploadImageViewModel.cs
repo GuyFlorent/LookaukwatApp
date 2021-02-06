@@ -115,6 +115,16 @@ namespace LookaukwatApp.ViewModels.Image
         }
         private async void OnPublish()
         {
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                IsBusy = false;
+                return;
+            }
+
+
             if (IsBusy)
             {
                 await Shell.Current.DisplayAlert("Alerte", "veuillez patienter la fin du téléchargement de l'image avant de valider", "ok");
@@ -185,6 +195,17 @@ namespace LookaukwatApp.ViewModels.Image
             if (_mediaFile == null)
                 return;
             IsBusy = true;
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                IsBusy = false;
+                return;
+            }
+
+
             var Image = await UploadPhoto_Click();
             if (Image != null)
             {
@@ -221,6 +242,17 @@ namespace LookaukwatApp.ViewModels.Image
             if (_mediaFile == null)
                 return;
             IsBusy = true;
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                IsBusy = false;
+                return;
+            }
+
+
             var Image = await UploadPhoto_Click();
             if (Image != null)
             {

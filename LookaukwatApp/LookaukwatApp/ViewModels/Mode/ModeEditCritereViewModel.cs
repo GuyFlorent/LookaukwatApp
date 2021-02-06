@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 namespace LookaukwatApp.ViewModels.Mode
 {
@@ -239,17 +240,39 @@ namespace LookaukwatApp.ViewModels.Mode
         public async void OnEdit()
         {
             IsBusy = true;
-            var accessToken = Settings.AccessToken;
-            await _apiServices.EditModeCritereAsync(ItemId, Price, SearchOrAskJob, Rubrique, Brand, Type,Univers,Size, Color, State, accessToken);
-            IsBusy = false;
-            await Shell.Current.DisplayAlert("Information", "Modifiée avec succès", "Ok");
-            await Shell.Current.GoToAsync("..");
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+                IsBusy = false;
+               
+                return;
+            }
+
+            try
+            {
+                var accessToken = Settings.AccessToken;
+                await _apiServices.EditModeCritereAsync(ItemId, Price, SearchOrAskJob, Rubrique, Brand, Type, Univers, Size, Color, State, accessToken);
+                IsBusy = false;
+                await Shell.Current.DisplayAlert("Information", "Modifiée avec succès", "Ok");
+                await Shell.Current.GoToAsync("..");
+            }catch(Exception e) { }
+           
 
         }
 
         public async void LoadItemId(string itemId)
         {
             IsRunning = true;
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+                IsRunning = false;
+
+                return;
+            }
             try
             {
                 var id = Convert.ToInt32(itemId);

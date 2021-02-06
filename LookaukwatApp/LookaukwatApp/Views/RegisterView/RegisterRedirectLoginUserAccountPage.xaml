@@ -21,9 +21,9 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Margin="20,35,20,25"
-                     Padding="24"
-                     Spacing="24"
+            <StackLayout Margin="20,0,20,20"
+                     Padding="10"
+                     Spacing="5"
                      BackgroundColor="White"
                      VerticalOptions="Center">
 

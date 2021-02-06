@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Appartment
@@ -89,15 +90,37 @@ namespace LookaukwatApp.ViewModels.Appartment
         {
             IsBusy = true;
             var accessToken = Settings.AccessToken;
-            await _apiServices.EditApartCritereAsync(ItemId, Price, SearchOrAsk, Type, RoomNumber,FurnitureOrNot,ApartSurface, accessToken);
-            IsBusy = false;
-            await Shell.Current.DisplayAlert("Information", "Modifiée avec succès", "Ok");
-            await Shell.Current.GoToAsync("..");
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez la connexion", "OK");
+                return;
+            }
+            try
+            {
+                await _apiServices.EditApartCritereAsync(ItemId, Price, SearchOrAsk, Type, RoomNumber, FurnitureOrNot, ApartSurface, accessToken);
+                IsBusy = false;
+                await Shell.Current.DisplayAlert("Information", "Modifiée avec succès", "Ok");
+                await Shell.Current.GoToAsync("..");
+            }
+            catch (Exception)
+            {
+                Debug.WriteLine("Failed to Load Item");
+            }
+
         }
 
         public async void LoadItemId(string itemId)
         {
             IsRunning = true;
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez la connexion", "OK");
+                return;
+            }
+
             try
             {
                 var id = Convert.ToInt32(itemId);

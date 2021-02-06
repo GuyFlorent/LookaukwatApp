@@ -93,11 +93,24 @@ namespace LookaukwatApp.ViewModels.Job
         public async void OnEdit()
         {
             IsBusy = true;
-            var accessToken = Settings.AccessToken;
-            await _apiServices.EditJobCritereAsync(ItemId, Price, SearchOrAskJob, TypeContract, ActivitySector, accessToken);
-            IsBusy = false;
-            await Shell.Current.DisplayAlert("Information", "Modifiée avec succès", "Ok");
-            await Shell.Current.GoToAsync("..");
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+                
+                IsBusy = false;
+                return;
+            }
+            try
+            {
+                var accessToken = Settings.AccessToken;
+                await _apiServices.EditJobCritereAsync(ItemId, Price, SearchOrAskJob, TypeContract, ActivitySector, accessToken);
+                IsBusy = false;
+                await Shell.Current.DisplayAlert("Information", "Modifiée avec succès", "Ok");
+                await Shell.Current.GoToAsync("..");
+            }catch(Exception e) { }
+            
 
         }
 
@@ -105,6 +118,15 @@ namespace LookaukwatApp.ViewModels.Job
         public async void LoadItemId(string itemId)
         {
             IsRunning = true;
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+                IsRunning = false;
+               
+                return;
+            }
             try
             {
                 var id = Convert.ToInt32(itemId);

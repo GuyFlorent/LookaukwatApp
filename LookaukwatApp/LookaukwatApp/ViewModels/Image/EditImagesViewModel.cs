@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Image
@@ -72,7 +73,16 @@ namespace LookaukwatApp.ViewModels.Image
                 {
                     IsBusy = true;
                     var AccessToken = Settings.AccessToken;
-                    
+
+                    var current = Connectivity.NetworkAccess;
+                    if (current != NetworkAccess.Internet)
+                    {
+                        await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                        IsBusy = false;
+                        return;
+                    }
+
                     Items.Remove(itm);
                     IsBusy = false;
                     bool resp = await _apiServices.DeleteImageAsync(AccessToken, itm.id);
@@ -123,6 +133,15 @@ namespace LookaukwatApp.ViewModels.Image
             if (_mediaFile == null)
                 return;
             IsBusy = true;
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                IsBusy = false;
+                return;
+            }
+
             var Image = await UploadPhoto_Click();
             if (Image != null)
             {
@@ -157,6 +176,15 @@ namespace LookaukwatApp.ViewModels.Image
             if (_mediaFile == null)
                 return;
             IsBusy = true;
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                IsBusy = false;
+                return;
+            }
+
             var Image = await UploadPhoto_Click();
             if (Image != null)
             {
@@ -172,6 +200,8 @@ namespace LookaukwatApp.ViewModels.Image
 
         private async Task<ImageProcductModel> UploadPhoto_Click()
         {
+           
+
             var content = new MultipartFormDataContent();
 
             content.Add(new StreamContent(_mediaFile.GetStream()),

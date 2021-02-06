@@ -5,13 +5,14 @@
              Title="{Binding Title}"
              xmlns:viewModels="clr-namespace:LookaukwatApp.ViewModels"
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
-                 xmlns:converter="clr-namespace:LookaukwatApp.Converter"
+                 xmlns:converter="clr-namespace:LookaukwatApp.Converter" 
+                 xmlns:viewModels1="clr-namespace:LookaukwatApp.ViewModels.Login"
                  Shell.PresentationMode="ModalAnimated"
              Shell.NavBarIsVisible="False">
 
 
     <ContentPage.BindingContext>
-        <viewModels:LoginViewModel></viewModels:LoginViewModel>
+        <viewModels1:LoginViewModel></viewModels1:LoginViewModel>
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>

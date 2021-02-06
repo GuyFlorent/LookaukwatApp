@@ -90,13 +90,13 @@ namespace LookaukwatApp.Views
         //    IsSort = isSort;
         //    _viewModel.OnApearing(Sortby, IsSort);
         //}
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    mylist.ItemsSource;
-        //    _viewmodel.OnAppearing();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+           // mylist.ItemsSource;
+            //_viewmodel.OnAppearing();
             
-        //}
+        }
 
     }
 }

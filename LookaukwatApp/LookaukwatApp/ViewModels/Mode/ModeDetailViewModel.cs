@@ -258,6 +258,16 @@ namespace LookaukwatApp.ViewModels.Mode
         {
             IsBusy = false;
             IsRunning = true;
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+                IsBusy = false;
+                IsRunning = false;
+                return;
+            }
+
             try
             {
                 var id = Convert.ToInt32(itemId);

@@ -5,6 +5,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Login
@@ -113,24 +114,38 @@ namespace LookaukwatApp.ViewModels.Login
         private async void OnLoginClicked()
         {
             IsRunning = true;
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                IsRunning = false;
+                return;
+            }
+
             if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
             {
-                var accesstonken = await _apiServices.LoginASync(Username, Password);
+                try
+                {
+                    var accesstonken = await _apiServices.LoginASync(Username, Password);
 
-                Settings.AccessToken = accesstonken;
-                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-                if (accesstonken != null)
-                {
-                    Settings.Password = password;
-                    await PopupNavigation.Instance.PopAllAsync();
-                   // await Shell.Current.GoToAsync("//MainPage/PublishAnnouncePage");
-                    IsRunning = false;
-                }
-                else
-                {
-                    IsRunning = false;
-                    ErrorMessage = "Email et/ou mot de passe incorrect !";
-                }
+                    Settings.AccessToken = accesstonken;
+                    // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                    if (accesstonken != null)
+                    {
+                        Settings.Password = password;
+                        await PopupNavigation.Instance.PopAllAsync();
+                        // await Shell.Current.GoToAsync("//MainPage/PublishAnnouncePage");
+                        IsRunning = false;
+                    }
+                    else
+                    {
+                        IsRunning = false;
+                        ErrorMessage = "Email et/ou mot de passe incorrect !";
+                    }
+                }catch(Exception e) { Console.WriteLine(e.Message); }
+                
             }
             else
             {
@@ -143,34 +158,48 @@ namespace LookaukwatApp.ViewModels.Login
         private async void OnLoginByPhoneClicked()
         {
             IsRunning = true;
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                IsRunning = false;
+                return;
+            }
+
             if (!string.IsNullOrEmpty(Phone) && !string.IsNullOrEmpty(Password))
             {
-                string userEmail = await _apiServices.GetUserNameWithPhoneAsync(Phone);
-                if (userEmail == null)
+                try
                 {
-                    IsRunning = false;
-                    ErrorMessage = "Téléphone et/ou mot de passe incorrecte !";
-                }
-                else
-                {
-
-                    var accesstonken = await _apiServices.LoginASync(userEmail, Password);
-
-                    Settings.AccessToken = accesstonken;
-                    // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-                    if (accesstonken != null)
+                    string userEmail = await _apiServices.GetUserNameWithPhoneAsync(Phone);
+                    if (userEmail == null)
                     {
-                        Settings.Password = password;
-                        await PopupNavigation.Instance.PopAllAsync();
-                        //await Shell.Current.GoToAsync("//MainPage/PublishAnnouncePage");
                         IsRunning = false;
+                        ErrorMessage = "Téléphone et/ou mot de passe incorrecte !";
                     }
                     else
                     {
-                        IsRunning = false;
-                        ErrorMessage = "Téléphone et/ou mot de passe incorrect !";
+
+                        var accesstonken = await _apiServices.LoginASync(userEmail, Password);
+
+                        Settings.AccessToken = accesstonken;
+                        // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                        if (accesstonken != null)
+                        {
+                            Settings.Password = password;
+                            await PopupNavigation.Instance.PopAllAsync();
+                            //await Shell.Current.GoToAsync("//MainPage/PublishAnnouncePage");
+                            IsRunning = false;
+                        }
+                        else
+                        {
+                            IsRunning = false;
+                            ErrorMessage = "Téléphone et/ou mot de passe incorrect !";
+                        }
                     }
-                }
+                }catch(Exception e) { Console.WriteLine(e.Message); }
+               
             }
             else
             {
@@ -182,46 +211,20 @@ namespace LookaukwatApp.ViewModels.Login
         private async void OnLoginReturnUserClicked()
         {
             IsRunning = true;
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                IsRunning = false;
+                return;
+            }
+
             if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
             {
-                var accesstonken = await _apiServices.LoginASync(Username, Password);
-
-                Settings.AccessToken = accesstonken;
-                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-                if (accesstonken != null)
+                try
                 {
-                    Settings.Password = password;
-                    await PopupNavigation.Instance.PopAllAsync();
-                    //await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
-                    IsRunning = false;
-                }
-                else
-                {
-                    IsRunning = false;
-                    ErrorMessage = "Email et/ou mot de passe incorrect !";
-                }
-            }
-            else
-            {
-                IsRunning = false;
-                ErrorMessage = "Email et mot de passe sont obligatoires !";
-            }
-        }
-        //for login with phone
-        private async void OnLoginByPhoneReturnUserClicked()
-        {
-            IsRunning = true;
-            if (!string.IsNullOrEmpty(Phone) && !string.IsNullOrEmpty(Password))
-            {
-                string userEmail = await _apiServices.GetUserNameWithPhoneAsync(Phone);
-                if (userEmail == null)
-                {
-                    IsRunning = false;
-                    ErrorMessage = "Téléphone et/ou mot de passe incorrecte !";
-                }
-                else
-                {
-                    var accesstonken = await _apiServices.LoginASync(userEmail, Password);
+                    var accesstonken = await _apiServices.LoginASync(Username, Password);
 
                     Settings.AccessToken = accesstonken;
                     // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
@@ -235,9 +238,62 @@ namespace LookaukwatApp.ViewModels.Login
                     else
                     {
                         IsRunning = false;
-                        ErrorMessage = "Téléphone et/ou mot de passe incorrect !";
+                        ErrorMessage = "Email et/ou mot de passe incorrect !";
                     }
-                }
+                }catch(Exception e) { Console.WriteLine(e.Message); }
+                
+            }
+            else
+            {
+                IsRunning = false;
+                ErrorMessage = "Email et mot de passe sont obligatoires !";
+            }
+        }
+        //for login with phone
+        private async void OnLoginByPhoneReturnUserClicked()
+        {
+            IsRunning = true;
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                IsRunning = false;
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(Phone) && !string.IsNullOrEmpty(Password))
+            {
+                try
+                {
+                    string userEmail = await _apiServices.GetUserNameWithPhoneAsync(Phone);
+                    if (userEmail == null)
+                    {
+                        IsRunning = false;
+                        ErrorMessage = "Téléphone et/ou mot de passe incorrecte !";
+                    }
+                    else
+                    {
+                        var accesstonken = await _apiServices.LoginASync(userEmail, Password);
+
+                        Settings.AccessToken = accesstonken;
+                        // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                        if (accesstonken != null)
+                        {
+                            Settings.Password = password;
+                            await PopupNavigation.Instance.PopAllAsync();
+                            //await Shell.Current.GoToAsync("//MainPage/UserProfilePage");
+                            IsRunning = false;
+                        }
+                        else
+                        {
+                            IsRunning = false;
+                            ErrorMessage = "Téléphone et/ou mot de passe incorrect !";
+                        }
+                    }
+                }catch(Exception e) { Console.WriteLine(e.Message); }
+               
             }
             else
             {

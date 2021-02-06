@@ -6,6 +6,7 @@ using LookaukwatApp.Views.ImageView;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Appartment
@@ -112,21 +113,31 @@ namespace LookaukwatApp.ViewModels.Appartment
         async void OnPostApart()
         {
             IsRunning = true;
-
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+                IsRunning = false;
+                return;
+            }
             //var coor = await _apiServices.GetCoodinateAsync(Town, Street);
             int surface = Convert.ToInt32(ApartSurface);
             int room = Convert.ToInt32(RoomNumber);
             int price = Convert.ToInt32(Price);
 
             var accessToken = Settings.AccessToken;
-            var ProductId = await _apiServices.ApartPostAsync(accessToken, TitleApart, Description, Town, Street, price, SearchOrAskJob, room, surface, FurnitureOrNot, Type);
-            if (ProductId != 0)
+            try
             {
-                IsRunning = false;
-                Id = ProductId;
-                await Shell.Current.GoToAsync($"{nameof(UploadImagePage)}?{nameof(UploadImageViewModel.ItemId)}={ProductId}");
+                var ProductId = await _apiServices.ApartPostAsync(accessToken, TitleApart, Description, Town, Street, price, SearchOrAskJob, room, surface, FurnitureOrNot, Type);
+                if (ProductId != 0)
+                {
+                    IsRunning = false;
+                    Id = ProductId;
+                    await Shell.Current.GoToAsync($"{nameof(UploadImagePage)}?{nameof(UploadImageViewModel.ItemId)}={ProductId}");
 
-            }
+                }
+            }catch(Exception e) { }
+           
         }
     }
 }

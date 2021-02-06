@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Edit
@@ -78,17 +79,38 @@ namespace LookaukwatApp.ViewModels.Edit
         public async void OnEdit()
         {
             IsBusy = true;
-            var accessToken = Settings.AccessToken;
-            await _apiServices.EditProductWithSamePropertieAsync(accessToken , ItemId, Title, Description, Town, Street);
-            IsBusy = false;
-            await Shell.Current.DisplayAlert("Information", "Modifier avec succès", "Ok");
-            await Shell.Current.GoToAsync("..");
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+                IsBusy = false;
+                
+                return;
+            }
+            try
+            {
+                var accessToken = Settings.AccessToken;
+                await _apiServices.EditProductWithSamePropertieAsync(accessToken, ItemId, Title, Description, Town, Street);
+                IsBusy = false;
+                await Shell.Current.DisplayAlert("Information", "Modifier avec succès", "Ok");
+                await Shell.Current.GoToAsync("..");
+            }catch(Exception e) { }
+          
         }
 
 
         public async void LoadItemId(string itemId)
         {
             IsRunning = true;
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+                
+                IsRunning = false;
+                return;
+            }
             try
             {
                 var id = Convert.ToInt32(itemId);

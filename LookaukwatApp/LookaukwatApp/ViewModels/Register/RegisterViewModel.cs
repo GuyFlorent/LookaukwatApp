@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Register
@@ -164,6 +165,14 @@ namespace LookaukwatApp.ViewModels.Register
         }
         private async void OnRegister()
         {
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                return;
+            }
+
             if (IsTerms)
             {
 
@@ -257,6 +266,15 @@ namespace LookaukwatApp.ViewModels.Register
 
         private async void OnRegisterReturnUserAccount()
         {
+
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                return;
+            }
+
             if (IsTerms)
             {
 

@@ -235,6 +235,15 @@ namespace LookaukwatApp.ViewModels.User
 
         private async void OnChangePassword()
         {
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                return;
+            }
+
+
             var accessToken = Settings.AccessToken;
             string username = Settings.Username;
             string password = Settings.Password;
@@ -285,6 +294,15 @@ namespace LookaukwatApp.ViewModels.User
         }
         private async void OnUpdateUserInfo()
         {
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                
+                return;
+            }
+
             if (!string.IsNullOrWhiteSpace(NewEmail) && !string.IsNullOrWhiteSpace(NewPhone) && !string.IsNullOrWhiteSpace(NewFirstName))
             {
                 bool checkPhoneExist = await _apiServices.CheckPhoneExistAsync(NewPhone);

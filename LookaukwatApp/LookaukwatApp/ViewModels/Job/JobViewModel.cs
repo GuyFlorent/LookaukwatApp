@@ -6,6 +6,7 @@ using LookaukwatApp.Views.ImageView;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Job
@@ -157,15 +158,27 @@ namespace LookaukwatApp.ViewModels.Job
         {
             //var coor = await _apiServices.GetCoodinateAsync(Town, Street);
             IsRunning = true;
-            var accessToken = Settings.AccessToken;
-            var ProductId = await _apiServices.JobPostAsync(accessToken, TitleJob, Description, Town, Street, Price, SearchOrAskJob, TypeContract, ActivitySector);
-            if (ProductId != 0)
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
             {
-                IsRunning = false;
-                Id = ProductId;
-                await Shell.Current.GoToAsync($"{nameof(UploadImagePage)}?{nameof(UploadImageViewModel.ItemId)}={ProductId}");
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
 
+                IsRunning = false;
+                return;
             }
+            try
+            {
+                var accessToken = Settings.AccessToken;
+                var ProductId = await _apiServices.JobPostAsync(accessToken, TitleJob, Description, Town, Street, Price, SearchOrAskJob, TypeContract, ActivitySector);
+                if (ProductId != 0)
+                {
+                    IsRunning = false;
+                    Id = ProductId;
+                    await Shell.Current.GoToAsync($"{nameof(UploadImagePage)}?{nameof(UploadImageViewModel.ItemId)}={ProductId}");
+
+                }
+            }catch(Exception e) { }
+           
         }
 
 

@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.User
@@ -132,24 +133,38 @@ namespace LookaukwatApp.ViewModels.User
         {
             string accessToken = Settings.AccessToken;
             IsBusy = true;
-            var items = await _apiServices.GetUserProductsAsync(accessToken);
 
-            if(items.Count == 0)
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
             {
-                IsListItems = false;
-                IsItems = true;
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+
+                IsBusy = false;
+                return;
             }
-            else
+
+            try
             {
-                IsListItems = true;
-                foreach (var prod in items)
+                var items = await _apiServices.GetUserProductsAsync(accessToken);
+
+                if (items.Count == 0)
                 {
-                    Items.Add(prod);
+                    IsListItems = false;
+                    IsItems = true;
                 }
-            }
-            
+                else
+                {
+                    IsListItems = true;
+                    foreach (var prod in items)
+                    {
+                        Items.Add(prod);
+                    }
+                }
+
+
+                IsBusy = false;
+            }catch(Exception e) { Console.WriteLine(e.Message); }
            
-            IsBusy = false;
         }
 
 

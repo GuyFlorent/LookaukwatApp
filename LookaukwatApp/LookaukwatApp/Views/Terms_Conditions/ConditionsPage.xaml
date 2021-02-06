@@ -79,7 +79,7 @@
 
             <Label Text="Informations"
                    TextColor="Black"></Label>
-            <Label Text="Lookaukwat pourra utiliser vos données personnelles pour vous contacter, soit pour vous infoermer des mises à jours ou soit dans le cadre du non respect des conditions"></Label>
+            <Label Text="Lookaukwat pourra utiliser vos données personnelles pour vous contacter, soit pour vous informer des mises à jours ou soit dans le cadre du non respect des conditions"></Label>
         </StackLayout>
     </ScrollView>
 

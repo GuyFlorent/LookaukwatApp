@@ -146,9 +146,22 @@ namespace LookaukwatApp
 
         protected async override void OnSleep()
         {
-            var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: 500, "");
+            var current = Connectivity.NetworkAccess;
 
-            Settings.Products = JsonConvert.SerializeObject(items);
+            if (current != NetworkAccess.Internet)
+            {
+                return;
+            }
+            try
+            {
+                var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: 500, "");
+
+                Settings.Products = JsonConvert.SerializeObject(items);
+            }catch(Exception ex)
+            {
+
+            }
+            
         }
 
         protected override void OnResume()

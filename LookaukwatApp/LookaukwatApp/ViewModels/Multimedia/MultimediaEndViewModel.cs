@@ -6,6 +6,7 @@ using LookaukwatApp.Views.ImageView;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Multimedia
@@ -133,15 +134,27 @@ namespace LookaukwatApp.ViewModels.Multimedia
             IsRunning = true;
             int price = Convert.ToInt32(Price);
 
-            var accessToken = Settings.AccessToken;
-            var ProductId = await _apiServices.MultimediaPostAsync(accessToken, Title, Description, Town, Street, price, SearchOrAskJob, Rubrique, Brand, Model, Capacity);
-            IsRunning = false;
-            if (ProductId != 0)
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
             {
-                Id = ProductId;
-                await Shell.Current.GoToAsync($"{nameof(UploadImagePage)}?{nameof(UploadImageViewModel.ItemId)}={ProductId}");
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
 
+                IsRunning = false;
+                return;
             }
+            try
+            {
+                var accessToken = Settings.AccessToken;
+                var ProductId = await _apiServices.MultimediaPostAsync(accessToken, Title, Description, Town, Street, price, SearchOrAskJob, Rubrique, Brand, Model, Capacity);
+                IsRunning = false;
+                if (ProductId != 0)
+                {
+                    Id = ProductId;
+                    await Shell.Current.GoToAsync($"{nameof(UploadImagePage)}?{nameof(UploadImageViewModel.ItemId)}={ProductId}");
+
+                }
+            }catch(Exception e) { Console.WriteLine(e.Message); }
+            
         }
     }
 }

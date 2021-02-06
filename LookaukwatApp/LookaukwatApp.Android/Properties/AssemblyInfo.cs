@@ -32,3 +32,6 @@ using Android.App;
 //add myselft after instalation of xam media
 [assembly: UsesFeature("android.hardware.camera", Required = false)]
 [assembly: UsesFeature("android.hardware.camera.autofocus", Required = false)]
+
+//for checking internet
+[assembly: UsesPermission(Android.Manifest.Permission.AccessNetworkState)]

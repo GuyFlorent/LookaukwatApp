@@ -6,6 +6,7 @@ using LookaukwatApp.Views.ImageView;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.House
@@ -133,15 +134,28 @@ namespace LookaukwatApp.ViewModels.House
             int price = Convert.ToInt32(Price);
 
             var accessToken = Settings.AccessToken;
-            var ProductId = await _apiServices.HousePostAsync(accessToken, Title, Description, Town, Street, price, SearchOrAskJob, Rubrique, Color, Type, State, FabricMaterial);
-
-            if (ProductId != 0)
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
             {
-                IsRunning = false;
-                Id = ProductId;
-                await Shell.Current.GoToAsync($"{nameof(UploadImagePage)}?{nameof(UploadImageViewModel.ItemId)}={ProductId}");
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
 
+                IsRunning = true;
+                return;
             }
+            try
+            {
+                var ProductId = await _apiServices.HousePostAsync(accessToken, Title, Description, Town, Street, price, SearchOrAskJob, Rubrique, Color, Type, State, FabricMaterial);
+
+                if (ProductId != 0)
+                {
+                    IsRunning = false;
+                    Id = ProductId;
+                    await Shell.Current.GoToAsync($"{nameof(UploadImagePage)}?{nameof(UploadImageViewModel.ItemId)}={ProductId}");
+
+                }
+            }catch(Exception e) { }
+
+           
         }
     }
 }

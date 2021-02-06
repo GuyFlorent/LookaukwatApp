@@ -25,6 +25,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Extended;
 
@@ -36,7 +37,8 @@ namespace LookaukwatApp.ViewModels.Home
     {
         private ProductForMobileViewModel _selectedItem;
 
-        private int numberOfProduct { get; set; }
+        private int numberOfProduct = 0;
+        public int NumberOfProduct { get => numberOfProduct; set => numberOfProduct = value; }
         ApiServices _apiServices = new ApiServices();
 
         public Command LoadItemsCommand { get; }
@@ -83,7 +85,14 @@ namespace LookaukwatApp.ViewModels.Home
         async Task ExecuteLoadItemsCommand()
         {
             IsRefressing = true;
-
+            var current = Connectivity.NetworkAccess;
+            if (current != NetworkAccess.Internet)
+            {
+                await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+                IsRefressing = false;
+                IsRunning = false;
+                return;
+            }
             try
             {
                 Items.Clear();
@@ -216,7 +225,7 @@ namespace LookaukwatApp.ViewModels.Home
                 OnCanLoadMore = () =>
                 {
 
-                    return Items.Count < numberOfProduct;
+                    return Items.Count < NumberOfProduct;
                 }
             };
 
@@ -258,7 +267,17 @@ namespace LookaukwatApp.ViewModels.Home
 
         private async Task DownloadDataAsync(string sortBy)
         {
+            
             IsRunning = true;
+            var current = Connectivity.NetworkAccess;
+
+            if (current != NetworkAccess.Internet)
+            {
+               await Shell.Current.DisplayAlert("Pas de connexion internet !", "Vérifiez votre connexion", "OK");
+                IsRunning = false;
+                return;
+            }
+           
             try
             {
                 Items.Clear();
@@ -304,7 +323,11 @@ namespace LookaukwatApp.ViewModels.Home
 
         private async void GetTotalNumberOfProduct()
         {
-            numberOfProduct = await _apiServices.Get_AllNumber_ProductsAsync();
+            try
+            {
+                NumberOfProduct = await _apiServices.Get_AllNumber_ProductsAsync();
+            }catch(Exception e) { }
+            
         }
 
     }

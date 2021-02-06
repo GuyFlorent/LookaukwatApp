@@ -18,6 +18,10 @@ namespace LookaukwatApp.Converter
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             var s = value as string;
+            if(s == "0")
+            {
+                return false;
+            }
             return !string.IsNullOrWhiteSpace(s);
         }
 

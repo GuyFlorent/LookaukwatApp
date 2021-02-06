@@ -39,6 +39,11 @@ namespace LookaukwatApp.ViewModels.Appartment
                     SearchrText = "Je recherche un(e) " + value;
                     OfferText = "J'ai un(e) " + value;
                 }
+                if(value == "terrain à vendre")
+                {
+                    FurnitureOrNot = "";
+                    RoomNumber = 0;
+                }
             }
         }
         private string furnitureOrNot;

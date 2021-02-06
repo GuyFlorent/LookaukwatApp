@@ -209,8 +209,8 @@
                         
                           
                                Aspect="AspectFit"
-                               HeightRequest="40"
-                               WidthRequest="40" />
+                               HeightRequest="5"
+                               WidthRequest="5" />
                     <Label Grid.Column="1"
                                Text="Nombre de pièces"
                                FontAttributes="Italic" />

@@ -542,11 +542,13 @@ namespace LookaukwatApp.Services
             var jwt = await response.Content.ReadAsStringAsync();
             var joo = JObject.Parse(jwt);
             var accessToken = (string)joo["access_token"];
-            var accessTokenExpiration = (DateTime)joo[".expires"];
-            Settings.AccessTokenExpiration = accessTokenExpiration;
+            
 
             if (accessToken != null)
             {
+                var accessTokenExpiration = (DateTime)joo[".expires"];
+                Settings.AccessTokenExpiration = accessTokenExpiration;
+
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
 
                  var resp = await client.GetStringAsync(Uri + "api/Product/GetUserInformation");

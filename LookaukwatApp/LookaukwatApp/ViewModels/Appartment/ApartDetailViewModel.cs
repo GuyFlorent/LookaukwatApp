@@ -41,9 +41,9 @@ namespace LookaukwatApp.ViewModels.Appartment
         private string lon;
         private string priceConvert;
         //for Apart model
-        private int apartSurface;
+        private string apartSurface;
         private string type;
-        private int roomNumber;
+        private string roomNumber;
         private string furnitureOrNot;
 
 
@@ -188,7 +188,7 @@ namespace LookaukwatApp.ViewModels.Appartment
             }
         }
         //for Apart model
-        public int ApartSurface
+        public string ApartSurface
         {
             get => apartSurface;
             set => SetProperty(ref apartSurface, value);
@@ -198,7 +198,7 @@ namespace LookaukwatApp.ViewModels.Appartment
             get => type;
             set => SetProperty(ref type, value);
         }
-        public int RoomNumber
+        public string RoomNumber
         {
             get => roomNumber;
             set => SetProperty(ref roomNumber, value);
@@ -267,9 +267,9 @@ namespace LookaukwatApp.ViewModels.Appartment
                 Lon = item.Lon;
                 //for Apart model
                 FurnitureOrNot = item.FurnitureOrNot;
-                ApartSurface = item.ApartSurface;
+                ApartSurface = item.ApartSurface.ToString();
                 Type = item.Type;
-                RoomNumber = item.RoomNumber;
+                RoomNumber = item.RoomNumber.ToString();
 
                 var img = item.Images;
                 foreach (var im in img)

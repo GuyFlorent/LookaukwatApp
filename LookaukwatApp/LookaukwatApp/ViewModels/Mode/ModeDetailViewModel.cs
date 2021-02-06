@@ -369,8 +369,12 @@ namespace LookaukwatApp.ViewModels.Mode
         }
 
 
-        private void OncallUser()
+        private async void OncallUser()
         {
+            string text = "- Ne jamais envoyer de l'argent sans avoir vu et juger le(a) " + Rubrique + ", " + Environment.NewLine + Environment.NewLine +
+                "- Toujours exiger une facture avec la pièce d'identité jointe." + Environment.NewLine + Environment.NewLine +
+                "Merci pour la confiance.";
+            await Shell.Current.DisplayAlert("Attention à l'arnaque !", text, "ok");
             PhoneDialerViewModel.PlacePhoneCall(Phone);
         }
 

@@ -104,8 +104,27 @@
                        Text="{Binding DateLetter}"
                        VerticalOptions="End"
                                        ></Label>
-                                            
-                                        </StackLayout>
+
+                                                <StackLayout 
+                                                    HorizontalOptions="EndAndExpand">
+
+                                                    <Image Source="trash"
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               BackgroundColor="Red"
+                               
+                               />
+
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Tapped="Remove_Button"
+                                CommandParameter="{Binding .}">
+                                                        </TapGestureRecognizer>
+                                                    </StackLayout.GestureRecognizers>
+                                                </StackLayout>
+
+                                            </StackLayout>
                                     </Grid>
 
                                     <StackLayout.GestureRecognizers>

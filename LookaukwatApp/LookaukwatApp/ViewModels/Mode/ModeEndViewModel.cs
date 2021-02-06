@@ -192,8 +192,8 @@ namespace LookaukwatApp.ViewModels.Mode
             Type = model.TypeMode;
             Color = model.ColorMode;
             Size = model.SizeMode;
-            State = State;
-            Univers = Univers;
+            State = model.StateMode;
+            Univers = model.UniversMode;
             } catch(Exception e)
             {
                 Console.WriteLine(e);

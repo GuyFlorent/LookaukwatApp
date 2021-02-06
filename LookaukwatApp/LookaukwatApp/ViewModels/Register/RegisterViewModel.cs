@@ -45,7 +45,12 @@ namespace LookaukwatApp.ViewModels.Register
         private string email;
         public string password;
         public string confirmPassword;
-
+        bool isTerms = false;
+        public bool IsTerms
+        {
+            get => isTerms;
+            set => SetProperty(ref isTerms, value);
+        }
         public string FirstName
         {
             get => firstname;
@@ -108,11 +113,13 @@ namespace LookaukwatApp.ViewModels.Register
             TitlePage = "Creation de compte";
             
             RegisterCommand = new Command(OnRegister, ValidateRegister);
-            RegisterReturnUserAccountCommand = new Command(OnRegisterReturnUserAccount);
+            RegisterReturnUserAccountCommand = new Command(OnRegisterReturnUserAccount, ValidateRegister);
             LoginCommand = new Command(OnLoginClicked);
             LoginReturnForUserCommand = new Command(OnLoginReturnForUserClicked);
             this.PropertyChanged +=
                 (_, __) => RegisterCommand.ChangeCanExecute();
+            this.PropertyChanged +=
+               (_, __) => RegisterReturnUserAccountCommand.ChangeCanExecute();
         }
 
 
@@ -157,180 +164,188 @@ namespace LookaukwatApp.ViewModels.Register
         }
         private async void OnRegister()
         {
-            IsRunning = true;
-            ErrorMessage1 = "";
-            ErrorMessage2 = "";
-            ErrorMessage3 = "";
-            ErrorMessage4 = "";
-
-            if (!string.IsNullOrWhiteSpace(Email) || !string.IsNullOrWhiteSpace(FirstName) || !string.IsNullOrWhiteSpace(Phone)
-                || !string.IsNullOrWhiteSpace(Password) || !string.IsNullOrWhiteSpace(ConfirmPassword))
+            if (IsTerms)
             {
 
 
-                bool checkPhoneExist = await _apiServices.CheckPhoneExistAsync(Phone);
-                bool checkEmailExist = await _apiServices.CheckEmailExistAsync(Email);
+                IsRunning = true;
+                ErrorMessage1 = "";
+                ErrorMessage2 = "";
+                ErrorMessage3 = "";
+                ErrorMessage4 = "";
 
-                if (checkPhoneExist && checkEmailExist)
+                if (!string.IsNullOrWhiteSpace(Email) || !string.IsNullOrWhiteSpace(FirstName) || !string.IsNullOrWhiteSpace(Phone)
+                    || !string.IsNullOrWhiteSpace(Password) || !string.IsNullOrWhiteSpace(ConfirmPassword))
                 {
-                    IsRunning = false;
-                    ErrorMessage1 = "Ce numéro de téléphone existe déja !";
-                    ErrorMessage2 = "Cette adresse Email existe déja !";
-                }
-                else if (checkPhoneExist)
-                {
-                    IsRunning = false;
-                    ErrorMessage1 = "Ce numéro de téléphone existe déja !";
-                }
-                else if (checkEmailExist)
-                {
-                    IsRunning = false;
-                    ErrorMessage2 = "Cette adresse Email existe déja !";
-                }
-
-                if ((Password.Length < 6 || confirmPassword.Length < 6) && Password != confirmPassword)
-                {
-                    IsRunning = false;
-                    ErrorMessage3 = "Le mot de passe doit être minimun 6 caractères.";
-                    ErrorMessage4 = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.";
-                }
-                else if ((Password.Length >= 6 && confirmPassword.Length >= 6) && Password != confirmPassword)
-                {
-                    IsRunning = false;
-                    ErrorMessage4 = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.";
-                }
-                else if ((Password.Length < 6 || confirmPassword.Length < 6) && Password == confirmPassword)
-                {
-                    IsRunning = false;
-                    ErrorMessage3 = "Le mot de passe doit être minimun 6 caractères.";
-
-                }
-
-                if (checkPhoneExist == false && checkEmailExist == false && (Password.Length >= 6 && confirmPassword.Length >= 6) && Password == confirmPassword)
-                {
-                    string parrainValue = null;
-                    if (!string.IsNullOrWhiteSpace(ParrainName))
-                    {
-                        parrainValue = ListParrian[ParrainName];
-                    }
-                    var isSuccess = await _apiServices.RegisterAsync(Email, FirstName, Phone, Password, ConfirmPassword, parrainValue);
 
 
-                    if (isSuccess)
+                    bool checkPhoneExist = await _apiServices.CheckPhoneExistAsync(Phone);
+                    bool checkEmailExist = await _apiServices.CheckEmailExistAsync(Email);
+
+                    if (checkPhoneExist && checkEmailExist)
                     {
                         IsRunning = false;
-                        Settings.Username = Email;
-                        Settings.Password = password;
-                        Settings.Phone = Phone;
-                        Message = "C'est bon c'est ajouté";
-                        // await Shell.Current.GoToAsync(nameof(LoginPage));
-                        await PopupNavigation.Instance.PopAllAsync();
-                        await PopupNavigation.Instance.PushAsync(new LoginPage());
+                        ErrorMessage1 = "Ce numéro de téléphone existe déja !";
+                        ErrorMessage2 = "Cette adresse Email existe déja !";
                     }
-                    else
+                    else if (checkPhoneExist)
                     {
                         IsRunning = false;
-                        Message = "C'est pas bon";
+                        ErrorMessage1 = "Ce numéro de téléphone existe déja !";
+                    }
+                    else if (checkEmailExist)
+                    {
+                        IsRunning = false;
+                        ErrorMessage2 = "Cette adresse Email existe déja !";
                     }
 
-                }
-            }
-            else
-            {
-                IsRunning = false;
-                ErrorMessage1 = "Les champs: Prénom, Email, Téléphone, Mot de passe et Confirmation de mot de passe sont obligatoires !";
-            }
-            // This will pop the current page off the navigation stack
+                    if ((Password.Length < 6 || confirmPassword.Length < 6) && Password != confirmPassword)
+                    {
+                        IsRunning = false;
+                        ErrorMessage3 = "Le mot de passe doit être minimun 6 caractères.";
+                        ErrorMessage4 = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.";
+                    }
+                    else if ((Password.Length >= 6 && confirmPassword.Length >= 6) && Password != confirmPassword)
+                    {
+                        IsRunning = false;
+                        ErrorMessage4 = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.";
+                    }
+                    else if ((Password.Length < 6 || confirmPassword.Length < 6) && Password == confirmPassword)
+                    {
+                        IsRunning = false;
+                        ErrorMessage3 = "Le mot de passe doit être minimun 6 caractères.";
 
+                    }
+
+                    if (checkPhoneExist == false && checkEmailExist == false && (Password.Length >= 6 && confirmPassword.Length >= 6) && Password == confirmPassword)
+                    {
+                        string parrainValue = null;
+                        if (!string.IsNullOrWhiteSpace(ParrainName))
+                        {
+                            parrainValue = ListParrian[ParrainName];
+                        }
+                        var isSuccess = await _apiServices.RegisterAsync(Email, FirstName, Phone, Password, ConfirmPassword, parrainValue);
+
+
+                        if (isSuccess)
+                        {
+                            IsRunning = false;
+                            Settings.Username = Email;
+                            Settings.Password = password;
+                            Settings.Phone = Phone;
+                            Message = "C'est bon c'est ajouté";
+                            // await Shell.Current.GoToAsync(nameof(LoginPage));
+                            await PopupNavigation.Instance.PopAllAsync();
+                            await PopupNavigation.Instance.PushAsync(new LoginPage());
+                        }
+                        else
+                        {
+                            IsRunning = false;
+                            Message = "C'est pas bon";
+                        }
+
+                    }
+                }
+                else
+                {
+                    IsRunning = false;
+                    ErrorMessage1 = "Les champs: Prénom, Email, Téléphone, Mot de passe et Confirmation de mot de passe sont obligatoires !";
+                }
+                // This will pop the current page off the navigation stack
+            }
         }
 
         private async void OnRegisterReturnUserAccount()
         {
-            IsRunning = false;
-            ErrorMessage1 = "";
-            ErrorMessage2 = "";
-            ErrorMessage3 = "";
-            ErrorMessage4 = "";
-
-            if (!string.IsNullOrWhiteSpace(Email) || !string.IsNullOrWhiteSpace(FirstName) || !string.IsNullOrWhiteSpace(Phone)
-                || !string.IsNullOrWhiteSpace(Password) || !string.IsNullOrWhiteSpace(ConfirmPassword))
+            if (IsTerms)
             {
 
 
-                bool checkPhoneExist = await _apiServices.CheckPhoneExistAsync(Phone);
-                bool checkEmailExist = await _apiServices.CheckEmailExistAsync(Email);
-
-                if (checkPhoneExist && checkEmailExist)
-                {
-                    IsRunning = false;
-                    ErrorMessage1 = "Ce numéro de téléphone existe déja !";
-                    ErrorMessage2 = "Cette adresse Email existe déja !";
-                }
-                else if (checkPhoneExist)
-                {
-                    IsRunning = false;
-                    ErrorMessage1 = "Ce numéro de téléphone existe déja !";
-                }
-                else if (checkEmailExist)
-                {
-                    IsRunning = false;
-                    ErrorMessage2 = "Cette adresse Email existe déja !";
-                }
-
-                if ((Password.Length < 6 || confirmPassword.Length < 6) && Password != confirmPassword)
-                {
-                    IsRunning = false;
-                    ErrorMessage3 = "Le mot de passe doit être minimun 6 caractères.";
-                    ErrorMessage4 = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.";
-                }
-                else if ((Password.Length >= 6 && confirmPassword.Length >= 6) && Password != confirmPassword)
-                {
-                    IsRunning = false;
-                    ErrorMessage4 = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.";
-                }
-                else if ((Password.Length < 6 || confirmPassword.Length < 6) && Password == confirmPassword)
-                {
-                    IsRunning = false;
-                    ErrorMessage3 = "Le mot de passe doit être minimun 6 caractères.";
-
-                }
-
-                if (checkPhoneExist == false && checkEmailExist == false && (Password.Length >= 6 && confirmPassword.Length >= 6) && Password == confirmPassword)
-                {
-                    string parrainValue = null;
-                    if (!string.IsNullOrWhiteSpace(ParrainName))
-                    {
-                        parrainValue = ListParrian[ParrainName];
-                    }
-
-                    var isSuccess = await _apiServices.RegisterAsync(Email, FirstName, Phone, Password, ConfirmPassword, parrainValue);
-
-
-                    if (isSuccess)
-                    {
-                        IsRunning = false;
-                        Settings.Username = Email;
-                        Settings.Password = password;
-                        Settings.Phone = Phone;
-                        Message = "C'est bon c'est ajouté";
-                        //await Shell.Current.GoToAsync(nameof(LoginRedirectUserAccountPage));
-                        await PopupNavigation.Instance.PopAllAsync();
-                        await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
-                    }
-                    else
-                    {
-                        IsRunning = false;
-                        Message = "C'est pas bon";
-                    }
-                }
-            }
-            else
-            {
                 IsRunning = false;
-                ErrorMessage1 = "Les champs: Prénom, Email, Téléphone, Mot de passe et Confirmation de mot de passe sont obligatoires !";
-            }
-            // This will pop the current page off the navigation stack
+                ErrorMessage1 = "";
+                ErrorMessage2 = "";
+                ErrorMessage3 = "";
+                ErrorMessage4 = "";
 
+                if (!string.IsNullOrWhiteSpace(Email) || !string.IsNullOrWhiteSpace(FirstName) || !string.IsNullOrWhiteSpace(Phone)
+                    || !string.IsNullOrWhiteSpace(Password) || !string.IsNullOrWhiteSpace(ConfirmPassword))
+                {
+
+
+                    bool checkPhoneExist = await _apiServices.CheckPhoneExistAsync(Phone);
+                    bool checkEmailExist = await _apiServices.CheckEmailExistAsync(Email);
+
+                    if (checkPhoneExist && checkEmailExist)
+                    {
+                        IsRunning = false;
+                        ErrorMessage1 = "Ce numéro de téléphone existe déja !";
+                        ErrorMessage2 = "Cette adresse Email existe déja !";
+                    }
+                    else if (checkPhoneExist)
+                    {
+                        IsRunning = false;
+                        ErrorMessage1 = "Ce numéro de téléphone existe déja !";
+                    }
+                    else if (checkEmailExist)
+                    {
+                        IsRunning = false;
+                        ErrorMessage2 = "Cette adresse Email existe déja !";
+                    }
+
+                    if ((Password.Length < 6 || confirmPassword.Length < 6) && Password != confirmPassword)
+                    {
+                        IsRunning = false;
+                        ErrorMessage3 = "Le mot de passe doit être minimun 6 caractères.";
+                        ErrorMessage4 = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.";
+                    }
+                    else if ((Password.Length >= 6 && confirmPassword.Length >= 6) && Password != confirmPassword)
+                    {
+                        IsRunning = false;
+                        ErrorMessage4 = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.";
+                    }
+                    else if ((Password.Length < 6 || confirmPassword.Length < 6) && Password == confirmPassword)
+                    {
+                        IsRunning = false;
+                        ErrorMessage3 = "Le mot de passe doit être minimun 6 caractères.";
+
+                    }
+
+                    if (checkPhoneExist == false && checkEmailExist == false && (Password.Length >= 6 && confirmPassword.Length >= 6) && Password == confirmPassword)
+                    {
+                        string parrainValue = null;
+                        if (!string.IsNullOrWhiteSpace(ParrainName))
+                        {
+                            parrainValue = ListParrian[ParrainName];
+                        }
+
+                        var isSuccess = await _apiServices.RegisterAsync(Email, FirstName, Phone, Password, ConfirmPassword, parrainValue);
+
+
+                        if (isSuccess)
+                        {
+                            IsRunning = false;
+                            Settings.Username = Email;
+                            Settings.Password = password;
+                            Settings.Phone = Phone;
+                            Message = "C'est bon c'est ajouté";
+                            //await Shell.Current.GoToAsync(nameof(LoginRedirectUserAccountPage));
+                            await PopupNavigation.Instance.PopAllAsync();
+                            await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
+                        }
+                        else
+                        {
+                            IsRunning = false;
+                            Message = "C'est pas bon";
+                        }
+                    }
+                }
+                else
+                {
+                    IsRunning = false;
+                    ErrorMessage1 = "Les champs: Prénom, Email, Téléphone, Mot de passe et Confirmation de mot de passe sont obligatoires !";
+                }
+                // This will pop the current page off the navigation stack
+            }
         }
     }
 }

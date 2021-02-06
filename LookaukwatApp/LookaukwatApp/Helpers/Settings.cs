@@ -21,6 +21,17 @@ namespace LookaukwatApp.Helpers
             }
         }
 
+        public static string Reviews_GooglePlay
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("Reviews_GooglePlay", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("Reviews_GooglePlay", value);
+            }
+        }
         public static string IdItem_For_Image
         {
             get

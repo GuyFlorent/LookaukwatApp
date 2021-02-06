@@ -25,7 +25,14 @@ namespace LookaukwatApp.Views.ImageView
             Shell.SetTabBarIsVisible(this, false);
            
         }
+        //subscribe to tell to the mainPage to refresh the view
 
+       
+        // private void Valid_Image(object sender, EventArgs e)
+        //{
+
+        //    MessagingCenter.Send<Page>(this, "Update_listview");
+        //}
         private async void Tapped_Image(object sender, EventArgs e)
         {
             var args = (TappedEventArgs)e;

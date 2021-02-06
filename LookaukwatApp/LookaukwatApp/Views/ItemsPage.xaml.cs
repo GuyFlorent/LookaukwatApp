@@ -11,26 +11,32 @@ namespace LookaukwatApp.Views
     
     public partial class ItemsPage : ContentPage
     {
-       // ItemsViewModel _viewModel = new ItemsViewModel();
-        string sort = "HeigherPrice";
-        bool isSort = false;
+       // ItemsViewModel _viewmodel = new ItemsViewModel();
+        //string sort = "HeigherPrice";
+        //bool isSort = false;
 
-        public string Sortby
-        {
-            get { return sort; }
-            set { sort = value; }
-        }
+        //public string Sortby
+        //{
+        //    get { return sort; }
+        //    set { sort = value; }
+        //}
 
-        public bool IsSort
-        {
-            get { return isSort; }
-            set { isSort = value; }
-        }
+        //public bool IsSort
+        //{
+        //    get { return isSort; }
+        //    set { isSort = value; }
+        //}
         public ItemsPage()
         {
             InitializeComponent();
-            
-           // Shell.SetNavBarIsVisible(this, false);
+            //MessagingCenter.Subscribe<Page>(this, "Update_listview", (sender) =>
+            //{
+
+            //    _viewmodel.IsRefressing = true;
+            //    _viewmodel.LoadItemsCommand.Execute(null);
+            //});
+           
+            // Shell.SetNavBarIsVisible(this, false);
         }
 
         
@@ -87,8 +93,9 @@ namespace LookaukwatApp.Views
         //protected override void OnAppearing()
         //{
         //    base.OnAppearing();
-        //    // _viewModel.OnApearing(Sortby, true);
-        //    mylist.ItemsSource = null;
+        //    mylist.ItemsSource;
+        //    _viewmodel.OnAppearing();
+            
         //}
 
     }

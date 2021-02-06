@@ -17,7 +17,7 @@ namespace LookaukwatApp.Converter
         /// </summary>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            
+           
             var ItemId = System.Convert.ToInt32(value);
             var Liste = Settings.JsonFavoriteList;
 
@@ -29,7 +29,6 @@ namespace LookaukwatApp.Converter
                     var item = ListFavorites.FirstOrDefault(model =>model.id == ItemId);
                     if(item != null)
                     {
-                        item.RedHeart = "heart_red";
                         return true;
                     }
                     else

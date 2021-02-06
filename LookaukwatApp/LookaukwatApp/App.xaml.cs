@@ -1,4 +1,5 @@
-﻿using LookaukwatApp.Services;
+﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.Appartment;
 using LookaukwatApp.ViewModels.House;
 using LookaukwatApp.ViewModels.Job;
@@ -6,6 +7,7 @@ using LookaukwatApp.ViewModels.Mode;
 using LookaukwatApp.ViewModels.Multimedia;
 using LookaukwatApp.ViewModels.Vehicule;
 using LookaukwatApp.Views;
+using Newtonsoft.Json;
 using Rg.Plugins.Popup.Services;
 using System;
 using Xamarin.Essentials;
@@ -137,13 +139,16 @@ namespace LookaukwatApp
         }
 
 
-
+        ApiServices _apiServices = new ApiServices();
         protected override void OnStart()
         {
         }
 
-        protected override void OnSleep()
+        protected async override void OnSleep()
         {
+            var items = await _apiServices.GetProductsAsync(pageIndex: 0, pageSize: 500, "");
+
+            Settings.Products = JsonConvert.SerializeObject(items);
         }
 
         protected override void OnResume()

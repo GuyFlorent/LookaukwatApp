@@ -318,8 +318,12 @@ namespace LookaukwatApp.ViewModels.Job
             }
         }
 
-        private void OncallUser()
+        private async void OncallUser()
         {
+            string text = "- Ne jamais envoyer de l'argent pour obtenir du travail" + Environment.NewLine + Environment.NewLine +
+                "- Toujours se déplacer dans un lieu public et en journée pour rencontrer l'employeur" + Environment.NewLine + Environment.NewLine +
+                "Merci pour la confiance.";
+            await Shell.Current.DisplayAlert("Attention à l'arnaque !", text, "ok");
             PhoneDialerViewModel.PlacePhoneCall(Phone);
         }
 

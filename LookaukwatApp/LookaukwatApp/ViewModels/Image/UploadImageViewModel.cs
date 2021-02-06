@@ -1,6 +1,7 @@
 ﻿using LookaukwatApp.Helpers;
 using LookaukwatApp.Models;
 using LookaukwatApp.Services;
+using LookaukwatApp.ViewModels.Home;
 using LookaukwatApp.Views.ImageView;
 using Newtonsoft.Json;
 using Plugin.Media;
@@ -11,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace LookaukwatApp.ViewModels.Image
@@ -86,7 +88,17 @@ namespace LookaukwatApp.ViewModels.Image
         private async void OnBack()
         {
             var acessToken = Settings.AccessToken;
-            int id = Convert.ToInt32(ItemId);
+            int id;
+            if (ItemId == null)
+            {
+               
+                id = Convert.ToInt32(Settings.IdItem_For_Image);
+            }
+            else
+            {
+                id = Convert.ToInt32(ItemId);
+            }
+             
             var response = await Shell.Current.DisplayAlert("Alerte !!!", "Si vous retournez, votre annonce sera supprimée. Voulez vous vraiment continuer ?", "Oui", "Non");
            
             if (response)
@@ -121,13 +133,38 @@ namespace LookaukwatApp.ViewModels.Image
                 (message, cert, chain, errors) => { return true; };
 
                 client = new HttpClient(httpClientHandler);
-                string id = ItemId;
+               
+                string id;
+                if (ItemId == null)
+                {
+                    id = Settings.IdItem_For_Image;
+                }
+                else
+                {
+                    id = ItemId;
+                }
 
                 await client.PostAsync(Uri + "api/Product/UpdateProductImage/?id=" + id, content);
                 IsRunning = false;
-                await Shell.Current.DisplayAlert("Alerte", "Votre annonce a été publiée avec succès. Lookaukwat vous remercie de votre confiance", "Ok");
 
+
+                await Shell.Current.DisplayAlert("Alerte", "Votre annonce a été publiée avec succès. Lookaukwat vous remercie de votre confiance", "Ok");
                 await Shell.Current.GoToAsync("///MainPage");
+                if (string.IsNullOrWhiteSpace(Settings.Reviews_GooglePlay))
+                {
+                    var respon = await Shell.Current.DisplayAlert("Votre avis nous intéresse !", "Donnez votre avis en 1 minute", "Oui", "Non");
+                    if (respon)
+                    {
+                       Settings.Reviews_GooglePlay = "Ok";
+                        string uri = "https://play.google.com/store/apps/details?id=com.lookaukwat.lookaukwatapp";
+                        await Browser.OpenAsync(uri);
+                    }
+                   
+                }
+               
+               
+
+                
             }
         }
 

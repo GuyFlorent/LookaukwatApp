@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.Terms_Conditions.ConditionsPage"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
+    <ScrollView>
+        <StackLayout Margin="20,35,10,20"
+                     Padding="10"
+                     Spacing="10"
+                     BackgroundColor="White"
+                     VerticalOptions="Center">
+            <Button Text="Fermer" 
+                   HorizontalOptions="End"
+                    BackgroundColor="White"
+                   TextColor="#2196F3"
+                    Clicked="ClosePoppup_Button"></Button>
+
+            <Label Text="Termes et conditions générales"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   FontSize="Title"></Label>
+
+            <Label Text="BONNES PRATIQUES"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   TextDecorations="Underline"></Label>
+
+            <Label Text="Voici quelques points à retenir lorsque vous déposez une annonce :"></Label>
+            <Label Text="- Le texte de l'annonce doit impérativement décrire le produit/bien/service de l'annonce. Les annonces contenant un texte généraliste du type «nombreux produits à vendre dans notre magasin» ne sont pas acceptées. Le texte d'une même annonce ne doit pas proposer plusieurs biens."></Label>
+            <Label Text="- L'annonce doit être déposée dans une catégorie correspondant à l'objet de l'annonce."></Label>
+            <Label Text="- L'annonce d'un bien à vendre doit être déposée dans la region où le bien est localisé."></Label>
+            <Label Text="- Vous devez supprimer une annonce ancienne avant d'en insérer une nouvelle relative au même bien. 
+                   Vous ne pouvez avoir simultanément plusieurs fois la même annonce sur le site
+                   (dans plusieurs départements ou plusieurs catégories)."></Label>
+            <Label Text="- Toute annonce à caractère publicitaire est interdite."></Label>
+            <Label Text="- Vous devez indiquer le prix total et TTC du bien dans le champ Prix.">
+            </Label>
+
+            <Label Text="INTERDICTIONS GENERALES"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   TextDecorations="Underline"></Label>
+            <Label Text="Toute annonce contenant des éléments de texte (mots, expressions, phrases… etc.) qui sembleraient contraires aux dispositions légales ou réglementaires, aux bonnes mœurs, aux règles de diffusion de notre site ou susceptible de troubler ou choquer les lecteurs sera refusée par lookaukwat, donc non référencée sur notre site, sans que cela ne fasse naître au profit de l'annonceur un quelconque droit à indemnité."></Label>
+            <Label Text="Contenus non autorisés"
+                   TextColor="Black"></Label>
+            <Label Text="Il est interdit de déposer une annonce :"></Label>
+            <Label Text=" -Exclusivement rédigée en termes étrangers. Les annonces doivent être rédigées en français ou en anglais. Lorsqu'un terme étranger ne peut trouver son équivalent en français ou en anglais, il doit être circonscrit d'une manière assez précise pour ne pas induire en erreur l'utilisateur du site."></Label>
+            <Label Text="- Comportant des termes ou des descriptions sans lien avec le contenu proposé."></Label>
+            <Label Text="- Présentant une utilisation abusive de mots clefs."></Label>
+            <Label Text="- Dirigeant directement ou indirectement vers un site autre que le nôtre."></Label>
+            <Label Text="- A caractère politique, sectaire, discriminatoire, sexiste, en lien avec des organisations ou des personnes responsables de crimes contre l'humanité etc."></Label>
+            <Label Text="Produits et services non autorisés"
+                   TextColor="Black"></Label>
+            <Label Text="En tant qu'utilisateur du service lookaukwat, vous devez vous assurer que le bien que vous cherchez à vendre ou à acheter est un produit autorisé sur le site, l'application et dont la vente est légale."></Label>
+            <Label Text="Nous vous invitons à prendre connaissance des produits/biens/services interdits sur notre site/application"></Label>
+            <Label Text="- Tabac, drogue et objets associés, substances dangereuses et illicites"></Label>
+            <Label Text="- Cosmétique, médicament et parapharmacie"></Label>
+            <Label Text="- Armes blanches de combat ou d'autodéfense, armes à feu, explosifs, pièges de chasse"></Label>
+            <Label Text="- Contenu réservé aux adultes (pornographie, nudité, etc.)"></Label>
+            <Label Text="- Certaines espèces végétales et animales protégées, menacées ou prélevées dans leur milieu naturel"></Label>
+            <Label Text="- Objets consignés"></Label>
+            <Label Text="- Appel aux dons financiers privés ou à but humanitaire"></Label>
+            <Label Text="- Avis de recherche d'une personne"></Label>
+            <Label Text="Cette liste est non exhaustive."></Label>
+            <Label Text="Interdiction des produits ou services portant atteinte aux droits de propriété intellectuelle"
+                   TextColor="Black"></Label>
+            <Label Text="Seule la diffusion d'annonce proposant la vente de produits originaux est autorisée (appareils électroniques, DVD, CD, jeux vidéo, logiciels informatiques, cartes pour télévision payante, vêtements de marque et accessoires de marque …)."></Label>
+            <Label Text="Photographies non autorisées"
+                   TextColor="Black"></Label>
+            <Label Text="Les photographies insérées doivent représenter le bien à vendre et ne peuvent être utilisées pour illustrer plusieurs annonces."></Label>
+            <Label Text="Il est interdit d'insérer des photos comportant :"></Label>
+            <Label Text="- Enfants mineurs"></Label>
+            <Label Text="- Logos seuls (à l'exception des catégories d'annonces Emploi et Services)"></Label>
+            <Label Text="- Lien vers un site internet"></Label>
+            <Label Text="- Numéro de téléphone ou adresse mail"></Label>
+            <Label Text="- Représentations sans lien avec l'offre proposée"></Label>
+
+            <Label Text="NB : Si vous ne respectez pas ces conditions, votre annonce sera supprimée par la direction."></Label>
+
+            <Label Text="Informations"
+                   TextColor="Black"></Label>
+            <Label Text="Lookaukwat pourra utiliser vos données personnelles pour vous contacter, soit pour vous infoermer des mises à jours ou soit dans le cadre du non respect des conditions"></Label>
+        </StackLayout>
+    </ScrollView>
+
+</pages:PopupPage>

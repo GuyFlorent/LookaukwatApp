@@ -28,10 +28,12 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-           
-                <StackLayout Orientation="Horizontal">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackLayout Orientation="Horizontal">
                     <Image Source="image"
-                           HeightRequest="40"></Image>
+                           HeightRequest="30"></Image>
                     <Button Text="Choisir dans galerie"
                  CornerRadius="20"
                 TextColor="White"

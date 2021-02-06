@@ -13,6 +13,7 @@ using LookaukwatApp.Views.PublishView;
 using LookaukwatApp.Views.RegisterView;
 using LookaukwatApp.Views.SearchView;
 using LookaukwatApp.Views.SortView;
+using LookaukwatApp.Views.Terms_Conditions;
 using LookaukwatApp.Views.UserView;
 using LookaukwatApp.Views.Vehicule;
 using System;
@@ -73,6 +74,7 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(VehiculeEditCriterePage), typeof(VehiculeEditCriterePage));
             Routing.RegisterRoute(nameof(SignalAnnoucePage), typeof(SignalAnnoucePage));
             Routing.RegisterRoute(nameof(FavorisPage), typeof(FavorisPage));
+            Routing.RegisterRoute(nameof(ConditionsPage), typeof(ConditionsPage));
         }
 
 

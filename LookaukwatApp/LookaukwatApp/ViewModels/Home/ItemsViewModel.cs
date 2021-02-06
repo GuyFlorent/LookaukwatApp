@@ -103,12 +103,13 @@ namespace LookaukwatApp.ViewModels.Home
             }
         }
 
-      
-        //public void OnAppearing()
-        //{
-        //    IsImageView = true;
-        //    SelectedItem = null;
-        //}
+
+        public void OnAppearing()
+        {
+            Items.Clear();
+            List<ProductForMobileViewModel> ListFavorites = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(Settings.Products);
+            Items.AddRange(ListFavorites);
+        }
 
         public ProductForMobileViewModel SelectedItem
         {
@@ -183,6 +184,7 @@ namespace LookaukwatApp.ViewModels.Home
        // public InfiniteScrollCollection<ProductForMobileViewModel> Items { get; set; }
  
         public ItemsViewModel()
+        
         {
             TitlePage = "Lookaukwat";
             GetTotalNumberOfProduct();
@@ -217,6 +219,10 @@ namespace LookaukwatApp.ViewModels.Home
                     return Items.Count < numberOfProduct;
                 }
             };
+
+
+           
+
             Settings.SortItemPage = "";
             //Settings.Products = "";
 

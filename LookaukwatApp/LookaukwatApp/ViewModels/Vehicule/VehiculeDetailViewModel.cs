@@ -401,19 +401,23 @@ namespace LookaukwatApp.ViewModels.Vehicule
             }
         }
 
-        private void OncallUser()
+        private async void OncallUser()
         {
+            string text = "- Ne jamais envoyer de l'argent sans avoir vu et juger la "+Rubrique+", " + Environment.NewLine + Environment.NewLine +
+                "- Toujours exiger une facture avec la pièce d'identité jointe." + Environment.NewLine + Environment.NewLine +
+                "Merci pour la confiance.";
+            await Shell.Current.DisplayAlert("Attention à l'arnaque !", text, "ok");
             PhoneDialerViewModel.PlacePhoneCall(Phone);
         }
         private async void OnShareCommand()
         {
-            var uri = "https://lookaukwat.com/Vehicule/VehiculeDetail/" + Id;
+            var uri = "https://lookaukwat.azurewebsites.net/Vehicule/VehiculeDetail/" + Id;
             await ShareViewModel.ShareUri(uri);
         }
         private async void OnClipboard()
         {
             await Shell.Current.DisplayAlert("Alerte", "Copier dans le papier-presse", "Ok");
-            var uri = "https://lookaukwat.com/Vehicule/VehiculeDetail/" + Id;
+            var uri = "https://lookaukwat.azurewebsites.net/Vehicule/VehiculeDetail/" + Id;
             await Clipboard.SetTextAsync(uri);
 
         }
@@ -425,7 +429,7 @@ namespace LookaukwatApp.ViewModels.Vehicule
                 NameSender = Settings.FirstName,
                 EmailSender = Settings.Username,
                 Category = "Vehicule",
-                Linkshare = "https://lookaukwat.com/Vehicule/VehiculeDetail/" + Id,
+                Linkshare = "https://lookaukwat.azurewebsites.net/Vehicule/VehiculeDetail/" + Id,
                 RecieverEmail = Email,
                 RecieverName = Name,
                 SubjectSender = "Votre article en vente sur lookaukwat me plaît"

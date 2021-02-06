@@ -1,4 +1,5 @@
 ﻿using LookaukwatApp.Views.LoginView;
+using LookaukwatApp.Views.Terms_Conditions;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,24 @@ namespace LookaukwatApp.Views.RegisterView
         {
             await PopupNavigation.Instance.PopAllAsync();
             await Shell.Current.GoToAsync("//MainPage/ItemsPage");
+        }
+
+        private async void Term_Button(object o, EventArgs e)
+        {
+            await PopupNavigation.Instance.PushAsync(new ConditionsPage(), true);
+        }
+        private void Register_Button(object o, EventArgs e)
+        {
+
+            if (!CheckTerms.IsChecked)
+            {
+                Label_Terme.TextColor = Color.Red;
+
+            }
+            else
+            {
+                Label_Terme.TextColor = Color.Black;
+            }
         }
     }
 }

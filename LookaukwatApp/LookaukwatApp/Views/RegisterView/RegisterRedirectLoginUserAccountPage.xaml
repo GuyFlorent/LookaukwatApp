@@ -68,9 +68,9 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <CheckBox  IsChecked="{Binding IsParrainCheck}" />
+                    <CheckBox Color="#2196F3"  IsChecked="{Binding IsParrainCheck}" />
                     <Label Grid.Column="1" Text="Avez vous été parrainé ?"></Label>
                 </Grid>
                 <StackLayout IsVisible="{Binding IsParrainCheck}">
@@ -80,7 +80,25 @@
                     SelectedItem="{Binding ParrainName, Mode=TwoWay}">
                     </Picker>
                 </StackLayout>
-
+                <Label Text="Cochez les termes et conditions générales"
+                   TextColor="Black"
+                   FontAttributes="Bold"
+                   x:Name="Label_Terme"></Label>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <CheckBox x:Name="CheckTerms" Color="#2196F3" IsChecked="{Binding IsTerms}" />
+                    <Button Grid.Column="1" Text="Termes et Conditions générales"
+                        BackgroundColor="White"
+                        TextColor="#2196F3"
+                        Clicked="Term_Button"
+                        ></Button>
+                </Grid>
                 <!--<StackLayout Orientation="Horizontal">
                 <Label Text="Save Password"></Label>
                 <Switch IsToggled="False"></Switch>
@@ -91,7 +109,8 @@
                 <Button Text="Créer"
                     TextColor="White"
                         CornerRadius="20"
-                    Command="{Binding RegisterReturnUserAccountCommand}"></Button>
+                    Command="{Binding RegisterReturnUserAccountCommand}"
+                        Clicked="Register_Button"></Button>
 
                
 

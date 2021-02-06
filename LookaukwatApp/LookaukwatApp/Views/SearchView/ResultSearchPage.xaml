@@ -53,7 +53,7 @@
             <converter:ImageNotFavoriteConverter x:Key="ImageNotFavoriteConverter"></converter:ImageNotFavoriteConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout Margin="20,10,20,25">
+    <StackLayout Margin="20,10,20,0">
 
 
 

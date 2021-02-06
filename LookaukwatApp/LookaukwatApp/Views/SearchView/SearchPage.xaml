@@ -689,7 +689,7 @@
                            TextColor="Black"></Label>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <RadioButton IsChecked="{Binding IsSearch}" ></RadioButton>
+                            <RadioButton  IsChecked="{Binding IsSearch}" ></RadioButton>
                             <Label Text="Demandes"
                            TextColor="Black"></Label>
                         </StackLayout>

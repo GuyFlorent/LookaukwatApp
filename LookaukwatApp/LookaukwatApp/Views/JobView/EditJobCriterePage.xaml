@@ -10,8 +10,10 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <StackLayout>
-        <StackLayout Margin="15,35,20,25">
+       
+            <StackLayout>
+            <ScrollView>
+                <StackLayout Margin="15,35,20,25">
             <Label Text="J'offre ou je recherche?"
                        TextColor="Black"
                             FontSize="Subtitle"
@@ -51,7 +53,7 @@
                    Text="{Binding Price}"
                        Keyboard="Numeric"></Entry>
         </StackLayout>
-
+            </ScrollView>
             <StackLayout  Margin="15,15,20,15">
 
                 <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color ="#80000000"/>
@@ -60,6 +62,8 @@
                         CornerRadius="20"
                         Command="{Binding EditCommand}"></Button>
             </StackLayout>
+           
         </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

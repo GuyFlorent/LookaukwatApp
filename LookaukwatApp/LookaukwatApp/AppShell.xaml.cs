@@ -12,6 +12,7 @@ using LookaukwatApp.Views.MultimediaView;
 using LookaukwatApp.Views.PublishView;
 using LookaukwatApp.Views.RegisterView;
 using LookaukwatApp.Views.SearchView;
+using LookaukwatApp.Views.SellView;
 using LookaukwatApp.Views.SortView;
 using LookaukwatApp.Views.Terms_Conditions;
 using LookaukwatApp.Views.UserView;
@@ -75,6 +76,11 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(SignalAnnoucePage), typeof(SignalAnnoucePage));
             Routing.RegisterRoute(nameof(FavorisPage), typeof(FavorisPage));
             Routing.RegisterRoute(nameof(ConditionsPage), typeof(ConditionsPage));
+            Routing.RegisterRoute(nameof(SellDeliveredAdressPage), typeof(SellDeliveredAdressPage));
+            Routing.RegisterRoute(nameof(SellDeliveredTypePage), typeof(SellDeliveredTypePage));
+            Routing.RegisterRoute(nameof(SellPayementMethodPage), typeof(SellPayementMethodPage));
+            Routing.RegisterRoute(nameof(SellResumePage), typeof(SellResumePage));
+            Routing.RegisterRoute(nameof(SellPayementConfirmationPage), typeof(SellPayementConfirmationPage));
         }
 
 

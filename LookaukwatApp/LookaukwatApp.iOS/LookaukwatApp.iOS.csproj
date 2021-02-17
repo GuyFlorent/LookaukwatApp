@@ -70,6 +70,8 @@
     <Compile Include="NotificationDelegate.cs" />
     <Compile Include="NotificationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -123,6 +125,63 @@
     <BundleResource Include="Resources\xamarin_logo.png" />
     <BundleResource Include="Resources\xamarin_logo%402x.png" />
     <BundleResource Include="Resources\xamarin_logo%403x.png" />
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage10.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage11.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage12.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage13.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage14.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage15.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage16.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage17.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage3.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage4.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage5.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage6.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage7.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage8.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\IconLookaukwat.appiconset\Webp.net-resizeimage9.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +360,26 @@
     <BundleResource Include="Resources\heart_red.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\heart _black.png" />
+    <BundleResource Include="Resources\logo_lookaukwat_xam1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\heart_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\visa_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\mtn_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\orange_icon.png" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties TriggeredFromHotReload="False" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

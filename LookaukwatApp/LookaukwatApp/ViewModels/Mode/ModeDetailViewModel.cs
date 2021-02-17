@@ -5,6 +5,8 @@ using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.MessageView;
 using LookaukwatApp.Views.ModeView;
+using LookaukwatApp.Views.SellView;
+using Newtonsoft.Json;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -63,6 +65,7 @@ namespace LookaukwatApp.ViewModels.Mode
         public Command SignalCommand { get; set; }
         public Command NotFavoriteCommand { get; set; }
         public Command FavoriteCommand { get; set; }
+        public Command BuyItemCommand { get; set; }
        
         public int Id
         {
@@ -246,6 +249,7 @@ namespace LookaukwatApp.ViewModels.Mode
             SignalCommand = new Command(OnSignal);
             NotFavoriteCommand = new Command<SimilarProductViewModel>(OnFavorite);
             FavoriteCommand = new Command(OnFavorite);
+            BuyItemCommand = new Command(OnBuyItem);
         }
 
         public async void OnTappedImage(string image)
@@ -298,7 +302,7 @@ namespace LookaukwatApp.ViewModels.Mode
                 var img = item.Images;
                 foreach (var im in img)
                 {
-                    images.Add(im);
+                    Images.Add(im);
                 }
 
 
@@ -431,6 +435,29 @@ namespace LookaukwatApp.ViewModels.Mode
             };
 
             await App.Current.MainPage.Navigation.PushAsync(new SignalAnnoucePage(contact));
+        }
+
+        private async void OnBuyItem()
+        {
+            ItemPurchaseModelViewModel item = new ItemPurchaseModelViewModel
+            {
+                Id = Id,
+                Title = Title,
+                Price = Price.ToString(),
+                Image = Images.First(),
+                Lat = Lat,
+                Lon = Lon
+            };
+            Settings.ItemPurchase = JsonConvert.SerializeObject(item);
+
+            if (!string.IsNullOrWhiteSpace(Settings.AddressDelivered))
+            {
+                await Shell.Current.GoToAsync($"{nameof(SellDeliveredTypePage)}");
+            }
+            else
+            {
+                await Shell.Current.GoToAsync($"{nameof(SellDeliveredAdressPage)}");
+            }
         }
     }
 }

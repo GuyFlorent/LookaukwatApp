@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.SellView.SellDeliveredAdressPage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.SellViewModel" 
+             Title="{Binding TitlePage}">
+    <ContentPage.BindingContext>
+        <local:SellDeliverAddressViewModel></local:SellDeliverAddressViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Margin="15,35,20,25"
+                     Spacing="15">
+
+
+            <ScrollView>
+                <StackLayout >
+
+                    <Label Text="Prénom / Raison sociale *"></Label>
+                    <Entry TextColor="Black"
+                   FontSize="Subtitle"
+                   Text="{Binding FirstName}"></Entry>
+
+                    <Label Text="Nom *"></Label>
+                    <Entry TextColor="Black"
+                   FontSize="Subtitle"
+                   Text="{Binding LastName}"></Entry>
+
+                    <Label Text="Ville de livraison *"></Label>
+                    <Picker 
+                    Title="Choisir la ville"
+                    ItemsSource="{Binding TownList}"
+                    SelectedItem="{Binding Town}">
+                    </Picker>
+
+                    <Label Text="Quartier de livraion *"></Label>
+                    <Entry TextColor="Black"
+                   FontSize="Subtitle"
+                           Text="{Binding Street}"></Entry>
+
+                    <Label Text="Numéro de portable *"></Label>
+                    <Entry TextColor="Black"
+                   FontSize="Subtitle"
+                           Keyboard="Telephone"
+                   Text="{Binding Number}"></Entry>
+
+                    <Label Text="Numéro supplémentaire"></Label>
+                    <Entry TextColor="Black"
+                   FontSize="Subtitle"
+                           Keyboard="Telephone"
+                   Text="{Binding Telephone}"></Entry>
+                </StackLayout>
+            </ScrollView>
+            <Button Text="Enregistrer"
+                TextColor="White"
+                Command="{Binding SaveDeliverAdressCommad}"
+                CornerRadius="20"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

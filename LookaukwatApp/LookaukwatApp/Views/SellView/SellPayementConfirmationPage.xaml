@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.SellView.SellPayementConfirmationPage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.SellViewModel" 
+             Title="{Binding TitlePage}">
+    
+    <ContentPage.BindingContext>
+        <local:SellPayementConfirmationViewModel></local:SellPayementConfirmationViewModel>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Paiement sécurisé"
+                   FontSize="Title"
+                   TextColor="Black"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <ScrollView>
+                <StackLayout>
+                <Frame HasShadow="True"
+                       BorderColor="#2196F3"
+                       BackgroundColor="GhostWhite"
+                       Padding="10"
+                       IsClippedToBounds="True"
+                       CornerRadius="5"
+                      HorizontalOptions="FillAndExpand">
+                        <Image 
+                                   Source="{Binding ImagePayement}"
+                                   Aspect="AspectFit"></Image>
+                    </Frame>
+
+                    <StackLayout IsVisible="{Binding IsVisa}"
+                                 Padding="20"
+                                 Spacing="10">
+                        <Entry Placeholder="Numéro de carte"
+                               Keyboard="Numeric"
+                               MaxLength="16"
+                               Text="{Binding CardNumber}"></Entry>
+                        <Entry Placeholder="Année d'expiration (Exemple : 21 ,22...)"
+                               Keyboard="Numeric"
+                               MaxLength="2"></Entry>
+                        <Entry Placeholder="Mois d'expiration (Exemple : 02, 10...)"
+                               Keyboard="Numeric"
+                               MaxLength="2"></Entry>
+                        <Entry Placeholder="CVV"
+                               Keyboard="Numeric"
+                               MaxLength="3"
+                               Text="{Binding CVV}"></Entry>
+
+                        <Button Text="Payer"
+                TextColor="White"
+                Command="{Binding Buy_VisaCommad}"
+                CornerRadius="20">
+                        </Button>
+                    </StackLayout>
+
+                    <StackLayout IsVisible="{Binding IsOrange}"
+                                 Padding="20"
+                                 Spacing="10">
+                        <Entry Text="{Binding Number}"
+                               Placeholder="Numéro de téléphone orange money"
+                               Keyboard="Numeric"
+                               MaxLength="9"></Entry>
+                        <Button Text="Payer"
+                TextColor="White"
+                Command="{Binding Buy_OrangeMoneyCommad}"
+                CornerRadius="20">
+                        </Button>
+                    </StackLayout>
+
+                    <StackLayout IsVisible="{Binding IsMtn}"
+                                 Padding="20"
+                                 Spacing="10">
+                        <Entry Text="{Binding Number}"
+                               Placeholder="Numéro de téléphone mtn money"
+                               Keyboard="Numeric"
+                               MaxLength="9"></Entry>
+                        <Button Text="Payer"
+                TextColor="White"
+                Command="{Binding Buy_MtnMoneyCommad}"
+                CornerRadius="20">
+                        </Button>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

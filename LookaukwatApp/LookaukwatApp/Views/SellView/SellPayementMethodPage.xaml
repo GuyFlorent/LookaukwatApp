@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.SellView.SellPayementMethodPage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.SellViewModel" 
+             Title="{Binding TitlePage}">
+
+    <ContentPage.BindingContext>
+        <local:SellPayementMethodViewModel></local:SellPayementMethodViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Frame HasShadow="True"
+                       BorderColor="#2196F3"
+                       BackgroundColor="#2196F3"
+                       Padding="2"
+                       IsClippedToBounds="True"
+                       CornerRadius="5">
+                    <Label Text="Livraison"
+                           TextColor="White"
+                            HorizontalOptions="CenterAndExpand"></Label>
+                </Frame>
+                <Frame HasShadow="True"
+                       BorderColor="#2196F3"
+                       BackgroundColor="#2196F3"
+                       Padding="2"
+                       IsClippedToBounds="True"
+                       CornerRadius="5"
+                       Grid.Column="1">
+                    <Label Text="Paiement"
+                           TextColor="White"
+                            HorizontalOptions="CenterAndExpand"></Label>
+                </Frame>
+                <Frame HasShadow="True"
+                       BorderColor="#2196F3"
+                       Padding="2"
+                       IsClippedToBounds="True"
+                       CornerRadius="5"
+                       Grid.Column="2">
+                    <Label Text="Résumer"
+                           HorizontalOptions="CenterAndExpand"></Label>
+                </Frame>
+            </Grid>
+
+            <ScrollView Margin="10">
+                <StackLayout>
+                    <Label Text="Sélectionnez votre méthode de paiement"
+                           TextColor="Black"
+                           FontSize="Subtitle"></Label>
+                    <Frame HasShadow="True"
+                       BorderColor="#2196F3"
+                       BackgroundColor="GhostWhite"
+                       Padding="10"
+                       IsClippedToBounds="True"
+                       CornerRadius="5"
+                      HorizontalOptions="FillAndExpand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <RadioButton
+                             IsChecked="{Binding IsMtn}"></RadioButton>
+                            <Image Grid.Column="1"
+                                   Source="mtn_icon"
+                                   Aspect="AspectFit"></Image>
+                           
+                        </Grid>
+                    </Frame>
+
+                    <Frame HasShadow="True"
+                       BorderColor="#2196F3"
+                       BackgroundColor="GhostWhite"
+                       Padding="10"
+                       IsClippedToBounds="True"
+                       CornerRadius="5"
+                      HorizontalOptions="FillAndExpand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <RadioButton
+                             IsChecked="{Binding IsOrange}"></RadioButton>
+                            <Image Grid.Column="1"
+                                   Source="orange_icon"
+                                   Aspect="AspectFit"></Image>
+
+                        </Grid>
+                    </Frame>
+
+                    <Frame HasShadow="True"
+                       BorderColor="#2196F3"
+                       BackgroundColor="GhostWhite"
+                       Padding="10"
+                       IsClippedToBounds="True"
+                       CornerRadius="5"
+                      HorizontalOptions="FillAndExpand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <RadioButton
+                             IsChecked="{Binding IsVisa}"></RadioButton>
+                            <Image Grid.Column="1"
+                                   Source="visa_icon"
+                                   Aspect="AspectFit"></Image>
+
+                        </Grid>
+                    </Frame>
+
+                    <Frame HasShadow="True"
+                       BorderColor="#2196F3"
+                       BackgroundColor="GhostWhite"
+                       Padding="10"
+                       IsClippedToBounds="True"
+                       CornerRadius="5"
+                      HorizontalOptions="FillAndExpand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Text="Prix de l'aritcle"
+                                   FontSize="Subtitle"></Label>
+                            <Label 
+                                   FontSize="Subtitle"
+                                   Grid.Column="1">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding ItemPrice}"></Span>
+                                        <Span Text=" FCFA"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Text="Frais de livrasion"
+                                   FontSize="Subtitle"
+                                   Grid.Row="1"></Label>
+                            <Label 
+                                   FontSize="Subtitle"
+                                   TextColor="#2196F3"
+                                   Grid.Column="1"
+                                   Grid.Row="1">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding DeliveredPrice}"></Span>
+                                        <Span Text=" FCFA"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Text="Prix total"
+                                   FontSize="Subtitle"
+                                   Grid.Row="2"></Label>
+                            <Label 
+                                   FontSize="Subtitle"
+                                   TextColor="#2196F3"
+                                   Grid.Column="1"
+                                   Grid.Row="2">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding TotalPrice}"></Span>
+                                        <Span Text=" FCFA"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                    </Frame>
+
+                    <Button Text="Passer au résumer"
+                TextColor="White"
+                Command="{Binding ResumeCommad}"
+                            
+                CornerRadius="20"></Button>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

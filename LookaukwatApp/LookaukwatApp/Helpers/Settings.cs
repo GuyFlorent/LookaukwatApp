@@ -55,6 +55,30 @@ namespace LookaukwatApp.Helpers
             }
         }
 
+        public static string AddressDelivered
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("AddressDelivered", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("AddressDelivered", value);
+            }
+        }
+
+        public static string ItemPurchase
+        {
+            get
+            {
+                return AppSettings.GetValueOrDefault("ItemPurchase", "");
+            }
+            set
+            {
+                AppSettings.AddOrUpdateValue("ItemPurchase", value);
+            }
+        }
+
         public static string JsonSearchSave
         {
             get

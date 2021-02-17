@@ -592,6 +592,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <ImageButton Source="icon_phone"
@@ -664,7 +665,27 @@
                                         NumberOfTapsRequired="1" />
                         </Label.GestureRecognizers>
                     </Label>
-            </Grid>
+
+                    <ImageButton Source="cash"
+                           Aspect="AspectFit"
+                           HeightRequest="25"
+                           BackgroundColor="#2196F3" 
+                           Grid.Column="3"
+                           Command="{Binding BuyItemCommand}"/>
+
+                    <Label Grid.Row="1"
+                       Grid.Column="3"
+                       HorizontalOptions="Start"
+                           Text="Acheter"
+                       TextColor="White"
+                           FontAttributes="Italic">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                        Command="{Binding BuyItemCommand}"
+                                        NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
 
         </StackLayout>
    </StackLayout>

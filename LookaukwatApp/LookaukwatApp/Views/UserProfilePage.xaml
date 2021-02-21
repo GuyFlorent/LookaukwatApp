@@ -71,6 +71,26 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+                    <Image Source="cash.png"
+                       HeightRequest="40"
+                       WidthRequest="40"
+                       HorizontalOptions="Start"></Image>
+                    <Button Grid.Column="1"
+                    Text="Mes transactions"
+                        TextColor="#2196F3"
+                        FontSize="Subtitle"
+                       BackgroundColor="White"
+                        Command="{Binding UserTransactionsCommand}"
+                        ></Button>
+                </Grid>
+
+                <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand" />
+
+                <Grid  Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>

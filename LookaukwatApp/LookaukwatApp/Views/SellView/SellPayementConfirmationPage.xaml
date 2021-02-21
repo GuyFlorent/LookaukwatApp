@@ -40,15 +40,17 @@
                                Text="{Binding CardNumber}"></Entry>
                         <Entry Placeholder="Année d'expiration (Exemple : 21 ,22...)"
                                Keyboard="Numeric"
-                               MaxLength="2"></Entry>
+                               MaxLength="2"
+                               Text="{Binding ExpireYear}"></Entry>
                         <Entry Placeholder="Mois d'expiration (Exemple : 02, 10...)"
                                Keyboard="Numeric"
-                               MaxLength="2"></Entry>
+                               MaxLength="2"
+                               Text="{Binding ExpireMonth}"></Entry>
                         <Entry Placeholder="CVV"
                                Keyboard="Numeric"
                                MaxLength="3"
                                Text="{Binding CVV}"></Entry>
-
+                        <ActivityIndicator  IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color ="#80000000"/>
                         <Button Text="Payer"
                 TextColor="White"
                 Command="{Binding Buy_VisaCommad}"
@@ -63,6 +65,7 @@
                                Placeholder="Numéro de téléphone orange money"
                                Keyboard="Numeric"
                                MaxLength="9"></Entry>
+                        <ActivityIndicator  IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color ="#80000000"/>
                         <Button Text="Payer"
                 TextColor="White"
                 Command="{Binding Buy_OrangeMoneyCommad}"
@@ -77,6 +80,7 @@
                                Placeholder="Numéro de téléphone mtn money"
                                Keyboard="Numeric"
                                MaxLength="9"></Entry>
+                        <ActivityIndicator  IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color ="#80000000"/>
                         <Button Text="Payer"
                 TextColor="White"
                 Command="{Binding Buy_MtnMoneyCommad}"

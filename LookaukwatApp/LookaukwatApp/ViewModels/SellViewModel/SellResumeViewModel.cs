@@ -153,7 +153,7 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             TotalPrice = item.TotalPrice;
             Image = item.Image;
             Title = item.Title;
-            if(DeliveredPrice == "0")
+            if(DeliveredPrice == " 0 ")
             {
                 IsHomeDeliverd = false;
                 isStoreTaken = true;
@@ -178,6 +178,7 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             }
 
             DeliverAdressModelViewModel Json = JsonConvert.DeserializeObject<DeliverAdressModelViewModel>(Settings.AddressDelivered);
+           
             FirstName = Json.FirstName;
             LastName = Json.LastName;
             Number = Json.Number;

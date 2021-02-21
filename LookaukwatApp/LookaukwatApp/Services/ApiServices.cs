@@ -6,9 +6,11 @@ using LookaukwatApp.ViewModels.Appartment;
 using LookaukwatApp.ViewModels.Message;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -20,7 +22,8 @@ namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-        string Uri = "https://lookaukwatapi.azurewebsites.net/";
+       // string Uri = "https://lookaukwatapi.azurewebsites.net/";
+        string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword, string parrainValue)
         {
             HttpClient client;
@@ -51,6 +54,46 @@ namespace LookaukwatApp.Services
             var response = await client.PostAsync(Uri+"api/Account/Register", content);
 
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<CommandModel> GetCommandBillAsync(int CommandId)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Command/?id=" + CommandId);
+
+            var bill = JsonConvert.DeserializeObject<CommandModel>(json);
+
+            return bill;
+        }
+
+        public async Task<List<CommandForMobile>> GetUserCommandsAsync( string accessToken)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Command/GetUserCommand");
+
+            var List = JsonConvert.DeserializeObject<List<CommandForMobile>>(json);
+            // var liste = List.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            return List;
         }
 
         public async Task<List<ImageProcductModel>> GetImagesAsyn(string itemId)
@@ -192,6 +235,83 @@ namespace LookaukwatApp.Services
             var response = await client.PutAsync(Uri + "api/Product/?id=" + itemId, content);
 
             Debug.WriteLine(response);
+        }
+
+        public async Task<int> CommandPostAsync(int id, string payementMethod, int deliveredPrice, int totalPrice_int, string firstName, string lastName, string town, string street, string number, string telephone, double distance)
+        {
+            HttpClient client;
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            DeliveredAdressModel addresse = new DeliveredAdressModel()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Number = number,
+                Street = street,
+                Telephone = telephone,
+                Town = town
+            };
+
+           
+
+            bool checkDeliver = false;
+            if(deliveredPrice == 0)
+            {
+                checkDeliver = false;
+
+            }
+            else
+            {
+                checkDeliver = true;
+            }
+
+            CommandModel command = new CommandModel()
+            {
+                TotalPrice = totalPrice_int,
+                Distance = Convert.ToInt32(distance).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim() + " Km",
+                DeliveredAdress = addresse,
+                DeliveredPrice = deliveredPrice,
+                PayementMethod = payementMethod,
+                IsDelivered = false,
+                IsDeleteByUser = false,
+                IsHomeDelivered = checkDeliver,
+            };
+
+            ProductModel product = new ProductModel()
+            {
+                id = id,
+            };
+            PurchaseModel purchase = new PurchaseModel()
+            {
+                
+                product = product,
+                Quantities = 1
+            };
+            List<PurchaseModel> purchases = new List<PurchaseModel>();
+            purchases.Add(purchase);
+
+            command.Purchases = purchases;
+
+            var  accessToken = Settings.AccessToken;
+            var json = JsonConvert.SerializeObject(command);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+            var response = await client.PostAsync(Uri + "api/Command", content);
+            Debug.WriteLine(response);
+            var jwt = await response.Content.ReadAsStringAsync();
+            var joo = JObject.Parse(jwt);//
+            var idCommand = (int)joo["CommandId"];
+
+            Debug.WriteLine(jwt);
+
+            return idCommand;
         }
 
         public async Task<ProductModel> GetProductSameParamAsync(int id)

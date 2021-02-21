@@ -11,7 +11,9 @@ namespace LookaukwatApp.Models.MobileModels
         public string Title { get; set; }
         public string Price { get; set; }
         public string TotalPrice { get; set; }
+        public int TotalPrice_int { get; set; }
         public string DeliveredPrice { get; set; }
+        public int DeliveredPrice_int { get; set; }
         public string PayementMethod { get; set; }
         public string Lat { get; set; }
         public string Lon { get; set; }

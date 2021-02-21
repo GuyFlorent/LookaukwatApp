@@ -1,6 +1,8 @@
-﻿using System;
+﻿using LookaukwatApp.Helpers;
+using LookaukwatApp.Models.MobileModels;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +10,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LookaukwatApp.Views.SellView
+namespace LookaukwatApp.Views.UserView
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [DesignTimeVisible(false)]
-    public partial class SellPayementConfirmationPage : ContentPage
+    public partial class UserTransactionsPage : ContentPage
     {
-        public SellPayementConfirmationPage()
+        public UserTransactionsPage()
         {
             InitializeComponent();
             Shell.SetTabBarIsVisible(this, false);

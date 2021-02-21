@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.UserView.UserTransactionsPage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.User"  
+             Title="Mes transactions">
+
+    <ContentPage.BindingContext>
+        <local:UserTransactionsViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout  Margin="10,5,5,0"
+                      Spacing="20"
+                      Padding="10"
+                      HorizontalOptions="CenterAndExpand"
+                      VerticalOptions="CenterAndExpand">
+
+            <Button Text="Mes commandes"
+                    TextColor="White"
+                    CornerRadius="20"
+                    Command="{Binding OrderCommand}"></Button>
+            <StackLayout Spacing="20">
+                <Label Text="Mes affaires avec lookaukwat"
+                       TextColor="Black"
+                       FontSize="Title"
+                       FontAttributes="Bold"></Label>
+                <Button Text="Mes Annonces en ligne"
+                    TextColor="White"
+                        CornerRadius="20"
+                        Command="{Binding AnnounceOnlineCommand}"></Button>
+                <Button Text="Mes ventes"
+                    TextColor="White"
+                        CornerRadius="20"
+                        Command="{Binding AnnounceSellCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

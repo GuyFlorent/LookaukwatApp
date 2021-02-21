@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.UserView.UserCommandsPage"
+             Title="{Binding TitlePage}"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.User">
+
+    <ContentPage.BindingContext>
+        <local:UserCommandsViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <RelativeLayout IsVisible="{Binding IsRunning}">
+                <ActivityIndicator TranslationX="150" TranslationY="200" IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+            </RelativeLayout>
+
+            <ListView ItemsSource="{Binding Commands}" 
+                      CachingStrategy="RecycleElement" 
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                      SeparatorVisibility="None"
+                      x:Name="UserAnounce">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="10"  
+                                   HasShadow="True"
+                                   BorderColor="#2196F3"
+                                       BackgroundColor="GhostWhite"
+                                       Padding="5"
+                                       IsClippedToBounds="True"
+                                       CornerRadius="5">
+
+                                <Grid BackgroundColor="GhostWhite"
+                                              x:Name="Item">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Label TextColor="Black"
+                                           FontSize="Subtitle"
+                                            Grid.ColumnSpan="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Commande numéro : "></Span>
+                                                <Span FontAttributes="Bold" Text="{Binding CommandId}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label TextColor="Black"
+                                           FontSize="Subtitle"
+                                           Grid.ColumnSpan="1"
+                                           Grid.Row="1">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Du "></Span>
+                                                <Span Text="{Binding DateCommand}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label  Grid.ColumnSpan="1"
+                                           Grid.Row="2"
+                                            TextColor="#2196F3"
+                                           FontSize="Subtitle"
+                                            Text="{Binding Message}"></Label>
+
+                                    <Button Text="Suivre la commande"
+                                            TextColor="White"
+                                            Grid.Row="3"
+                                            Grid.Column="0"
+                                            IsEnabled="{Binding IsHomeDelivered}"
+                                            Command="{Binding TrackingOrderCommand}"></Button>
+                                    <Button Text="Facture"
+                                            TextColor="White"
+                                            Grid.Row="3"
+                                            Grid.Column="1"
+                                            Command="{Binding BillCommand}"
+                                            BindingContext="{Binding Source={x:Reference UserAnounce}, Path=BindingContext}"
+                                            CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" ></Button>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -72,11 +72,25 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             set => SetProperty(ref deliveredPrice, value);
         }
 
+        private int deliveredPrice_int = 0;
+        public int DeliveredPrice_int
+        {
+            get => deliveredPrice_int;
+            set => SetProperty(ref deliveredPrice_int, value);
+        }
+
         private string totalPrice;
         public string TotalPrice
         {
             get => totalPrice;
             set => SetProperty(ref totalPrice, value);
+        }
+
+        private int totalPrice_int;
+        public int TotalPrice_int
+        {
+            get => totalPrice_int;
+            set => SetProperty(ref totalPrice_int, value);
         }
 
         private string distance;
@@ -136,6 +150,8 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             ItemPurchaseModelViewModel item = JsonConvert.DeserializeObject<ItemPurchaseModelViewModel>(Settings.ItemPurchase);
             item.TotalPrice = TotalPrice;
             item.DeliveredPrice = deliveredPrice;
+            item.TotalPrice_int = TotalPrice_int;
+            item.DeliveredPrice_int = DeliveredPrice_int;
             Settings.ItemPurchase = JsonConvert.SerializeObject(item);
 
             await Shell.Current.GoToAsync($"{nameof(SellPayementMethodPage)}");
@@ -220,18 +236,19 @@ namespace LookaukwatApp.ViewModels.SellViewModel
                 DeliveredPrice = Convert.ToInt32(Json.Distance * 100 * 0.2).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
 
                 Delivered = Convert.ToInt32(Json.Distance * 100 * 0.2);
-
+                DeliveredPrice_int = Delivered;
             }
             else
             {
                 DeliveredPrice = Convert.ToInt32(Json.Distance * 200).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
 
                 Delivered = Convert.ToInt32(Json.Distance * 200);
+                DeliveredPrice_int = Delivered;
             }
 
             IsStoreTaken = false;
-            
-            TotalPrice = (itemPrice + Delivered).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
+            TotalPrice_int = itemPrice + Delivered;
+            TotalPrice = (TotalPrice_int).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
         }
     }
 }

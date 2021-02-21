@@ -91,6 +91,7 @@ namespace LookaukwatApp.ViewModels.User
             UpdateUserCommand = new Command(OnUpdateUserInfo, ValidateChangeUserInfo);
             UserPersonalInfoCommand = new Command(OnUserPersonalInfo);
             UpdateUserPageCommand = new Command(OnUpdateUserPage);
+            UserTransactionsCommand = new Command(OnUserTransaction);
             UpdatePasswordCommand = new Command(OnChangePassword, ValidateChangePassword);
             this.PropertyChanged +=
                (_, __) => UpdatePasswordCommand.ChangeCanExecute();
@@ -107,6 +108,7 @@ namespace LookaukwatApp.ViewModels.User
         public Command UpdateUserPageCommand { get; }
         public Command ProfileUserCommand { get; }
         public Command UserPersonalInfoCommand { get; }
+        public Command UserTransactionsCommand { get; }
 
 
        
@@ -122,6 +124,11 @@ namespace LookaukwatApp.ViewModels.User
             return !String.IsNullOrWhiteSpace(NewPhone)
                 || !String.IsNullOrWhiteSpace(NewEmail)
                 || !String.IsNullOrWhiteSpace(NewFirstName);
+        }
+
+        private async void OnUserTransaction()
+        {
+            await Shell.Current.GoToAsync(nameof(UserTransactionsPage));
         }
         private async void OnUserAnnouce()
         {

@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.UserView.UserBillPage"
+             Title="{Binding TitlePage}"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.User"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:zxingcommon="clr-namespace:ZXing.Common;assembly=zxing">
+
+    <ContentPage.BindingContext>
+        <local:UserBillViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <RelativeLayout IsVisible="{Binding IsRunning}">
+                <ActivityIndicator TranslationX="150" TranslationY="200" IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+            </RelativeLayout>
+            <ScrollView>
+        <StackLayout IsVisible="{Binding IsBusy}">
+            
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout>
+                    <Label TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding LastName}"></Span>
+                                <Span Text=" "></Span>
+                                <Span Text="{Binding FirstName}"></Span>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Text="{Binding Number}"></Label>
+                    <Label Text="{Binding Telephone}"></Label>
+                    <Label Text="{Binding Town}"></Label>
+                    <Label Text="{Binding Street}"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Column="1"
+                             Orientation="Vertical">
+                    <Image Source="logo_lookaukwat_xam1.png"
+                           HeightRequest="30"></Image>
+
+                    <Label Text="Tel : 657633039"></Label>
+                    <Label Text="contact@lookaukwat.com"></Label>
+                </StackLayout>
+            </Grid>
+
+            
+            <ListView ItemsSource="{Binding Purchases}"
+                      Margin="0"
+                      HeightRequest="100"
+                      CachingStrategy="RecycleElement" 
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                      SeparatorVisibility="None">
+                <ListView.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Article" HorizontalOptions="Fill"  Grid.Column="0"   FontSize="Medium" FontAttributes="Bold" BackgroundColor="#2196F3" TextColor="White" HorizontalTextAlignment="Center" Margin="1"/>
+                        <Label Text="Prix unité" HorizontalOptions="Fill"  Grid.Column="1"  FontSize="Medium" FontAttributes="Bold" BackgroundColor="#2196F3" TextColor="White" HorizontalTextAlignment="Center" Margin="1"/>
+                        <Label Text="Qté" HorizontalOptions="Fill"  Grid.Column="2"  FontSize="Medium" FontAttributes="Bold" BackgroundColor="#2196F3" TextColor="White" HorizontalTextAlignment="Center" Margin="1"/>
+                        <Label Text="Prix total" HorizontalOptions="Fill"  Grid.Column="3"  FontSize="Medium" FontAttributes="Bold" BackgroundColor="#2196F3" TextColor="White" HorizontalTextAlignment="Center" Margin="1"/>
+                    </Grid>
+                </ListView.Header>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                       
+                                <Image Grid.Column="0" Source ="{Binding Image}" HorizontalOptions="Fill" Aspect="AspectFill" HeightRequest="80"></Image>
+                                <Label Grid.Column="1" Text ="{Binding Price}" HorizontalOptions="Fill"  HorizontalTextAlignment="Center" Margin="1"></Label>
+                                <Label Grid.Column="2" Text ="{Binding Quantity}" HorizontalOptions="Fill"  HorizontalTextAlignment="Center" Margin="1"></Label>
+                                <Label Grid.Column="3" Text ="{Binding Price}" HorizontalOptions="Fill"  HorizontalTextAlignment="Center" Margin="1"></Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label FontSize="Subtitle"
+                   IsVisible="{Binding IsHomeDelivered}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Frais de livraison "></Span>
+                        <Span TextColor="#2196F3" Text="{Binding DeliveredPrice}"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Label FontSize="Subtitle">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Prix total de la commande "></Span>
+                        <Span TextColor="#2196F3" Text="{Binding TotalPrice}"></Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+
+
+                    <zxing:ZXingBarcodeImageView BarcodeValue="{Binding GetCommandId}"
+                                                 HorizontalOptions="FillAndExpand"
+                                                 VerticalOptions="FillAndExpand"
+                                                 HeightRequest="290">
+                        <zxing:ZXingBarcodeImageView.BarcodeOptions>
+                            <zxingcommon:EncodingOptions Height="500"
+                                                         Width="500"></zxingcommon:EncodingOptions> 
+                        </zxing:ZXingBarcodeImageView.BarcodeOptions>
+            </zxing:ZXingBarcodeImageView>
+
+        </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

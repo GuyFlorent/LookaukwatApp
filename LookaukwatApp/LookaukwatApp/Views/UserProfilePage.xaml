@@ -32,8 +32,8 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image Source="account_circle.png"
-                       HeightRequest="40"
-                       WidthRequest="40"
+                      
+                           Aspect="AspectFit"
                        HorizontalOptions="Start"></Image>
                     <Button Grid.Column="1"
                     Text="Profil"
@@ -52,8 +52,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image Source="list.png"
-                       HeightRequest="40"
-                       WidthRequest="40"
+                      Aspect="AspectFit"
                        HorizontalOptions="Start"></Image>
                     <Button Grid.Column="1"
                     Text="Mes annonces"
@@ -72,8 +71,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Image Source="cash.png"
-                       HeightRequest="40"
-                       WidthRequest="40"
+                       Aspect="AspectFit"
                        HorizontalOptions="Start"></Image>
                     <Button Grid.Column="1"
                     Text="Mes transactions"
@@ -97,8 +95,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="setting.png"
-                       HeightRequest="40"
-                       WidthRequest="40"
+                       Aspect="AspectFit"
                        HorizontalOptions="Start"
                        Grid.Row="0"
                        Grid.Column="0"></Image>
@@ -147,8 +144,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Source="help.png"
-                       HeightRequest="40"
-                       WidthRequest="40"
+                       Aspect="AspectFit"
                        HorizontalOptions="Start"
                        Grid.Row="0"
                        Grid.Column="0"></Image>

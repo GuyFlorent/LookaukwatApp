@@ -1,6 +1,7 @@
 ﻿using LookaukwatApp.Helpers;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.Appartment;
+using LookaukwatApp.ViewModels.Home;
 using LookaukwatApp.ViewModels.House;
 using LookaukwatApp.ViewModels.Job;
 using LookaukwatApp.ViewModels.Mode;
@@ -140,8 +141,10 @@ namespace LookaukwatApp
 
 
         ApiServices _apiServices = new ApiServices();
+
         protected override void OnStart()
         {
+           
         }
 
         protected async override void OnSleep()
@@ -166,6 +169,8 @@ namespace LookaukwatApp
 
         protected override void OnResume()
         {
+            //ItemsViewModel vm = new ItemsViewModel();
+            //vm.UpdateItems();
         }
     }
 }

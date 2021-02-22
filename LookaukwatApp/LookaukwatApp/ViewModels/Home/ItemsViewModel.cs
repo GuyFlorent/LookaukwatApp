@@ -320,7 +320,7 @@ namespace LookaukwatApp.ViewModels.Home
             }
 
         }
-
+      
         private async void GetTotalNumberOfProduct()
         {
             try
@@ -328,6 +328,18 @@ namespace LookaukwatApp.ViewModels.Home
                 NumberOfProduct = await _apiServices.Get_AllNumber_ProductsAsync();
             }catch(Exception e) { }
             
+        }
+
+
+        public void UpdateItems()
+        {
+        
+            //if (!string.IsNullOrWhiteSpace(Settings.Products))
+            //{
+            //    Items.Clear();
+            //    List<ProductForMobileViewModel> ListFavorites = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(Settings.Products);
+            //    Items.AddRange(ListFavorites);
+            //}
         }
 
     }

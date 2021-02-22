@@ -13,14 +13,14 @@ namespace LookaukwatApp.Models.MobileModels
         public bool IsDelivered { get; set; }
         public bool IsHomeDelivered { get; set; }
         public string Message { get { return DeliveredMessage(); } }
-        public string DateCommand { get { return CommandDate.ToString(); } }
+        public string DateCommand { get { return ((DateTime)CommandDate).ToString("dddd, dd MMMM yyyy HH:mm:ss"); } }
         
 
         private string DeliveredMessage()
         {
             if (IsDelivered)
             {
-                return "Commande livrée le " + DeliveredDate.ToString();
+                return "Livrée le " + ((DateTime)DeliveredDate).ToString("dddd, dd MMMM yyyy HH:mm:ss");
             }
             else
             {

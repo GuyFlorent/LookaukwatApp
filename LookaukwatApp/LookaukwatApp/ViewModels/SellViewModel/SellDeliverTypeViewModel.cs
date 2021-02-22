@@ -223,8 +223,8 @@ namespace LookaukwatApp.ViewModels.SellViewModel
 
             DeliveredPrice = " 0 ";
             IsHomeDeliverd = false;
-           
-            TotalPrice  = (itemPrice).ToString();
+            TotalPrice_int = itemPrice;
+             TotalPrice  = (itemPrice).ToString();
         }
 
         private void PopulateHomeDeliverd()

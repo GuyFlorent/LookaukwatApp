@@ -14,6 +14,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using Xamarin.Essentials;
@@ -24,6 +25,7 @@ namespace LookaukwatApp.Services
     {
        // string Uri = "https://lookaukwatapi.azurewebsites.net/";
         string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
+        CancellationTokenSource cts;
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword, string parrainValue)
         {
             HttpClient client;
@@ -54,6 +56,28 @@ namespace LookaukwatApp.Services
             var response = await client.PostAsync(Uri+"api/Account/Register", content);
 
             return response.IsSuccessStatusCode;
+        }
+
+        public async Task<List<TrackingCommandModelViewModel>> GetListTrackingCommand(int commandId)
+        {
+
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/TrackingCommand/?id=" + commandId);
+
+            var tackings = JsonConvert.DeserializeObject<List<TrackingCommandModelViewModel>>(json);
+
+            return tackings;
         }
 
         public async Task<CommandModel> GetCommandBillAsync(int CommandId)
@@ -466,6 +490,70 @@ namespace LookaukwatApp.Services
             var house = JsonConvert.DeserializeObject<VehiculeModelViewModel>(json);
 
             return house;
+        }
+
+        public async Task<string> GetDeliveredCommandAsync(int CommandId)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Command/DeliveredCommand/?id=" + CommandId);
+
+            var res = JsonConvert.DeserializeObject<string>(json);
+
+            return res;
+        }
+
+        public async Task<bool> PostTrackingCommandAsync(int idCommand , string lat, string lon)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+           
+            string accessToken = Settings.AccessToken;
+           
+            var command = new CommandModel
+            {
+                CommandId = idCommand
+            };
+
+            var model = new TrackingCommandModel()
+            {
+               Command = command,
+               Lat = lat,
+               Lon = lon
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+            var response = await client.PostAsync(Uri + "api/TrackingCommand", content);
+            Debug.WriteLine(response);
+            var jwt = await response.Content.ReadAsStringAsync();
+            //var joo = JObject.Parse(jwt);
+            //var id = (int)joo["id"];
+            var res = JsonConvert.DeserializeObject<bool>(jwt);
+            //var accessToken = jwtDynamic.Value<string>("access_token");
+
+            Debug.WriteLine(jwt);
+
+            return res;
         }
 
         public async Task<ModeModelViewModel> GetUniqueModeCritereAsync(int id)

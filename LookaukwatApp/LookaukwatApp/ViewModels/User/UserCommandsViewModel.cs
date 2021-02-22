@@ -31,6 +31,16 @@ namespace LookaukwatApp.ViewModels.User
 
 
             });
+
+            TrackingOrderCommand = new Command(async (e) =>
+            {
+                var item = e as CommandForMobile;
+
+                await Shell.Current.GoToAsync($"{nameof(UserCommandTrackingPage)}?{nameof(UserCommandTrackingViewModel.CommandId)}={item.CommandId}");
+
+
+            });
+
             Populate();
         }
 

@@ -39,11 +39,10 @@
                                         <RowDefinition Height="Auto"></RowDefinition>
                                         <RowDefinition Height="Auto"></RowDefinition>
                                         <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Label TextColor="Black"
                                            FontSize="Subtitle"
@@ -67,26 +66,30 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label  Grid.ColumnSpan="1"
-                                           Grid.Row="2"
+                                    <Label  Grid.Column="1"
+                                          
                                             TextColor="#2196F3"
                                            FontSize="Subtitle"
                                             Text="{Binding Message}"></Label>
 
                                     <Button Text="Suivre la commande"
                                             TextColor="White"
-                                            Grid.Row="3"
-                                            Grid.Column="0"
+                                            Grid.Row="2"
+                                            FontSize="12"
                                             IsEnabled="{Binding IsHomeDelivered}"
-                                            Command="{Binding TrackingOrderCommand}"></Button>
+                                            Command="{Binding TrackingOrderCommand}"
+                                            BindingContext="{Binding Source={x:Reference UserAnounce}, Path=BindingContext}"
+                                            CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" ></Button>
                                     <Button Text="Facture"
                                             TextColor="White"
-                                            Grid.Row="3"
+                                            Grid.Row="2"
+                                             FontSize="12"
                                             Grid.Column="1"
                                             Command="{Binding BillCommand}"
                                             BindingContext="{Binding Source={x:Reference UserAnounce}, Path=BindingContext}"
                                             CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}" ></Button>
                                 </Grid>
+                                
                             </Frame>
                         </ViewCell>
                     </DataTemplate>

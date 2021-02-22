@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.UserView.UserCommandTrackingPage"
+              Title="{Binding TitlePage}"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.User">
+
+    <ContentPage.BindingContext>
+        <local:UserCommandTrackingViewModel />
+    </ContentPage.BindingContext>
+
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding Trackings}" 
+                      CachingStrategy="RecycleElement" 
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="20">
+                                <StackLayout Padding="5" BackgroundColor="LimeGreen">
+                                    <Label Text="{Binding Street}" 
+                             />
+                                    <Label >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Road}"></Span>
+                                                <Span Text="{Binding Town}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Le "></Span>
+                                                <Span Text="{Binding DateLetter}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                </StackLayout>
+                                <BoxView  
+                               VerticalOptions="Fill"
+                               HorizontalOptions="Start"
+                               WidthRequest="1"
+                               Color="Blue"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

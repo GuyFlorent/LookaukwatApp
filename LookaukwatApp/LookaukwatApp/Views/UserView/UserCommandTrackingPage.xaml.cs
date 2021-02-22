@@ -10,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace LookaukwatApp.Views.UserView
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UserPersonalInfoPage : ContentPage
+    public partial class UserCommandTrackingPage : ContentPage
     {
-        public UserPersonalInfoPage()
+        public UserCommandTrackingPage()
         {
             InitializeComponent();
-            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

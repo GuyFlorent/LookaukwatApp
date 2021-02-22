@@ -84,6 +84,7 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(UserTransactionsPage), typeof(UserTransactionsPage));
             Routing.RegisterRoute(nameof(UserCommandsPage), typeof(UserCommandsPage));
             Routing.RegisterRoute(nameof(UserBillPage), typeof(UserBillPage));
+            Routing.RegisterRoute(nameof(UserCommandTrackingPage), typeof(UserCommandTrackingPage));
         }
 
 

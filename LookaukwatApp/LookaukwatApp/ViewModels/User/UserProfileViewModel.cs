@@ -7,6 +7,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -92,6 +93,8 @@ namespace LookaukwatApp.ViewModels.User
             UserPersonalInfoCommand = new Command(OnUserPersonalInfo);
             UpdateUserPageCommand = new Command(OnUpdateUserPage);
             UserTransactionsCommand = new Command(OnUserTransaction);
+            ScanDeliveredItemCommand = new Command(OnScanDeliveredItem);
+            ScanTrackingItemCommand = new Command(OnScanTrackingItem);
             UpdatePasswordCommand = new Command(OnChangePassword, ValidateChangePassword);
             this.PropertyChanged +=
                (_, __) => UpdatePasswordCommand.ChangeCanExecute();
@@ -109,6 +112,8 @@ namespace LookaukwatApp.ViewModels.User
         public Command ProfileUserCommand { get; }
         public Command UserPersonalInfoCommand { get; }
         public Command UserTransactionsCommand { get; }
+        public Command ScanDeliveredItemCommand { get; }
+        public Command ScanTrackingItemCommand { get; }
 
 
        
@@ -458,6 +463,55 @@ namespace LookaukwatApp.ViewModels.User
             }
 
 
+        }
+
+        //For scanning item
+
+        private async void OnScanDeliveredItem()
+        {
+
+            try
+            {
+                IQrScanningService scan = new QrScanningService();
+                var result = await scan.ScanAsync();
+                if (result != null)
+                {
+                    int CommandId = Convert.ToInt32(result);
+                    string response = await _apiServices.GetDeliveredCommandAsync(CommandId);
+                    if (!string.IsNullOrWhiteSpace(response))
+                        await Shell.Current.DisplayAlert(response, "", "OK");
+                }
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+          
+        }
+        CancellationTokenSource cts;
+        private async void OnScanTrackingItem()
+        {
+           
+
+            try
+            {
+                var request = new GeolocationRequest(GeolocationAccuracy.Low, TimeSpan.FromSeconds(10));
+                cts = new CancellationTokenSource();
+                var location = await Geolocation.GetLocationAsync(request, cts.Token);
+
+                IQrScanningService scan = new QrScanningService();
+                var result = await scan.ScanAsync();
+                if (result != null)
+                {
+                    int Id = Convert.ToInt32(result);
+                    var response = await _apiServices.PostTrackingCommandAsync(Id, location.Latitude.ToString(), location.Longitude.ToString());
+                    if (response)
+                        await Shell.Current.DisplayAlert("Scan validé !", "", "OK");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

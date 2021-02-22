@@ -12,7 +12,7 @@
         <ToolbarItem IconImageSource="account_edit" Command="{Binding UpdateUserPageCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Margin="15,35,20,25">
+        <StackLayout Margin="15,35,20,0">
             <Label Text="Mes informations personnelles"
                    TextColor="Black"
                    FontSize="Title"
@@ -50,6 +50,27 @@
                    FontAttributes="Bold"></Label>
             </StackLayout>
             <Label Text="{Binding OldPhone}"></Label>
+
+            <StackLayout Spacing="20">
+                <Label Text="Espace agents lookaukwat"
+                       FontSize="Subtitle"
+                       TextColor="Black"></Label>
+
+                <Button Text="Espace agentcpublicitaire"
+                    TextColor="White"
+                        CornerRadius="20"
+                        Command="{Binding LookaukwatAgentCommand}"></Button>
+                <Button Text="Scanner le trajet de l'article"
+                    TextColor="White"
+                        CornerRadius="20"
+                        Command="{Binding ScanTrackingItemCommand}"></Button>
+
+                <Button Text="Scanner la livraison de l'article"
+                    TextColor="White"
+                        CornerRadius="20"
+                        Command="{Binding ScanDeliveredItemCommand}"></Button>
+
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -231,10 +231,15 @@ namespace LookaukwatApp.ViewModels.SellViewModel
                 }
                 else
                 {
-                    IsBusy = false;
+                    
                     await Shell.Current.DisplayAlert("Echec de paiement !", "Vérifiez votre compte", "OK");
                 }
-            }catch(Exception e) { }
+            }catch(Exception e) 
+            {
+
+                Console.WriteLine(e.Message);
+            }
+            finally { IsBusy = false; }
         }
     }
 }

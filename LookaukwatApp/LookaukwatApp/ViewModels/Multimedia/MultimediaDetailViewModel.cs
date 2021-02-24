@@ -5,6 +5,8 @@ using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.MessageView;
 using LookaukwatApp.Views.MultimediaView;
+using LookaukwatApp.Views.SellView;
+using Newtonsoft.Json;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -60,6 +62,7 @@ namespace LookaukwatApp.ViewModels.Multimedia
         public Command SignalCommand { get; set; }
         public Command NotFavoriteCommand { get; set; }
         public Command FavoriteCommand { get; set; }
+        public Command BuyItemCommand { get; set; }
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
 
@@ -178,6 +181,18 @@ namespace LookaukwatApp.ViewModels.Multimedia
             set => SetProperty(ref redHeart, value);
         }
 
+        bool isLookaukwat = false;
+        public bool IsLookaukwat
+        {
+            get { return isLookaukwat; }
+            set { SetProperty(ref isLookaukwat, value); }
+        }
+        private int stock;
+        public int Stock
+        {
+            get { return stock; }
+            set { SetProperty(ref stock, value); }
+        }
         public string ItemId
         {
             get
@@ -229,6 +244,7 @@ namespace LookaukwatApp.ViewModels.Multimedia
             SignalCommand = new Command(OnSignal);
             NotFavoriteCommand = new Command<SimilarProductViewModel>(OnFavorite);
             FavoriteCommand = new Command(OnFavorite);
+            BuyItemCommand = new Command(OnBuyItem);
         }
 
 
@@ -275,7 +291,8 @@ namespace LookaukwatApp.ViewModels.Multimedia
                 Model = item.Model;
                 Type = item.Type;
                 Capacity = item.Capacity;
-
+                IsLookaukwat = item.IsLookaukwat;
+                Stock = item.Stock;
                 var img = item.Images;
                 foreach (var im in img)
                 {
@@ -414,6 +431,30 @@ namespace LookaukwatApp.ViewModels.Multimedia
             };
 
             await App.Current.MainPage.Navigation.PushAsync(new SignalAnnoucePage(contact));
+        }
+
+        private async void OnBuyItem()
+        {
+            ItemPurchaseModelViewModel item = new ItemPurchaseModelViewModel
+            {
+                Id = Id,
+                Title = Title,
+                Price = Price.ToString(),
+                Image = Images.First(),
+                Lat = Lat,
+                Lon = Lon,
+                Stock = Stock
+            };
+            Settings.ItemPurchase = JsonConvert.SerializeObject(item);
+
+            if (!string.IsNullOrWhiteSpace(Settings.AddressDelivered))
+            {
+                await Shell.Current.GoToAsync($"{nameof(SellDeliveredTypePage)}");
+            }
+            else
+            {
+                await Shell.Current.GoToAsync($"{nameof(SellDeliveredAdressPage)}");
+            }
         }
     }
 }

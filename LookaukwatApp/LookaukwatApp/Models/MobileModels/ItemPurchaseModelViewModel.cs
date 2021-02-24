@@ -10,6 +10,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string Image { get; set; }
         public string Title { get; set; }
         public string Price { get; set; }
+        public int Stock { get; set; }
         public string TotalPrice { get; set; }
         public int TotalPrice_int { get; set; }
         public string DeliveredPrice { get; set; }

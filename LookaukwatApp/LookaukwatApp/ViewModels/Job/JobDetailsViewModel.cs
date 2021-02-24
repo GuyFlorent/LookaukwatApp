@@ -175,6 +175,13 @@ namespace LookaukwatApp.ViewModels.Job
             get => priceConvert;
             set => SetProperty(ref priceConvert, value);
         }
+
+        bool isLookaukwat = false;
+        public bool IsLookaukwat
+        {
+            get { return isLookaukwat; }
+            set { SetProperty(ref isLookaukwat, value); }
+        }
         public string ItemId
         {
             get
@@ -246,6 +253,7 @@ namespace LookaukwatApp.ViewModels.Job
                 Street = item.Street;
                 Lat = item.Lat;
                 Lon = item.Lon;
+                IsLookaukwat = item.IsLookaukwat;
                 var img = item.Images.Select(s => s.ImageMobile);
                 foreach (var im in img)
                 {

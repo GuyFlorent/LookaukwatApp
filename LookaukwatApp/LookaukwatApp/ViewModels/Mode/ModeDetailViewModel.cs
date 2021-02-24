@@ -182,6 +182,19 @@ namespace LookaukwatApp.ViewModels.Mode
             set => SetProperty(ref redHeart, value);
         }
 
+        bool isLookaukwat = false;
+        public bool IsLookaukwat
+        {
+            get { return isLookaukwat; }
+            set { SetProperty(ref isLookaukwat, value); }
+        }
+        private int stock;
+        public int Stock
+        {
+            get { return stock; }
+            set { SetProperty(ref stock, value); }
+        }
+
         public string ItemId
         {
             get
@@ -298,7 +311,8 @@ namespace LookaukwatApp.ViewModels.Mode
                 Size = item.Size;
                 Color = item.Color;
                 State = item.State;
-
+                IsLookaukwat = item.IsLookaukwat;
+                Stock = item.Stock;
                 var img = item.Images;
                 foreach (var im in img)
                 {
@@ -446,7 +460,8 @@ namespace LookaukwatApp.ViewModels.Mode
                 Price = Price.ToString(),
                 Image = Images.First(),
                 Lat = Lat,
-                Lon = Lon
+                Lon = Lon,
+                Stock = Stock
             };
             Settings.ItemPurchase = JsonConvert.SerializeObject(item);
 

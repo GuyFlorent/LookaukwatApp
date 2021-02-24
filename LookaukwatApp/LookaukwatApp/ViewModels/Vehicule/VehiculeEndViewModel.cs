@@ -5,6 +5,7 @@ using LookaukwatApp.ViewModels.StaticList;
 using LookaukwatApp.Views.ImageView;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -169,6 +170,39 @@ namespace LookaukwatApp.ViewModels.Vehicule
             set => SetProperty(ref color, Uri.UnescapeDataString(value));
         }
 
+        bool isLookaukwat = false;
+        public bool IsLookaukwat
+        {
+            get { return isLookaukwat; }
+            set { SetProperty(ref isLookaukwat, value); }
+        }
+
+        bool isProvider = false;
+        public bool IsProvider
+        {
+            get { return isProvider; }
+            set 
+            { 
+                SetProperty(ref isProvider, value);
+                if (value)
+                {
+                    GetProviderList();
+                }
+            }
+        }
+        private string provider;
+        public string Provider
+        {
+            get => provider;
+            set => SetProperty(ref provider, Uri.UnescapeDataString(value));
+        }
+
+        private int stock = 1;
+        public int Stock
+        {
+            get { return stock; }
+            set { SetProperty(ref stock, value); }
+        }
 
         private bool ValidateLoging()
         {
@@ -184,10 +218,35 @@ namespace LookaukwatApp.ViewModels.Vehicule
             TownList = StaticListViewModel.GetTownCameroonList;
             this.PropertyChanged +=
                (_, __) => PostVehiculeCommad.ChangeCanExecute();
+
+            CheckLookaukwat();
         }
+
+        ObservableCollection<string> providers = new ObservableCollection<string>();
+        public ObservableCollection<string> Providers { get => providers; set => SetProperty(ref providers, value); }
+
+        private IDictionary<string, string> listProviders = new Dictionary<string, string>();
+        public IDictionary<string, string> ListProviders { get => listProviders; set => SetProperty(ref listProviders, value); }
 
         public Command PostVehiculeCommad { get; }
 
+        private void CheckLookaukwat()
+        {
+            if (Settings.Username == "contact@lookaukwat.com")
+                IsLookaukwat = true;
+        }
+
+        private async void GetProviderList()
+        {
+            Providers.Clear();
+            ListProviders.Clear();
+            ListProviders = await _apiServices.GetListProvidersAsync();
+
+            foreach (var key in ListProviders.Keys)
+            {
+                Providers.Add(key);
+            }
+        }
 
         async void OnPostVehicule()
         {
@@ -206,8 +265,13 @@ namespace LookaukwatApp.ViewModels.Vehicule
 
             try
             {
+                string Provider_Id = null;
+                if (!string.IsNullOrWhiteSpace(Provider))
+                {
+                    Provider_Id = ListProviders[Provider];
+                }
                 var accessToken = Settings.AccessToken;
-                var ProductId = await _apiServices.VehiculePostAsync(accessToken, Title, Description, Town, Street, price, SearchOrAskJob, Rubrique, Brand, Color, Type, Petrol, State, FirstYear, Year, Mileage, NumberOfDoor, GearBox, Model);
+                var ProductId = await _apiServices.VehiculePostAsync(accessToken, Title, Description, Town, Street, price, SearchOrAskJob, Rubrique, Brand, Color, Type, Petrol, State, FirstYear, Year, Mileage, NumberOfDoor, GearBox, Model, Provider_Id,Stock);
 
                 if (ProductId != 0)
                 {

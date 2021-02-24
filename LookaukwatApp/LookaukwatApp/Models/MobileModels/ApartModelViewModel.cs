@@ -30,7 +30,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string Type { get; set; }
 
         public int RoomNumber { get; set; }
-
+        public bool IsLookaukwat { get; set; }
         public string FurnitureOrNot { get; set; }
         public string UserName { get; set; }
         public string UserPhone { get; set; }

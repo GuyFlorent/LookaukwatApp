@@ -4,7 +4,9 @@ using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.MessageView;
+using LookaukwatApp.Views.SellView;
 using LookaukwatApp.Views.Vehicule;
+using Newtonsoft.Json;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -66,6 +68,7 @@ namespace LookaukwatApp.ViewModels.Vehicule
         public Command SignalCommand { get; set; }
         public Command NotFavoriteCommand { get; set; }
         public Command FavoriteCommand { get; set; }
+        public Command BuyItemCommand { get; set; }
         //Similar item selected
         public Command<SimilarProductViewModel> ItemTapped { get; }
 
@@ -183,6 +186,18 @@ namespace LookaukwatApp.ViewModels.Vehicule
             get => redHeart;
             set => SetProperty(ref redHeart, value);
         }
+        bool isLookaukwat = false;
+        public bool IsLookaukwat
+        {
+            get { return isLookaukwat; }
+            set { SetProperty(ref isLookaukwat, value); }
+        }
+        private int stock;
+        public int Stock
+        {
+            get { return stock; }
+            set { SetProperty(ref stock, value); }
+        }
 
         public string ItemId
         {
@@ -275,6 +290,7 @@ namespace LookaukwatApp.ViewModels.Vehicule
             SignalCommand = new Command(OnSignal);
             NotFavoriteCommand = new Command<SimilarProductViewModel>(OnFavorite);
             FavoriteCommand = new Command(OnFavorite);
+            BuyItemCommand = new Command(OnBuyItem);
         }
 
         public async void OnTappedImage(string image)
@@ -326,7 +342,8 @@ namespace LookaukwatApp.ViewModels.Vehicule
                 GearBox = item.GearBoxVehicule;
                 Model = item.ModelVehicule;
                 State = item.StateVehicule;
-
+                IsLookaukwat = item.IsLookaukwat;
+                Stock = item.Stock;
 
                 var img = item.Images;
                 foreach (var im in img)
@@ -460,6 +477,30 @@ namespace LookaukwatApp.ViewModels.Vehicule
             };
 
             await App.Current.MainPage.Navigation.PushAsync(new SignalAnnoucePage(contact));
+        }
+
+        private async void OnBuyItem()
+        {
+            ItemPurchaseModelViewModel item = new ItemPurchaseModelViewModel
+            {
+                Id = Id,
+                Title = Title,
+                Price = Price.ToString(),
+                Image = Images.First(),
+                Lat = Lat,
+                Lon = Lon,
+                Stock = Stock
+            };
+            Settings.ItemPurchase = JsonConvert.SerializeObject(item);
+
+            if (!string.IsNullOrWhiteSpace(Settings.AddressDelivered))
+            {
+                await Shell.Current.GoToAsync($"{nameof(SellDeliveredTypePage)}");
+            }
+            else
+            {
+                await Shell.Current.GoToAsync($"{nameof(SellDeliveredAdressPage)}");
+            }
         }
     }
 }

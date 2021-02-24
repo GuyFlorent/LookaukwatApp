@@ -5,6 +5,8 @@ using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.MessageView;
+using LookaukwatApp.Views.SellView;
+using Newtonsoft.Json;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -62,6 +64,7 @@ namespace LookaukwatApp.ViewModels.House
         public Command SignalCommand { get; set; }
         public Command NotFavoriteCommand { get; set; }
         public Command FavoriteCommand { get; set; }
+        public Command BuyItemCommand { get; set; }
         public int Id
         {
             get => id;
@@ -175,6 +178,19 @@ namespace LookaukwatApp.ViewModels.House
             get => priceConvert;
             set => SetProperty(ref priceConvert, value);
         }
+
+        bool isLookaukwat = false;
+        public bool IsLookaukwat
+        {
+            get { return isLookaukwat; }
+            set { SetProperty(ref isLookaukwat, value); }
+        }
+        private int stock;
+        public int Stock
+        {
+            get { return stock; }
+            set { SetProperty(ref stock, value); }
+        }
         public string ItemId
         {
             get
@@ -232,6 +248,7 @@ namespace LookaukwatApp.ViewModels.House
             SignalCommand = new Command(OnSignal);
             NotFavoriteCommand = new Command<SimilarProductViewModel>(OnFavorite);
             FavoriteCommand = new Command(OnFavorite);
+            BuyItemCommand = new Command(OnBuyItem);
         }
 
         public async void OnTappedImage(string image)
@@ -277,7 +294,8 @@ namespace LookaukwatApp.ViewModels.House
                 Type = item.TypeHouse;
                 Color = item.ColorHouse;
                 State = item.StateHouse;
-
+                IsLookaukwat = item.IsLookaukwat;
+                Stock = item.Stock;
                 var img = item.Images;
                 foreach (var im in img)
                 {
@@ -412,6 +430,30 @@ namespace LookaukwatApp.ViewModels.House
             };
 
             await App.Current.MainPage.Navigation.PushAsync(new SignalAnnoucePage(contact));
+        }
+
+        private async void OnBuyItem()
+        {
+            ItemPurchaseModelViewModel item = new ItemPurchaseModelViewModel
+            {
+                Id = Id,
+                Title = Title,
+                Price = Price.ToString(),
+                Image = Images.First(),
+                Lat = Lat,
+                Lon = Lon,
+                Stock = Stock
+            };
+            Settings.ItemPurchase = JsonConvert.SerializeObject(item);
+
+            if (!string.IsNullOrWhiteSpace(Settings.AddressDelivered))
+            {
+                await Shell.Current.GoToAsync($"{nameof(SellDeliveredTypePage)}");
+            }
+            else
+            {
+                await Shell.Current.GoToAsync($"{nameof(SellDeliveredAdressPage)}");
+            }
         }
     }
 }

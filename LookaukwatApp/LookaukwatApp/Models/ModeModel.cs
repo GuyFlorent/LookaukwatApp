@@ -21,5 +21,6 @@ namespace LookaukwatApp.Models
         public string ColorMode { get; set; }
         
         public string StateMode { get; set; }
+        public int Stock { get; set; }
     }
 }

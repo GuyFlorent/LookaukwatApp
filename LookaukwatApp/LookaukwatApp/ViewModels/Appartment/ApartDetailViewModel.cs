@@ -172,6 +172,13 @@ namespace LookaukwatApp.ViewModels.Appartment
             get => priceConvert;
             set => SetProperty(ref priceConvert, value);
         }
+
+        bool isLookaukwat = false;
+        public bool IsLookaukwat
+        {
+            get { return isLookaukwat; }
+            set { SetProperty(ref isLookaukwat, value); }
+        }
         public string ItemId
         {
             get
@@ -265,6 +272,7 @@ namespace LookaukwatApp.ViewModels.Appartment
                 Street = item.Street;
                 Lat = item.Lat;
                 Lon = item.Lon;
+                IsLookaukwat = item.IsLookaukwat;
                 //for Apart model
                 FurnitureOrNot = item.FurnitureOrNot;
                 ApartSurface = item.ApartSurface.ToString();

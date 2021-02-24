@@ -56,7 +56,7 @@
                        FontSize="Subtitle"
                        TextColor="Black"></Label>
 
-                <Button Text="Espace agentcpublicitaire"
+                <Button Text="Espace agent publicitaire"
                     TextColor="White"
                         CornerRadius="20"
                         Command="{Binding LookaukwatAgentCommand}"></Button>

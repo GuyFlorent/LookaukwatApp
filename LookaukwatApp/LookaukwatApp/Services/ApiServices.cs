@@ -196,6 +196,27 @@ namespace LookaukwatApp.Services
             return apart;
         }
 
+        public async Task<IDictionary<string, string>> GetListProvidersAsync()
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Product/GetProviderList/");
+
+            var ParrainList = JsonConvert.DeserializeObject<IDictionary<string, string>>(json);
+
+            return ParrainList;
+        }
+
         public async Task<IDictionary<string, string>> GetListParrainAsync()
         {
             HttpClient client;
@@ -1018,7 +1039,7 @@ namespace LookaukwatApp.Services
             return result;
         }
 
-        public async Task<int> VehiculePostAsync(string accessToken, string title, string description, string town, string street, int price, string searchOrAskJob, string rubrique, string brand, string color, string type, string petrol, string state, string firstYear, string year, string mileage, string numberOfDoor, string gearBox, string model)
+        public async Task<int> VehiculePostAsync(string accessToken, string title, string description, string town, string street, int price, string searchOrAskJob, string rubrique, string brand, string color, string type, string petrol, string state, string firstYear, string year, string mileage, string numberOfDoor, string gearBox, string model, string provider_Id, int stock)
         {
             HttpClient client;
             var httpClientHandler = new HttpClientHandler();
@@ -1065,7 +1086,9 @@ namespace LookaukwatApp.Services
                 ModelVehicule = model,
                 NumberOfDoorVehicule = numberOfDoor,
                 Category = categorie,
-                Coordinate = coor
+                Coordinate = coor,
+                Provider_Id = provider_Id,
+                Stock = stock
 
             };
 

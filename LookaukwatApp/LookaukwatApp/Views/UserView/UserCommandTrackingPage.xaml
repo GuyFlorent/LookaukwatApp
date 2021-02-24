@@ -12,6 +12,10 @@
 
     <ContentPage.Content>
         <StackLayout>
+            <RelativeLayout IsVisible="{Binding IsRunning}">
+                <ActivityIndicator TranslationX="150" TranslationY="200" IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+            </RelativeLayout>
+
             <ListView ItemsSource="{Binding Trackings}" 
                       CachingStrategy="RecycleElement" 
                       HasUnevenRows="True"
@@ -20,11 +24,13 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="20">
-                                <StackLayout Padding="5" BackgroundColor="LimeGreen">
+                            <StackLayout Spacing="20"
+                                          Padding="15">
+                            <StackLayout>
+                                <StackLayout Padding="5" BackgroundColor="#2196F3">
                                     <Label Text="{Binding Street}" 
-                             />
-                                    <Label >
+                                           TextColor="White"/>
+                                    <Label TextColor="White">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding Road}"></Span>
@@ -33,7 +39,7 @@
                                         </Label.FormattedText>
                                     </Label>
 
-                                    <Label >
+                                    <Label TextColor="White">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Le "></Span>
@@ -47,7 +53,8 @@
                                VerticalOptions="Fill"
                                HorizontalOptions="Start"
                                WidthRequest="1"
-                               Color="Blue"/>
+                               Color="LimeGreen"/>
+                            </StackLayout>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

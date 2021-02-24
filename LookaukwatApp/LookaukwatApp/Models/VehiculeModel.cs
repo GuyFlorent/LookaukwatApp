@@ -29,5 +29,6 @@ namespace LookaukwatApp.Models
         public string StateVehicule { get; set; }
        
         public string GearBoxVehicule { get; set; }
+        public int Stock { get; set; }
     }
 }

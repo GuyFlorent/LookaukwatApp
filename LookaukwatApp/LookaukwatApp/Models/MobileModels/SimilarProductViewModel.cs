@@ -18,7 +18,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string Date { get; set; }
 
         public string Category { get; set; }
-
+        public bool IsLookaukwat { get; set; }
         public string Image { get; set; }
         public int NumberImages { get; set; }
 

@@ -95,10 +95,7 @@ namespace LookaukwatApp.ViewModels.Register
                 {
                     GetParrainList();
                 }
-                else
-                {
-
-                }
+                
             }
         }
 

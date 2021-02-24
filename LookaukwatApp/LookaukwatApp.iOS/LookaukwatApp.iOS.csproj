@@ -385,6 +385,12 @@
   <ItemGroup>
     <BundleResource Include="Resources\orange_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\garanty.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\stock.png" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties TriggeredFromHotReload="False" />

@@ -11,5 +11,6 @@ namespace LookaukwatApp.Models
         public string FabricMaterialeHouse { get; set; }
         public string ColorHouse { get; set; }
         public string StateHouse { get; set; }
+        public int Stock { get; set; }
     }
 }

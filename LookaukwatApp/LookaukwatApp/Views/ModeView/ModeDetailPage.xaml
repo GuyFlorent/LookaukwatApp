@@ -83,15 +83,60 @@
                 </Label>
 
                 <Label Text="{Binding Date}"
-                     Margin="0,0,0,20"></Label>
+                     ></Label>
 
+                        <Grid IsVisible="{Binding IsLookaukwat}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="garanty"
+                               Aspect="AspectFit"
+                               HeightRequest="80"
+                               />
+                            <Frame 
+                                                   Padding="1"
+                                                   Grid.Column="1"
+                                                   BackgroundColor="#2196F3"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Payer en ligne"
+                                                       TextColor="White"
+                                                           FontAttributes="Bold"></Label>
+                                </StackLayout>
 
-                <Label>
+                            </Frame>
+                            
+                            <Frame 
+                                                   Padding="1"
+                                                   Grid.Column="2"
+                                                   BackgroundColor="#2196F3"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Garantie/Livraison possible"
+                                                       TextColor="White"
+                                                           FontAttributes="Bold"></Label>
+                                </StackLayout>
+
+                            </Frame>
+                        </Grid>
+
+                        <Label>
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Contacter " TextColor="Black" FontAttributes="Bold" FontSize="Subtitle"></Span>
-                            <Span Text="{Binding Name}"></Span>
-                            <Span Text=" par :"></Span>
+                            <Span TextColor="#2196F3" Text="{Binding Name}"></Span>
+                            <Span TextColor="Black" Text=" par :"></Span>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -119,7 +164,39 @@
                        TextColor="Black"
                        FontSize="Subtitle"
                        FontAttributes="Bold"></Label>
-                <Grid >
+
+                        <Grid IsVisible="{Binding IsLookaukwat}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.85*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="stock"
+                           
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
+                            <Label Grid.Column="1"
+                               Text="Stock"
+                               FontAttributes="Italic" />
+                            <Label Grid.Column="1"
+                           Grid.Row="1"
+                               
+                           TextColor="#2196F3"
+                            FontAttributes="Bold">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Stock}"></Span>
+                                        <Span Text=" Pièces restante(s)"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+
+                        <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.15*" />
                         <ColumnDefinition Width="0.85*" />
@@ -562,9 +639,25 @@
                                                 ></Label>
                                             <Label Text="{Binding Date}"
                                                ></Label>
-                                        
 
-                                        <StackLayout.GestureRecognizers>
+                                                <Frame IsVisible="{Binding IsLookaukwat}"
+                                                   Padding="1"
+                                                   BackgroundColor="#2196F3"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Image Source="garanty"
+                                                           HeightRequest="20"
+                                                       Aspect="AspectFit"></Image>
+                                                        <Label Text="Garantie/Livraison possible"
+                                                       TextColor="White"
+                                                           FontAttributes="Bold"></Label>
+                                                    </StackLayout>
+
+                                                </Frame>
+                                                <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:ModeDetailViewModel}}, Path=ItemTapped}"		
@@ -589,22 +682,23 @@
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
                 <ImageButton Source="icon_phone"
                                  HeightRequest="30"
                                  WidthRequest="30"
-                             HorizontalOptions="Start"
+                             HorizontalOptions="Fill"
                              Aspect="AspectFit"
                                  BackgroundColor="#2196F3"
                                  Command="{Binding CallUserCommand}"></ImageButton>
                 <Label Grid.Row="1"
                            Text="Contacter"
-                       HorizontalOptions="Start"
+                        HorizontalTextAlignment="Center"
+                           HorizontalOptions="Fill"
                        TextColor="White"
                            FontAttributes="Italic">
                         <Label.GestureRecognizers>
@@ -617,14 +711,15 @@
                 <ImageButton Source="messages"
                               Aspect="AspectFit"
                                  Grid.Column="1"
-                             HorizontalOptions="Start"
+                             HorizontalOptions="Fill"
                                  HeightRequest="30"
                                  WidthRequest="30"
                                  BackgroundColor="#2196F3 "
                                  Command="{Binding SendMessageCommand}"></ImageButton>
                 <Label Grid.Row="1"
                        Grid.Column="1"
-                       HorizontalOptions="Start"
+                       HorizontalTextAlignment="Center"
+                           HorizontalOptions="Fill"
                            Text="Message"
                        TextColor="White"
                            FontAttributes="Italic">
@@ -655,7 +750,8 @@
 
                 <Label Grid.Row="1"
                        Grid.Column="2"
-                       HorizontalOptions="Start"
+                        HorizontalTextAlignment="Center"
+                           HorizontalOptions="Fill"
                            Text="Sauvegarder"
                        TextColor="White"
                            FontAttributes="Italic">
@@ -671,14 +767,17 @@
                            HeightRequest="25"
                            BackgroundColor="#2196F3" 
                            Grid.Column="3"
-                           Command="{Binding BuyItemCommand}"/>
+                           Command="{Binding BuyItemCommand}"
+                           IsVisible="{Binding IsLookaukwat}"/>
 
                     <Label Grid.Row="1"
                        Grid.Column="3"
-                       HorizontalOptions="Start"
+                       HorizontalTextAlignment="Center"
+                           HorizontalOptions="Fill"
                            Text="Acheter"
                        TextColor="White"
-                           FontAttributes="Italic">
+                           FontAttributes="Italic"
+                           IsVisible="{Binding IsLookaukwat}">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer
                                         Command="{Binding BuyItemCommand}"

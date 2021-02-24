@@ -16,7 +16,9 @@ namespace LookaukwatApp.Models.MobileModels
         public string Town { get; set; }
         public string Category { get; set; }
 
+        public bool IsLookaukwat { get; set; }
 
+        
         public int Price { get; set; }
         public string PriceConvert { get => Price.ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim() ; }
         public DateTime DateAdd { get; set; }
@@ -40,6 +42,6 @@ namespace LookaukwatApp.Models.MobileModels
             set => SetProperty(ref redHeart, value);
         }
 
-
+      
     }
 }

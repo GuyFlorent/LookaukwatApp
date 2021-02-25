@@ -133,16 +133,15 @@
                        Keyboard="Numeric"></Entry>
 
 
-           
-
-        </StackLayout>
-    </ScrollView>
-
-        <StackLayout Margin="15,0,20,20">
-            <Button Text="Suivant"
+                <Button Text="Suivant"
                     CornerRadius="20"
                     Command="{Binding NextMultimediaCommad}"
-                    VerticalOptions="EndAndExpand"></Button>
-        </StackLayout>
+                    VerticalOptions="EndAndExpand"
+                        Margin="3"></Button>
+
+            </StackLayout>
+    </ScrollView>
+
+       
     </StackLayout>
 </ContentPage>

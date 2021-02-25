@@ -13,6 +13,6 @@ namespace LookaukwatApp.Models
         public string Model { get; set; }
        
         public string Capacity { get; set; }
-        public int Stock { get; set; }
+       
     }
 }

@@ -182,6 +182,12 @@ namespace LookaukwatApp.ViewModels.Job
             get { return isLookaukwat; }
             set { SetProperty(ref isLookaukwat, value); }
         }
+        private int stock;
+        public int Stock
+        {
+            get { return stock; }
+            set { SetProperty(ref stock, value); }
+        }
         public string ItemId
         {
             get
@@ -254,6 +260,7 @@ namespace LookaukwatApp.ViewModels.Job
                 Lat = item.Lat;
                 Lon = item.Lon;
                 IsLookaukwat = item.IsLookaukwat;
+                Stock = item.Stock;
                 var img = item.Images.Select(s => s.ImageMobile);
                 foreach (var im in img)
                 {

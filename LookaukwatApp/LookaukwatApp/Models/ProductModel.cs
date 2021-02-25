@@ -32,6 +32,6 @@ namespace LookaukwatApp.Models
         public bool IsActive { get; set; }
         public bool IsLookaukwat { get; set; }
         public bool IsParticulier { get; set; }
-        
+        public int Stock { get; set; }
     }
 }

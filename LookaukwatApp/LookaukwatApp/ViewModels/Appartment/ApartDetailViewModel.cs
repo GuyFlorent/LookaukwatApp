@@ -179,6 +179,12 @@ namespace LookaukwatApp.ViewModels.Appartment
             get { return isLookaukwat; }
             set { SetProperty(ref isLookaukwat, value); }
         }
+        private int stock;
+        public int Stock
+        {
+            get { return stock; }
+            set { SetProperty(ref stock, value); }
+        }
         public string ItemId
         {
             get
@@ -273,6 +279,7 @@ namespace LookaukwatApp.ViewModels.Appartment
                 Lat = item.Lat;
                 Lon = item.Lon;
                 IsLookaukwat = item.IsLookaukwat;
+                Stock = item.Stock;
                 //for Apart model
                 FurnitureOrNot = item.FurnitureOrNot;
                 ApartSurface = item.ApartSurface.ToString();

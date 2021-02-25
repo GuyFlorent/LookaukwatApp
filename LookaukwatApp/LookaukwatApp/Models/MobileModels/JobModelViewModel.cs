@@ -33,5 +33,6 @@ namespace LookaukwatApp.Models.MobileModels
         public List<ImageProcductModel> Images { get; set; }
         public int NumberImages { get; set; }
         public bool IsLookaukwat { get; set; }
+        public int Stock { get; set; }
     }
 }

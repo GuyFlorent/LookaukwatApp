@@ -40,20 +40,40 @@
                        TextColor="Black"></Label>
                     <Entry Placeholder="Saisir le nom du quartier"
                    Text="{Binding Street}"></Entry>
-                    
-                    
-                    
+
+                    <StackLayout IsVisible="{Binding IsLookaukwat}">
+                        <Label Text="Quantitée"
+                       TextColor="Black"></Label>
+                        <Entry Placeholder="Donnez le stock"
+                   Text="{Binding Stock}"
+                         Keyboard="Numeric"></Entry>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Color="#2196F3"  IsChecked="{Binding IsProvider}" />
+                            <Label Grid.Column="1" Text="Y'a t'il un fournisseur ?"></Label>
+                        </Grid>
+                        <StackLayout IsVisible="{Binding IsProvider}">
+                            <Picker 
+                    Title="Choisir un fournisseur"
+                    ItemsSource="{Binding Providers}"
+                    SelectedItem="{Binding Provider, Mode=TwoWay}">
+                            </Picker>
+                        </StackLayout>
+                    </StackLayout>
+                    <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+
+                    <Button Text="Suivant"
+                        CornerRadius="20"
+                    Command="{Binding PostHouseCommad}"
+                    VerticalOptions="EndAndExpand"
+                            Margin="3"></Button>
                 </StackLayout>
             </ScrollView>
 
-            <StackLayout Margin="15,0,20,20">
-                <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
-
-                <Button Text="Suivant"
-                        CornerRadius="20"
-                    Command="{Binding PostHouseCommad}"
-                    VerticalOptions="EndAndExpand"></Button>
-            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

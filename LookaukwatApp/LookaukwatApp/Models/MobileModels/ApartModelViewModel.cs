@@ -38,7 +38,7 @@ namespace LookaukwatApp.Models.MobileModels
         public List<string> Images { get; set; }
         public int NumberImages { get; set; }
         public List<SimilarProductViewModel> SimilarProduct { get; set; }
+        public int Stock { get; set; }
 
-        
     }
 }

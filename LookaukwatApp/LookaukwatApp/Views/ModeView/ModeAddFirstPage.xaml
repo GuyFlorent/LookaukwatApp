@@ -148,16 +148,14 @@
                        Keyboard="Numeric"></Entry>
 
 
-            
 
-        </StackLayout>
-    </ScrollView>
-        <StackLayout Margin="15,0,20,20">
-            <Button Text="Suivant"
+                <Button Text="Suivant"
                     CornerRadius="20"
                     Command="{Binding NextModeCommad}"
                     VerticalOptions="EndAndExpand"
-                    Margin="0,0,0,20"></Button>
-        </StackLayout>
+                    Margin="3"></Button>
+            </StackLayout>
+    </ScrollView>
+       
     </StackLayout>
 </ContentPage>

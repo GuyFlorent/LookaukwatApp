@@ -924,7 +924,7 @@ namespace LookaukwatApp.Services
             return house;
         }
 
-        public async Task<int> ApartPostAsync(string accessToken, string titleApart, string description, string town, string street, int price, string searchOrAskJob, int roomNumber, int apartSurface, string furnitureOrNot, string type)
+        public async Task<int> ApartPostAsync(string accessToken, string titleApart, string description, string town, string street, int price, string searchOrAskJob, int roomNumber, int apartSurface, string furnitureOrNot, string type, string provider_Id, int stock)
         {
             HttpClient client;
 
@@ -962,7 +962,9 @@ namespace LookaukwatApp.Services
                 RoomNumber = roomNumber,
                 FurnitureOrNot = furnitureOrNot,
                 Category = categorie,
-                Coordinate = coor
+                Coordinate = coor,
+                Stock = stock,
+                Provider_Id = provider_Id
 
             };
 
@@ -1147,7 +1149,7 @@ namespace LookaukwatApp.Services
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<int> HousePostAsync(string accessToken, string title, string description, string town, string street, int price, string searchOrAskJob, string rubrique, string color, string type, string state, string fabricMaterial)
+        public async Task<int> HousePostAsync(string accessToken, string title, string description, string town, string street, int price, string searchOrAskJob, string rubrique, string color, string type, string state, string fabricMaterial, string provider_Id, int stock)
         {
             HttpClient client;
             var httpClientHandler = new HttpClientHandler();
@@ -1185,8 +1187,9 @@ namespace LookaukwatApp.Services
                 StateHouse = state,
                 FabricMaterialeHouse =fabricMaterial,
                 Category = categorie,
-                Coordinate = coor
-
+                Coordinate = coor,
+                Stock = stock,
+                Provider_Id = provider_Id
             };
 
             var json = JsonConvert.SerializeObject(model);
@@ -1207,7 +1210,7 @@ namespace LookaukwatApp.Services
             return id;
         }
 
-        public async Task<int> MultimediaPostAsync(string accessToken, string title, string description, string town, string street, int price, string searchOrAskJob, string rubrique, string brand, string model, string capacity)
+        public async Task<int> MultimediaPostAsync(string accessToken, string title, string description, string town, string street, int price, string searchOrAskJob, string rubrique, string brand, string model, string capacity, string provider_Id, int stock)
         {
             HttpClient client;
 
@@ -1245,8 +1248,9 @@ namespace LookaukwatApp.Services
                 Model = model,
                 Capacity = capacity,
                 Category = categorie,
-                Coordinate = coor
-
+                Coordinate = coor,
+                Stock = stock,
+                Provider_Id = provider_Id
             };
 
             var json = JsonConvert.SerializeObject(modele);
@@ -1268,7 +1272,7 @@ namespace LookaukwatApp.Services
         }
 
         public async Task<int> ModePostAsync(string accessToken, string title, string description, string town, string street, int price,
-            string searchOrAskJob, string rubrique, string brand, string color, string type, string size, string state, string univers)
+            string searchOrAskJob, string rubrique, string brand, string color, string type, string size, string state, string univers, string provider_Id, int stock)
         {
             HttpClient client;
 
@@ -1309,7 +1313,9 @@ namespace LookaukwatApp.Services
                 StateMode = state,
                 UniversMode = univers,
                 Category = categorie,
-                Coordinate = coor
+                Coordinate = coor,
+                Stock = stock,
+                Provider_Id = provider_Id
 
             };
 
@@ -1332,7 +1338,7 @@ namespace LookaukwatApp.Services
         }
 
         public async Task<int> JobPostAsync(string accessToken, string titleJob, string description, string town, string street, int price,
-            string searchOrAskJob, string typeContract, string activitySector)
+            string searchOrAskJob, string typeContract, string activitySector, string provider_Id, int stock)
         {
             HttpClient client;
 
@@ -1368,7 +1374,9 @@ namespace LookaukwatApp.Services
                 TypeContract = typeContract,
                 ActivitySector = activitySector,
                 Category = categorie,
-                Coordinate = coor
+                Coordinate = coor,
+                Stock = stock,
+                Provider_Id  =provider_Id
 
             };
 

@@ -242,17 +242,14 @@
                    Text="{Binding Price}"
                        Keyboard="Numeric"></Entry>
 
-
-           
-        </StackLayout>
-    </ScrollView>
-
-        <StackLayout Margin="15,0,20,20">
-            <Button Text="Suivant"
+                <Button Text="Suivant"
                     Command="{Binding NextVehiculeCommad}"
                     VerticalOptions="EndAndExpand"
-                    CornerRadius="20"></Button>
+                    CornerRadius="20"
+                        Margin="3"></Button>
 
-        </StackLayout>
+            </StackLayout>
+    </ScrollView>
+
     </StackLayout>
 </ContentPage>

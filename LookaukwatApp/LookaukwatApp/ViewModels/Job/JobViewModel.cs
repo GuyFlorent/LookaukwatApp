@@ -5,6 +5,7 @@ using LookaukwatApp.ViewModels.StaticList;
 using LookaukwatApp.Views.ImageView;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -83,6 +84,40 @@ namespace LookaukwatApp.ViewModels.Job
             }
         }
 
+        bool isLookaukwat = false;
+        public bool IsLookaukwat
+        {
+            get { return isLookaukwat; }
+            set { SetProperty(ref isLookaukwat, value); }
+        }
+
+        bool isProvider = false;
+        public bool IsProvider
+        {
+            get { return isProvider; }
+            set
+            {
+                SetProperty(ref isProvider, value);
+                if (value)
+                {
+                    GetProviderList();
+                }
+            }
+        }
+        private string provider;
+        public string Provider
+        {
+            get => provider;
+            set => SetProperty(ref provider, Uri.UnescapeDataString(value));
+        }
+
+        private int stock = 1;
+        public int Stock
+        {
+            get { return stock; }
+            set { SetProperty(ref stock, value); }
+        }
+
         private bool ValidateLoging()
         {
             return !String.IsNullOrWhiteSpace(TitleJob)
@@ -150,10 +185,35 @@ namespace LookaukwatApp.ViewModels.Job
             SearchOrSaskList = StaticListViewModel.OfferOSearchList;
             this.PropertyChanged +=
                (_, __) => PostJobCommad.ChangeCanExecute();
+
+            CheckLookaukwat();
         }
+
+        ObservableCollection<string> providers = new ObservableCollection<string>();
+        public ObservableCollection<string> Providers { get => providers; set => SetProperty(ref providers, value); }
+
+        private IDictionary<string, string> listProviders = new Dictionary<string, string>();
+        public IDictionary<string, string> ListProviders { get => listProviders; set => SetProperty(ref listProviders, value); }
 
         public Command PostJobCommad { get; }
 
+        private void CheckLookaukwat()
+        {
+            if (Settings.Username == "contact@lookaukwat.com")
+                IsLookaukwat = true;
+        }
+
+        private async void GetProviderList()
+        {
+            Providers.Clear();
+            ListProviders.Clear();
+            ListProviders = await _apiServices.GetListProvidersAsync();
+
+            foreach (var key in ListProviders.Keys)
+            {
+                Providers.Add(key);
+            }
+        }
         async void OnPostJob()
         {
             //var coor = await _apiServices.GetCoodinateAsync(Town, Street);
@@ -168,8 +228,13 @@ namespace LookaukwatApp.ViewModels.Job
             }
             try
             {
+                string Provider_Id = null;
+                if (!string.IsNullOrWhiteSpace(Provider))
+                {
+                    Provider_Id = ListProviders[Provider];
+                }
                 var accessToken = Settings.AccessToken;
-                var ProductId = await _apiServices.JobPostAsync(accessToken, TitleJob, Description, Town, Street, Price, SearchOrAskJob, TypeContract, ActivitySector);
+                var ProductId = await _apiServices.JobPostAsync(accessToken, TitleJob, Description, Town, Street, Price, SearchOrAskJob, TypeContract, ActivitySector, Provider_Id, Stock);
                 if (ProductId != 0)
                 {
                     IsRunning = false;

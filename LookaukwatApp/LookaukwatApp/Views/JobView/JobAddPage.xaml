@@ -12,7 +12,7 @@
         <StackLayout>
             <ScrollView>
                 <StackLayout Orientation="Vertical"
-                     Margin="15,35,20,25">
+                     Margin="18">
 
                     <Label Text="Mettez en valeur votre annonce! plus il ya de détails, plus votre annonce sera de qualité.N'oubliez pas de mettre aussi le quartier exact pour mieux être visible dans les recherches."
                TextColor="Black"
@@ -111,20 +111,43 @@
                        FontAttributes="Bold"></Label>
                     <Entry Placeholder="Saisir le nom du quartier"
                    Text="{Binding Street}"></Entry>
-                  
-                  
+
+                    <StackLayout IsVisible="{Binding IsLookaukwat}">
+                        <Label Text="Nombre de poste"
+                       TextColor="Black"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                        <Entry Placeholder="Donnez le stock"
+                   Text="{Binding Stock}"
+                         Keyboard="Numeric"></Entry>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox Color="#2196F3"  IsChecked="{Binding IsProvider}" />
+                            <Label Grid.Column="1" TextColor="Black" FontSize="Subtitle" Text="Y'a t'il un fournisseur ?"></Label>
+                        </Grid>
+                        <StackLayout IsVisible="{Binding IsProvider}">
+                            <Picker 
+                    Title="Choisir un parrain"
+                    ItemsSource="{Binding Providers}"
+                    SelectedItem="{Binding Provider, Mode=TwoWay}">
+                            </Picker>
+                        </StackLayout>
+
+                        
+                    </StackLayout>
+                    <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+
+                    <Button Text="Suivant"
+                        CornerRadius="20"
+                    Command="{Binding PostJobCommad}"
+                    VerticalOptions="EndAndExpand"
+                            Margin="3"></Button>
                 </StackLayout>
             </ScrollView>
 
-            <StackLayout Margin="15,0,20,20">
-                
-                <ActivityIndicator IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
-
-                <Button Text="Suivant"
-                        CornerRadius="20"
-                    Command="{Binding PostJobCommad}"
-                    VerticalOptions="EndAndExpand"></Button>
-            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 

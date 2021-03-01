@@ -44,6 +44,48 @@ namespace LookaukwatApp.ViewModels.Search
             }
         }
 
+        private int date = DateTime.Now.Year;
+        public int Date
+        {
+            get { return date; }
+            set
+            {
+                SetProperty(ref date, value);
+            }
+        }
+
+        private int minimumDate = 2021;
+        public int MinimumDate
+        {
+            get { return minimumDate; }
+            set
+            {
+                SetProperty(ref minimumDate, value);
+            }
+        }
+
+        bool isLookaukwat = true;
+        public bool IsLookaukwat
+        {
+            get { return isLookaukwat; }
+            set 
+            { 
+                SetProperty(ref isLookaukwat, value);
+                NumberOfResult();
+            }
+        }
+
+        bool isParticulier = true;
+        public bool IsParticulier
+        {
+            get { return isParticulier; }
+            set 
+            {
+                SetProperty(ref isParticulier, value);
+                NumberOfResult();
+            }
+        }
+
         private string searchAndResultText = "Rechercher";
         public string SearchAndResultText
         {
@@ -1433,14 +1475,14 @@ namespace LookaukwatApp.ViewModels.Search
 
                             case "Emploi":
                                 TitlePage = "Plus de filtres dans Emploi";
-                                Result = await _apiServices.GetResultOfferSeachNumberJobAsync(Categori, Town, SearchOrAskJob, TypeContract, ActivitySector, PriceJob);
+                                Result = await _apiServices.GetResultOfferSeachNumberJobAsync(Categori, Town, SearchOrAskJob, TypeContract, ActivitySector, PriceJob, IsParticulier, IsLookaukwat);
 
                                 SearchAndResultText = "Rechercher" +Environment.NewLine + Result + " annonces";
                                 break;
                             case "Immobilier":
                                 TitlePage = "Plus de filtres dans Immobilier";
                                 Result = await _apiServices.GetResultOfferSeachNumberApartAsync(Categori, Town, SearchOrAskJob, PriceApart, RoomNumberAppart,
-                                    FurnitureOrNotAppart, TypeAppart, ApartSurfaceAppart);
+                                    FurnitureOrNotAppart, TypeAppart, ApartSurfaceAppart, IsParticulier, IsLookaukwat);
 
                                 SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
 
@@ -1448,7 +1490,7 @@ namespace LookaukwatApp.ViewModels.Search
                             case "Multimédia":
                                 TitlePage = "Plus de filtres dans Multimédia";
                                 Result = await _apiServices.GetResultOfferSeachNumberMultiAsync("Multimedia", Town, SearchOrAskJob, PriceMulti, MultimediaRubrique,
-                                    MultimediaBrand, MultimediaModel, MultimediaCapacity);
+                                    MultimediaBrand, MultimediaModel, MultimediaCapacity, IsParticulier, IsLookaukwat);
 
                                 SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
 
@@ -1456,7 +1498,7 @@ namespace LookaukwatApp.ViewModels.Search
                             case "Maison":
                                 TitlePage = "Plus de filtres dans Maison";
                                 Result = await _apiServices.GetResultOfferSeachNumberHouseAsync(Categori, Town, SearchOrAskJob, PriceHouse, RubriqueHouse, TypeHouse,
-                                    FabricMaterialHouse, StateHouse, ColorHouse);
+                                    FabricMaterialHouse, StateHouse, ColorHouse, true, true);
 
                                 SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
 
@@ -1464,7 +1506,7 @@ namespace LookaukwatApp.ViewModels.Search
                             case "Mode":
                                 TitlePage = "Plus de filtres dans Mode";
                                 Result = await _apiServices.GetResultOfferSeachNumberModeAsync(Categori, Town, SearchOrAskJob, PriceMode, RubriqueMode, TypeMode,
-                                    BrandMode, UniversMode, SizeMode, State, ColorMode);
+                                    BrandMode, UniversMode, SizeMode, State, ColorMode, IsParticulier, IsLookaukwat);
 
                                 SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
 
@@ -1472,14 +1514,14 @@ namespace LookaukwatApp.ViewModels.Search
                             case "Véhicule":
                                 TitlePage = "Plus de filtres dans Véhicule";
                                 Result = await _apiServices.GetResultOfferSeachNumberVehiculeAsync("Vehicule", Town, SearchOrAskJob, PriceVehicule, VehiculeRubrique, VehiculeBrand, VehiculeModel,
-                                    VehiculeType, Petrol, Year, Mileage, NumberOfDoor, GearBox, Vehiculestate, Color);
+                                    VehiculeType, Petrol, Year, Mileage, NumberOfDoor, GearBox, Vehiculestate, Color, IsParticulier, IsLookaukwat);
 
                                 SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
 
                                 break;
 
                             default:
-                                Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob); ;
+                                Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob, IsParticulier, IsLookaukwat); ;
                                 SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
                                 break;
                         }
@@ -1488,7 +1530,7 @@ namespace LookaukwatApp.ViewModels.Search
 
                     case "Je recherche":
 
-                        Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob);
+                        Result = await _apiServices.GetResultAskAndOfferSeachNumberAsync(Categori, Town, SearchOrAskJob, IsParticulier, IsLookaukwat);
 
                         SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
                         break;
@@ -1519,7 +1561,9 @@ namespace LookaukwatApp.ViewModels.Search
                                 SearchOrAskJob = SearchOrAskJob,
                                 TypeContract = TypeContract,
                                 ActivitySector = ActivitySector,
-                                PriceJob = PriceJob
+                                PriceJob = PriceJob,
+                                IsLookaukwat = IsLookaukwat,
+                                IsParticulier = IsParticulier
                             };
                             JsonSearchModel = JsonConvert.SerializeObject(searchModel); 
 
@@ -1538,7 +1582,9 @@ namespace LookaukwatApp.ViewModels.Search
                                 RoomNumberAppart = RoomNumberAppart,
                                 FurnitureOrNotAppart = FurnitureOrNotAppart,
                                 TypeAppart = TypeAppart,
-                                ApartSurfaceAppart = ApartSurfaceAppart
+                                ApartSurfaceAppart = ApartSurfaceAppart,
+                                IsLookaukwat = IsLookaukwat,
+                                IsParticulier = IsParticulier
 
                             };
                             JsonSearchModel = JsonConvert.SerializeObject(searchModelImo);
@@ -1559,7 +1605,9 @@ namespace LookaukwatApp.ViewModels.Search
                                 MultimediaRubrique = MultimediaRubrique,
                                 MultimediaBrand = MultimediaBrand,
                                 MultimediaModel = MultimediaModel,
-                                MultimediaCapacity = MultimediaCapacity
+                                MultimediaCapacity = MultimediaCapacity,
+                                IsLookaukwat = IsLookaukwat,
+                                IsParticulier = IsParticulier
 
                             };
                             JsonSearchModel = JsonConvert.SerializeObject(searchModelMulti);
@@ -1580,7 +1628,9 @@ namespace LookaukwatApp.ViewModels.Search
                                 TypeHouse = TypeHouse,
                                 FabricMaterialHouse = FabricMaterialHouse,
                                 StateHouse = StateHouse,
-                                ColorHouse = ColorHouse
+                                ColorHouse = ColorHouse,
+                                IsLookaukwat = IsLookaukwat,
+                                IsParticulier = IsParticulier
 
                             };
 
@@ -1605,7 +1655,9 @@ namespace LookaukwatApp.ViewModels.Search
                                 UniversMode = UniversMode,
                                 SizeMode = SizeMode,
                                 State = State,
-                                ColorMode = ColorMode
+                                ColorMode = ColorMode,
+                                IsLookaukwat = IsLookaukwat,
+                                IsParticulier = IsParticulier
 
                             };
 
@@ -1633,7 +1685,9 @@ namespace LookaukwatApp.ViewModels.Search
                                 NumberOfDoor = NumberOfDoor,
                                 GearBox = GearBox,
                                 VehiculeState = Vehiculestate,
-                                Color = Color
+                                Color = Color,
+                                IsLookaukwat = IsLookaukwat,
+                                IsParticulier = IsParticulier
 
                             };
 
@@ -1651,7 +1705,8 @@ namespace LookaukwatApp.ViewModels.Search
                                 Category = Categori,
                                 Town = Town,
                                 SearchOrAskJob = SearchOrAskJob,
-
+                                IsLookaukwat = IsLookaukwat,
+                                IsParticulier = IsParticulier
                             };
                             JsonSearchModel = JsonConvert.SerializeObject(searchModelOffer);
 
@@ -1670,7 +1725,8 @@ namespace LookaukwatApp.ViewModels.Search
                         Category = Categori,
                         Town = Town,
                         SearchOrAskJob = SearchOrAskJob,
-
+                        IsLookaukwat = IsLookaukwat,
+                        IsParticulier = IsParticulier
                     };
                     JsonSearchModel = JsonConvert.SerializeObject(searchModelSearch);
 

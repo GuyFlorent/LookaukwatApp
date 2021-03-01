@@ -33,15 +33,15 @@
                         <Grid x:Name="Item" BackgroundColor="GhostWhite">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
                     <Image Grid.ColumnSpan="2"
                        Source="{Binding Image}"
                        Aspect="AspectFill"
@@ -85,30 +85,66 @@
                             </Label.FormattedText>
                         </Label>
 
-
-
-                        <StackLayout Orientation="Horizontal" 
-                                     Grid.Row="2"
-                                     Grid.Column="1"
-                                     HorizontalOptions="End"
-                                     VerticalOptions="Start"
-                                                     >
-                            <Image Source="eye"
+                                   
+                                        <Grid Grid.Row="3"
+                                                Grid.ColumnSpan="2" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                           
+                                            
+                                            <StackLayout 
+                                                 HorizontalOptions="StartAndExpand"
+                                                 VerticalOptions="Start"
+                                                 Orientation="Horizontal">
+                                                <Image Source="icon_phone"
                           
                                Aspect="AspectFit"
                                HeightRequest="20"
                                WidthRequest="20" />
-                            <Label Text="{Binding ViewNumber}"></Label>
-                        </StackLayout>
+                                                <Label Text="{Binding CallNumber}"></Label>
+                                            </StackLayout>
 
-                            <Label 
-                           Grid.Row="3"
+                                            <StackLayout Grid.Column="1"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Start"
+                                                 Orientation="Horizontal">
+                                                <Image Source="messages"
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               WidthRequest="20" />
+                                                <Label Text="{Binding MessageNumber}"></Label>
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal" 
+                                     Grid.Column="2"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Start"
+                                                     >
+                                                <Image Source="eye"
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               WidthRequest="20" />
+                                                <Label Text="{Binding ViewNumber}"></Label>
+                                            </StackLayout>
+                                        </Grid>
+                                  
+                                   
+                                   
+                                    <Label 
+                           Grid.Row="4"
                                 Grid.ColumnSpan="2"
                        Text="{Binding Date}"
                        VerticalOptions="Start"
                                        ></Label>
+                            
+                            
 
-                            <ImageButton Grid.Row="4"
+                            <ImageButton Grid.Row="5"
                                             
                                              Source="trash"
                                              BackgroundColor="Red"
@@ -118,7 +154,7 @@
                                              HorizontalOptions="Start"
                                              ></ImageButton>
                         <ImageButton Source="pencil"
-                               Grid.Row="4"
+                               Grid.Row="5"
                                HorizontalOptions="End"
                                      BackgroundColor="Transparent"
                                Grid.Column="1"

@@ -93,7 +93,7 @@
                                 <Image Grid.Column="0" Source ="{Binding Image}" HorizontalOptions="Fill" Aspect="AspectFill" HeightRequest="80"></Image>
                                 <Label Grid.Column="1" Text ="{Binding Price}" HorizontalOptions="Fill"  HorizontalTextAlignment="Center" Margin="1"></Label>
                                 <Label Grid.Column="2" Text ="{Binding Quantity}" HorizontalOptions="Fill"  HorizontalTextAlignment="Center" Margin="1"></Label>
-                                <Label Grid.Column="3" Text ="{Binding Price}" HorizontalOptions="Fill"  HorizontalTextAlignment="Center" Margin="1"></Label>
+                                        <Label Grid.Column="3" Text ="{Binding Price_Per_Quantity}" HorizontalOptions="Fill"  HorizontalTextAlignment="Center" Margin="1"></Label>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

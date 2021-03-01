@@ -32,6 +32,13 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             set => SetProperty(ref totalPrice, value);
         }
 
+        private int quantity;
+        public int Quantity
+        {
+            get => quantity;
+            set => SetProperty(ref quantity, value);
+        }
+
         //Bool for payement method
 
         private string payementMethod;
@@ -105,6 +112,7 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             ItemPrice = item.Price;
             DeliveredPrice = item.DeliveredPrice;
             TotalPrice = item.TotalPrice;
+            Quantity = item.Quantity;
         }
 
         public async void OnResume()

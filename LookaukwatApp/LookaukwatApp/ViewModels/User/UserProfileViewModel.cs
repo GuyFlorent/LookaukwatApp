@@ -86,6 +86,7 @@ namespace LookaukwatApp.ViewModels.User
             OldEmail = Settings.Username;
             AboutUsCommand = new Command(async () => await Browser.OpenAsync("https://lookaukwat.com/Home/About"));
             ContactUsCommand = new Command(async () => await Browser.OpenAsync("https://lookaukwat.com/Home/Contact"));
+            LookaukwatAgentCommand = new Command(async () => await Browser.OpenAsync("https://lookaukwat.com/Admin/Stat_Account_Agent?userEmail=tsiminaomie@yahoo.fr"));
             UserAnnounceCommand = new Command(OnUserAnnouce);
             ProfileUserCommand = new Command(OnUserProfile);
             UpdateUserPasswordCommand = new Command(OnUserPassword);
@@ -114,6 +115,7 @@ namespace LookaukwatApp.ViewModels.User
         public Command UserTransactionsCommand { get; }
         public Command ScanDeliveredItemCommand { get; }
         public Command ScanTrackingItemCommand { get; }
+        public Command LookaukwatAgentCommand { get; }
 
 
        

@@ -384,6 +384,7 @@ namespace LookaukwatApp.ViewModels.House
                 "- Toujours exiger une facture avec la pièce d'identité jointe." + Environment.NewLine + Environment.NewLine +
                 "Merci pour la confiance.";
             await Shell.Current.DisplayAlert("Attention à l'arnaque !", text, "ok");
+            _apiServices.UpdateCallNumber(Id);
             PhoneDialerViewModel.PlacePhoneCall(Phone);
         }
 
@@ -402,6 +403,7 @@ namespace LookaukwatApp.ViewModels.House
 
         private async void OnSendMessage()
         {
+           
             contactUserViewModel contact = new contactUserViewModel()
             {
                 NameSender = Settings.FirstName,
@@ -410,7 +412,8 @@ namespace LookaukwatApp.ViewModels.House
                 Linkshare = "https://lookaukwat.com/House/HouseDetail/" + Id,
                 RecieverEmail = Email,
                 RecieverName = Name,
-                SubjectSender = "Votre article en vente sur lookaukwat me plaît"
+                SubjectSender = "Votre article en vente sur lookaukwat me plaît",
+                ProductId = Id
             };
 
             await PopupNavigation.Instance.PushAsync(new ContactEmailUserPage(contact));
@@ -418,6 +421,7 @@ namespace LookaukwatApp.ViewModels.House
 
         private async void OnSignal()
         {
+
             contactUserViewModel contact = new contactUserViewModel()
             {
                 NameSender = Settings.FirstName,

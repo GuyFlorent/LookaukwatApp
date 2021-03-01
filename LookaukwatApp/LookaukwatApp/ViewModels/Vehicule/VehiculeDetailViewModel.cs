@@ -432,6 +432,7 @@ namespace LookaukwatApp.ViewModels.Vehicule
                 "- Toujours exiger une facture avec la pièce d'identité jointe." + Environment.NewLine + Environment.NewLine +
                 "Merci pour la confiance.";
             await Shell.Current.DisplayAlert("Attention à l'arnaque !", text, "ok");
+            _apiServices.UpdateCallNumber(Id);
             PhoneDialerViewModel.PlacePhoneCall(Phone);
         }
         private async void OnShareCommand()
@@ -457,7 +458,8 @@ namespace LookaukwatApp.ViewModels.Vehicule
                 Linkshare = "https://lookaukwat.azurewebsites.net/Vehicule/VehiculeDetail/" + Id,
                 RecieverEmail = Email,
                 RecieverName = Name,
-                SubjectSender = "Votre article en vente sur lookaukwat me plaît"
+                SubjectSender = "Votre article en vente sur lookaukwat me plaît",
+                ProductId = Id
             };
 
             await PopupNavigation.Instance.PushAsync(new ContactEmailUserPage(contact));

@@ -40,8 +40,8 @@ namespace LookaukwatApp.ViewModels.Image
             set => SetProperty(ref message, value);
         }
 
-       // string Uri = "https://lookaukwatapi.azurewebsites.net/";
-        string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
+       string Uri = "https://lookaukwatapi.azurewebsites.net/";
+      //  string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
         private MediaFile _mediaFile;
         public ObservableCollection<ImageProcductModel> Items { get; set; }
         public Command AddImageGaleryCommad { get; }
@@ -159,7 +159,7 @@ namespace LookaukwatApp.ViewModels.Image
                 IsRunning = false;
 
 
-                await Shell.Current.DisplayAlert("Alerte", "Votre annonce a été publiée avec succès. Lookaukwat vous remercie de votre confiance", "Ok");
+                await Shell.Current.DisplayAlert("Bravo !", "Votre annonce a été publiée avec succès. Lookaukwat vous remercie de votre confiance", "Ok");
                 await Shell.Current.GoToAsync("///MainPage");
                 if (string.IsNullOrWhiteSpace(Settings.Reviews_GooglePlay))
                 {

@@ -218,7 +218,7 @@ namespace LookaukwatApp.ViewModels.SellViewModel
                 if (charge.Status == "succeeded")
                 {
                     int result = await _apiServices.CommandPostAsync(item.Id, item.PayementMethod, item.DeliveredPrice_int, item.TotalPrice_int,
-                        Json.FirstName, Json.LastName, Json.Town, Json.Street, Json.Number, Json.Telephone, Json.Distance);
+                        Json.FirstName, Json.LastName, Json.Town, Json.Street, Json.Number, Json.Telephone, Json.Distance, item.Quantity);
                     IsBusy = false;
                     string text = "Votre numéro de commande est " + result + "." + Environment.NewLine +
                         "Votre facture et suivie de votre commande se trouve dans :" + Environment.NewLine +

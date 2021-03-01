@@ -13,8 +13,11 @@ namespace LookaukwatApp.Models.MobileModels
         public string Title { get; set; }
 
         public int ViewNumber { get; set; }
+        public int CallNumber { get; set; }
+        public int MessageNumber { get; set; }
         public string Town { get; set; }
         public string Category { get; set; }
+        public string HomeMessage { get => LooaukwatMessage(); }
 
         public bool IsLookaukwat { get; set; }
 
@@ -42,6 +45,20 @@ namespace LookaukwatApp.Models.MobileModels
             set => SetProperty(ref redHeart, value);
         }
 
+        private string LooaukwatMessage()
+        {
+           if(Category == "Emploi")
+            {
+                return "Garantie/Postuler en ligne";
+            }else if(Category == "Immobilier")
+            {
+                return "Garantie Lookaukwat";
+            }
+            else
+            {
+                return "Garantie/Livraison possible";
+            }
+        }
       
     }
 }

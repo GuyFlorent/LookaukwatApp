@@ -33,6 +33,7 @@ namespace LookaukwatApp.ViewModels.User
             get => deliveredPrice;
             set => SetProperty(ref deliveredPrice, value);
         }
+        
 
         private string totalPrice;
         public string TotalPrice
@@ -153,9 +154,9 @@ namespace LookaukwatApp.ViewModels.User
                 {
                     PurchaseForBill purchaseForBill = new PurchaseForBill();
                     purchaseForBill.Image = purchase.product.Images.Select(s => s.ImageMobile).FirstOrDefault();
-                    purchaseForBill.Price = purchase.product.Price.ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim() + " FCFA"; ;
-                    purchaseForBill.Quantity = 1;
-
+                    purchaseForBill.Price = purchase.product.Price.ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim() + " FCFA";
+                    purchaseForBill.Quantity = purchase.Quantities;
+                    purchaseForBill.Price_Per_Quantity = (purchase.product.Price * purchase.Quantities).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim() + " FCFA"; ;
                     Purchases.Add(purchaseForBill);
                 }
                 //totalprica

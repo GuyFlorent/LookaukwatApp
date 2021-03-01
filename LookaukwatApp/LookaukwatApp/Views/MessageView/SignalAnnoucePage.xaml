@@ -54,7 +54,7 @@
             </Label>
 
             <Editor x:Name="Description"
-                    Placeholder="Description excacte"
+                    Placeholder="Description exacte"
                     AutoSize="TextChanges"></Editor>
             
         </StackLayout>

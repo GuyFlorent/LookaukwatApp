@@ -214,7 +214,7 @@
                                                     <Image Source="garanty"
                                                            HeightRequest="20"
                                                        Aspect="AspectFit"></Image>
-                                                    <Label Text="Garantie/Livraison possible"
+                                                    <Label Text="{Binding HomeMessage}"
                                                        TextColor="White"
                                                            FontAttributes="Bold"></Label>
                                                 </StackLayout>

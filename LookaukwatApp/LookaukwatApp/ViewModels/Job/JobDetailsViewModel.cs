@@ -350,6 +350,7 @@ namespace LookaukwatApp.ViewModels.Job
                 "- Toujours se déplacer dans un lieu public et en journée pour rencontrer l'employeur" + Environment.NewLine + Environment.NewLine +
                 "Merci pour la confiance.";
             await Shell.Current.DisplayAlert("Attention à l'arnaque !", text, "ok");
+            _apiServices.UpdateCallNumber(Id);
             PhoneDialerViewModel.PlacePhoneCall(Phone);
         }
 
@@ -369,6 +370,7 @@ namespace LookaukwatApp.ViewModels.Job
 
         private async void OnSendMessage()
         {
+           
             contactUserViewModel contact = new contactUserViewModel()
             {
                 NameSender = Settings.FirstName,
@@ -377,7 +379,8 @@ namespace LookaukwatApp.ViewModels.Job
                 Linkshare = "https://lookaukwat.azurewebsites.net/Job/JobDetail/" + Id,
                 RecieverEmail = Email,
                 RecieverName = Name,
-                SubjectSender = "Votre article en vente sur lookaukwat me plaît"
+                SubjectSender = "Votre article en vente sur lookaukwat me plaît",
+                ProductId = Id
             };
 
             await PopupNavigation.Instance.PushAsync(new ContactEmailUserPage(contact));

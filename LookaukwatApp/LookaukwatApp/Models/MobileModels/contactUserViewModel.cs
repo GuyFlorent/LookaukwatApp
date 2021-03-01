@@ -11,7 +11,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string SubjectSender { get; set; }
 
         public string EmailSender { get; set; }
-
+        public int ProductId { get; set; }
         public string Message { get; set; }
         public string Linkshare { get; set; }
         public string RecieverEmail { get; set; }

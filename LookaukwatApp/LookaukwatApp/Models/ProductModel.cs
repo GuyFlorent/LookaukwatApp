@@ -23,6 +23,8 @@ namespace LookaukwatApp.Models
         public string SearchOrAskJob { get; set; }
 
         public int ViewNumber { get; set; }
+        public int CallNumber { get; set; }
+        public int MessageNumber { get; set; }
         public virtual CategoryModel Category { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual ProductCoordinateModel Coordinate { get; set; }

@@ -86,11 +86,17 @@
                 MaximumTrackColor="DarkGray"
                 MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceApart"/>
-
-                                <Label Text="{Binding Source={x:Reference sliderPriceApart},
+                                
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Source={x:Reference sliderPriceApart},
                               Path=Value,
-                              StringFormat='{0:F0} FCFA / 1 000 000 FCFA +'}"
-                   TextColor="Black"></Label>
+                              StringFormat='{0:F0} FCFA '}"
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                    <Label Text="1 000 000 FCFA +"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                                </StackLayout>
                             </StackLayout>
 
 
@@ -108,10 +114,17 @@
                 MinimumTrackColor="#2196F3"
                     x:Name="sliderSurface"/>
 
-                                <Label Text="{Binding Source={x:Reference sliderSurface},
+                               
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Source={x:Reference sliderSurface},
                               Path=Value,
-                              StringFormat='{0:F0} m2 / 2000 m2 +'}"
-                   TextColor="Black"></Label>
+                              StringFormat='{0:F0} m2'}"
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                    <Label Text="2 000 m2 +"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                                </StackLayout>
                             </StackLayout>
 
 
@@ -131,10 +144,16 @@
                 MinimumTrackColor="#2196F3"
                     x:Name="sliderNumberOfRoom"/>
 
-                                    <Label Text="{Binding Source={x:Reference sliderNumberOfRoom},
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Source={x:Reference sliderNumberOfRoom},
                               Path=Value,
-                              StringFormat='{0:F0} Pièces / 10 pièces +'}"
-                   TextColor="Black"></Label>
+                              StringFormat='{0:F0} pièce(s)'}"
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                        <Label Text="10 pièce(s) +"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                                    </StackLayout>
                                 </StackLayout>
 
                                 <Label Text="Meublé/Non meublé"
@@ -192,10 +211,16 @@
                 MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceHouse"/>
 
-                                    <Label Text="{Binding Source={x:Reference sliderPriceHouse},
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Source={x:Reference sliderPriceHouse},
                               Path=Value,
-                              StringFormat='{0:F0} FCFA / 100 000 FCFA +'}"
-                   TextColor="Black"></Label>
+                              StringFormat='{0:F0} FCFA'}"
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                        <Label Text="100 000 FCFA +"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                                    </StackLayout>
                                 </StackLayout>
 
                                 <Label Text="Matériel de fabrication"
@@ -280,10 +305,17 @@
                 MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceJob"/>
 
-                                <Label Text="{Binding Source={x:Reference sliderPriceJob},
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Source={x:Reference sliderPriceJob},
                               Path=Value,
-                              StringFormat='{0:F0} FCFA / 300 000 FCFA +'}"
-                   TextColor="Black"></Label>
+                              StringFormat='{0:F0} FCFA '}"
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                    <Label Text="300 000 FCFA +"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                                </StackLayout>   
+                               
                             </StackLayout>
                         </StackLayout>
 
@@ -341,10 +373,17 @@
                 MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceMode"/>
 
-                                <Label Text="{Binding Source={x:Reference sliderPriceMode},
+                            
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Source={x:Reference sliderPriceMode},
                               Path=Value,
-                              StringFormat='{0:F0} FCFA / 100 000 FCFA +'}"
-                   TextColor="Black"></Label>
+                              StringFormat='{0:F0} FCFA'}"
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                    <Label Text="100 000 FCFA +"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                                </StackLayout>
                             </StackLayout>
 
                             <Label Text="Sexe"
@@ -456,10 +495,17 @@
                 MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceMultimedia"/>
 
-                                <Label Text="{Binding Source={x:Reference sliderPriceMultimedia},
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Source={x:Reference sliderPriceMultimedia},
                               Path=Value,
-                              StringFormat='{0:F0} FCFA / 100 000 FCFA +'}"
-                   TextColor="Black"></Label>
+                              StringFormat='{0:F0} FCFA'}"
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                    <Label Text="100 000 FCFA +"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                                </StackLayout>
                             </StackLayout>
 
                             <Label Text="Capacité"
@@ -535,10 +581,16 @@
                 MinimumTrackColor="#2196F3"
                     x:Name="sliderPriceVehicule"/>
 
-                                <Label Text="{Binding Source={x:Reference sliderPriceVehicule},
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Source={x:Reference sliderPriceVehicule},
                               Path=Value,
-                              StringFormat='{0:F0} FCFA / 2 000 000 FCFA +'}"
-                   TextColor="Black"></Label>
+                              StringFormat='{0:F0} FCFA'}"
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                    <Label Text="2 000 000 FCFA +"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                                </StackLayout>
                             </StackLayout>
 
                             <Label Text="L'état"
@@ -596,10 +648,17 @@
                 MinimumTrackColor="#2196F3"
                     x:Name="sliderVehiculeYear"/>
 
-                                    <Label Text="{Binding Source={x:Reference sliderVehiculeYear},
+
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Source={x:Reference sliderVehiculeYear},
                               Path=Value,
                               StringFormat='{0:F0}'}"
-                   TextColor="Black"></Label>
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                        <Label Text="2021"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                                    </StackLayout>
                                 </StackLayout>
 
                                 <Label Text="Kilométrage maximal"
@@ -617,10 +676,16 @@
                 MinimumTrackColor="#2196F3"
                     x:Name="slider"/>
 
-                                    <Label Text="{Binding Source={x:Reference slider},
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Source={x:Reference slider},
                               Path=Value,
-                              StringFormat='{0:F0} km / 300 000 km +'}"
-                   TextColor="Black"></Label>
+                              StringFormat='{0:F0}'}"
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                        <Label Text="300 000 km +"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                                    </StackLayout>
                                 </StackLayout>
 
                             </StackLayout>
@@ -682,19 +747,55 @@
                                    FontAttributes="Bold"
                        />
                     <StackLayout Orientation="Horizontal">
-                        <StackLayout Orientation="Horizontal">
+                        
+                       
+
+                    </StackLayout>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="Start">
+                            <CheckBox Color="#2196F3"  IsChecked="{Binding IsParticulier}" />
+                            <Label Text="Particulier"
+                                   TextColor="Black"></Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="Start"
+                                     Grid.Column="1" >
+                            <CheckBox Color="#2196F3"  IsChecked="{Binding IsLookaukwat}" />
+                            <Label Text="Garantie lookaukwat"
+                                   TextColor="Black"></Label>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="Start"
+                                     Grid.Row="1">
                             <RadioButton 
                              IsChecked="{Binding IsOffer}"></RadioButton>
                             <Label Text="Offres"
                            TextColor="Black"></Label>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <RadioButton  IsChecked="{Binding IsSearch}" ></RadioButton>
+
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="Start"
+                                     Grid.Row="1"
+                                     Grid.Column="1">
+                            <RadioButton IsChecked="{Binding IsSearch}" ></RadioButton>
                             <Label Text="Demandes"
                            TextColor="Black"></Label>
                         </StackLayout>
 
-                    </StackLayout>
+                    </Grid>
+                    
 
 
                 </StackLayout>

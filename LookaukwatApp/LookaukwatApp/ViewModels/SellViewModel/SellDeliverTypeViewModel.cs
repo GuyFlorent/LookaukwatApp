@@ -100,6 +100,43 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             set => SetProperty(ref distance, value);
         }
 
+        private int stock;
+        public int Stock
+        {
+            get => stock;
+            set => SetProperty(ref stock, value);
+        }
+
+        private int differencePrice = 1;
+        public int DifferencePrice
+        {
+            get => differencePrice;
+            set => SetProperty(ref differencePrice, value);
+        }
+
+        private int quantity = 1;
+        public int Quantity
+        {
+            get => quantity;
+            set 
+            {
+               
+                    DifferencePrice= value;
+                if (IsStoreTaken)
+                {
+                    PopulateStoreTake(DifferencePrice);
+                }
+                else
+                {
+                    PopulateHomeDeliverd(DifferencePrice);
+                }
+                   
+               
+                SetProperty(ref quantity, value);
+              
+            }
+        }
+
         //check deliverd or store taken
         bool isStoreTaken = true;
         public bool IsStoreTaken
@@ -110,8 +147,8 @@ namespace LookaukwatApp.ViewModels.SellViewModel
                 SetProperty(ref isStoreTaken, value);
                 if (value)
                 {
-                    PopulateStoreTake();
-                   
+                    PopulateStoreTake(DifferencePrice);
+                    IsHomeDeliverd = false;
                 }
             }
         }
@@ -127,8 +164,8 @@ namespace LookaukwatApp.ViewModels.SellViewModel
                 SetProperty(ref isHomeDeliverd, value);
                 if (value)
                 {
-                    PopulateHomeDeliverd();
-
+                    PopulateHomeDeliverd(DifferencePrice);
+                    IsStoreTaken = false;
                 }
             }
         }
@@ -152,6 +189,7 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             item.DeliveredPrice = deliveredPrice;
             item.TotalPrice_int = TotalPrice_int;
             item.DeliveredPrice_int = DeliveredPrice_int;
+            item.Quantity = Quantity;
             Settings.ItemPurchase = JsonConvert.SerializeObject(item);
 
             await Shell.Current.GoToAsync($"{nameof(SellPayementMethodPage)}");
@@ -173,13 +211,23 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             Telephone = Json.Telephone;
             Street = Json.Street;
             Town = Json.Town;
-            
-            
+
+            if (Json.Distance < 1)
+            {
+                DeliveredPrice = Convert.ToInt32(Json.Distance * 100 * 0.2).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
+
+            }
+            else
+            {
+                DeliveredPrice = Convert.ToInt32(Json.Distance * 200).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
+
+            }
+
 
             ItemPurchaseModelViewModel item = JsonConvert.DeserializeObject<ItemPurchaseModelViewModel>(Settings.ItemPurchase);
 
             ItemPrice = item.Price;
-
+            Stock = item.Stock;
 
             //getting distance between item and receiver
             
@@ -218,16 +266,16 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             }
         }
 
-        private void PopulateStoreTake()
+        private void PopulateStoreTake(int Value)
         {
 
             DeliveredPrice = " 0 ";
-            IsHomeDeliverd = false;
-            TotalPrice_int = itemPrice;
-             TotalPrice  = (itemPrice).ToString();
+          
+            TotalPrice_int = (itemPrice * Value);
+            TotalPrice  = (TotalPrice_int).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
         }
 
-        private void PopulateHomeDeliverd()
+        private void PopulateHomeDeliverd(int Value)
         {
             int Delivered;
             DeliverAdressModelViewModel Json = JsonConvert.DeserializeObject<DeliverAdressModelViewModel>(Settings.AddressDelivered);
@@ -246,9 +294,11 @@ namespace LookaukwatApp.ViewModels.SellViewModel
                 DeliveredPrice_int = Delivered;
             }
 
-            IsStoreTaken = false;
-            TotalPrice_int = itemPrice + Delivered;
+           
+            
+            TotalPrice_int = (itemPrice * Value) + Delivered;
             TotalPrice = (TotalPrice_int).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
         }
+
     }
 }

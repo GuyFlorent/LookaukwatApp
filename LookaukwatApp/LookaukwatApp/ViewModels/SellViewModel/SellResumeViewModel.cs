@@ -69,7 +69,12 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             get => deliveredPrice;
             set => SetProperty(ref deliveredPrice, value);
         }
-
+        private int quantity;
+        public int Quantity
+        {
+            get => quantity;
+            set => SetProperty(ref quantity, value);
+        }
         private string totalPrice;
         public string TotalPrice
         {
@@ -149,6 +154,7 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             ItemPurchaseModelViewModel item = JsonConvert.DeserializeObject<ItemPurchaseModelViewModel>(Settings.ItemPurchase);
 
             ItemPrice = item.Price;
+            Quantity = item.Quantity;
             DeliveredPrice = item.DeliveredPrice;
             TotalPrice = item.TotalPrice;
             Image = item.Image;

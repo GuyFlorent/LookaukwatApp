@@ -94,19 +94,20 @@
                                             <RowDefinition Height="*"></RowDefinition>
                                             <RowDefinition Height="*"></RowDefinition>
                                             <RowDefinition Height="*"></RowDefinition>
+                                            <RowDefinition Height="*"></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            
                                         </Grid.ColumnDefinitions>
-                                        <Image Grid.RowSpan="4" 
+                                        <Image Grid.RowSpan="5" 
                        Source="{Binding Image }"
                        Aspect="AspectFill"
                        HeightRequest="100"
                        WidthRequest="100"></Image>
 
                                         <Frame Padding="1"
-                                                   Grid.RowSpan="4" 
+                                                   Grid.RowSpan="5" 
                                                    HorizontalOptions="Start"
                                                    VerticalOptions="End"
                                                    CornerRadius="10"
@@ -190,6 +191,26 @@
                                                 </StackLayout.GestureRecognizers>
                                             </StackLayout>
                                         </StackLayout>
+
+                                        <Frame IsVisible="{Binding IsLookaukwat}"
+                                                   Padding="1"
+                                                   Grid.Row="4" 
+                                                   Grid.Column="1"
+                                                   BackgroundColor="#2196F3"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Source="garanty"
+                                                           HeightRequest="20"
+                                                       Aspect="AspectFit"></Image>
+                                                <Label Text="{Binding HomeMessage}"
+                                                       TextColor="White"
+                                                           FontAttributes="Bold"></Label>
+                                            </StackLayout>
+
+                                        </Frame>
                                     </Grid>
 
                                     <StackLayout.GestureRecognizers>

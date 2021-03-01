@@ -10,7 +10,8 @@ namespace LookaukwatApp.Models
         public string Category { get; set; }
         public string Town { get; set; }
         public string SearchOrAskJob { get; set; }
-
+        public bool IsLookaukwat { get; set; }
+        public bool IsParticulier { get; set; }
 
         //For Job
         public int PriceJob { get; set; }

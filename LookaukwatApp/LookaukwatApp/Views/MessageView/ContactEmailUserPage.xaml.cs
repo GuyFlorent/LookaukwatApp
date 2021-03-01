@@ -39,7 +39,8 @@ namespace LookaukwatApp.Views.MessageView
                 Linkshare = contact.Linkshare,
                 RecieverEmail = contact.RecieverEmail,
                 RecieverName = contact.RecieverName,
-                SubjectSender =contact.SubjectSender
+                SubjectSender =contact.SubjectSender,
+                ProductId = contact.ProductId
             };
         }
 
@@ -51,6 +52,7 @@ namespace LookaukwatApp.Views.MessageView
 
         private async void SendMessage_Button(object o, EventArgs e)
         {
+            _apiServices.UpdateMessageNumber(Contact.ProductId);
             Indicator.IsVisible = true;
             Indicator.IsRunning = true;
 

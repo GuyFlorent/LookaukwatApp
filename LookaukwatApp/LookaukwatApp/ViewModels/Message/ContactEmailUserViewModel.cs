@@ -56,5 +56,12 @@ namespace LookaukwatApp.ViewModels.Message
             get { return category; }
             set { SetProperty(ref category, value); }
         }
+
+        private int productId;
+        public int ProductId
+        {
+            get { return productId; }
+            set { SetProperty(ref productId, value); }
+        }
     }
 }

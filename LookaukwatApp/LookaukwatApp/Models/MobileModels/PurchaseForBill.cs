@@ -9,5 +9,6 @@ namespace LookaukwatApp.Models.MobileModels
         public string Image { get; set; }
         public int Quantity { get; set; }
         public string Price { get; set; }
+        public string Price_Per_Quantity { get; set; }
     }
 }

@@ -71,7 +71,7 @@
                         </Grid>
                         <StackLayout IsVisible="{Binding IsProvider}">
                             <Picker 
-                    Title="Choisir un parrain"
+                    Title="Choisir un fournisseur"
                     ItemsSource="{Binding Providers}"
                     SelectedItem="{Binding Provider, Mode=TwoWay}">
                             </Picker>

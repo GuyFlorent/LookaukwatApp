@@ -880,7 +880,7 @@
                         </Label.GestureRecognizers>
                     </Label>
 
-                    <ImageButton Source="cash"
+                    <!--<ImageButton Source="cash"
                            Aspect="AspectFit"
                            HeightRequest="25"
                            BackgroundColor="#2196F3" 
@@ -901,7 +901,7 @@
                                         Command="{Binding BuyItemCommand}"
                                         NumberOfTapsRequired="1" />
                         </Label.GestureRecognizers>
-                    </Label>
+                    </Label>-->
                 </Grid>
 
         </StackLayout>

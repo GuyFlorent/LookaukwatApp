@@ -51,7 +51,10 @@
             </StackLayout>
             <Label Text="{Binding OldPhone}"></Label>
 
-            <StackLayout Spacing="20">
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color ="#80000000"/>
+
+            <StackLayout Spacing="20"
+                         IsVisible="{Binding IsAgent}">
                 <Label Text="Espace agents lookaukwat"
                        FontSize="Subtitle"
                        TextColor="Black"></Label>

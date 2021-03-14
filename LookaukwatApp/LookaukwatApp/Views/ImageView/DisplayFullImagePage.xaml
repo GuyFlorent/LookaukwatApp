@@ -24,10 +24,8 @@
                             <local:PinchToZoomContainer>
                                 <local:PinchToZoomContainer.Content>
                                 <Image Source="{Binding .}"
-                               Aspect="AspectFill"
-                              WidthRequest="{DynamicResource FullScreenWidth}"
-                               HorizontalOptions="FillAndExpand"
-                               VerticalOptions="CenterAndExpand"/>
+                               Aspect="AspectFit"
+                              />
                                 </local:PinchToZoomContainer.Content>
                             </local:PinchToZoomContainer>
                      

@@ -1,4 +1,5 @@
-﻿using LookaukwatApp.Views.UserView;
+﻿using LookaukwatApp.Views.ProviderView;
+using LookaukwatApp.Views.UserView;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,11 +22,17 @@ namespace LookaukwatApp.ViewModels.User
         public UserTransactionsViewModel()
         {
             OrderCommand = new Command(OnOrder);
+            AnnounceOnlineCommand = new Command(OnAnnounceOnline);
         }
 
         public async void OnOrder()
         {
             await Shell.Current.GoToAsync(nameof(UserCommandsPage));
+        }
+
+        public async void OnAnnounceOnline()
+        {
+            await Shell.Current.GoToAsync(nameof(ProviderAnnouncePage));
         }
     }
 }

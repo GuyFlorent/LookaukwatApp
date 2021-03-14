@@ -25,7 +25,7 @@ namespace LookaukwatApp.Services
     {
         string Uri = "https://lookaukwatapi.azurewebsites.net/";
         //string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
-        CancellationTokenSource cts;
+       
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword, string parrainValue)
         {
             HttpClient client;
@@ -173,6 +173,11 @@ namespace LookaukwatApp.Services
             var response = await client.PutAsync(Uri + "api/Apartment/?id=" + itemId, content);
 
             Debug.WriteLine(response);
+        }
+
+        public async Task<int> EventPostAsync(string accessToken, string titleApart, string description, string town, string street, int price, string searchOrAskJob, string rubrique, string type, string artisteName, string sport_Game, string provider_Id, int stock)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<ApartModelViewModel> GetUniqueApartCritereAsync(int id)
@@ -1460,6 +1465,44 @@ namespace LookaukwatApp.Services
             return List;
         }
 
+
+        public async Task<List<ProductForMobileViewModel>> GetProviderProductsAsync(string accessToken)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Product/GetProviderProducts");
+
+            var List = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(json);
+            // var liste = List.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            return List;
+        }
+
+        public async Task<List<ProductForMobileViewModel>> GetProviderSellAsync(string accessToken)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Product/GetProviderSell");
+
+            var List = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(json);
+            // var liste = List.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            return List;
+        }
 
         public async Task<List<ProductForMobileViewModel>> GetProductsAsync(int pageIndex, int pageSize, string sortBy)
         {

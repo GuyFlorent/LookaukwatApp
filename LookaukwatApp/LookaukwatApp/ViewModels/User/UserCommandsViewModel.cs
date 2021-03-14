@@ -20,6 +20,20 @@ namespace LookaukwatApp.ViewModels.User
 
         public Command TrackingOrderCommand { get; }
         public Command BillCommand { get; }
+
+        bool isEmpty = false;
+        public bool IsEmpty
+        {
+            get { return isEmpty; }
+            set { SetProperty(ref isEmpty, value); }
+        }
+
+        bool isNotEmty = false;
+        public bool IsNotEmty
+        {
+            get { return isNotEmty; }
+            set { SetProperty(ref isNotEmty, value); }
+        }
         public UserCommandsViewModel()
         {
             TitlePage = "Mes commandes";
@@ -64,6 +78,14 @@ namespace LookaukwatApp.ViewModels.User
                 Commands.Clear();
                 string accessToken = Settings.AccessToken;
                 var results = await _apiServices.GetUserCommandsAsync(accessToken);
+                if(results.Count > 0)
+                {
+                    IsNotEmty = true;
+                }
+                else
+                {
+                    IsEmpty = true;
+                }
                 foreach (var item in results)
                 {
                     Commands.Add(item);

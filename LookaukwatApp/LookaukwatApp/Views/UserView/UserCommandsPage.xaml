@@ -15,12 +15,22 @@
                 <ActivityIndicator TranslationX="150" TranslationY="200" IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
             </RelativeLayout>
 
+            <StackLayout IsVisible="{Binding IsEmpty}">
+                <Label Text="Oup! vous n'avez pas encore passé de commande"
+                       TextColor="Black"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       FontSize="Title"></Label>
+            </StackLayout>
+                         
+
             <ListView ItemsSource="{Binding Commands}" 
                       CachingStrategy="RecycleElement" 
                       HasUnevenRows="True"
                       SelectionMode="None"
                       SeparatorVisibility="None"
-                      x:Name="UserAnounce">
+                      x:Name="UserAnounce"
+                      IsVisible="{Binding IsNotEmty}">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>

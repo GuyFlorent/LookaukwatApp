@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.ProviderView.ProviderAnnouncePage"
+             Title="{Binding TitlePage}"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Provider" >
+
+    <ContentPage.BindingContext>
+        <local:ProviderAnnounceViewModel />
+    </ContentPage.BindingContext>
+
+
+
+    <StackLayout>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color ="#80000000"/>
+
+        <StackLayout IsVisible="{Binding IsNotEmty}">
+
+            <CollectionView ItemsSource="{Binding Items}"
+                ItemsLayout="VerticalGrid, 2"
+                     x:Name="UserAnounce">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame  
+                                   HasShadow="True"
+                                   BorderColor="#2196F3"
+                       BackgroundColor="GhostWhite"
+                       Padding="3">
+
+                            <StackLayout >
+                                <Grid x:Name="Item" BackgroundColor="GhostWhite">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Grid.ColumnSpan="2"
+                       Source="{Binding Image}"
+                       Aspect="AspectFill"
+                       HeightRequest="100"
+                       WidthRequest="100" />
+
+                                    <Frame Padding="1"
+                                                   Grid.ColumnSpan="2" 
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Image Source="camera"
+                                                           HeightRequest="20"
+                                                       Aspect="AspectFit"></Image>
+                                            <Label Text="{Binding NumberImages}"
+                                                       TextColor="Black"
+                                                           FontAttributes="Bold"></Label>
+                                        </StackLayout>
+
+                                    </Frame>
+
+                                    <Label Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                       Text="{Binding Title}"
+                       FontAttributes="Bold"
+                       LineBreakMode="TailTruncation" />
+
+                                    <Label 
+                           Grid.Row="2"
+                          TextColor="#2196F3"
+                           LineBreakMode="TailTruncation"
+                       FontAttributes="Italic"
+                       VerticalOptions="Start">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding PriceConvert}"></Span>
+                                                <Span Text=" FCFA"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+
+                                    <Grid Grid.Row="3"
+                                                Grid.ColumnSpan="2" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+
+                                        <StackLayout 
+                                                 HorizontalOptions="StartAndExpand"
+                                                 VerticalOptions="Start"
+                                                 Orientation="Horizontal">
+                                            <Image Source="icon_phone"
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               WidthRequest="20" />
+                                            <Label Text="{Binding CallNumber}"></Label>
+                                        </StackLayout>
+
+                                        <StackLayout Grid.Column="1"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Start"
+                                                 Orientation="Horizontal">
+                                            <Image Source="messages"
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               WidthRequest="20" />
+                                            <Label Text="{Binding MessageNumber}"></Label>
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal" 
+                                     Grid.Column="2"
+                                     HorizontalOptions="End"
+                                     VerticalOptions="Start"
+                                                     >
+                                            <Image Source="eye"
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="20"
+                               WidthRequest="20" />
+                                            <Label Text="{Binding ViewNumber}"></Label>
+                                        </StackLayout>
+                                    </Grid>
+
+
+
+                                    <Label 
+                           Grid.Row="4"
+                                Grid.ColumnSpan="2"
+                       Text="{Binding Date}"
+                       VerticalOptions="Start"
+                                       ></Label>
+
+                                    <Label Grid.Row="5">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Stock restant : "></Span>
+                                                <Span TextColor="#2196F3" Text="{Binding Stock}"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                </Grid>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProviderAnnounceViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        <StackLayout IsVisible="{Binding IsEmpty}"
+                 VerticalOptions="Center">
+            <StackLayout VerticalOptions="Center"
+                         Margin="15,35,20,25">
+                <Label Text="C'est désert ici ! Vous n'avez pas d'annonces en ligne."
+                       FontSize="Subtitle"
+                       TextColor="Black"
+                       FontAttributes="Bold"></Label>
+            </StackLayout>
+            <StackLayout VerticalOptions="End">
+                <Button Text="Publier une annonce"
+                        TextColor="White"
+                        CornerRadius="20"
+                        Command="{Binding PublishAnnounceCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

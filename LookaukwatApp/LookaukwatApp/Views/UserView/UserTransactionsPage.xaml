@@ -20,7 +20,7 @@
                     TextColor="White"
                     CornerRadius="20"
                     Command="{Binding OrderCommand}"></Button>
-            <StackLayout Spacing="20">
+            <!--<StackLayout Spacing="20">
                 <Label Text="Mes affaires avec lookaukwat"
                        TextColor="Black"
                        FontSize="Title"
@@ -33,7 +33,7 @@
                     TextColor="White"
                         CornerRadius="20"
                         Command="{Binding AnnounceSellCommand}"></Button>
-            </StackLayout>
+            </StackLayout>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

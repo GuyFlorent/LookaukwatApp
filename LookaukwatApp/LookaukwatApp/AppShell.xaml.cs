@@ -9,6 +9,7 @@ using LookaukwatApp.Views.LoginView;
 using LookaukwatApp.Views.MessageView;
 using LookaukwatApp.Views.ModeView;
 using LookaukwatApp.Views.MultimediaView;
+using LookaukwatApp.Views.ProviderView;
 using LookaukwatApp.Views.PublishView;
 using LookaukwatApp.Views.RegisterView;
 using LookaukwatApp.Views.SearchView;
@@ -85,6 +86,7 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(UserCommandsPage), typeof(UserCommandsPage));
             Routing.RegisterRoute(nameof(UserBillPage), typeof(UserBillPage));
             Routing.RegisterRoute(nameof(UserCommandTrackingPage), typeof(UserCommandTrackingPage));
+            Routing.RegisterRoute(nameof(ProviderAnnouncePage), typeof(ProviderAnnouncePage));
         }
 
 

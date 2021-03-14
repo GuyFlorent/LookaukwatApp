@@ -20,6 +20,7 @@ namespace LookaukwatApp.Models.MobileModels
         public string HomeMessage { get => LooaukwatMessage(); }
 
         public bool IsLookaukwat { get; set; }
+        public int Stock { get; set; }
 
         
         public int Price { get; set; }

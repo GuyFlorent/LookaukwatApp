@@ -85,7 +85,8 @@
                 Minimum="0"
                 MaximumTrackColor="DarkGray"
                 MinimumTrackColor="#2196F3"
-                    x:Name="sliderPriceApart"/>
+                    x:Name="sliderPriceApart"
+                 />
                                 
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Source={x:Reference sliderPriceApart},

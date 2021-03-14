@@ -78,6 +78,21 @@ namespace LookaukwatApp.ViewModels.User
             get => confirmPassword;
             set => SetProperty(ref confirmPassword, value);
         }
+
+        bool isAgent = false;
+        public bool IsAgent
+        {
+            get { return isAgent; }
+            set { SetProperty(ref isAgent, value); }
+        }
+
+        bool isAgent_Deliver = false;
+        public bool IsAgent_Deliver
+        {
+            get { return isAgent_Deliver; }
+            set { SetProperty(ref isAgent_Deliver, value); }
+        }
+
         public UserProfileViewModel()
         {
             //TitlePage = "About";
@@ -86,7 +101,7 @@ namespace LookaukwatApp.ViewModels.User
             OldEmail = Settings.Username;
             AboutUsCommand = new Command(async () => await Browser.OpenAsync("https://lookaukwat.com/Home/About"));
             ContactUsCommand = new Command(async () => await Browser.OpenAsync("https://lookaukwat.com/Home/Contact"));
-            LookaukwatAgentCommand = new Command(async () => await Browser.OpenAsync("https://lookaukwat.com/Admin/Stat_Account_Agent?userEmail=tsiminaomie@yahoo.fr"));
+            LookaukwatAgentCommand = new Command(async () => await Browser.OpenAsync("https://lookaukwat.com/Admin/Stat_Account_Agent?userEmail="+Settings.Username));
             UserAnnounceCommand = new Command(OnUserAnnouce);
             ProfileUserCommand = new Command(OnUserProfile);
             UpdateUserPasswordCommand = new Command(OnUserPassword);
@@ -101,7 +116,11 @@ namespace LookaukwatApp.ViewModels.User
                (_, __) => UpdatePasswordCommand.ChangeCanExecute();
             this.PropertyChanged +=
                (_, __) => UpdateUserCommand.ChangeCanExecute();
+
+            CheckIfAgent();
         }
+
+      
 
         public ICommand AboutUsCommand { get; }
         public ICommand ContactUsCommand { get; }
@@ -137,6 +156,27 @@ namespace LookaukwatApp.ViewModels.User
         {
             await Shell.Current.GoToAsync(nameof(UserTransactionsPage));
         }
+
+        private async void CheckIfAgent()
+        {
+            IsBusy = true;
+            if (Settings.Username == "contact@lookaukwat.com")
+            {
+                IsAgent_Deliver = true;
+                IsAgent = true;
+            }
+
+            var agent = await _apiServices.GetListParrainAsync();
+            foreach (var value in agent.Values)
+            {
+                if(value == Settings.Username)
+                {
+                    IsAgent = true;
+                }
+            }
+            IsBusy = false;
+        }
+
         private async void OnUserAnnouce()
         {
             string accessToken = Settings.AccessToken;

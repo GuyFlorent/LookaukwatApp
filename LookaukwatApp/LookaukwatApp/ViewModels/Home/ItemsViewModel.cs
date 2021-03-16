@@ -2,6 +2,7 @@
 using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.Appartment;
+using LookaukwatApp.ViewModels.Event;
 using LookaukwatApp.ViewModels.House;
 using LookaukwatApp.ViewModels.Job;
 using LookaukwatApp.ViewModels.Mode;
@@ -10,6 +11,7 @@ using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.ViewModels.Vehicule;
 using LookaukwatApp.Views;
 using LookaukwatApp.Views.AppartmentView;
+using LookaukwatApp.Views.EventView;
 using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.JobView;
 using LookaukwatApp.Views.ModeView;
@@ -179,6 +181,11 @@ namespace LookaukwatApp.ViewModels.Home
 
                 case "Maison":
                     await Shell.Current.GoToAsync($"{nameof(HouseDetailPage)}?{nameof(HouseDetailViewModel.ItemId)}={item.id}");
+                    break;
+                case "Événement":
+                   
+                    await Shell.Current.GoToAsync($"{nameof(EventDetailPage)}?{nameof(EventDetailViewModel.ItemId)}={item.id}");
+
                     break;
             }
 

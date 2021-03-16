@@ -40,8 +40,8 @@ namespace LookaukwatApp.ViewModels.Image
             set => SetProperty(ref message, value);
         }
 
-       string Uri = "https://lookaukwatapi.azurewebsites.net/";
-      //  string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
+      // string Uri = "https://lookaukwatapi.azurewebsites.net/";
+        string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
         private MediaFile _mediaFile;
         public ObservableCollection<ImageProcductModel> Items { get; set; }
         public Command AddImageGaleryCommad { get; }

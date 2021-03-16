@@ -2,6 +2,7 @@
 using LookaukwatApp.Views.EventView;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Forms;
 
@@ -13,7 +14,9 @@ namespace LookaukwatApp.ViewModels.Event
         public IList<string> TypeSportList { get; }
         public IList<string> TypeSpectacleList { get; }
         public IList<string> RubriqueList { get; }
-       
+
+        ObservableCollection<string> types = new ObservableCollection<string>();
+        public ObservableCollection<string> Types { get => types; set => SetProperty(ref types, value); }
 
         private int price;
         public int Price
@@ -42,8 +45,15 @@ namespace LookaukwatApp.ViewModels.Event
         public string Rubrique
         {
             get => rubrique;
-            set => SetProperty(ref rubrique, value);
+            set 
+            { 
+                SetProperty(ref rubrique, value);
+
+                CheckType(value);
+            }
         }
+
+       
 
         private string artisteName;
         public string ArtisteName
@@ -64,6 +74,13 @@ namespace LookaukwatApp.ViewModels.Event
         {
             get => date;
             set => SetProperty(ref date, value);
+        }
+
+        private TimeSpan hour;
+        public TimeSpan Hour
+        {
+            get => hour;
+            set => SetProperty(ref hour, value);
         }
 
         private bool Validate()
@@ -121,10 +138,23 @@ namespace LookaukwatApp.ViewModels.Event
             set => SetProperty(ref searchText, value);
         }
 
+        bool isSport = false;
+        public bool IsSport
+        {
+            get { return isSport; }
+            set { SetProperty(ref isSport, value); }
+        }
+
+        bool isSpectacle = false;
+        public bool IsSpectacle
+        {
+            get { return isSpectacle; }
+            set { SetProperty(ref isSpectacle, value); }
+        }
 
         public EventViewModel()
         {
-            NextEventCommad = new Command(OnNextApart, Validate);
+            NextEventCommad = new Command(OnNextEvent, Validate);
             this.PropertyChanged +=
               (_, __) => NextEventCommad.ChangeCanExecute();
             TitlePage = "Titre,description, ville, quartier...";
@@ -137,13 +167,34 @@ namespace LookaukwatApp.ViewModels.Event
         public Command NextEventCommad { get; }
 
 
-        async void OnNextApart()
+        private void CheckType(string value)
+        {
+            Types.Clear();
+           if (value == "Sport")
+            {
+                IsSport = true;
+                IsSpectacle = false;
+                foreach(var item in TypeSportList)
+                {
+                    Types.Add(item);
+                }
+            }
+            else
+            {
+                IsSport = false;
+                IsSpectacle = true;
+                foreach (var item in TypeSpectacleList)
+                {
+                    Types.Add(item);
+                }
+            }
+        }
+        async void OnNextEvent()
         {
 
-            await Shell.Current.GoToAsync($"{nameof(EventAddPage)}?{nameof(EventEndViewModel.Price)}={Price}&{nameof(EventEndViewModel.Rubrique)}={Rubrique}&{nameof(EventEndViewModel.ArtisteName)}={ArtisteName}&{nameof(EventEndViewModel.Type)}={Type}&{nameof(EventEndViewModel.Date)}={Date}&{nameof(EventEndViewModel.SearchOrAskJob)}={SearchOrAskJob}&{nameof(EventEndViewModel.Sport_Game)}={Sport_Game}");
+            await Shell.Current.GoToAsync($"{nameof(EventAddPage)}?{nameof(EventEndViewModel.Price)}={Price}&{nameof(EventEndViewModel.Rubrique)}={Rubrique}&{nameof(EventEndViewModel.ArtisteName)}={ArtisteName}&{nameof(EventEndViewModel.Type)}={Type}&{nameof(EventEndViewModel.Date)}={Date}&{nameof(EventEndViewModel.SearchOrAskJob)}={SearchOrAskJob}&{nameof(EventEndViewModel.Sport_Game)}={Sport_Game}&{nameof(EventEndViewModel.Hour)}={Hour}");
 
         }
-
 
     }
 }

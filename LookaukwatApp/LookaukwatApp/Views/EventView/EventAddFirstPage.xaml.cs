@@ -15,6 +15,7 @@ namespace LookaukwatApp.Views.EventView
         public EventAddFirstPage()
         {
             InitializeComponent();
+            Shell.SetTabBarIsVisible(this, false);
         }
     }
 }

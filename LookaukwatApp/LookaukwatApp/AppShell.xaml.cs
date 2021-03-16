@@ -2,6 +2,7 @@
 using LookaukwatApp.Views;
 using LookaukwatApp.Views.AppartmentView;
 using LookaukwatApp.Views.EditView;
+using LookaukwatApp.Views.EventView;
 using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.JobView;
@@ -87,6 +88,9 @@ namespace LookaukwatApp
             Routing.RegisterRoute(nameof(UserBillPage), typeof(UserBillPage));
             Routing.RegisterRoute(nameof(UserCommandTrackingPage), typeof(UserCommandTrackingPage));
             Routing.RegisterRoute(nameof(ProviderAnnouncePage), typeof(ProviderAnnouncePage));
+            Routing.RegisterRoute(nameof(EventAddPage), typeof(EventAddPage));
+            Routing.RegisterRoute(nameof(EventAddFirstPage), typeof(EventAddFirstPage));
+            Routing.RegisterRoute(nameof(EventDetailPage), typeof(EventDetailPage));
         }
 
 

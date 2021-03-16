@@ -1,0 +1,767 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LookaukwatApp.Views.EventView.EventDetailPage"
+             xmlns:converter="clr-namespace:LookaukwatApp.Converter"
+             xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Event"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <local:EventDetailViewModel></local:EventDetailViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:StringNullOrEmptyBoolConverter x:Key="StringNullOrEmptyBoolConverter"></converter:StringNullOrEmptyBoolConverter>
+            <converter:ImageFavoriteConverter x:Key="ImageFavoriteConverter"></converter:ImageFavoriteConverter>
+            <converter:ImageNotFavoriteConverter x:Key="ImageNotFavoriteConverter"></converter:ImageNotFavoriteConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <RelativeLayout IsVisible="{Binding IsRunning}">
+            <ActivityIndicator TranslationX="150" TranslationY="200" IsVisible="{Binding IsRunning}" IsRunning="{Binding IsRunning}" Color ="#80000000"/>
+        </RelativeLayout>
+        <StackLayout IsVisible="{Binding IsBusy}">
+
+            <ScrollView>
+                <StackLayout>
+
+                    <CarouselView ItemsSource="{Binding Images}"
+                          IndicatorView="indicatorview"
+                          HeightRequest="310">
+
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+
+
+                                    <Image Source="{Binding .}"
+                               Aspect="AspectFill"
+                               HeightRequest="300"
+                               HorizontalOptions="FillAndExpand"/>
+
+
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:EventDetailViewModel}}, Path=TappedImageCommand}"		
+                                CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView
+            x:Name="indicatorview"
+            AbsoluteLayout.LayoutBounds="0.5,0.95,100,100"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            IndicatorColor="LightGray"
+            IndicatorSize="10"
+            SelectedIndicatorColor="#2196F3" />
+
+                    <StackLayout Margin="10,15,10,15">
+                        <StackLayout IsVisible="false">
+                            <Label x:Name="Lat" Text="{Binding Lat}"></Label>
+                            <Label x:Name="Lon" Text="{Binding Lon}"></Label>
+                        </StackLayout>
+                        <Label Text="{Binding Title}"
+                   FontSize="20"
+                   FontAttributes="Bold"></Label>
+
+                        <Label  TextColor="#2196F3"
+                           FontAttributes="Bold"
+                    VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding PriceConvert}"></Span>
+                                    <Span Text=" FCFA"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="{Binding Date}"
+                     ></Label>
+
+                        <Grid IsVisible="{Binding IsLookaukwat}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="garanty"
+                               Aspect="AspectFit"
+                               HeightRequest="80"
+                               />
+                            <Frame 
+                                                   Padding="1"
+                                                   Grid.Column="1"
+                                                   BackgroundColor="#2196F3"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Payer en ligne"
+                                                       TextColor="White"
+                                                           FontAttributes="Bold"></Label>
+                                </StackLayout>
+
+                            </Frame>
+
+                            <Frame 
+                                                   Padding="1"
+                                                   Grid.Column="2"
+                                                   BackgroundColor="#2196F3"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Garantie Lookaukwat à 100 %"
+                                                       TextColor="White"
+                                                           FontAttributes="Bold"></Label>
+                                </StackLayout>
+
+                            </Frame>
+                        </Grid>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Contacter " TextColor="Black" FontAttributes="Bold" FontSize="Subtitle"></Span>
+                                    <Span TextColor="#2196F3" Text="{Binding Name}"></Span>
+                                    <Span TextColor="Black" Text=" par :"></Span>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Grid Margin="0,0,0,20">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <ImageButton Source="icon_phone"
+                                 HeightRequest="40"
+                                 WidthRequest="40"
+                                 BackgroundColor="White"
+                                 Command="{Binding CallUserCommand}"></ImageButton>
+                            <Label Grid.Row="1"
+                           Text="Téléphone"
+                           FontAttributes="Italic"></Label>
+                        </Grid>
+
+                        <Label Text="Critères"
+                       TextColor="Black"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+
+                        <Grid IsVisible="{Binding IsLookaukwat}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.85*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="stock"
+                           
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
+                            <Label Grid.Column="1"
+                               Text="Nombre de place(s)"
+                               FontAttributes="Italic" />
+                            <Label Grid.Column="1"
+                           Grid.Row="1"
+                               
+                           TextColor="#2196F3"
+                            FontAttributes="Bold">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Stock}"></Span>
+                                        <Span Text=" Place(s) restante(s)"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.85*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="icon_activitySector"
+                           
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
+                            <Label Grid.Column="1"
+                               Text="Rubrique"
+                               FontAttributes="Italic" />
+                            <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding Rubrique}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                        </Grid>
+                        <Grid IsVisible="{Binding Type, Converter={StaticResource StringNullOrEmptyBoolConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.85*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="group"
+                          
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
+                            <Label Grid.Column="1"
+                               Text="Type"
+                               FontAttributes="Italic" />
+                            <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding Type}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                        </Grid>
+
+                        <Grid IsVisible="{Binding ArtisteName, Converter={StaticResource StringNullOrEmptyBoolConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.85*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="icon_activitySector"
+                          
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
+                            <Label Grid.Column="1"
+                               Text="Organisateur"
+                               FontAttributes="Italic" />
+                            <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding ArtisteName}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                        </Grid>
+
+                        <Grid IsVisible="{Binding Sport_Game, Converter={StaticResource StringNullOrEmptyBoolConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.85*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="tshirt"
+                          
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
+                            <Label Grid.Column="1"
+                               Text="Rencontre"
+                               FontAttributes="Italic" />
+                            <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding Sport_Game}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.85*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="ruler"
+                          
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
+                            <Label Grid.Column="1"
+                               Text="La date de l'événement"
+                               FontAttributes="Italic" />
+                            <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding DateEvent}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.85*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="color_palette"
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
+                            <Label Grid.Column="1"
+                               Text="Heure de début"
+                               FontAttributes="Italic" />
+                            <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="{Binding Hour}"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                        </Grid>
+
+                      
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.85*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="icon_searchOrAsk"
+                          
+                               Aspect="AspectFit"
+                               HeightRequest="10"
+                               WidthRequest="10" />
+                            <Label Grid.Column="1"
+                               Text="Offre/Recherche"
+                               FontAttributes="Italic" />
+                            <Label Grid.Column="1"
+                           Grid.Row="1"
+                               Text="Offre"
+                           TextColor="Black"
+                               FontAttributes="Bold" />
+                        </Grid>
+
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.85*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Source="map_marker"
+                         
+                               Aspect="AspectFit"
+                               HeightRequest="5"
+                               WidthRequest="5" />
+                            <Label Grid.Column="1"
+                               Text="Position"
+                               FontAttributes="Italic" />
+                            <StackLayout Grid.Column="1"
+                                     Grid.Row="1"
+                                     Orientation="Horizontal">
+                                <Label 
+                           TextColor="Black"
+                               FontAttributes="Bold">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Town}"></Span>
+                                            <Span Text=", "></Span>
+                                            <Span Text="{Binding Street}"></Span>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Button Text="voir itinéraire"
+                                    Clicked="Map_Click"
+                                    CornerRadius="20"></Button>
+                            </StackLayout>
+                        </Grid>
+
+                        <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                        <Label Text="Description"
+                       TextColor="Black"
+                       FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+
+
+                        <Label Text="{Binding Description}"
+                   
+                   LineBreakMode="WordWrap"
+                   Margin="0,0,0,20"></Label>
+
+                        <BoxView Margin="0,0,0,10" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+                        <StackLayout Margin="0,0,0,10"
+                                 Orientation="Horizontal">
+                            <Image Source="flag_triangle"
+                               Aspect="AspectFit"></Image>
+                            <Button Text="Signaler l'annonce"
+                                TextColor="#2196F3"
+                                FontSize="Subtitle"
+                                BackgroundColor="White"
+                                Command="{Binding SignalCommand}"></Button>
+                        </StackLayout>
+
+                        <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+                        <Grid Margin="10,0,10,20">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Orientation="Horizontal">
+                                <ImageButton Source="share"
+                                 HeightRequest="35"
+                                 WidthRequest="35"
+                                 BackgroundColor="White"
+                                 Command="{Binding ShareCommand}"
+                                 Aspect="AspectFit"></ImageButton>
+                                <Label 
+                           Text="Partager"
+                           FontAttributes="Italic"
+                           >
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                        Command="{Binding ShareCommand}"
+                                        NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal"
+                                 Grid.Column="2"
+                                 HorizontalOptions="End">
+                                <ImageButton 
+                                 Source="link"
+                                 HeightRequest="35"
+                                 WidthRequest="35"
+                                 BackgroundColor="White"
+                                 Command="{Binding ClipBoardCommand}"
+                                 Aspect="AspectFit"></ImageButton>
+                                <Label 
+                           
+                           Text="Copier le lien"
+                           FontAttributes="Italic">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                        Command="{Binding ClipBoardCommand}"
+                                        NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                            </StackLayout>
+                        </Grid>
+
+                        <BoxView Margin="0,0,0,20" HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" />
+
+                        <Label Text="Ces annonces peuvent vous intéresser"
+                       TextColor="Black"
+                       FontAttributes="Bold"
+                       FontSize="Subtitle"></Label>
+
+                        <CarouselView ItemsSource="{Binding SimilarProduct}"
+                              PeekAreaInsets="70"
+                              HeightRequest="290">
+
+                            <CarouselView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" />
+                            </CarouselView.ItemsLayout>
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Frame HasShadow="True"
+                       BorderColor="White"
+                       CornerRadius="5"
+                       Margin="5"
+                       HeightRequest="280"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Start"
+                                       BackgroundColor="GhostWhite"
+                                       Padding="0"
+                                       IsClippedToBounds="True">
+                                            <StackLayout>
+
+                                                <RelativeLayout HeightRequest="40">
+                                                    <Image Source="{Binding Image}"
+                               Aspect="AspectFill"
+                               HeightRequest="154"
+                               WidthRequest="250"
+                               HorizontalOptions="Center" />
+                                                    <StackLayout Opacity="0.6" TranslationY="130"  BackgroundColor="Transparent">
+                                                        <Frame Padding="1"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                                            <StackLayout Orientation="Horizontal">
+                                                                <Image Source="camera"
+                                                           HeightRequest="20"
+                                                       Aspect="AspectFit"></Image>
+                                                                <Label Text="{Binding NumberImages}"
+                                                       TextColor="Black"
+                                                       FontAttributes="Bold"></Label>
+                                                            </StackLayout>
+
+                                                        </Frame>
+
+
+                                                    </StackLayout>
+
+                                                    <StackLayout TranslationX="160"
+                                                             Opacity="2"
+                                                             Padding="0"
+                                                             BackgroundColor="Transparent"
+                                                             IsVisible="{Binding id, Converter={StaticResource ImageFavoriteConverter}}">
+                                                        <Frame Padding="0"
+                                                   HorizontalOptions="End"
+                                                   VerticalOptions="End"
+                                                  BackgroundColor="Transparent"
+                                                   Opacity="1">
+                                                            <StackLayout >
+                                                                <Image Source="{Binding RedHeart}"
+                                                          Aspect="AspectFit"
+                                                          HeightRequest="25"
+                                                                           />
+
+                                                                <StackLayout.GestureRecognizers>
+                                                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:EventDetailViewModel}}, Path=NotFavoriteCommand}"		
+                                CommandParameter="{Binding .}">
+                                                                    </TapGestureRecognizer>
+                                                                </StackLayout.GestureRecognizers>
+                                                            </StackLayout>
+                                                        </Frame>
+
+                                                    </StackLayout>
+
+
+                                                    <StackLayout TranslationX="160"
+                                                             Opacity="2"
+                                                             Padding="0"
+                                                             BackgroundColor="Transparent"
+                                                             IsVisible="{Binding id, Converter={StaticResource ImageNotFavoriteConverter}}">
+                                                        <Frame Padding="0"
+                                                   HorizontalOptions="End"
+                                                   VerticalOptions="End"
+                                                  BackgroundColor="Transparent"
+                                                   Opacity="1">
+                                                            <StackLayout >
+                                                                <Image Source="{Binding BlackHeart}"
+                                                          Aspect="AspectFit"
+                                                          HeightRequest="25"
+                                                                           />
+
+                                                                <StackLayout.GestureRecognizers>
+                                                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:EventDetailViewModel}}, Path=NotFavoriteCommand}"		
+                                CommandParameter="{Binding .}">
+                                                                    </TapGestureRecognizer>
+                                                                </StackLayout.GestureRecognizers>
+                                                            </StackLayout>
+                                                        </Frame>
+
+                                                    </StackLayout>
+
+                                                </RelativeLayout>
+                                                <Label Text="{Binding Title}"
+                               HorizontalOptions="Start"
+                                               TextColor="Black"
+                                               FontAttributes="Bold"
+                                               MaxLines="1"/>
+                                                <Label  TextColor="#2196F3"
+                           FontAttributes="Bold"
+                    VerticalOptions="Center">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding PriceConvert}"></Span>
+                                                            <Span Text=" FCFA"></Span>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                                <Label Text="{Binding Town}"
+                                                ></Label>
+                                                <Label Text="{Binding Date}"
+                                               ></Label>
+
+                                                <Frame IsVisible="{Binding IsLookaukwat}"
+                                                   Padding="1"
+                                                   BackgroundColor="#2196F3"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="End"
+                                                   CornerRadius="10"
+                                                   Opacity="0.8">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Image Source="garanty"
+                                                           HeightRequest="20"
+                                                       Aspect="AspectFit"></Image>
+                                                        <Label Text="Garantie/Livraison"
+                                                       TextColor="White"
+                                                           FontAttributes="Bold"></Label>
+                                                    </StackLayout>
+
+                                                </Frame>
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:EventDetailViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                                    </TapGestureRecognizer>
+                                                </StackLayout.GestureRecognizers>
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <StackLayout HeightRequest="160" BackgroundColor="#2196F3">
+
+                <Grid Margin="10,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <ImageButton Source="icon_phone"
+                                 HeightRequest="30"
+                                 WidthRequest="30"
+                             HorizontalOptions="Fill"
+                             Aspect="AspectFit"
+                                 BackgroundColor="#2196F3"
+                                 Command="{Binding CallUserCommand}"></ImageButton>
+                    <Label Grid.Row="1"
+                           Text="Contacter"
+                        HorizontalTextAlignment="Center"
+                           HorizontalOptions="Fill"
+                       TextColor="White"
+                           FontAttributes="Italic">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                        Command="{Binding CallUserCommand}"
+                                        NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <ImageButton Source="messages"
+                              Aspect="AspectFit"
+                                 Grid.Column="1"
+                             HorizontalOptions="Fill"
+                                 HeightRequest="30"
+                                 WidthRequest="30"
+                                 BackgroundColor="#2196F3 "
+                                 Command="{Binding SendMessageCommand}"></ImageButton>
+                    <Label Grid.Row="1"
+                       Grid.Column="1"
+                       HorizontalTextAlignment="Center"
+                           HorizontalOptions="Fill"
+                           Text="Message"
+                       TextColor="White"
+                           FontAttributes="Italic">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                        Command="{Binding SendMessageCommand}"
+                                        NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+
+                    <ImageButton Source="{Binding RedHeart}"
+                           Aspect="AspectFit"
+                           HeightRequest="25"
+                           BackgroundColor="#2196F3"
+                           Grid.Column="2"
+                           IsVisible="{Binding Id, Converter={StaticResource ImageFavoriteConverter}}"
+                           Command="{Binding FavoriteCommand}"/>
+
+
+                    <ImageButton Source="{Binding BlackHeart }"
+                           Aspect="AspectFit"
+                           HeightRequest="25"
+                           BackgroundColor="#2196F3" 
+                           Grid.Column="2"
+                           IsVisible="{Binding Id, Converter={StaticResource ImageNotFavoriteConverter}}"
+                                 Command="{Binding FavoriteCommand}"/>
+
+                    <Label Grid.Row="1"
+                       Grid.Column="2"
+                        HorizontalTextAlignment="Center"
+                           HorizontalOptions="Fill"
+                           Text="Sauvegarder"
+                       TextColor="White"
+                           FontAttributes="Italic">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                        Command="{Binding FavoriteCommand}"
+                                        NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!--<ImageButton Source="cash"
+                           Aspect="AspectFit"
+                           HeightRequest="25"
+                           BackgroundColor="#2196F3" 
+                           Grid.Column="3"
+                           Command="{Binding BuyItemCommand}"
+                           IsVisible="{Binding IsLookaukwat}"/>
+
+                    <Label Grid.Row="1"
+                       Grid.Column="3"
+                       HorizontalTextAlignment="Center"
+                           HorizontalOptions="Fill"
+                           Text="Acheter"
+                       TextColor="White"
+                           FontAttributes="Italic"
+                           IsVisible="{Binding IsLookaukwat}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer
+                                        Command="{Binding BuyItemCommand}"
+                                        NumberOfTapsRequired="1" />
+                        </Label.GestureRecognizers>
+                    </Label>-->
+                </Grid>
+
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

@@ -18,6 +18,8 @@ namespace LookaukwatApp.ViewModels.Event
     [QueryProperty(nameof(ArtisteName), nameof(ArtisteName))]
     [QueryProperty(nameof(SearchOrAskJob), nameof(SearchOrAskJob))]
     [QueryProperty(nameof(Rubrique), nameof(Rubrique))]
+    [QueryProperty(nameof(Hour), nameof(Hour))]
+    [QueryProperty(nameof(Date), nameof(Date))]
     public class EventEndViewModel : BaseViewModel
     {
         ApiServices _apiServices = new ApiServices();
@@ -91,13 +93,18 @@ namespace LookaukwatApp.ViewModels.Event
             set => SetProperty(ref sport_Game, value);
         }
 
-        private DateTime date;
-        public DateTime Date
+        private string date;
+        public string Date
         {
             get => date;
             set => SetProperty(ref date, value);
         }
-
+        private string hour;
+        public string Hour
+        {
+            get => hour;
+            set => SetProperty(ref hour, value);
+        }
         bool isLookaukwat = false;
         public bool IsLookaukwat
         {
@@ -131,7 +138,7 @@ namespace LookaukwatApp.ViewModels.Event
             get { return stock; }
             set { SetProperty(ref stock, value); }
         }
-        private bool ValidateLoging()
+        private bool ValidateEvent()
         {
             return !String.IsNullOrWhiteSpace(TitleApart)
                 && !String.IsNullOrWhiteSpace(Description)
@@ -140,11 +147,11 @@ namespace LookaukwatApp.ViewModels.Event
 
         public EventEndViewModel()
         {
-            PostEventCommad = new Command(OnPostApart, ValidateLoging);
+            PostEventCommand = new Command(OnPostEvent, ValidateEvent);
             TitlePage = "Titre,description, ville, quartier...";
             TownList = StaticListViewModel.GetTownCameroonList;
             this.PropertyChanged +=
-               (_, __) => PostEventCommad.ChangeCanExecute();
+               (_, __) => PostEventCommand.ChangeCanExecute();
             CheckLookaukwat();
         }
 
@@ -154,7 +161,7 @@ namespace LookaukwatApp.ViewModels.Event
         private IDictionary<string, string> listProviders = new Dictionary<string, string>();
         public IDictionary<string, string> ListProviders { get => listProviders; set => SetProperty(ref listProviders, value); }
 
-        public Command PostEventCommad { get; }
+        public Command PostEventCommand { get; }
 
         private void CheckLookaukwat()
         {
@@ -173,7 +180,7 @@ namespace LookaukwatApp.ViewModels.Event
                 Providers.Add(key);
             }
         }
-        async void OnPostApart()
+        async void OnPostEvent()
         {
             IsRunning = true;
             var current = Connectivity.NetworkAccess;
@@ -195,7 +202,9 @@ namespace LookaukwatApp.ViewModels.Event
                 {
                     Provider_Id = ListProviders[Provider];
                 }
-                var ProductId = await _apiServices.EventPostAsync(accessToken, TitleApart, Description, Town, Street, price, SearchOrAskJob, Rubrique, Type, ArtisteName, Sport_Game, Provider_Id, Stock);
+                var date = DateTime.Parse(Date);
+                var hour = TimeSpan.Parse(Hour);
+                var ProductId = await _apiServices.EventPostAsync(accessToken, TitleApart, Description, Town, Street, price, SearchOrAskJob, Rubrique, Type, ArtisteName, Sport_Game, Provider_Id, Stock, date, hour);
                 if (ProductId != 0)
                 {
                     IsRunning = false;

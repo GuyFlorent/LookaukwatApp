@@ -9,6 +9,7 @@ namespace LookaukwatApp.ViewModels.StaticList
         public static IList<string> GetCategoryList = new List<string>()
         {
             "Emploi",
+            "Événement",
              "Immobilier",
              "Maison",
             "Multimédia",

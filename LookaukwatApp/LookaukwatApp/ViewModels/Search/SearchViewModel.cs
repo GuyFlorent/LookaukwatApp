@@ -1348,7 +1348,155 @@ namespace LookaukwatApp.ViewModels.Search
         }
         #endregion Vehicule
 
+        // for Event
+        #region Event
 
+        public IList<string> TypeSportList { get; }
+        public IList<string> TypeSpectacleList { get; }
+        public IList<string> RubriqueEventList { get; }
+
+        ObservableCollection<string> typesEvent = new ObservableCollection<string>();
+        public ObservableCollection<string> TypesEvent { get => typesEvent; set => SetProperty(ref typesEvent, value); }
+
+        ObservableCollection<string> gameListEvent = new ObservableCollection<string>();
+        public ObservableCollection<string> GameListEvent { get => gameListEvent; set => SetProperty(ref gameListEvent, value); }
+
+        ObservableCollection<string> artistListEvent = new ObservableCollection<string>();
+        public ObservableCollection<string> ArtistListEvent { get => artistListEvent; set => SetProperty(ref artistListEvent, value); }
+
+        ObservableCollection<DateTime> dateListEvent = new ObservableCollection<DateTime>();
+        public ObservableCollection<DateTime> DateListEvent { get => dateListEvent; set => SetProperty(ref dateListEvent, value); }
+
+
+        private string typeEvent;
+        public string TypeEvent
+        {
+            get => typeEvent;
+            set
+            {
+                SetProperty(ref typeEvent, value);
+                PopulateEvent(value);
+                NumberOfResult();
+            }
+        }
+
+        private async void PopulateEvent(string value)
+        {
+            artistListEvent.Clear();
+            GameListEvent.Clear();
+            DateListEvent.Clear();
+            if (RubriqueEvent == "Sport")
+            {
+                List<string> Games = await _apiServices.GetListSportGameAsync(TypeEvent);
+                foreach (var item in Games)
+                {
+                    GameListEvent.Add(item);
+                }
+                List<DateTime> Dates = await _apiServices.GetListDateAsync(TypeEvent);
+                foreach (var item in Dates)
+                {
+                    DateListEvent.Add(item);
+                }
+            }
+            else
+            {
+
+                List<string> Artists = await _apiServices.GetListArtistAsync(TypeEvent);
+                foreach (var item in Artists)
+                {
+                    ArtistListEvent.Add(item);
+                }
+
+                List<DateTime> Dates = await _apiServices.GetListDateAsync(TypeEvent);
+                foreach (var item in Dates)
+                {
+                    DateListEvent.Add(item);
+                }
+            }
+        }
+
+        private string rubriqueEvent;
+        public string RubriqueEvent
+        {
+            get => rubriqueEvent;
+            set
+            {
+                SetProperty(ref rubriqueEvent, value);
+
+                CheckType(value);
+                NumberOfResult();
+            }
+        }
+        bool isSport = false;
+        public bool IsSport
+        {
+            get { return isSport; }
+            set { SetProperty(ref isSport, value); }
+        }
+
+        bool isSpectacle = false;
+        public bool IsSpectacle
+        {
+            get { return isSpectacle; }
+            set { SetProperty(ref isSpectacle, value); }
+        }
+        private void CheckType(string value)
+        {
+            Types.Clear();
+            if (value == "Sport")
+            {
+              
+                IsSport = true;
+                IsSpectacle = false;
+                foreach (var item in TypeSportList)
+                {
+                    Types.Add(item);
+                }
+
+               
+            }
+            else
+            {
+              
+                IsSport = false;
+                IsSpectacle = true;
+                foreach (var item in TypeSpectacleList)
+                {
+                    Types.Add(item);
+                }
+
+            }
+        }
+
+        private int priceEvent;
+        public int PriceEvent
+        {
+            get => priceEvent;
+            set => SetProperty(ref priceEvent, value);
+        }
+
+        private string artisteName;
+        public string ArtisteName
+        {
+            get => artisteName;
+            set => SetProperty(ref artisteName, value);
+        }
+
+        private string sport_Game;
+        public string Sport_Game
+        {
+            get => sport_Game;
+            set => SetProperty(ref sport_Game, value);
+        }
+
+        private DateTime dateEvent;
+        public DateTime DateEvent
+        {
+            get => dateEvent;
+            set => SetProperty(ref dateEvent, value);
+        }
+
+        #endregion
         public Command SearchCommand { get; }
         //Constuctor
         public SearchViewModel()
@@ -1457,7 +1605,12 @@ namespace LookaukwatApp.ViewModels.Search
 
             #endregion
 
-
+            //for Event
+            #region Event
+            TypeSportList = StaticListEventViewModel.GetTypeEventSportListSearch;
+            TypeSpectacleList = StaticListEventViewModel.GetTypeEventSpectacleListSearch;
+            RubriqueList = StaticListEventViewModel.GetRubriqueEventListSearch;
+            #endregion
         }
 
         private async void NumberOfResult()

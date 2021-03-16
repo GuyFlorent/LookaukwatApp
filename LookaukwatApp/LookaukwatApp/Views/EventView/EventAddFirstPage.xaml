@@ -1,12 +1,132 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LookaukwatApp.Views.EventView.EventAddFirstPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="LookaukwatApp.Views.EventView.EventAddFirstPage"
+              xmlns:local="clr-namespace:LookaukwatApp.ViewModels.Event" 
+              xmlns:converter="clr-namespace:LookaukwatApp.Converter"
+             Title="Dites-nous en plus">
+    <ContentPage.BindingContext>
+        <local:EventViewModel></local:EventViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ApartCheckingForm x:Key="ApartCheckingForm"></converter:ApartCheckingForm>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <ScrollView>
+            <StackLayout Orientation="Vertical"
+                     Margin="15,35,20,25">
+                <Label Text="Mettez en valeur votre annonce! plus il ya de détails, plus votre client vous trouvera rapidement."
+               TextColor="Black"
+               FontSize="Small"></Label>
+               
+                <Label Text="Rubrique"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Picker 
+                    
+                    Title="Choisir la rubrique"
+                    ItemsSource="{Binding RubriqueList}"
+                    SelectedItem="{Binding Rubrique, Mode=TwoWay}">
+                </Picker>
+                
+                <Label Text="Type"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                <Picker 
+                    
+                    Title="Choisir le type de bien immobilier"
+                    ItemsSource="{Binding Types}"
+                    SelectedItem="{Binding Type, Mode=TwoWay}">
+                </Picker>
+
+                <!--For search and ask-->
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <RadioButton 
+                             IsChecked="{Binding IsOffer}"></RadioButton>
+                        <Label Text="Offres"
+                           TextColor="Black"
+                                   FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                    </StackLayout>
+                    <Label Text="{Binding OfferText}"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <RadioButton IsChecked="{Binding IsSearch}" ></RadioButton>
+                        <Label Text="Demandes"
+                           TextColor="Black"
+                                   FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                    </StackLayout>
+                    <Label Text="{Binding SearchrText}"></Label>
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding IsSport}">
+                    <Label Text="La rencontre"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                    <Entry Text="{Binding Sport_Game}"
+                           Keyboard="Text"></Entry>
+                   
+                </StackLayout>
+
+                <StackLayout IsVisible="{Binding IsSpectacle}">
+                    <Label Text="Nom de(s) artiste(s)"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold"></Label>
+                    <Entry Text="{Binding ArtisteName}"
+                           Keyboard="Text"></Entry>
+
+                </StackLayout>
+
+                <Label Text="Date de l'événement"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                </Label>
+
+                <DatePicker Date="{Binding Date}"
+                            Format="D"
+                            ></DatePicker>
+
+                <Label Text="Heure de l'événement"
+                       TextColor="Black"
+                    FontSize="Subtitle"
+                       FontAttributes="Bold">
+                </Label>
+                <TimePicker Time="{Binding Hour}"
+                    Format="T"
+                     />
+
+                <Label Text="Prix du billet (FCFA)"
+                       TextColor="Black"
+                FontSize="Subtitle"
+                       FontAttributes="Bold">
+                </Label>
+                <Entry Placeholder="2"
+                   Text="{Binding Price}"
+                       Keyboard="Numeric"></Entry>
+
+                <StackLayout Margin="5">
+                    <Button Text="Suivant"
+                    CornerRadius="20"
+                    Command="{Binding NextEventCommad}"
+                    VerticalOptions="EndAndExpand"
+                ></Button>
+
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+
+       
+
+    </StackLayout>
 </ContentPage>

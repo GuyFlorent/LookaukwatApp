@@ -23,8 +23,8 @@ namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-        string Uri = "https://lookaukwatapi.azurewebsites.net/";
-        //string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
+       // string Uri = "https://lookaukwatapi.azurewebsites.net/";
+        string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
        
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword, string parrainValue)
         {
@@ -175,9 +175,90 @@ namespace LookaukwatApp.Services
             Debug.WriteLine(response);
         }
 
-        public async Task<int> EventPostAsync(string accessToken, string titleApart, string description, string town, string street, int price, string searchOrAskJob, string rubrique, string type, string artisteName, string sport_Game, string provider_Id, int stock)
+        public async Task<int> EventPostAsync(string accessToken, string titleApart, string description, string town, string street, int price, string searchOrAskJob, string rubrique, string type, string artisteName, string sport_Game, string provider_Id, int stock, DateTime date, TimeSpan hour)
         {
-            throw new NotImplementedException();
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+            CategoryModel categorie = new CategoryModel() { CategoryName = "Événement" };
+
+            //get lat and lon
+            var address = $"{street + " " + town + " " + "Cameroun"}";
+            var locations = await Geocoding.GetLocationsAsync(address);
+            var location = locations?.FirstOrDefault();
+            ProductCoordinateModel coor = new ProductCoordinateModel() { };
+            if (location != null)
+            {
+
+                coor.Lat = location.Latitude.ToString();
+                coor.Lon = location.Longitude.ToString();
+
+            }
+
+            var model = new EventModel()
+            {
+                Title = titleApart,
+                Description = description,
+                Town = town,
+                Street = street,
+                Price = price,
+                SearchOrAskJob = searchOrAskJob,
+                RubriqueEvent = rubrique,
+                TypeEvent = type,
+                Artist_Name = artisteName,
+                Sport_Game = sport_Game,
+                DateEvent = date,
+                Hour = hour,
+                Category = categorie,
+                Coordinate = coor,
+                Stock = stock,
+                Provider_Id = provider_Id,
+                IsActive = true
+
+            };
+
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+            var response = await client.PostAsync(Uri + "api/Event", content);
+            Debug.WriteLine(response);
+            var jwt = await response.Content.ReadAsStringAsync();
+            var joo = JObject.Parse(jwt);
+            var id = (int)joo["id"];
+
+            //var accessToken = jwtDynamic.Value<string>("access_token");
+
+            Debug.WriteLine(jwt);
+
+            return id;
+        }
+
+        public async Task<EventModelViewModel> GetUniqueEventAsync(int id)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Event/?id=" + id);
+
+            var eventModel = JsonConvert.DeserializeObject<EventModelViewModel>(json);
+
+            return eventModel;
         }
 
         public async Task<ApartModelViewModel> GetUniqueApartCritereAsync(int id)
@@ -1154,6 +1235,69 @@ namespace LookaukwatApp.Services
             Debug.WriteLine(jwt);
 
             return id;
+        }
+
+        public async Task<List<string>> GetListSportGameAsync(string typeEvent)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Event/GetListSportGame/?type=" + typeEvent);
+
+            var Games = JsonConvert.DeserializeObject<List<string>>(json);
+
+            return Games;
+        }
+
+        public async Task<List<string>> GetListArtistAsync(string typeEvent)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Event/GetListArtist/?type=" + typeEvent);
+
+            var Artists = JsonConvert.DeserializeObject<List<string>>(json);
+
+            return Artists;
+        }
+
+        public async Task<List<DateTime>> GetListDateAsync(string typeEvent)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+
+            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Event/GetListDate/?type=" + typeEvent);
+
+            var Dates = JsonConvert.DeserializeObject<List<DateTime>>(json);
+
+            return Dates;
         }
 
         public async Task<bool> UpdateUserInfoAsync(string oldFirstName, string oldPhone, string newEmail)

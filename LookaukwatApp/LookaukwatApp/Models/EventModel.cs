@@ -6,10 +6,11 @@ namespace LookaukwatApp.Models
 {
     public class EventModel: ProductModel
     {
-        public string Rubrique { get; set; }
-        public string Type { get; set; }
+        public string RubriqueEvent { get; set; }
+        public string TypeEvent { get; set; }
         public string Sport_Game { get; set; }
         public string Artist_Name { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime DateEvent { get; set; }
+        public TimeSpan Hour { get; set; }
     }
 }

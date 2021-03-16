@@ -182,6 +182,7 @@ namespace LookaukwatApp.ViewModels.StaticList
         {
             "Toutes",
             "Emploi",
+            "Événement",
              "Immobilier",
              "Maison",
             "Multimédia",

@@ -1468,18 +1468,26 @@ namespace LookaukwatApp.ViewModels.Search
             }
         }
 
-        private int priceEvent;
+        private int priceEvent=300000;
         public int PriceEvent
         {
             get => priceEvent;
-            set => SetProperty(ref priceEvent, value);
+            set 
+            { 
+                SetProperty(ref priceEvent, value);
+                NumberOfResult();
+            }
         }
 
         private string artisteName;
         public string ArtisteName
         {
             get => artisteName;
-            set => SetProperty(ref artisteName, value);
+            set
+            {
+                SetProperty(ref artisteName, value);
+                NumberOfResult();
+            }
         }
 
         private string sport_Game;
@@ -1493,7 +1501,11 @@ namespace LookaukwatApp.ViewModels.Search
         public DateTime DateEvent
         {
             get => dateEvent;
-            set => SetProperty(ref dateEvent, value);
+            set
+            {
+                SetProperty(ref dateEvent, value);
+                NumberOfResult();
+            }
         }
 
         #endregion
@@ -1609,7 +1621,7 @@ namespace LookaukwatApp.ViewModels.Search
             #region Event
             TypeSportList = StaticListEventViewModel.GetTypeEventSportListSearch;
             TypeSpectacleList = StaticListEventViewModel.GetTypeEventSpectacleListSearch;
-            RubriqueList = StaticListEventViewModel.GetRubriqueEventListSearch;
+            RubriqueEventList = StaticListEventViewModel.GetRubriqueEventListSearch;
             #endregion
         }
 
@@ -1617,7 +1629,6 @@ namespace LookaukwatApp.ViewModels.Search
         {
             try
             {
-
 
                 switch (SearchOrAskJob)
                 {
@@ -1631,6 +1642,12 @@ namespace LookaukwatApp.ViewModels.Search
                                 Result = await _apiServices.GetResultOfferSeachNumberJobAsync(Categori, Town, SearchOrAskJob, TypeContract, ActivitySector, PriceJob, IsParticulier, IsLookaukwat);
 
                                 SearchAndResultText = "Rechercher" +Environment.NewLine + Result + " annonces";
+                                break;
+                            case "Événement":
+                                TitlePage = "Plus de filtres dans Événement";
+                                Result = await _apiServices.GetResultOfferSeachNumberEventAsync(Categori, Town, RubriqueEvent, TypeEvent, PriceEvent,ArtisteName,Sport_Game,DateEvent, IsParticulier, IsLookaukwat);
+
+                                SearchAndResultText = "Rechercher" + Environment.NewLine + Result + " annonces";
                                 break;
                             case "Immobilier":
                                 TitlePage = "Plus de filtres dans Immobilier";
@@ -1721,6 +1738,26 @@ namespace LookaukwatApp.ViewModels.Search
                             JsonSearchModel = JsonConvert.SerializeObject(searchModel); 
 
                              await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
+
+                            break;
+
+                        case "Événement":
+                            SearchModel searchModelEvent = new SearchModel
+                            {
+                                Category = Categori,
+                                Town = Town,
+                                SearchOrAskJob = SearchOrAskJob,
+                                EventDate = DateEvent,
+                                Artist_Name = ArtisteName,
+                                Sport_Game = Sport_Game,
+                                TypeAppart = TypeEvent,
+                                RubriqueEvent = RubriqueEvent,
+                                IsLookaukwat = IsLookaukwat,
+                                IsParticulier = IsParticulier
+                            };
+                            JsonSearchModel = JsonConvert.SerializeObject(searchModelEvent);
+
+                            await Shell.Current.GoToAsync($"{nameof(ResultSearchPage)}?{nameof(ResultSearchViewModel.JsonSearchModel)}={JsonSearchModel}&{nameof(ResultSearchViewModel.NumberOfresult)}={Result}");
 
                             break;
                         case "Immobilier":

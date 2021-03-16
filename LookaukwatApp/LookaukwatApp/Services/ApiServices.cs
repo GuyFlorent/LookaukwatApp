@@ -1528,6 +1528,27 @@ namespace LookaukwatApp.Services
             return id;
         }
 
+        public async Task<int> GetResultOfferSeachNumberEventAsync(string categori, string town, string rubriqueEvent, string typeEvent, int priceEvent, string artisteName, string sport_Game, DateTime dateEvent, bool isParticulier, bool isLookaukwat)
+        {
+
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Event/GetOfferEventSearchNumber/?categori=" + categori + "&town=" + town + "&rubriqueEvent=" + rubriqueEvent + "&typeEvent=" + typeEvent + "&priceEvent=" + priceEvent + "&artisteName=" + artisteName + "&sport_Game=" + sport_Game + "&dateEvent=" + dateEvent + "&isParticulier=" + isParticulier + "&isLookaukwat=" + isLookaukwat);
+
+            int result = JsonConvert.DeserializeObject<int>(json);
+
+            return result;
+        }
+
         public async Task<int> JobPostAsync(string accessToken, string titleJob, string description, string town, string street, int price,
             string searchOrAskJob, string typeContract, string activitySector, string provider_Id, int stock)
         {

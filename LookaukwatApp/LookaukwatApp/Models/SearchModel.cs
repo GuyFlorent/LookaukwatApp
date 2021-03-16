@@ -18,6 +18,12 @@ namespace LookaukwatApp.Models
         public string TypeContract { get; set; }
         public string ActivitySector { get; set; }
 
+        //For Event
+        public DateTime EventDate { get; set; }
+        public string RubriqueEvent { get; set; }
+        public string TypeEvent { get; set; }
+        public string Sport_Game { get; set; }
+        public string Artist_Name { get; set; }
         //For Mode
 
         public int PriceMode { get; set; }

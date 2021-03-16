@@ -27,6 +27,7 @@
             <converter:MultimediaCheckSearchCategory x:Key="MultimediaCheckSearchCategory"></converter:MultimediaCheckSearchCategory>
             <converter:VehiculeCheckSearchCategory x:Key="VehiculeCheckSearchCategory"></converter:VehiculeCheckSearchCategory>
             <converter:SearchOrAskJCheckinForm x:Key="SearchOrAskJCheckinForm"></converter:SearchOrAskJCheckinForm>
+            <converter:EventCheckSearchCategory x:Key="EventCheckSearchCategory"></converter:EventCheckSearchCategory>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -57,8 +58,8 @@
 
                     <!--for differents categories-->
                     <StackLayout IsVisible="{Binding SearchOrAskJob, Converter={StaticResource SearchOrAskJCheckinForm}}">
-                        <!--for appart categorie-->
-
+                      
+                        <!--#region Appart categorie-->
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource ApartCheckSearchCategory}}">
 
                             <Label Text="Type de bien"
@@ -170,9 +171,9 @@
                                 </Picker>
                             </StackLayout>
                         </StackLayout>
-
+                        <!--#endregion-->
                         <!--for house category-->
-
+                        <!--#region House Category-->
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource HouseCheckSearchCategory}}">
                             <Label Text="Rubrique"
                       TextColor="#2196F3"
@@ -265,9 +266,9 @@
                     SelectedItem="{Binding StateHouse, Mode=TwoWay}">
                             </Picker>
                         </StackLayout>
-
+                        <!--#endregion-->
                         <!--for job category-->
-
+                        <!--#region job category-->
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource JobCheckSearchCategory}}">
                             <Label Text="Secteur d'activité"
                        TextColor="#2196F3"
@@ -319,9 +320,9 @@
                                
                             </StackLayout>
                         </StackLayout>
-
+                        <!--#endregion-->
                         <!--for Mode category-->
-
+                        <!--#region Mode category-->
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource ModeCheckSearchCategory}}">
                             <Label Text="Rubrique"
                   TextColor="#2196F3"
@@ -441,9 +442,9 @@
                             </Picker>
 
                         </StackLayout>
-
+                        <!--#endregion-->
                         <!--for Multimedia category-->
-
+                        <!--#region Multimedia category-->
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource MultimediaCheckSearchCategory}}">
                             <Label Text="Rubrique"
                    TextColor="#2196F3"
@@ -522,9 +523,9 @@
                     SelectedItem="{Binding MultimediaCapacity, Mode=TwoWay}">
                             </Picker>
                         </StackLayout>
-
+                        <!--#endregion-->
                         <!--for Vehicule category-->
-
+                        <!--#region Vehicule category-->
                         <StackLayout IsVisible="{Binding Categori, Converter={StaticResource VehiculeCheckSearchCategory}}">
                             <Label Text="Rubrique"
                   TextColor="#2196F3"
@@ -736,8 +737,107 @@
 
 
                     </StackLayout>
+                    <!--#endregion-->
 
+                    <!--#region Event category-->
+                    
+                    
+                    <!--#endregion-->
+                    <StackLayout IsVisible="{Binding Categori, Converter={StaticResource EventCheckSearchCategory}}">
 
+                        <Label Text="Rubrique"
+                      TextColor="#2196F3"
+                    FontSize="Subtitle"
+                           FontAttributes="Bold"
+                       ></Label>
+                        <Picker 
+                    
+                    Title="Choisir une rubrique"
+                    ItemsSource="{Binding RubriqueEventList}"
+                    SelectedItem="{Binding RubriqueEvent, Mode=TwoWay}">
+                        </Picker>
+
+                        <Label Text="Type"
+                      TextColor="#2196F3"
+                    FontSize="Subtitle"
+                           FontAttributes="Bold"
+                       ></Label>
+                        <Picker 
+                    
+                    Title="Choisir un type"
+                    ItemsSource="{Binding Types}"
+                    SelectedItem="{Binding TypeEvent, Mode=TwoWay}">
+                        </Picker>
+
+                        <Label Text="Prix du billet"
+                   TextColor="#2196F3"
+                    FontSize="Subtitle"
+                           FontAttributes="Bold"
+                      />
+
+                        <StackLayout Orientation="Vertical">
+                            <Slider Value="{Binding PriceEvent}"
+                Maximum="300000"
+                Minimum="0"
+                MaximumTrackColor="DarkGray"
+                MinimumTrackColor="#2196F3"
+                    x:Name="sliderPriceEvent"
+                 />
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Source={x:Reference sliderPriceEvent},
+                              Path=Value,
+                              StringFormat='{0:F0} FCFA '}"
+                   TextColor="Black"
+                                           HorizontalOptions="StartAndExpand"></Label>
+                                <Label Text="300 000 FCFA +"
+                                           HorizontalOptions="EndAndExpand"
+                                           TextColor="Black"></Label>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <StackLayout IsVisible="{Binding IsSport}">
+                        <Label Text="Rencontre"
+                      TextColor="#2196F3"
+                    FontSize="Subtitle"
+                           FontAttributes="Bold"
+                       ></Label>
+                        <Picker 
+                    
+                    Title="Choisir un type"
+                    ItemsSource="{Binding GameListEvent}"
+                    SelectedItem="{Binding Sport_Game, Mode=TwoWay}">
+                        </Picker>
+                        </StackLayout>
+                        
+                        <StackLayout IsVisible="{Binding IsSpectacle}">
+
+                            <Label Text="Organisateur"
+                    TextColor="#2196F3"
+                    FontSize="Subtitle"
+                           FontAttributes="Bold"
+                       />
+
+                            <Picker 
+                    Title="Choisir un organisateur"
+                    ItemsSource="{Binding ArtistListEvent}"
+                    SelectedItem="{Binding ArtisteName, Mode=TwoWay}">
+                            </Picker>
+                            
+                        </StackLayout>
+
+                        <Label Text="Date de l'événement"
+                       TextColor="#2196F3"
+                    FontSize="Subtitle"
+                                       FontAttributes="Bold"
+                       ></Label>
+                        <Picker 
+                    
+                    Title="Choisir une date"
+                    ItemsSource="{Binding DateListEvent}"
+                    SelectedItem="{Binding DateEvent, Mode=TwoWay}">
+                        </Picker>
+                    </StackLayout>
                     <!--end of different categorie-->
 
 

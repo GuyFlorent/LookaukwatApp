@@ -464,7 +464,9 @@ namespace LookaukwatApp.ViewModels.Mode
                 Image = Images.First(),
                 Lat = Lat,
                 Lon = Lon,
-                Stock = Stock
+                Stock = Stock,
+                Town = Town,
+                Category = "Mode"
             };
             Settings.ItemPurchase = JsonConvert.SerializeObject(item);
 

@@ -5,6 +5,8 @@ using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.Views.EventView;
 using LookaukwatApp.Views.ImageView;
 using LookaukwatApp.Views.MessageView;
+using LookaukwatApp.Views.SellView;
+using Newtonsoft.Json;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -61,6 +63,7 @@ namespace LookaukwatApp.ViewModels.Event
         public Command SignalCommand { get; set; }
         public Command NotFavoriteCommand { get; set; }
         public Command FavoriteCommand { get; set; }
+        public Command BuyItemCommand { get; set; }
         public int Id
         {
             get => id;
@@ -267,6 +270,7 @@ namespace LookaukwatApp.ViewModels.Event
             SignalCommand = new Command(OnSignal);
             NotFavoriteCommand = new Command<SimilarProductViewModel>(OnFavorite);
             FavoriteCommand = new Command(OnFavorite);
+            BuyItemCommand = new Command(OnBuyItem);
         }
 
 
@@ -455,6 +459,32 @@ namespace LookaukwatApp.ViewModels.Event
             };
 
             await App.Current.MainPage.Navigation.PushAsync(new SignalAnnoucePage(contact));
+        }
+
+        private async void OnBuyItem()
+        {
+            ItemPurchaseModelViewModel item = new ItemPurchaseModelViewModel
+            {
+                Id = Id,
+                Title = Title,
+                Price = Price.ToString(),
+                Image = Images.First(),
+                Lat = Lat,
+                Lon = Lon,
+                Stock = Stock,
+                Town = Town,
+                Category = "Événement"
+            };
+            Settings.ItemPurchase = JsonConvert.SerializeObject(item);
+
+            if (!string.IsNullOrWhiteSpace(Settings.AddressDelivered))
+            {
+                await Shell.Current.GoToAsync($"{nameof(SellDeliveredTypePage)}");
+            }
+            else
+            {
+                await Shell.Current.GoToAsync($"{nameof(SellDeliveredAdressPage)}");
+            }
         }
     }
 }

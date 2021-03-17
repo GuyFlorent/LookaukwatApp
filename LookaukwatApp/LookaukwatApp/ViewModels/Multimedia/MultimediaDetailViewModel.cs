@@ -446,7 +446,9 @@ namespace LookaukwatApp.ViewModels.Multimedia
                 Image = Images.First(),
                 Lat = Lat,
                 Lon = Lon,
-                Stock = Stock
+                Stock = Stock,
+                Town = Town,
+                Category = "Multimedia"
             };
             Settings.ItemPurchase = JsonConvert.SerializeObject(item);
 

@@ -1744,6 +1744,7 @@ namespace LookaukwatApp.ViewModels.Search
                         case "Événement":
                             SearchModel searchModelEvent = new SearchModel
                             {
+                                PriceEvent = PriceHouse,
                                 Category = Categori,
                                 Town = Town,
                                 SearchOrAskJob = SearchOrAskJob,

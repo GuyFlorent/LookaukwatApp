@@ -23,7 +23,8 @@ namespace LookaukwatApp.Services
 {
     public class ApiServices
     {
-       // string Uri = "https://lookaukwatapi.azurewebsites.net/";
+        // string Uri = "https://lookaukwatapi.azurewebsites.net/";
+        // string Uri = "https://https://10.1.2.69:45458/";
         string Uri = "https://lookaukwatapi-st5.conveyor.cloud/";
        
         public async Task<bool> RegisterAsync(string email, string firstName, string phone, string password, string confirmPassword, string parrainValue)
@@ -366,6 +367,26 @@ namespace LookaukwatApp.Services
             var response = await client.PutAsync(Uri + "api/Product/?id=" + itemId, content);
 
             Debug.WriteLine(response);
+        }
+
+        public async Task<List<ProductForMobileViewModel>> GetResultOfferSeachEventAsync(SearchModel userSearchCondition, int pageIndex, int pageSize, string sortBy)
+        {
+            HttpClient client;
+
+            var httpClientHandler = new HttpClientHandler();
+
+            httpClientHandler.ServerCertificateCustomValidationCallback =
+            (message, cert, chain, errors) => { return true; };
+
+            client = new HttpClient(httpClientHandler);
+
+            // client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+
+            var json = await client.GetStringAsync(Uri + "api/Event/GetOfferEventSearch/?categori=" + userSearchCondition.Category + "&town=" + userSearchCondition.Town + "&rubriqueEvent=" + userSearchCondition.RubriqueEvent + "&typeEvent=" + userSearchCondition.TypeEvent + "&priceEvent=" + userSearchCondition.PriceEvent + "&artisteName=" + userSearchCondition.Artist_Name + "&sport_Game=" + userSearchCondition.Sport_Game + "&dateEvent=" + userSearchCondition.EventDate + "&pageIndex=" + pageIndex + "&pageSize=" + pageSize + "&sortBy=" + sortBy + "&isParticulier=" + userSearchCondition.IsParticulier + "&isLookaukwat=" + userSearchCondition.IsLookaukwat);
+
+            var result = JsonConvert.DeserializeObject<List<ProductForMobileViewModel>>(json);
+
+            return result;
         }
 
         public async Task<int> CommandPostAsync(int id, string payementMethod, int deliveredPrice, int totalPrice_int, string firstName, string lastName, string town, string street, string number, string telephone, double distance, int quantity)

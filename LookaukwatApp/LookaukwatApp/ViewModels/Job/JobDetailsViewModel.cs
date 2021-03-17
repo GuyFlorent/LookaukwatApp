@@ -277,8 +277,9 @@ namespace LookaukwatApp.ViewModels.Job
                 IsRunning = false;
                 IsBusy = true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 Debug.WriteLine("Failed to Load Item");
                 IsRunning = false;
             }

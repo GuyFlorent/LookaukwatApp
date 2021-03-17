@@ -163,7 +163,7 @@ namespace LookaukwatApp.ViewModels.Image
                 await Shell.Current.GoToAsync("///MainPage");
                 if (string.IsNullOrWhiteSpace(Settings.Reviews_GooglePlay))
                 {
-                    var respon = await Shell.Current.DisplayAlert("Votre avis nous intéresse !", "Donnez votre avis en 1 minute", "Oui", "Non");
+                    var respon = await Shell.Current.DisplayAlert("Votre avis nous intéresse !", "Donnez votre avis en 1 minute", "Maintenant", "Plus tard");
                     if (respon)
                     {
                        Settings.Reviews_GooglePlay = "Ok";

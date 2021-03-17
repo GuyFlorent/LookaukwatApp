@@ -77,7 +77,7 @@ namespace LookaukwatApp.ViewModels.SellViewModel
         public IList<string> TownList { get; }
         public SellDeliverAddressViewModel()
         {
-            TitlePage = "Ajouter une adresse de livraison";
+            TitlePage = "Adresse de livraison/Facturation";
             TownList = StaticListViewModel.GetTownCameroonList;
             SaveDeliverAdressCommad = new Command(OnSaveDeliverAdress, Validate);
             this.PropertyChanged +=
@@ -125,7 +125,7 @@ namespace LookaukwatApp.ViewModels.SellViewModel
 
         private void Populate_Address(string jsonAddress)
         {
-            TitlePage = "Modifier l'adresse de livraiosn";
+            TitlePage = "Modifier adresse livraison/Facturation";
             DeliverAdressModelViewModel Json = JsonConvert.DeserializeObject<DeliverAdressModelViewModel>(jsonAddress);
             FirstName = Json.FirstName;
             LastName = Json.LastName;

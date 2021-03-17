@@ -1,7 +1,10 @@
 ﻿using LookaukwatApp.Helpers;
 using LookaukwatApp.Models.MobileModels;
+using LookaukwatApp.Views.LoginView;
+using LookaukwatApp.Views.RegisterView;
 using LookaukwatApp.Views.SellView;
 using Newtonsoft.Json;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -56,6 +59,18 @@ namespace LookaukwatApp.ViewModels.SellViewModel
         }
 
         // For item
+        bool isNotEvent = true;
+        public bool IsNotEvent
+        {
+            get { return isNotEvent; }
+            set { SetProperty(ref isNotEvent, value); }
+        }
+        private string itemTown;
+        public string ItemTown
+        {
+            get => itemTown;
+            set => SetProperty(ref itemTown, value);
+        }
         private string itemPrice;
         public string ItemPrice
         {
@@ -159,7 +174,14 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             TotalPrice = item.TotalPrice;
             Image = item.Image;
             Title = item.Title;
-            if(DeliveredPrice == " 0 ")
+            ItemTown = item.Town;
+            //Visible or or not deliver type
+            if (item.Category == "Événement")
+            {
+                IsNotEvent = false;
+            }
+
+            if (DeliveredPrice == " 0 ")
             {
                 IsHomeDeliverd = false;
                 isStoreTaken = true;
@@ -205,7 +227,26 @@ namespace LookaukwatApp.ViewModels.SellViewModel
 
         private async void OnValid()
         {
-            await Shell.Current.GoToAsync($"{nameof(SellPayementConfirmationPage)}");
+            string accessToken = Settings.AccessToken;
+            string username = Settings.Username;
+            string password = Settings.Password;
+
+            if (!string.IsNullOrWhiteSpace(accessToken))
+            {
+                await Shell.Current.DisplayAlert("Fonctionnalitée bientôt disponible", "Pour payer, contactez lookaukwat sur Whatapps au +237657633039 ou par Email contact@lookaukwat.com. Merci la direction", "OK");
+               // await Shell.Current.GoToAsync($"{nameof(SellPayementConfirmationPage)}");
+            }
+            else if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+            {
+                await PopupNavigation.Instance.PushAsync(new LoginRedirectUserAccountPage());
+            }
+
+            else
+            {
+                await PopupNavigation.Instance.PushAsync(new RegisterRedirectLoginUserAccountPage());
+
+            }
+            
         }
     }
 }

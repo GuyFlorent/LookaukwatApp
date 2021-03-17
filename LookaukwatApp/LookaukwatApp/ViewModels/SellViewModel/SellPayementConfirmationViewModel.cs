@@ -228,6 +228,18 @@ namespace LookaukwatApp.ViewModels.SellViewModel
 
                     await Shell.Current.DisplayAlert("Commande validée avec succès !", text, "OK");
                     await Shell.Current.GoToAsync("//MainPage/UserProfilePage/UserTransactionsPage");
+                    //ask for reviews
+                    if (string.IsNullOrWhiteSpace(Settings.Reviews_GooglePlay))
+                    {
+                        var respon = await Shell.Current.DisplayAlert("Votre avis nous intéresse !", "Donnez votre avis en 1 minute", "Maintenant", "Plus tard");
+                        if (respon)
+                        {
+                            Settings.Reviews_GooglePlay = "Ok";
+                            string uri = "https://play.google.com/store/apps/details?id=com.lookaukwat.lookaukwatapp";
+                            await Browser.OpenAsync(uri);
+                        }
+
+                    }
                 }
                 else
                 {

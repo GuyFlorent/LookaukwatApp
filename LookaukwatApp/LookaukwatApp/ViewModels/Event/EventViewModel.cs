@@ -37,7 +37,7 @@ namespace LookaukwatApp.ViewModels.Event
             set
             {
                 SetProperty(ref type, value);
-                
+
             }
         }
 
@@ -45,15 +45,15 @@ namespace LookaukwatApp.ViewModels.Event
         public string Rubrique
         {
             get => rubrique;
-            set 
-            { 
+            set
+            {
                 SetProperty(ref rubrique, value);
 
                 CheckType(value);
             }
         }
 
-       
+
 
         private string artisteName;
         public string ArtisteName
@@ -69,13 +69,14 @@ namespace LookaukwatApp.ViewModels.Event
             set => SetProperty(ref sport_Game, value);
         }
 
-        private DateTime date;
+        private DateTime date = DateTime.Now;
         public DateTime Date
         {
             get => date;
             set => SetProperty(ref date, value);
         }
 
+        public string MinDate { get => DateTime.Now.ToString("MM/dd/yyyy"); }
         private TimeSpan hour;
         public TimeSpan Hour
         {

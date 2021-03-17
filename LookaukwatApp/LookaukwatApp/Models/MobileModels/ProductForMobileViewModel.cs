@@ -55,6 +55,10 @@ namespace LookaukwatApp.Models.MobileModels
             {
                 return "Garantie Lookaukwat";
             }
+            else if (Category == "Événement")
+            {
+                return "Garantie/Billet en ligne";
+            }
             else
             {
                 return "Garantie/Livraison possible";

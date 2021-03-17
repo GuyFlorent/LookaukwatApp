@@ -57,7 +57,19 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             set => SetProperty(ref telephone, value);
         }
 
-        // For item
+        // For item --------------------------------------------------------
+        bool isNotEvent = true;
+        public bool IsNotEvent
+        {
+            get { return isNotEvent; }
+            set { SetProperty(ref isNotEvent, value); }
+        }
+        private string itemTown;
+        public string ItemTown
+        {
+            get => itemTown;
+            set => SetProperty(ref itemTown, value);
+        }
         private int itemPrice;
         public string ItemPrice
         {
@@ -214,12 +226,12 @@ namespace LookaukwatApp.ViewModels.SellViewModel
 
             if (Json.Distance < 1)
             {
-                DeliveredPrice = Convert.ToInt32(Json.Distance * 100 * 0.2).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
+                DeliveredPrice = Convert.ToInt32(Json.Distance * 100 * 0.02).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
 
             }
             else
             {
-                DeliveredPrice = Convert.ToInt32(Json.Distance * 200).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
+                DeliveredPrice = Convert.ToInt32(Json.Distance * 20).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
 
             }
 
@@ -228,6 +240,13 @@ namespace LookaukwatApp.ViewModels.SellViewModel
 
             ItemPrice = item.Price;
             Stock = item.Stock;
+            ItemTown = item.Town;
+
+            //Visible or or not deliver type
+            if(item.Category == "Événement")
+            {
+                IsNotEvent = false;
+            }
 
             //getting distance between item and receiver
             
@@ -255,13 +274,13 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             if (Json.Distance < 1)
             {
                 Distance = Convert.ToInt32(Json.Distance * 100).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim() + " m";
-                DeliveredPrice = Convert.ToInt32(Json.Distance * 100 * 0.2).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
+                DeliveredPrice = Convert.ToInt32(Json.Distance * 100 * 0.02).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
 
             }
             else
             {
                 Distance = Convert.ToInt32(Json.Distance).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim() + " Km";
-                DeliveredPrice = Convert.ToInt32(Json.Distance * 200).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
+                DeliveredPrice = Convert.ToInt32(Json.Distance * 20).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
 
             }
         }
@@ -281,16 +300,16 @@ namespace LookaukwatApp.ViewModels.SellViewModel
             DeliverAdressModelViewModel Json = JsonConvert.DeserializeObject<DeliverAdressModelViewModel>(Settings.AddressDelivered);
             if (Json.Distance < 1)
             {
-                DeliveredPrice = Convert.ToInt32(Json.Distance * 100 * 0.2).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
+                DeliveredPrice = Convert.ToInt32(Json.Distance * 100 * 0.02).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
 
-                Delivered = Convert.ToInt32(Json.Distance * 100 * 0.2);
+                Delivered = Convert.ToInt32(Json.Distance * 100 * 0.02);
                 DeliveredPrice_int = Delivered;
             }
             else
             {
-                DeliveredPrice = Convert.ToInt32(Json.Distance * 200).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
+                DeliveredPrice = Convert.ToInt32(Json.Distance * 20).ToString("N", CultureInfo.CreateSpecificCulture("af-ZA")).Split(',')[0].Trim();
 
-                Delivered = Convert.ToInt32(Json.Distance * 200);
+                Delivered = Convert.ToInt32(Json.Distance * 20);
                 DeliveredPrice_int = Delivered;
             }
 

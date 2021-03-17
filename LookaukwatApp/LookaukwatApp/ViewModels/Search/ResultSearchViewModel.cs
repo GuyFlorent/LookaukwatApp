@@ -3,6 +3,7 @@ using LookaukwatApp.Models;
 using LookaukwatApp.Models.MobileModels;
 using LookaukwatApp.Services;
 using LookaukwatApp.ViewModels.Appartment;
+using LookaukwatApp.ViewModels.Event;
 using LookaukwatApp.ViewModels.House;
 using LookaukwatApp.ViewModels.Job;
 using LookaukwatApp.ViewModels.Mode;
@@ -10,6 +11,7 @@ using LookaukwatApp.ViewModels.Multimedia;
 using LookaukwatApp.ViewModels.OtherServices;
 using LookaukwatApp.ViewModels.Vehicule;
 using LookaukwatApp.Views.AppartmentView;
+using LookaukwatApp.Views.EventView;
 using LookaukwatApp.Views.HouseView;
 using LookaukwatApp.Views.JobView;
 using LookaukwatApp.Views.ModeView;
@@ -321,6 +323,11 @@ namespace LookaukwatApp.ViewModels.Search
                     await Shell.Current.GoToAsync($"{nameof(JobDetailPage)}?{nameof(JobDetailsViewModel.ItemId)}={item.id}");
 
                     break;
+                case "Événement":
+
+                    await Shell.Current.GoToAsync($"{nameof(EventDetailPage)}?{nameof(EventDetailViewModel.ItemId)}={item.id}");
+
+                    break;
 
                 case "Immobilier":
 
@@ -372,6 +379,11 @@ namespace LookaukwatApp.ViewModels.Search
                                 var resultJob = await _apiServices.GetResultOfferSeachJobAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                                 Items.AddRange(resultJob);
                                 list = resultJob;
+                                break;
+                            case "Événement":
+                                var resultEvent = await _apiServices.GetResultOfferSeachEventAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
+                                Items.AddRange(resultEvent);
+                                list = resultEvent;
                                 break;
                             case "Immobilier":
 
@@ -448,6 +460,11 @@ namespace LookaukwatApp.ViewModels.Search
                                 var resultJob = await _apiServices.GetResultOfferSeachJobAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
                                 Items.AddRange(resultJob);
                                 list = resultJob;
+                                break;
+                            case "Événement":
+                                var resultEvent = await _apiServices.GetResultOfferSeachEventAsync(UserSearchCondition, pageIndex: pageIndex, pageSize: PageSize, sortBy);
+                                Items.AddRange(resultEvent);
+                                list = resultEvent;
                                 break;
                             case "Immobilier":
 

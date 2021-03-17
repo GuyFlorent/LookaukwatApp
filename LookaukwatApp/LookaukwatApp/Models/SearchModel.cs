@@ -19,6 +19,7 @@ namespace LookaukwatApp.Models
         public string ActivitySector { get; set; }
 
         //For Event
+        public int PriceEvent { get; set; }
         public DateTime EventDate { get; set; }
         public string RubriqueEvent { get; set; }
         public string TypeEvent { get; set; }

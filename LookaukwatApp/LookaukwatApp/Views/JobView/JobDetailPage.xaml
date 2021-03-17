@@ -530,7 +530,7 @@
                                                         <Image Source="garanty"
                                                            HeightRequest="20"
                                                        Aspect="AspectFit"></Image>
-                                                        <Label Text="Garantie/Livraison possible"
+                                                        <Label Text="Garantie/Postulez"
                                                        TextColor="White"
                                                            FontAttributes="Bold"></Label>
                                                     </StackLayout>

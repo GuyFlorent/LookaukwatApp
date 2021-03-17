@@ -151,6 +151,7 @@
                             </Grid>
                         </Frame>
 
+                    <StackLayout IsVisible="{Binding IsNotEvent}">
                         <Label Text="Lieu de livraison"
                            TextColor="Black"
                            FontSize="Subtitle"></Label>
@@ -171,12 +172,19 @@
                                 </Grid.RowDefinitions>
                                 
                                 <Label 
-                                   Text="Retrait en magasin"
                                    TextColor="Black"
-                                   FontSize="Subtitle"></Label>
+                                   FontSize="Subtitle">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Retrait au bureau lookaukwat de "></Span>
+                                        <Span Text="{Binding ItemTown}"
+                                              TextColor="#2196F3"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                                 <Label 
                                    Grid.Column="1"
-                                   Text="Retrait en 1 jour si vous "></Label>
+                                   Text="Délais 1 jour"></Label>
                             </Grid>
                         </Frame>
 
@@ -206,8 +214,8 @@
                                 <Label Text="{Binding Street}"></Label>
                             </StackLayout>
                         </Frame>
-
-                        <Label Text="Méthode de paiement"
+                    </StackLayout>
+                    <Label Text="Méthode de paiement"
                            TextColor="Black"
                            FontSize="Subtitle"></Label>
 

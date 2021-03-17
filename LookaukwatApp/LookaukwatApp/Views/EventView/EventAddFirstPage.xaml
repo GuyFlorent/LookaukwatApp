@@ -93,6 +93,7 @@
                 </Label>
 
                 <DatePicker Date="{Binding Date}"
+                            MinimumDate="{Binding MinDate}"
                             Format="D"
                             ></DatePicker>
 

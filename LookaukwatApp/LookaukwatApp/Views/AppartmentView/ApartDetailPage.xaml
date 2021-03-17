@@ -447,7 +447,7 @@
 
                 <CarouselView ItemsSource="{Binding SimilarProduct}"
                               PeekAreaInsets="70"
-                              HeightRequest="260">
+                              HeightRequest="291">
 
                     <CarouselView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" />
@@ -459,7 +459,7 @@
                        BorderColor="White"
                        CornerRadius="5"
                        Margin="5"
-                       HeightRequest="250"
+                       HeightRequest="281"
                        HorizontalOptions="Start"
                        VerticalOptions="Start"
                        BackgroundColor="GhostWhite"
@@ -580,7 +580,7 @@
                                                         <Image Source="garanty"
                                                            HeightRequest="20"
                                                        Aspect="AspectFit"></Image>
-                                                        <Label Text="Garantie/Livraison possible"
+                                                        <Label Text="Garantie Lookaukwat"
                                                        TextColor="White"
                                                            FontAttributes="Bold"></Label>
                                                     </StackLayout>

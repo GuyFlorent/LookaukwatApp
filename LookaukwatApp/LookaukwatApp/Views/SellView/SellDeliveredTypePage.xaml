@@ -54,7 +54,7 @@
             <ScrollView Margin="10">
                 <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Adresse de livraison"
+                        <Label Text="Adresse de livraison/Facturation"
                            HorizontalOptions="StartAndExpand"
                            TextColor="Black"
                            FontSize="Subtitle"></Label>
@@ -90,6 +90,7 @@
                         </StackLayout>
                     </Frame>
 
+                    <StackLayout IsVisible="{Binding IsNotEvent}">
                     <Label Text="Sélectionnez votre méthode de livraison"
                            TextColor="Black"
                            FontSize="Subtitle"></Label>
@@ -113,9 +114,16 @@
                             <RadioButton
                              IsChecked="{Binding IsStoreTaken}"></RadioButton>
                             <Label Grid.Column="1"
-                                   Text="Retrait en magasin"
                                    TextColor="Black"
-                                   FontSize="Subtitle"></Label>
+                                   FontSize="Subtitle">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Retrait au bureau lookaukwat de "></Span>
+                                        <Span Text="{Binding ItemTown}"
+                                              TextColor="#2196F3"></Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                             <Label Grid.Row="1"
                                    Grid.Column="1"
                                    Text="Retrait en 1 jour si vous "></Label>
@@ -173,7 +181,7 @@
                                    Text="Livraison entre 1 et 3 jours"></Label>
                         </Grid>
                     </Frame>
-
+                    </StackLayout>
                     <Label Text="Quantitée" 
                            TextColor="Black"
                            FontAttributes="Bold"></Label>
